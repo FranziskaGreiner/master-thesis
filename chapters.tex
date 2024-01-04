@@ -223,6 +223,27 @@ Diese können auf Zeiten mit niedriger Kohlenstoffintensität verschoben werden 
 
 \subsection{Herausforderungen und vorhandene Tools}
 %Verwaltete Cloud-Dienste bieten aufgrund ihrer hohen Rechendichte und ihrer enormen Hardware- und Energienutzung ein großes Potenzial zur Effizienzverbesserung~\cite{Currie.2024}.
+Die drei großen Cloud-Anbieter Google Cloud, Azure und AWS haben sich zur Kohlenstoffneutralität verpflichtet.
+Dies bedeutet jedoch nicht, dass es allein ausreichend ist, eine Anwendung auf einer dieser Plattformen bereitzustellen und sich nicht weiter mit dem Thema Nachhaltigkeit auseinander setzten muss.
+Auch die Anwendung selbst muss für Nachhaltigkeit optimiert sein und die vorhanden Möglichkeiten müssen genutzt werden~\cite{Newman.2023}.
+Der deutsche Bitkom hat in einer Metastudie auf Grundlage von mehreren Studien aus den Jahren 2012 bis 2019 zwei Hauptkategorien für Energieensparungen definiert: Anwendungen und Infrastruktur.
+In Abbildung~\ref{FIG:sustainability-infrastructure} werden die Facetten der Nachhaltigkeit auf Anwendungs- und Infrastrukturebene dargestellt.
+Von Amazon~\cite{Mokhtari.2023} wird dieses Modell als Modell der geteilten Verantwortungen vorgestellt.
+Der Cloud-Anbieter ist für die Nachhaltigkeit der Cloud verantwortlich, dies beinhaltet unter anderem die Bereitstellung einer effizienten, gemeinsam genutzten Infrastruktur, die Wasserverantwortung und die Beschaffung erneuerbarer Energien.
+Der Cloud-Nutzer ist für die Nachhaltigkeit in der Cloud verantwortlich, also zum Beispiel das Optimieren von Workloads und Ressourcennutzung und das Minimieren der Gesamtressourcen, die für die Workloads bereitgestellt werden müssen~\cite{Mokhtari.2023}.
+\begin{figure}
+ \caption{Nachhaltigkeit auf Anwendungs- und Infrastrukturebene, eigene Darstellung nach ~\cite{Mokhtari.2023}}
+ {\includegraphics[width=1\textwidth]{\figdir/SustainabilityOfAndOnInfrastructure}}
+ \label{FIG:sustainability-infrastructure}
+\end{figure}
+
+Eine große Herausforderung besteht darin, das Thema Nachhaltigkeit in der IT anzubringen.
+Lange wurde diesem keine Aufmerksamkeit geschenkt und Optimierungen fanden hauptsächlich für anfallende Kosten statt.
+Wenn der Umweltaspekt nicht Motivation genug ist, können noch zwei weitere Aspekte hilfreich sein.
+Zum einen gehen mit der Optimierung des Energieverbrauchs und der Umstellung auf grüne Energiequellen oft verminderte Stromkosten einher, was als Anreiz dienen kann.
+Zum anderen werden immer mehr Vorschriften und Berichtsanforderungen in Bezug auf verursachte Emissionen eingeführt~\cite{expand}.
+Dies sind weitere Gründe, sich mit der Energienutzung zu beschäftigen.
+
 Für Großbritannien besteht ein Zusammenschluss zwischen dem nationalen Stromnetz, mehreren Nichtregierungsorganisationen und akademischen Einrichtungen, der eine API konzipiert hat, um die Kohlenstoffintensität für verschiedene Regionen Großbritanniens vorherzusagen.
 Diese Schnittstelle basiert auf maschinellem Lernen und ermöglicht Anwendern, ihren Stromverbrauch so zu planen, dass die Kohlenstoffemissionen auf regionaler Ebene minimiert werden~\cite{Currie.2024}.
 Dafür wurde der Berechnungsansatz, der im vorherigen Kapitel (Formel~\ref{eq:ci}) erklärt wurde, verwendet.
@@ -232,7 +253,12 @@ Carbon Aware SDK ist ein experimentelles Projekt der Green Software Foundation, 
 Es wird sowohl die zeitliche als auch die örtliche Komponente für die Verlagerung von Workloads berücksichtigt.
 Carbon Aware SDK kann als WebAPI und als Command Line Interface verwendet werden und steht als Open-Source-Projekt zur Verfügung~\cite{GreenSoftwareFoundation.20231212T09:58:27.000Z}.
 
-tbd: WattTime, Electricity Maps
+Electricity Maps bietet eine API an, über die verschiedene Daten wie z.B.\ die Kohlenstoffintensität oder die Zusammensetzung des Strommixes abgefragt werden können.
+Die Abdeckung umfasst über 160 Regionen weltweit und es sind historische, aktuelle und zukünftige (24 Stunden im Voraus) Werte verfügbar~\cite{ElectricityMaps.20231220T09:16:49.000Z}.
+
+WattTime stellt ebenfalls eine API zur Verfügung.
+Über diese kann z.B.\ die marginale und die durchschnittliche Kohlenstoffintensität in der Vergangenheit, in Echtzeit oder 24 Stunden im Voraus abgefragt werden.
+Die Daten sind in einem Intervall von fünf Minuten erhältlich~\cite{WattTime.20231130T19:28:06+00:00}.
 
 \section{KI-gestützte Prognosemodelle für Umweltdaten}
 \subsection{Überblick über Zeitreihenprognose}
