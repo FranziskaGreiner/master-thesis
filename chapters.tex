@@ -362,6 +362,33 @@ Die Lufttemperatur wurde in zwei Metern Höhe gemessen und die Windgeschwindigke
 \chapter{Optimierung in Softwareanwendungen}
 \section{Nachhaltige Scheduling Strategien}
 \subsection{Dynamische Scheduling Modelle}
+Es sollen zwei zeitliche Optimierungsmethoden untersucht werden, die im folgenden kurz beschrieben werden~\cite{Dodge.06212022}:
+\begin{itemize}
+ \item Flexibler Start: Ein flexibler Workload wird zu einem Zeitpunkt mit minimaler marginalen Kohlenstoffintensität in den nächsten N Stunden gestartet.
+ Dabei wird der Workload nicht unterbrochen, sondern wird bis zur Fertigstellung ausgeführt.
+ Es werden alle möglichen Startzeiten im Zeitfenster N mit einer Granularität von fünf Minuten betrachtet.
+ \item Anhalten und Fortsetzen: Ein Workload wird (möglicherweise mehrmals) angehalten und wieder neu gestartet, um sicherzustellen, dass er ausschließlich zu kohlenstoffarmen Zeiten läuft.
+ Der Workload wird dadurch in den nächsten (N + Dauer des Auftrags) Stunden durchgeführt.
+ Wichtige Voraussetzungen für diese Methode sind ebenfalls die zeitliche Flexibilität und zudem funktioniert sie nur für Workloads, die unterbrochen und wieder neu aufgenommen werden können.
+ Zur Umsetzung werden genügend viele fünfminütige Intervalle mit geringsten Grenzemissionen während des Zeitfensters (N + Dauer des Auftrags) gesucht.
+ Es wird davon ausgegangen, dass die Unterbrechung und der Neustart des Auftrags sofort erfolgen und keine zusätzliche Energie verbraucht wird.
+ Dies ähnelt den Spot-Instanzen auf bestehenden Cloud-Plattformen, die einen vom Nutzer festgelegten Preis als Schwellenwert für automatisches Pausieren verwenden.
+\end {itemize}
+Zu beachten ist dabei, dass unterschiedliche Regionen sich durch verschieden starke Varianzen auszeichnen.
+In manchen Regionen schwankt die Emissionsgröße innerhalb eines Tages stark, wodurch sich diese sehr gut für die Methode des Anhaltens und Fortsetzens eignen.
+Andere Regionen haben dagegen relativ gleichbleibende Emissionen, sodass zeitliche Optimierungen nur einen geringen Einfluss haben können.
+In Abbildung~\ref{FIG:flexible-start} wird die mögliche Emissionsverringerung durch einen flexiblen Start anhand des DenseNet 201 veranschaulicht.
+DenseNet201 ist ein Convolutional Neural Network mit wenigen Schichten, das in der Studie von~\cite{Dodge.06212022} weniger als eine halbe Stunde benötigte.
+Bei vielen Regionen ist eine Emissionsreduzierung um mehr als 20\% möglich, das beste Ergebnis liegt bei 80\% für die Region West US\@.
+Die Wirksamkeit der eingesetzten Methode hängt demnach auch stark von der betrachteten Region ab~\cite{Dodge.06212022}.
+\begin{figure}
+ \caption{Die zu erwarteten Emissionseinsparungen durch Verschiebung der Startzeit um bis zu 24 Stunden (Flexible Start) für Dense 201~\cite{Dodge.06212022}}
+ {\includegraphics[width=0.7\textwidth]{\figdir/flexible-start_measuring-carbon-intensity-of-ai}}
+ \label{FIG:flexible-start}
+\end{figure}
+Betrachtet man ein zeitintensiveres Experiment, wie das Training eines Language Modells mit sechs Millionen Parametern, ist das Gegenteil zu beobachten.
+Beim flexiblen Start ist das Optimierungspotential sehr gering (meist weniger als 1\%), jedoch bietet das Anhalten und Fortsetzen gute Optimierungsergebnisse.
+In vielen Regionen sind Emissionsreduzierungen um mehr als 10\% und in der Region West US erneut am meisten mit ungefähr 28\%~\cite{Dodge.06212022}.
 \subsection{Konzeption der Architekturanpassungen}
 \subsection{Anpassung und Interoperabilität in vorhandenen Systemen}
 \subsection{Grenzen}
