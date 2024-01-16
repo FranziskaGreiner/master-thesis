@@ -49,7 +49,6 @@
             breaklinks=true]
             {hyperref}
 \usepackage{reledmac}
-
 \usepackage{acronym}
 
 
@@ -94,7 +93,10 @@
 
 \pagestyle{scrheadings}
 
-
+\chapter*{Abkürzungsverzeichnis}
+\addcontentsline{toc}{chapter}{Abkürzungsverzeichnis}
+\markboth{Abkürzungsverzeichnis}{Abkürzungsverzeichnis}
+\input{acronyms}
 \addtokomafont{caption}{\small}
 
 \mainmatter
