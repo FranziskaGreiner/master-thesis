@@ -393,6 +393,86 @@ Die Lufttemperatur wurde in zwei Metern Höhe gemessen und die Windgeschwindigke
 \end{figure}
 
 \subsection{Entwurf des Vorhersagemodells}
+Zunächst sollen die Anforderungen an das Modell beschrieben werden, um dann die Wahl des Modells festzulegen und diese zu begründen.
+Das Modell soll in der Lage sein, den Zusammenhang zwischen Wetterdaten und den Werten der marginalen Kohlenstoffintensität für ein bestimmtes Land zu einem bestimmten Zeitpunkt zu erlernen.
+
+Ein \ac{TFT} ist ein \ac{DNN} mit besonderer Architektur für das Multi-Horizon Forecasting, also die Vorhersage für mehrere zukünftige Zeitschritte.
+\ac{DNN}s werden zunehmen für diese Aufgabe herangezogen, weil sie verglichen mit herkömmlichen Zeitreihenmodellen große Leistungsverbesserungen aufzeigen.
+Bei anderen aufmerksamkeitsbasierten Methoden, die auch Transformer-basierte Modelle mit einschließen, besteht oft das Problem, dass die verschiedenen Datenquellen (z.B. Static Covariates) nicht ausreichend berücksichtigt werden.
+Außerdem können sie oft die Bedeutung verschiedener Daten in einem bestimmten Zeitabschnitt unterscheiden.
+Andere \ac{DNN}s neben dem \ac{TFT} haben zum Beispiel den Nachteil, dass sie die zeitliche Anordnung der Eingangsmerkmale nicht berücksichtigen (konventionelle Formen von LIME und SHAP), obwohl diese Abhängigkeit in Zeitreihen signifikant sind~\cite{Lim.19.12.2019}.
+
+Auch wenn der \ac{TFT} ein großes Modell ist und am besten für große Datenmengen geeignet ist, erzielt er auch für kleine Datensätze mit ca. 20 000 Samples gute Ergebnisse~\cite{Beitner.2020}.
+Er verwendet als Input verschiedenste Daten, wie in Abbildung~\ref{FIG:tft-forecasting} dargestellt~\cite{Lim.19.12.2019}:
+\begin{itemize}
+ \item Werte der Zielvariablen aus der Vergangenheit (Past Targets)
+ \item Zeitlich abhängige bekannte Informationen sowohl für die Vergangenheit, als auch für die Zukunft (Known Inputs)
+ \item Zeitlich abhängige jedoch nur in der Vergangenheit bekannte Eingabewerte (Observed Inputs)
+ \item Feststehende, zeitunabhängige Daten, die einen kontextuellen Zusammenhang bieten (Static Covariates)
+\end{itemize}
+\begin{figure}
+ \caption{Multi-horizon Forecasting mit dem \ac{TFT}~\cite{Lim.19.12.2019}.}
+ {\includegraphics[width=0.7\textwidth]{\figdir/TFT_multi-horizon-forecasting}}
+ \label{FIG:tft-forecasting}
+\end{figure}
+Die Ausgabe des Modells ist nicht ein einziger Wert, sondern ein Werteintervall (Prediction Interval).
+Die Multi-Horizon Vorhersage ist deshalb so komplex, weil trotz weniger Informationen darüber, das Zusammenspiel und die Abhängigkeit der Daten untereinander erlernt werden müssen~\cite{Lim.19.12.2019}.
+
+Jeder Wert der Zielvariablen $i$ ist an eine oder mehrere Static Covariates $s_i$, an zeitabhängige Variablen $\chi_{i,t}$ und skalare Zielvariablen $y_{i,t}$ zu jedem Zeitschritt $t$ gebunden.
+Wie in vorheriger Auflistung deutlich wurde, können die zeitabhängigen Variablen weiter unterteil werden in Known Inputs ($x_{i,t}$) und Observed Inputs ($z_{i,t}$).
+Wichtig sind außerdem sogenannte Quantile, denn sie ermöglichen die Vorhersage von Ergebnisintervallen, anstatt nur einzelner Werte und ermöglichen so die Aussage über Best- und Worst-Case Werte (z.B. Ausgabe des 10., 50. und 90. Perzentil jedes Zeitschrittes)~\cite{Lim.19.12.2019}.
+
+Formel~\ref{eq:tft} beschreibt die Prognose des $q$-ten Quantils des $\tau$-ten Vorhersageschrittes zum Zeitpunkt $t$.
+Dabei werden alle Informationen innerhalb des endlichen Look-Back-Windows $k$ mit einbezogen inklusive der Zielvariablen $y$ bis einschließlich des Startpunkts der Vorhersage $t$ ($y_{i,t-k:t} = \{y_{j,t-k}, \ldots, y_{j,t}\}$) und bekannter Variablen $x$ für den gesamten Zeitraum ($x_{i,t-k:t+\tau} = \{x_{i,t-k}, \ldots, x_{i,t}, \ldots, x_{i,t+\tau}\}$)~\cite{Lim.19.12.2019}.
+\begin{equation}
+ \label{eq:tft}
+ \hat{y}_i(q, \tau, T) = f_q(\tau, y_{j,t-k:t}, z_{i,t-k:t}, x_{j,t-k:t+T}, s_i)
+\end{equation}
+
+Im betrachteten Anwendungsfall der Vorhersage von \ac{MOER}-Werten sind die bekannten Variablen die ..., die unbekannten Variablen die.. und die statische Co-Variante das Land Deutschland oder Schweden~\cite{Labiadh.2023}.
+
+Abbildung~\ref{FIG:tft-architecture} zeigt den Aufbau eines \ac{TFT}s.
+\begin{figure}
+ \caption{Vereinfachte Darstellung des Aufbaus eines \ac{TFT}~\cite{Labiadh.2023}.}
+ {\includegraphics[width=0.90\textwidth]{\figdir/TFT-architecture}}
+ \label{FIG:tft-architecture}
+\end{figure}
+
+Gating-Mechanismen in Form von \ac{GRN}s verfolgen das Ziel, nicht-lineare Verarbeitung nur dort anzuwenden, wo sie nötig ist.
+Sie dienen dazu, ungenutzte Komponenten zu überspringen, sodass die Tiefe und Komplexität des Netzwerkes anpassungsfähig ist, um ein breites Spektrum an Szenarien und Datensätzen abdecken zu können~\cite{Lim.19.12.2019}.
+
+Ein Variable Selection Network dient dazu, die relevanten Input-Variablen für jeden Zeitschritt auszuwählen.
+Dadurch dass eine Vielzahl von Variablen verfügbar ist, ist es essenziell, die Relevanz und den Beitrag der einzelnen Variablen zu untersuchen.
+Die Variablen Auswahl, in der Architektur-Abbildung unten zu finden, wird auf statische und zeitabhängige Kovarianten angewendet.
+Sie hilft, die auffälligsten Merkmale herauszufinden und diejenigen, die sich negativ auf das Ergebnis auswirken, herauszufiltern.
+Dadurch kann sie die Leistung des Modells erheblich verbessern~\cite{Lim.19.12.2019}.
+
+Ein wichtiger Bestandteil sind außerdem die statischen Kovariaten-Kodierer (Static Covariate Encoders).
+Mit Hilfe von diesen werden verschiedene Kontextvektoren erstellt, nämlich für die Auswahl zeitlicher Variablen, die lokale Verarbeitung zeitlicher Variablen und das Anreichern von zeitlichen Merkmale mit statischen Variablen.
+Diese werden an den verschiedenen Stellen im Decoder verknüpft, um statische Merkmale in das Netzwerk zu integrieren.
+Das unterscheidet das \ac{TFT}-Netzwerk von anderen Architekturen für die Zeitreihenprognose, die für statische Metadaten keine separaten Kodierer verwenden~\cite{Lim.19.12.2019, Labiadh.2023}.
+
+Sowohl kurzfristige als auch langfristige zeitliche Zusammenhänge zu erfassen ist eine der Hauptaufgaben bei der Zeitreihenvorhersage.
+Um beides ausreichend abdecken zu können, werden bei einem \ac{TFT} Sequence-to-Sequence-Schichten (kurzfristige Prognosen) und ein Multi-Head-Attention-Block (langfristige Prognosen) eingesetzt.
+Die Sequence-to-Sequence-Schichten sind die Alternative zur Positionskodierung, die in Transformern üblicherweise verwendet wird.
+Solche Schichten überzeugen durch ihre Fähigkeit, zeitliche Muster durch rekurrente Verbindungen festzuhalten~\cite{Labiadh.2023}.
+Der in anderen Transformer-Architekturen verwendete Multi-Attention-Block wurde leicht abgewandelt, um die zeitlichen Beziehungen über verschiedene Zeitschritte zu erlernen.
+Dafür wird ein sogenannter Self-Attention-Mechanismus eingesetzt, der es ermöglicht, Beziehungen über mehrere Zeitschritte hinweg zu erlernen.
+Bei diesem wurde im Vergleich zu anderen Transformer-basierten Architekturen die Erklärbarkeit verbessert~\cite{Lim.19.12.2019}.
+Er bewertet die Wichtigkeit einzelner Werte anhand von Beziehungen zwischen Schlüsseln und Abfragen~\cite{Labiadh.2023}.
+
+Besonders ist zudem die verwendete Loss-Funktion.
+Ein \ac{TFT} wird dadurch trainiert, dass die Quantilverluste über alle Quantilausgaben, d.h. Aussagen über die Verteilung des Zielwerts, minimiert werden.
+Die spezielle Quantile Loss-Funktion, auch Pinball Regression genannt, ist durch Formel~\ref{eq:tft-quantile-loss} beschreibbar.
+Bei Unterschätzungen wird der erste Term der Funktion für obere Quantile hoch gewichtet und bei Überschätzungen bekommt der zweite Term mehr Gewicht~\cite{Labiadh.2023}.
+\begin{equation}
+ \label{eq:tft-quantile-loss}
+ QL(y, \hat{y}, q) = q \max(0, y - \hat{y}) + (1 - q) \max(0, \hat{y} - y)
+\end{equation}
+
+Die neue Form der Interpretierbarkeit eines \ac{TFT} ermöglicht ein einfaches Zurückverfolgen der relevantesten Zeitschritte für jede Prognose, was traditionelle Saisonalitäts- und Autokorrelationsanalysen ersetzen kann.
+Außerdem hilft sie, signifikante Veränderungen zu erkennen, indem ein durchschnittlicher Aufmerksamkeitswert pro Vorhersagebereich berechnet wird und zu jedem Zeitpunkt als Vergleich dient~\cite{Labiadh.2023}.
+
 \subsection{Implementierung und Trainingsprozess}
 \section{Erstellung der Prognose-API}
 \subsection{Konzeption der API-Architektur}
