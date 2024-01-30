@@ -337,11 +337,11 @@ Die Kohlenstoffintensität kann dadurch um bis zu 75\% reduziert werden~\cite{Do
 Der potenzielle Ablauf eines Zeitreihenprognose-Projekts ist in Abbildung~\ref{FIG:process-time-series-forecasting} zu sehen.
 Er dient als Richtlinie für die einzelnen Arbeitsschritte eines solchen Prognoseprojekts und deren Reihenfolge.
 
-\begin{figure}
- \caption{Eine vereinfachte Darstellung, wie ein Prognoseprojekt in einzelnen Schritten ablaufen kann~\cite{Peixeiro.2022}.}
- {\includegraphics[width=0.5\textwidth]{\figdir/process-time-series-forecasting}}
- \label{FIG:process-time-series-forecasting}
-\end{figure}
+%\begin{figure}
+% \caption{Eine vereinfachte Darstellung, wie ein Prognoseprojekt in einzelnen Schritten ablaufen kann~\cite{Peixeiro.2022}.}
+% {\includegraphics[width=0.5\textwidth]{\figdir/process-time-series-forecasting}}
+% \label{FIG:process-time-series-forecasting}
+%\end{figure}
 
 Diesem Ablauf soll im vorliegenden Projekt Folge geleistet werden.
 Zu Beginn gilt es, das Ziel festzulegen: Die Kohlenstoffintensität des Stromnetzes vorherzusagen.
@@ -363,13 +363,14 @@ Ziel ist es, die elektrische Last auf Zeiten mit niedrigen Werten zu verlagern, 
 Wie gut die Daten dafür geeignet sind, hängt von verschiedenen Faktoren ab, zum Beispiel ob MOER-Werte in Echtzeit vorliegen oder wie genau diese Werte sind.
 Die Schwierigkeit besteht darin, dass zwei Fälle miteinander verglichen werden müssen, nämlich dass die Lastverschiebung stattfindet und dass sie nicht stattfindet, von denen nicht beide gleichzeitig umgesetzt werden können.
 Durch schwankende Bedingungen im Stromnetz ändert sich die MOER ständig, weshalb man den Fall der Lastverschiebung und den Fall, in dem keine Last verschoben wird, nicht einfach hintereinander ausprobieren kann.
-Eine mögliche Lösung dieses Problems ist, die Netzbedingungen mit zu betrachten und davon auszugehen, dass bei gleichen Bedingungen auch die MOER gleich ist
+Eine mögliche Lösung dieses Problems ist, die Netzbedingungen mitzubetrachten und davon auszugehen, dass bei gleichen Bedingungen auch die MOER gleich ist.
 Diesen Ansatz nutzt WattTime und überprüft dessen Genauigkeit durch verschiedenste Experimente~\cite{WattTime.2022}.
-
+% pro kWh wird soviel mehr g CO2 ausgestossen
+% Electricity Maps Beitrag zu MOER !
 Die Verfügbarkeit von erneuerbaren Energien hängt maßgeblich vom Wetter ab.
 Dieser Zusammenhang kann für die Vorhersage genutzt werden, weshalb Wetterdaten zum Modell hinzugefügt werden.
 Dafür wird auf den Copernicus Climate Change Service~\cite{Copernicus.20231212T14:09:40.000Z} zurückgegriffen, der umfangreiche Datensätze rund um das weltweite Klima und den Klimawandeln zur Verfügung stellt.
-Konkret wurden drei mögliche Einflussfaktoren für die Kohlenstoffintensität als wichtig identifiziert und ausgewählt: die Lufttemperatur in 2 m Höhe, die Windgeschwindigkeit in 100 m Höhe und die globale horizontale Bestrahlungsstärke (englisch global horizontal irradiance, kurz GHI).
+Konkret wurden drei mögliche Einflussfaktoren für die Kohlenstoffintensität als wichtig identifiziert und ausgewählt: die Lufttemperatur in 2 m Höhe, die Windgeschwindigkeit in 100 m Höhe und die globale horizontale Bestrahlungsstärke (englisch global horizontal irradiance, kurz ~\ac{GHI}).
 Letztere wird durch die atmosphärische Zusammensetzung mit Aerosolen, Wasserdampf und Ozon, hauptsächliche jedoch von Wolken beeinflusst~\cite{KallioMyers.2020}.
 Für die Stromerzeugung durch Photovoltaik ist in erster Linie die Sonneneinstrahlung, die auf das Solarmodul einfällt, entscheidend~\cite{James.}.
 Die Erzeugung durch Windkraft hängt hauptsächlich von der Windgeschwindigkeit ab.
@@ -428,7 +429,15 @@ Betrachtet man ein zeitintensiveres Experiment, wie das Training eines Language 
 Beim flexiblen Start ist das Optimierungspotential sehr gering (meist weniger als 1\%), jedoch bietet das Anhalten und Fortsetzen gute Optimierungsergebnisse.
 In vielen Regionen sind Emissionsreduzierungen um mehr als 10\% und in der Region West US erneut am meisten mit ungefähr 28\%~\cite{Dodge.06212022}.
 \subsection{Konzeption der Architekturanpassungen}
+%Geplante Skalierung
+%Dynamische Skalierung
+%Dynamische Ressourcenanpassung
+%Optimierung des Datenzugriffs
 \subsection{Anpassung und Interoperabilität in vorhandenen Systemen}
+Skalierung bedeutet im Kontext des Softwarebetriebs eine Erhöhung oder Verringerung der Rechen-, Speicher- oder Netzwerkressourcen, die für einen bestimmten Workload genutzt werden.
+Wohingegen man in herkömmlichen, dedizierten Hosting-Umgebungen durch die verfügbaren Hardwareressourcen begrenzt ist, bietet eine Cloud-basierte Anwendung diese Möglichkeit.
+Es kann zudem zwischen vertikaler Skalierung (Scaling Up) und horizontaler Skalierung (Scaling Out) unterschieden werden.
+Bei der vertikalen Skalierung wird die Rechenleistung erhöht und die Infrastruktur beibehalten~\cite{francois}.
 \subsection{Grenzen}
 %Für welche Architektur geeignet
 Es gilt zu beachten, dass die analysierten Optimierungen ihre Grenzen haben.
