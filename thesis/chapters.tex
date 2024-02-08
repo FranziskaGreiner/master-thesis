@@ -5,7 +5,7 @@ Der Klimawandel stellt eine der größten Herausforderungen unserer Zeit dar.
 Seine Realität und die dringende Notwendigkeit, seine Hauptverursacher und Treibfaktoren zu bremsen, sind längst unbestreitbar.
 Dies wird unter anderem durch den im März 2023 veröffentlichten Bericht des \ac{IPCC} deutlich bestätigt.
 Der Bericht zeigt auf, dass die globale Oberflächentemperatur im Zeitraum von 2011 bis 2020 um 1,09 Grad Celsius höher lag als im Zeitraum von 1850 bis 1900 und identifiziert die nicht nachhaltige Energienutzung als einen der Haupttreiber dieser Veränderungen~\cite{IPCC.2023}.
-
+%!Gleichzeitig war es lange Zeit üblich, quasi unendlich Rechenkapazität etc. zur Verfügung zu haben und auch zu nutzen
 In diesem Kontext spielt die Technologiebranche eine zentrale Rolle.
 Der rasante technologische Fortschritt hat zu einem exponentiellen Wachstum der Rechenkapazitäten geführt.
 %Besonders im Bereich der Softwareentwicklung ist ein stetiges Wachstum von Technologien und Anwendungen zu verzeichnen.
@@ -120,15 +120,15 @@ Betrachtet man den Begriff vor dem Aspekt der Softwareentwicklung, so lassen sic
 \end{itemize}
 Nachhaltige Software zeichnet sich also dadurch aus, dass die negativen Auswirkungen auf die drei Bereiche der Nachhaltigkeit (Wirtschaft, Gesellschaft und Umwelt) während Entwicklung, Einsatz und Nutzung der Software gering gehalten werden oder sich sogar positiv auf diese auswirken.
 
-Die \ac{IT} spielt für das Thema Nachhaltigkeit eine wichtige Rolle und das sowohl als Teil des Problems, als auch als Teil der Lösung~\cite{Calero.2015}.
+Die \ac{IT} spielt für das Thema Nachhaltigkeit eine wichtige Rolle und das sowohl als Teil des Problems, als auch als Teil der Lösung.
 Diese Arbeit spricht von den drei genannten Ausprägungen der Nachhaltigkeit hauptsächlich die ökologische Tragfähigkeit an, die auch als \glqq grüne\grqq{} oder \glqq umweltfreundliche\grqq{} Dimension bezeichnet wird.
 Betreffend dieser Dimension kann die \ac{IT} zwei verschiedene Rollen annehmen, bezeichnet als Green in \ac{IT} und Green by \ac{IT}\@.
 Tabelle~\ref{tab:GreenInByIT} grenzt die beiden Begriffe voneinander ab.
-Beschrieben wird jeweils die Rolle der \ac{IT}, das Ziel und das Potenzial der beiden Bereiche, untermauert durch je ein Beispiel.
+Beschrieben wird jeweils die Rolle der \ac{IT}, das Ziel und das Potenzial der beiden Bereiche, untermauert durch je ein Beispiel~\cite{Calero.2015}.
 
 \begin{table}[t]
  \centering\small
- \caption{Green in \ac{IT} vs. Green by \ac{IT}}
+ \caption{Green in IT vs. Green by IT}
  \label{tab:GreenInByIT}
  \input{\tabledir/GreenInByIT.tex}
 \end{table}
@@ -169,7 +169,7 @@ Durch erneuerbare Energien, wie Wind-, Solar-, oder Wasserenergie, erzeugter Str
 Die Zeit ist ein wichtiger Faktor, weil ein direkter Zusammenhang zwischen Zeit und Wetter besteht und vom Wetter wiederum die erneuerbaren Energien abhängig sind.
 Außerdem verfügen verschiedene Länder und Regionen über eine unterschiedliche Zusammensetzung des Stromnetzes.
 Um die \ac{CO2}-Bilanz des verwendeten Stroms so gering wie möglich zu halten, ist es deshalb wichtig zu wissen, wann und wo die Kohlenstoffintensität des Stromnetzes gering ist.
-So kann zum Beispiel, wenn es die Anforderungen erlauben, die Nutzung des Stroms auf kohlenstoffarme Zeiten verschoben werden.
+%So kann zum Beispiel, wenn es die Anforderungen erlauben, die Nutzung des Stroms auf kohlenstoffarme Zeiten verschoben werden.
 Hinzu kommt, dass erneuerbare Energien in Betrieb und Wartung verhältnismäßig billig sind, was dazu führt, dass deren erzeugter Strom nicht nur umweltfreundlicher, sondern meist auch kostengünstiger ist~\cite{NationalGrid.20231106T13:28:05.000Z}.
 
 Ein weiterer wichtiger Faktor ist das Zusammenspiel aus Energieangebot und -nachfrage.
@@ -213,14 +213,6 @@ R ist eine Skaliereinheit, die für die zu messende Software relevant ist und ka
  SCI = ((E \times I) + M) pro R
 \end{equation}
 
-Wie bereits erwähnt kann eine Anwendung nachhaltiger betrieben werden, indem der Strombedarf auf die Kohlenstoffintensität ausgerichtet wird.
-Durch sogenanntes Demand-Shifting, also der Verschiebung der Nachfrage je nach Kohlenstoffintensität, kann zwischen 45\% und 90\% Kohlenstoff eingespart werden.
-Diese Verlagerung kann sowohl auf zeitlicher Ebene als auch auf örtlicher Ebene stattfinden~\cite{GreenSoftwareFoundation.2022}.
-Eine ähnliche Methode, die ebenfalls das Ziel verfolgt, die Kohlenstoffemissionen zu senken, ist das Demand-Shaping.
-Dabei wird bei geringer Kohlenstoffintensität die volle Funktionalität geboten und bei hoher Kohlenstoffintensität Einschränkungen getroffen oder die Funktionalität reduziert.
-Am besten anwendbar sind diese Methoden bei nicht-zeitkritischen Aufgaben.
-Diese können auf Zeiten mit niedriger Kohlenstoffintensität verschoben werden (Demand-Shifting) und zu solchen Zeiten können viele dieser Aufgaben abgearbeitet werden, wodurch sich der Bedarf erhöht (Demand-Shaping)~\cite{Currie.2024}.
-
 \subsection{Herausforderungen und vorhandene Tools}
 %Verwaltete Cloud-Dienste bieten aufgrund ihrer hohen Rechendichte und ihrer enormen Hardware- und Energienutzung ein großes Potenzial zur Effizienzverbesserung~\cite{Currie.2024}.
 Die drei großen Cloud-Anbieter Google Cloud, Azure und AWS haben sich zur Kohlenstoffneutralität verpflichtet.
@@ -241,7 +233,7 @@ Eine große Herausforderung besteht darin, das Thema Nachhaltigkeit in der \ac{I
 Lange wurde diesem keine Aufmerksamkeit geschenkt und Optimierungen fanden hauptsächlich für anfallende Kosten statt.
 Wenn der Umweltaspekt nicht Motivation genug ist, können noch zwei weitere Aspekte hilfreich sein.
 Zum einen gehen mit der Optimierung des Energieverbrauchs und der Umstellung auf grüne Energiequellen oft verminderte Stromkosten einher, was als Anreiz dienen kann.
-Zum anderen werden immer mehr Vorschriften und Berichtsanforderungen in Bezug auf verursachte Emissionen eingeführt~\cite{expand}.
+Zum anderen werden immer mehr Vorschriften und Berichtsanforderungen in Bezug auf verursachte Emissionen eingeführt~\cite{GreenSoftwareFoundation.2023}.
 Dies sind weitere Gründe, sich mit der Energienutzung zu beschäftigen.
 
 Für Großbritannien besteht ein Zusammenschluss zwischen dem nationalen Stromnetz, mehreren Nichtregierungsorganisationen und akademischen Einrichtungen, der eine \ac{API} konzipiert hat, um die Kohlenstoffintensität für verschiedene Regionen Großbritanniens vorherzusagen.
@@ -367,10 +359,11 @@ Eine mögliche Lösung dieses Problems ist, die Netzbedingungen mitzubetrachten 
 Diesen Ansatz nutzt WattTime und überprüft dessen Genauigkeit durch verschiedenste Experimente~\cite{WattTime.2022}.
 % pro kWh wird soviel mehr g CO2 ausgestossen
 % Electricity Maps Beitrag zu MOER !
-Die Verfügbarkeit von erneuerbaren Energien hängt maßgeblich vom Wetter ab.
+
+Die Verfügbarkeit erneuerbarer Energien hängt maßgeblich vom Wetter ab.
 Dieser Zusammenhang kann für die Vorhersage genutzt werden, weshalb Wetterdaten zum Modell hinzugefügt werden.
-Dafür wird auf den Copernicus Climate Change Service~\cite{Copernicus.20231212T14:09:40.000Z} zurückgegriffen, der umfangreiche Datensätze rund um das weltweite Klima und den Klimawandeln zur Verfügung stellt.
-Konkret wurden drei mögliche Einflussfaktoren für die Kohlenstoffintensität als wichtig identifiziert und ausgewählt: die Lufttemperatur in 2 m Höhe, die Windgeschwindigkeit in 100 m Höhe und die globale horizontale Bestrahlungsstärke (englisch global horizontal irradiance, kurz ~\ac{GHI}).
+Dafür wird auf den Copernicus Climate Change Service~\cite{Copernicus.20231212T14:09:40.000Z} zurückgegriffen, der umfangreiche Datensätze rund um das weltweite Klima und den Klimawandel zur Verfügung stellt.
+Konkret wurden drei mögliche Einflussfaktoren für die Kohlenstoffintensität als wichtig identifiziert und ausgewählt: die Lufttemperatur in 2 m Höhe, die Windgeschwindigkeit in 100 m Höhe und die globale horizontale Bestrahlungsstärke (im Englischen als \ac{GHI} bezeichnet).
 Letztere wird durch die atmosphärische Zusammensetzung mit Aerosolen, Wasserdampf und Ozon, hauptsächliche jedoch von Wolken beeinflusst~\cite{KallioMyers.2020}.
 Für die Stromerzeugung durch Photovoltaik ist in erster Linie die Sonneneinstrahlung, die auf das Solarmodul einfällt, entscheidend~\cite{James.}.
 Die Erzeugung durch Windkraft hängt hauptsächlich von der Windgeschwindigkeit ab.
@@ -391,6 +384,9 @@ Die Lufttemperatur wurde in zwei Metern Höhe gemessen und die Windgeschwindigke
  {\includegraphics[width=0.99\textwidth]{\figdir/ghi_de_15-22}}
  \label{FIG:ghi_de_2015-2022}
 \end{figure}
+Bei den Werten handelt es sich um Daten des ERA5 Reanalysis Datensatzes.
+Dies sind von verschiedenen Quellen, wie Satelliten oder Wetterstationen, gemessene Daten, bei denen fehlende Werte durch physikalische Gesetze oder historische Verlaufsmuster generierte Daten ergänzt wurden.
+Grundsätzlich sind die Daten also echt gemessene Daten, die zur Vollständigkeit mit generierten Daten ergänzt wurden~\cite{CopernicusClimateChangeService.2020}~\cite{CopernicusKnowledgeBase.20231009}.
 
 \subsection{Entwurf des Vorhersagemodells}
 Zunächst sollen die Anforderungen an das Modell beschrieben werden, um dann die Wahl des Modells festzulegen und diese zu begründen.
@@ -420,18 +416,19 @@ Die Multi-Horizon Vorhersage ist deshalb so komplex, weil trotz weniger Informat
 
 Jeder Wert der Zielvariablen $i$ ist an eine oder mehrere Static Covariates $s_i$, an zeitabhängige Variablen $\chi_{i,t}$ und skalare Zielvariablen $y_{i,t}$ zu jedem Zeitschritt $t$ gebunden.
 Wie in vorheriger Auflistung deutlich wurde, können die zeitabhängigen Variablen weiter unterteil werden in Known Inputs ($x_{i,t}$) und Observed Inputs ($z_{i,t}$).
-Wichtig sind außerdem sogenannte Quantile, denn sie ermöglichen die Vorhersage von Ergebnisintervallen, anstatt nur einzelner Werte und ermöglichen so die Aussage über Best- und Worst-Case Werte (z.B. Ausgabe des 10., 50. und 90. Perzentil jedes Zeitschrittes)~\cite{Lim.19.12.2019}.
+Wichtig sind außerdem sogenannte Quantile, denn sie ermöglichen die Vorhersage von Ergebnisintervallen, anstatt nur einzelner Werte und bieten auf diese Weise die Aussage über Best- und Worst-Case Werte (z.B. Ausgabe des 10., 50. und 90. Perzentil jedes Zeitschrittes)~\cite{Lim.19.12.2019}.
 
 Formel~\ref{eq:tft} beschreibt die Prognose des $q$-ten Quantils des $\tau$-ten Vorhersageschrittes zum Zeitpunkt $t$.
-Dabei werden alle Informationen innerhalb des endlichen Look-Back-Windows $k$ mit einbezogen inklusive der Zielvariablen $y$ bis einschließlich des Startpunkts der Vorhersage $t$ ($y_{i,t-k:t} = \{y_{j,t-k}, \ldots, y_{j,t}\}$) und bekannter Variablen $x$ für den gesamten Zeitraum ($x_{i,t-k:t+\tau} = \{x_{i,t-k}, \ldots, x_{i,t}, \ldots, x_{i,t+\tau}\}$)~\cite{Lim.19.12.2019}.
+Dabei werden alle Informationen innerhalb des endlichen Look-Back-Windows $k$ mit einbezogen, inklusive der Zielvariablen $y$ bis einschließlich des Startpunkts der Vorhersage $t$ ($y_{i,t-k:t} = \{y_{j,t-k}, \ldots, y_{j,t}\}$) und bekannter Variablen $x$ für den gesamten Zeitraum ($x_{i,t-k:t+\tau} = \{x_{i,t-k}, \ldots, x_{i,t}, \ldots, x_{i,t+\tau}\}$)~\cite{Lim.19.12.2019}.
 \begin{equation}
  \label{eq:tft}
  \hat{y}_i(q, \tau, T) = f_q(\tau, y_{j,t-k:t}, z_{i,t-k:t}, x_{j,t-k:t+T}, s_i)
 \end{equation}
 
-Im betrachteten Anwendungsfall der Vorhersage von \ac{MOER}-Werten sind die bekannten Variablen die ..., die unbekannten Variablen die.. und die statische Co-Variante das Land Deutschland oder Schweden~\cite{Labiadh.2023}.
+Im betrachteten Anwendungsfall der Vorhersage von \ac{MOER}-Werten sind die bekannten Variablen die Wetterdaten, sowie die jeweilige Jahreszeit, der Wochentag und, ob es sich um einen Feier-/Ferientag handelt.
+Die statische Co-Variate ist das Land Deutschland oder Schweden und die unbekannte Variable ist die \ac{MOER}~\cite{Labiadh.2023}.
 
-Abbildung~\ref{FIG:tft-architecture} zeigt den Aufbau eines \ac{TFT}s.
+Abbildung~\ref{FIG:tft-architecture} zeigt den Aufbau eines \ac{TFT}s, wovon die wichtigsten Bestandteile im Folgenden kurz erklärt werden.
 \begin{figure}
  \caption{Vereinfachte Darstellung des Aufbaus eines \ac{TFT}~\cite{Labiadh.2023}.}
  {\includegraphics[width=0.90\textwidth]{\figdir/TFT-architecture}}
@@ -442,12 +439,12 @@ Gating-Mechanismen in Form von \ac{GRN}s verfolgen das Ziel, nicht-lineare Verar
 Sie dienen dazu, ungenutzte Komponenten zu überspringen, sodass die Tiefe und Komplexität des Netzwerkes anpassungsfähig ist, um ein breites Spektrum an Szenarien und Datensätzen abdecken zu können~\cite{Lim.19.12.2019}.
 
 Ein Variable Selection Network dient dazu, die relevanten Input-Variablen für jeden Zeitschritt auszuwählen.
-Dadurch dass eine Vielzahl von Variablen verfügbar ist, ist es essenziell, die Relevanz und den Beitrag der einzelnen Variablen zu untersuchen.
-Die Variablen Auswahl, in der Architektur-Abbildung unten zu finden, wird auf statische und zeitabhängige Kovarianten angewendet.
+Dadurch, dass eine Vielzahl von Variablen verfügbar ist, ist es essenziell, die Relevanz und den Beitrag der einzelnen Variablen zu untersuchen.
+Die Variablen Auswahl, in der Architektur-Abbildung unten zu finden, wird auf statische und zeitabhängige Kovariaten angewendet.
 Sie hilft, die auffälligsten Merkmale herauszufinden und diejenigen, die sich negativ auf das Ergebnis auswirken, herauszufiltern.
 Dadurch kann sie die Leistung des Modells erheblich verbessern~\cite{Lim.19.12.2019}.
 
-Ein wichtiger Bestandteil sind außerdem die statischen Kovariaten-Kodierer (Static Covariate Encoders).
+Ein wichtiger Bestandteil sind außerdem die statischen Kovariaten-Kodierer (Static Covariate Encoders), die in Abbildung~\ref{FIG:tft-architecture} links zu finden sind.
 Mit Hilfe von diesen werden verschiedene Kontextvektoren erstellt, nämlich für die Auswahl zeitlicher Variablen, die lokale Verarbeitung zeitlicher Variablen und das Anreichern von zeitlichen Merkmale mit statischen Variablen.
 Diese werden an den verschiedenen Stellen im Decoder verknüpft, um statische Merkmale in das Netzwerk zu integrieren.
 Das unterscheidet das \ac{TFT}-Netzwerk von anderen Architekturen für die Zeitreihenprognose, die für statische Metadaten keine separaten Kodierer verwenden~\cite{Lim.19.12.2019, Labiadh.2023}.
@@ -464,7 +461,7 @@ Er bewertet die Wichtigkeit einzelner Werte anhand von Beziehungen zwischen Schl
 Besonders ist zudem die verwendete Loss-Funktion.
 Ein \ac{TFT} wird dadurch trainiert, dass die Quantilverluste über alle Quantilausgaben, d.h. Aussagen über die Verteilung des Zielwerts, minimiert werden.
 Die spezielle Quantile Loss-Funktion, auch Pinball Regression genannt, ist durch Formel~\ref{eq:tft-quantile-loss} beschreibbar.
-Bei Unterschätzungen wird der erste Term der Funktion für obere Quantile hoch gewichtet und bei Überschätzungen bekommt der zweite Term mehr Gewicht~\cite{Labiadh.2023}.
+Bei Unterschätzungen wird der erste Summand der Funktion für obere Quantile hoch gewichtet und bei Überschätzungen bekommt der zweite Summan mehr Gewicht~\cite{Labiadh.2023}.
 \begin{equation}
  \label{eq:tft-quantile-loss}
  QL(y, \hat{y}, q) = q \max(0, y - \hat{y}) + (1 - q) \max(0, \hat{y} - y)
@@ -473,12 +470,48 @@ Bei Unterschätzungen wird der erste Term der Funktion für obere Quantile hoch 
 Die neue Form der Interpretierbarkeit eines \ac{TFT} ermöglicht ein einfaches Zurückverfolgen der relevantesten Zeitschritte für jede Prognose, was traditionelle Saisonalitäts- und Autokorrelationsanalysen ersetzen kann.
 Außerdem hilft sie, signifikante Veränderungen zu erkennen, indem ein durchschnittlicher Aufmerksamkeitswert pro Vorhersagebereich berechnet wird und zu jedem Zeitpunkt als Vergleich dient~\cite{Labiadh.2023}.
 
+
+
+Verglichen werden soll das \ac{TFT}-Modell mit einem traditionellen, statistischen Modell, dem SARIMAX-Modell.
+Das SARIMAX-Modell kommt folgendermaßen zustande:
+Für das ARMA-Modell werden die autoregressive (AR) und die Moving-Average- (MA) Komponente zusammengefügt.
+Ein autoregressiver Prozess geht davon aus, dass die Zielvariable linear von ihren eigenen Werten in der Vergangenheit abhängt.
+Beim Moving-Average-Prozess (zu Deutsch gleitender Durchschnittsprozess) wird der aktuelle Wert als lineare Kombination des Mittelwerts der aktuellen und vergangenen Fehlerterme dargestellt.
+Das \ac{ARIMA}-Modell enthält zusätzlich noch einen Vorverarbeitungsschritt (I), um nicht stationäre Zeitreihen modellieren zu können.
+Um saisonale Muster berücksichtigen zu können, wird aus dem \ac{ARIMA}-Modell das SARIMA-Modell, welches schließlich um exogene Variablen (X), also von extern beeinflussende Variablen, erweitert wird.
+Das ARIMA-Modell in Abhängigkeit von der Ordnung des AR-Prozesses $p$, der Ordnung der Integration $d$ und der Ordnung des MV-Prozesses $q$, kann durch Formel~\ref{eq:arima} ausgedrückt werden~\cite{Peixeiro.2022}.
+$p$ gibt an, wie viele verzögerte Werte hinzugegeben werden, wohingegen $q$ die Anzahl der verzögerten Fehlerterme definiert.
+\begin{equation}
+ \label{eq:arima}
+ y'_t = C + \phi_1 y'_{t-1} + \ldots + \phi_p y'_{t-p} + \theta_1 \varepsilon_{t-1} + \ldots + \theta_q \varepsilon_{t-q} + \varepsilon_t
+\end{equation}
+Der aktuelle Wert der differenzierten Reihe $y'_t$ ist somit die Summe aus einer Konstanten $C$, den Vergangenheitswerten dieser differenzierten Reihe $\phi_p y'_{t-p}$, vergangenen Fehlertermen $\theta_1 \varepsilon_{t-1}$ und dem aktuellen Fehlerterm $\varepsilon_t$.
+$d$ ist hier nicht explizit angegeben, definiert jedoch die Anzahl der Differenzierungen, bis eine Reihe stationär wird.
+
+Basierend auf Formel~\ref{eq:arima} ergibt sich Formel~\ref{eq:sarimax} für das SARIMAX-Modell.
+\begin{equation}
+ \label{eq:sarimax}
+ d_t = C + \sum_{n=1}^{P} \phi_n d_{t-sn} + \sum_{n=1}^{q} \theta_n e_{t-n} + \varepsilon_t + \sum_{n=1}^{p} \alpha_n d_{t-n} + \sum_{n=1}^{Q} \eta_n e_{t-sn} + \sum_{n=1}^{r} \beta_n x_{t-n}
+\end{equation}
+Ergänzt wurde die Formel durch die Saisonalität in Form einer zusätzlichen AR- ($$) und MA- ($$) Komponente verschoben um die Frequenz der Saisonalität (z.B.\ 12: monatlich oder 24: stündlich) und um die exogenen Variablen ($\sum_{n=1}^{r} \beta_n x_{t-n}$)~\cite{Artley.26.4.2022}.
+
 \subsection{Implementierung und Trainingsprozess}
+Für die Implementierung soll eine Pipeline verwendet werden, um sich wiederholende Schritte problemlos und ohne nötigen Mehraufwand ausführen zu können.
+Die Idee dabei ist, dass die Modell-übergreifenden Schritte, wie Datenvorverarbeitung und Feature-Engineering, für die beiden Modelle gleichermaßen verwendet werden, wohingegen Modell-spezifische Schritte separat umgesetzt werden.
+Der Vorteil der Pipeline-Struktur besteht darin, dass
 \section{Erstellung der Prognose-API}
 \subsection{Konzeption der API-Architektur}
 \subsection{Implementierung der API}
 
 \chapter{Optimierung in Softwareanwendungen}
+Eine Software-Anwendung kann nachhaltiger betrieben werden, indem der Strombedarf auf die Kohlenstoffintensität ausgerichtet wird.
+Durch sogenanntes Demand-Shifting, also der Verschiebung der Nachfrage je nach Kohlenstoffintensität, kann zwischen 45\% und 90\% Kohlenstoff eingespart werden.
+Diese Verlagerung kann sowohl auf zeitlicher Ebene als auch auf örtlicher Ebene stattfinden~\cite{GreenSoftwareFoundation.2022}.
+Eine ähnliche Methode, die ebenfalls das Ziel verfolgt, die Kohlenstoffemissionen zu senken, ist das Demand-Shaping.
+Dabei wird bei geringer Kohlenstoffintensität die volle Funktionalität geboten und bei hoher Kohlenstoffintensität Einschränkungen getroffen oder die Funktionalität reduziert.
+Am besten anwendbar sind diese Methoden bei nicht-zeitkritischen Aufgaben.
+Diese können auf Zeiten mit niedriger Kohlenstoffintensität verschoben werden (Demand-Shifting) und zu solchen Zeiten können viele dieser Aufgaben abgearbeitet werden, wodurch sich der Bedarf erhöht (Demand-Shaping)~\cite{Currie.2024}.
+
 \section{Nachhaltige Scheduling Strategien}
 \subsection{Dynamische Scheduling Modelle}
 Es sollen zwei zeitliche Optimierungsmethoden untersucht werden, die im folgenden kurz beschrieben werden~\cite{Dodge.06212022}:
@@ -507,7 +540,7 @@ Die Wirksamkeit der eingesetzten Methode hängt demnach auch stark von der betra
 \end{figure}
 Betrachtet man ein zeitintensiveres Experiment, wie das Training eines Language Modells mit sechs Millionen Parametern, ist das Gegenteil zu beobachten.
 Beim flexiblen Start ist das Optimierungspotential sehr gering (meist weniger als 1\%), jedoch bietet das Anhalten und Fortsetzen gute Optimierungsergebnisse.
-In vielen Regionen sind Emissionsreduzierungen um mehr als 10\% und in der Region West US erneut am meisten mit ungefähr 28\%~\cite{Dodge.06212022}.
+In vielen Regionen sind Emissionsreduzierungen um mehr als 10\% und in der Region West US erneut am meisten mit ungefähr 28\% möglich~\cite{Dodge.06212022}.
 \subsection{Konzeption der Architekturanpassungen}
 %Geplante Skalierung
 %Dynamische Skalierung
@@ -517,7 +550,7 @@ In vielen Regionen sind Emissionsreduzierungen um mehr als 10\% und in der Regio
 Skalierung bedeutet im Kontext des Softwarebetriebs eine Erhöhung oder Verringerung der Rechen-, Speicher- oder Netzwerkressourcen, die für einen bestimmten Workload genutzt werden.
 Wohingegen man in herkömmlichen, dedizierten Hosting-Umgebungen durch die verfügbaren Hardwareressourcen begrenzt ist, bietet eine Cloud-basierte Anwendung diese Möglichkeit.
 Es kann zudem zwischen vertikaler Skalierung (Scaling Up) und horizontaler Skalierung (Scaling Out) unterschieden werden.
-Bei der vertikalen Skalierung wird die Rechenleistung erhöht und die Infrastruktur beibehalten~\cite{francois}.
+Bei der vertikalen Skalierung wird die Rechenleistung erhöht und die Infrastruktur beibehalten~\cite{AlibabaCloudCommunity.20240118T09:19:15.000Z}.
 \subsection{Grenzen}
 %Für welche Architektur geeignet
 Es gilt zu beachten, dass die analysierten Optimierungen ihre Grenzen haben.
