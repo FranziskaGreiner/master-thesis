@@ -1,20 +1,15 @@
 import torch
 import pandas as pd
 import lightning.pytorch as pl
+import wandb
 from pathlib import Path
-from src.util import save_config_and_results, create_run_directory
 from lightning.pytorch.callbacks import ModelCheckpoint
-from pytorch_lightning.loggers import TensorBoardLogger
+from pytorch_lightning.loggers import WandbLogger
 from pytorch_forecasting.data.encoders import GroupNormalizer
 from pytorch_forecasting import TimeSeriesDataSet, QuantileLoss, TemporalFusionTransformer
 from src.config import get_tft_config
 
 tft_config = get_tft_config()
-run_dir = Path(create_run_directory('tft'))
-logger = TensorBoardLogger(
-    save_dir=run_dir,
-    name="tensorboard_logs",
-)
 
 
 def create_tft_training_dataset(final_data):
@@ -39,7 +34,7 @@ def create_tft_training_dataset(final_data):
         time_varying_known_reals=["time_idx", "temperature", "radiation", "wind_speed"],
         time_varying_unknown_reals=["moer"],
         target_normalizer=target_normalizer,
-        lags={'moer': [tft_config.get('lag_size')]},
+        lags={'moer': tft_config.get('lags')},
         add_relative_time_idx=True,
         add_target_scales=True,
         add_encoder_length=True,
@@ -49,7 +44,10 @@ def create_tft_training_dataset(final_data):
 
 
 def create_tft_validation_dataset(final_data, training_dataset):
-    validation_data = final_data[final_data['date'] > tft_config.get('training_cutoff_date')].copy()
+    validation_data = final_data[
+        (final_data['date'] > tft_config.get('training_cutoff_date')) &
+        (final_data['date'] <= tft_config.get('validation_cutoff_date'))
+        ].copy()
     validation_data.loc[:, 'time_idx'] = validation_data['time_idx'].astype(int)
 
     validation_dataset = TimeSeriesDataSet.from_dataset(
@@ -84,11 +82,10 @@ def create_tft_model(training_dataset):
         hidden_continuous_size=tft_config.get('hidden_continuous_size'),
         output_size=tft_config.get('output_size'),  # 7 quantiles by default
         loss=QuantileLoss(),
-        log_interval=tft_config.get('log_interval'),
         reduce_on_plateau_patience=tft_config.get('reduce_on_plateau_patience'),  # reduce learning automatically
     )
-    save_config_and_results(run_dir, tft_config, None)
-    model_save_path = Path(run_dir) / "tft_model.pth"
+    # save_config_and_results(run_dir, tft_config, None)
+    model_save_path = Path(wandb.run.dir) / "tft_model.pth"
     torch.save(tft_model.state_dict(), model_save_path)
     return tft_model
 
@@ -96,7 +93,7 @@ def create_tft_model(training_dataset):
 def create_tft_checkpoints():
     checkpoint_callback = ModelCheckpoint(
         monitor='val_loss',
-        dirpath=run_dir / "checkpoints",
+        dirpath=Path(wandb.run.dir) / "checkpoints",
         filename='tft-{epoch:02d}-{val_loss:.2f}',
         save_top_k=3,
         mode='min',
@@ -105,17 +102,20 @@ def create_tft_checkpoints():
 
 
 def create_tft_trainer():
+    wandb_logger = WandbLogger(name="tsf_tft", project="tsf_tft")
     trainer = pl.Trainer(
         max_epochs=tft_config.get('max_epochs'),
         accelerator="auto",
         enable_model_summary=True,
-        logger=logger,
+        logger=wandb_logger,
         callbacks=[create_tft_checkpoints()]
     )
     return trainer
 
 
 def train_tft(final_data):
+    run = wandb.init(project="tsf_tft", config=dict(tft_config))
+
     training_dataset = create_tft_training_dataset(final_data)
     validation_dataset = create_tft_validation_dataset(final_data, training_dataset)
     test_dataset = create_tft_test_dataset(final_data, training_dataset)
@@ -140,3 +140,11 @@ def train_tft(final_data):
         train_dataloaders=train_dataloader,
         val_dataloaders=val_dataloader,
     )
+
+    trainer.test(dataloaders=test_dataloader)
+
+    model_save_path = f"{wandb.run.dir}/tft_model.pth"
+    torch.save(tft_model.state_dict(), model_save_path)
+    wandb.save(model_save_path)
+
+    run.finish()

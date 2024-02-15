@@ -1,5 +1,6 @@
 import pandas as pd
 import argparse
+import wandb
 
 from src.config import get_general_config, get_tft_config, get_sarimax_config
 from src.util import check_if_preprocessed_data_exists
@@ -11,9 +12,8 @@ from src.models.tft import train_tft
 
 def main(model_type):
     general_config = get_general_config()
-    tft_config = get_tft_config()
-    arima_config = get_sarimax_config()
     preprocessed_feature_engineered_data_exists = check_if_preprocessed_data_exists()
+    wandb.login(key="361ced3122f96ccbe37b41a4ec49c643503bc408")
 
     if not preprocessed_feature_engineered_data_exists:
         print('preprocessing data')
@@ -34,16 +34,6 @@ def main(model_type):
         # evaluate_tft(tft_model, preprocessed_feature_engineered_data)
     else:
         raise ValueError("Unsupported model type specified.")
-
-    # # datasets and model
-    # tft_training_dataset = create_tft_training_dataset(preprocessed_feature_engineered_data)
-    # tft_validation_dataset = create_tft_validation_dataset(preprocessed_feature_engineered_data, tft_training_dataset)
-    # tft_model = create_tft_model(tft_training_dataset)
-    #
-    # # training
-    # train_tft(tft_training_dataset, tft_validation_dataset, tft_model)
-    #
-    # # tft_results = run_tft_pipeline(preprocessed_feature_engineered_data, tft_config)
 
 
 if __name__ == "__main__":

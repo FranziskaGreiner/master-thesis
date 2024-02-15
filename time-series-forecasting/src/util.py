@@ -6,7 +6,6 @@ from pathlib import Path
 from pandas import Timestamp
 
 from config import get_general_config
-from src import config
 
 general_config = get_general_config()
 output_path = general_config.get('output_path')
@@ -15,21 +14,13 @@ output_path = general_config.get('output_path')
 def check_if_preprocessed_data_exists():
     data_path = general_config.get('data_path')
     preprocessed_data_file_name = general_config.get('preprocessed_data_file_name')
-    if f'{data_path}{preprocessed_data_file_name}':
-        return True
+    preprocessed_data_file_path = os.path.join(data_path, preprocessed_data_file_name)
+    return os.path.exists(preprocessed_data_file_path)
 
 
 def save_config_and_results(run_dir, config, results):
     save_config(config, run_dir)
     # save_results(results, run_dir)
-
-
-def create_run_directory(model_type):
-    timestamp = datetime.datetime.now().strftime("%Y%m%d-%H%M%S")
-    # run_dir = Path(base_path) / model_type / timestamp
-    run_dir = f'{output_path}{model_type}{timestamp}'
-    os.makedirs(run_dir, exist_ok=True)
-    return run_dir
 
 
 def save_config(config, run_dir):
