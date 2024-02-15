@@ -1,5 +1,6 @@
 import pandas as pd
 import holidays
+import pytz
 from datetime import datetime
 from src.config import get_general_config
 
@@ -8,7 +9,10 @@ data_path = get_general_config()["data_path"]
 
 
 def add_features(final_data):
+    print(final_data.head)
     final_data['date'] = final_data.apply(apply_timezone, axis=1)
+    final_data.sort_values(by='date', inplace=True)
+    final_data = final_data[['date', 'country', 'temperature', 'radiation', 'wind_speed', 'moer']]
     final_data['date'] = pd.to_datetime(final_data['date'])
     start_dates = {'DE': final_data[final_data['country'] == 'DE']['date'].min(),
                    'SE': final_data[final_data['country'] == 'SE']['date'].min()}
@@ -19,16 +23,20 @@ def add_features(final_data):
     final_data['season'] = final_data['season'].astype('category')
     final_data['day_of_week'] = final_data['day_of_week'].astype('category')
     final_data['country'] = final_data['country'].astype('category')
+    print(final_data.head)
     final_data.to_csv(f'{data_path}{preprocessed_data_file_name}', index=False)
     return final_data
 
 
-def apply_timezone(df, country, timezone):
-    if country == 'DE':
-        df['date'] = df['date'].dt.tz_localize('UTC').tz_convert(timezone).dt.tz_localize(None)
-    elif country == 'SE':
-        df['date'] = df['date'].dt.tz_localize('UTC').tz_convert(timezone).dt.tz_localize(None)
-    return df
+def apply_timezone(row):
+    germany_tz = pytz.timezone('Europe/Berlin')
+    sweden_tz = pytz.timezone('Europe/Stockholm')
+
+    if row['country'] == 'DE':
+        return row['date'].tz_localize('UTC').tz_convert(germany_tz).tz_localize(None)
+    elif row['country'] == 'SE':
+        return row['date'].tz_localize('UTC').tz_convert(sweden_tz).tz_localize(None)
+    return row['date']
 
 
 def calculate_time_idx(row, start_dates):
