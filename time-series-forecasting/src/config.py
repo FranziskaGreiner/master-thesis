@@ -5,7 +5,7 @@ import os
 def get_general_config():
     return {
         "data_path": os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), 'data/'),
-        "output_path": os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), 'output/'),
+        "output_path": os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), 'out/'),
         "preprocessed_data_file_name": "combined_weather_moer_2021_2023_with_features.csv",
         "training_cutoff_date": pd.Timestamp('2023-09-30'),
         "validation_cutoff_date": pd.Timestamp('2023-11-30'),
@@ -15,22 +15,22 @@ def get_general_config():
 def get_tft_config():
     general_config = get_general_config()
     tft_specific_config = {
-        "max_encoder_length": 24,
-        "max_prediction_length": 24,
-        "lag_size": 24,
+        "max_encoder_length": 168,
+        "max_prediction_length": 168,
+        "lags": [24, 168],
         "batch_size": 32,
         "num_workers": 2,
-        "max_epochs": 10,
-        "accelerator:": "gpu",
+        "max_epochs": 20,
+        "accelerator:": "auto",
         "enable_model_summary": True,
-        "learning_rate": 0.02,
-        "hidden_size": 16,
-        "attention_head_size": 1,
-        "dropout": 0.1,
+        "learning_rate": 0.01,
+        "hidden_size": 32,
+        "attention_head_size": 4,
+        "dropout": 0.4,
         "hidden_continuous_size": 8,
         "output_size": 7,
         "log_interval": 10,
-        "reduce_on_plateau_patience": 4,
+        "reduce_on_plateau_patience": 2,
     }
     return {**general_config, **tft_specific_config}
 
