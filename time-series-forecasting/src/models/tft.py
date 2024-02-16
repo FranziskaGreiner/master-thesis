@@ -30,7 +30,6 @@ def create_tft_training_dataset(final_data):
         max_encoder_length=tft_config.get('max_encoder_length'),
         max_prediction_length=tft_config.get('max_prediction_length'),
         static_categoricals=["country"],
-        time_varying_known_categoricals=["season", "day_of_week", "is_holiday"],
         time_varying_known_reals=["time_idx", "temperature", "radiation", "wind_speed"],
         time_varying_unknown_reals=["moer"],
         target_normalizer=target_normalizer,
