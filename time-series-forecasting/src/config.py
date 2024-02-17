@@ -17,7 +17,7 @@ def get_tft_config():
     tft_specific_config = {
         "max_encoder_length": 168,
         "max_prediction_length": 168,
-        "lags": [24, 168, 8736],
+        "lags": [24, 168],
         "batch_size": 32,
         "num_workers": 2,
         "max_epochs": 10,

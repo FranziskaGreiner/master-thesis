@@ -114,6 +114,8 @@ def create_tft_trainer():
 def train_tft(final_data):
     run = wandb.init(project="tsf_tft", config=dict(tft_config))
 
+    final_data = final_data[final_data['country'] == 'DE'].copy()
+
     training_dataset = create_tft_training_dataset(final_data)
     validation_dataset = create_tft_validation_dataset(final_data, training_dataset)
     test_dataset = create_tft_test_dataset(final_data, training_dataset)
