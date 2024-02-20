@@ -40,7 +40,7 @@ def create_tft_training_dataset(final_data):
         max_encoder_length=tft_config.get('max_encoder_length'),
         max_prediction_length=tft_config.get('max_prediction_length'),
         static_categoricals=["country"],
-        time_varying_known_reals=["time_idx", "radiation", "wind_speed"],
+        time_varying_known_reals=["time_idx", "radiation", "temperature"],
         time_varying_unknown_reals=["moer"],
         target_normalizer=target_normalizer,
         lags={'moer': tft_config.get('lags')},
@@ -127,7 +127,7 @@ def create_tft_trainer():
 def train_tft(final_data):
     run = wandb.init(project="tsf_tft", config=dict(tft_config))
 
-    final_data = final_data[final_data['country'] == 'DE'].copy()
+    final_data = final_data[final_data['country'] == 'SE'].copy()
 
     training_dataset = create_tft_training_dataset(final_data)
     validation_dataset = create_tft_validation_dataset(final_data, training_dataset)
