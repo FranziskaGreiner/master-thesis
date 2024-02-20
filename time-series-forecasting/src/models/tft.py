@@ -22,7 +22,9 @@ def create_tft_training_dataset(final_data):
     features_to_normalize = ['temperature', 'radiation', 'wind_speed']
     scaler.fit(final_data[features_to_normalize])
     final_data[features_to_normalize] = scaler.transform(final_data[features_to_normalize])
-    joblib.dump(scaler, Path(f"{tft_config.get('output_path')}feature_scaler.joblib"))
+
+    scaler_save_path = f"{wandb.run.dir}/feature_scaler.joblib"
+    joblib.dump(scaler, scaler_save_path)
 
     train_data = final_data[final_data['date'] <= tft_config.get('training_cutoff_date')].copy()
     train_data.loc[:, 'time_idx'] = train_data['time_idx'].astype(int)
@@ -48,7 +50,8 @@ def create_tft_training_dataset(final_data):
         allow_missing_timesteps=True
     )
     training_dataset_params = training_dataset.get_parameters()
-    torch.save(training_dataset_params, Path(f"{tft_config.get('output_path')}/training_dataset_params.pth"))
+    training_params_save_path = f"{wandb.run.dir}/training_dataset_params.pth"
+    torch.save(training_dataset_params, training_params_save_path)
     return training_dataset
 
 
@@ -95,7 +98,6 @@ def create_tft_model(training_dataset):
     )
     model_save_path = Path(wandb.run.dir) / "tft_model.pth"
     torch.save(tft_model.state_dict(), model_save_path)
-    torch.save(tft_model.state_dict(), Path(f"{tft_config.get('output_path')}tft_model.pth"))
     return tft_model
 
 
