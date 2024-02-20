@@ -2,6 +2,8 @@ import torch
 import pandas as pd
 import lightning.pytorch as pl
 import wandb
+import joblib
+from sklearn.preprocessing import StandardScaler
 from pathlib import Path
 from lightning.pytorch.callbacks import ModelCheckpoint
 from pytorch_lightning.loggers import WandbLogger
@@ -15,6 +17,12 @@ tft_config = get_tft_config()
 def create_tft_training_dataset(final_data):
     final_data['date'] = pd.to_datetime(final_data['date'])
     final_data['is_holiday'] = final_data['is_holiday'].astype(str)
+
+    scaler = StandardScaler()
+    features_to_normalize = ['temperature', 'radiation', 'wind_speed']
+    scaler.fit(final_data[features_to_normalize])
+    final_data[features_to_normalize] = scaler.transform(final_data[features_to_normalize])
+    joblib.dump(scaler, f"{tft_config.get('output_path')}feature_scaler.joblib")
 
     train_data = final_data[final_data['date'] <= tft_config.get('training_cutoff_date')].copy()
     train_data.loc[:, 'time_idx'] = train_data['time_idx'].astype(int)
@@ -30,6 +38,7 @@ def create_tft_training_dataset(final_data):
         max_encoder_length=tft_config.get('max_encoder_length'),
         max_prediction_length=tft_config.get('max_prediction_length'),
         static_categoricals=["country"],
+        time_varying_known_reals=["time_idx", "radiation", "wind_speed"],
         time_varying_unknown_reals=["moer"],
         target_normalizer=target_normalizer,
         lags={'moer': tft_config.get('lags')},
@@ -38,6 +47,8 @@ def create_tft_training_dataset(final_data):
         add_encoder_length=True,
         allow_missing_timesteps=True
     )
+    training_dataset_params = training_dataset.get_parameters()
+    torch.save(training_dataset_params, f"{tft_config.get('output_path')}/training_dataset_params.pth")
     return training_dataset
 
 
@@ -82,9 +93,9 @@ def create_tft_model(training_dataset):
         loss=QuantileLoss(),
         reduce_on_plateau_patience=tft_config.get('reduce_on_plateau_patience'),  # reduce learning automatically
     )
-    # save_config_and_results(run_dir, tft_config, None)
     model_save_path = Path(wandb.run.dir) / "tft_model.pth"
     torch.save(tft_model.state_dict(), model_save_path)
+    torch.save(tft_model.state_dict(), f"{tft_config.get('output_path')}tft_model.pth")
     return tft_model
 
 
