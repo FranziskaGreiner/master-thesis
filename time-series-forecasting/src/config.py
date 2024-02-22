@@ -21,6 +21,7 @@ def get_tft_config():
         "max_encoder_length": 24,
         "max_prediction_length": 24,
         "static_categoricals": ["country"],
+        "time_varying_known_categoricals": ["season", "day_of_week", "is_holiday"],
         "time_varying_known_reals": ["time_idx", "radiation", "temperature", "wind_speed"],
         "time_varying_unknown_reals": ["moer"],
         "lags": {'moer': [24, 168]},

@@ -41,7 +41,7 @@ def create_tft_training_dataset(final_data):
         max_encoder_length=tft_config.get('max_encoder_length'),
         max_prediction_length=tft_config.get('max_prediction_length'),
         static_categoricals=tft_config.get("static_categoricals"),
-        time_varying_known_categoricals= tft_config.get("time_varying_known_categoricals"),
+        time_varying_known_categoricals=tft_config.get("time_varying_known_categoricals"),
         time_varying_known_reals=tft_config.get("time_varying_known_reals"),
         time_varying_unknown_reals=tft_config.get("time_varying_unknown_reals"),
         target_normalizer=target_normalizer,
