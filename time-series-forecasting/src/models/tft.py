@@ -3,6 +3,7 @@ import pandas as pd
 import lightning.pytorch as pl
 import wandb
 import joblib
+import matplotlib.pyplot as plt
 from sklearn.preprocessing import StandardScaler
 from pathlib import Path
 from lightning.pytorch.callbacks import ModelCheckpoint
@@ -34,20 +35,20 @@ def create_tft_training_dataset(final_data):
 
     training_dataset = TimeSeriesDataSet(
         train_data[lambda x: x.time_idx <= training_cutoff],
-        time_idx="time_idx",
-        target="moer",
-        group_ids=["country"],
+        time_idx=tft_config.get("time_idx"),
+        target=tft_config.get("target"),
+        group_ids=tft_config.get("group_ids"),
         max_encoder_length=tft_config.get('max_encoder_length'),
         max_prediction_length=tft_config.get('max_prediction_length'),
-        static_categoricals=["country"],
-        time_varying_known_reals=["time_idx", "radiation", "temperature"],
-        time_varying_unknown_reals=["moer"],
+        static_categoricals=tft_config.get("static_categoricals"),
+        time_varying_known_reals=tft_config.get("time_varying_known_reals"),
+        time_varying_unknown_reals=tft_config.get("time_varying_unknown_reals"),
         target_normalizer=target_normalizer,
-        lags={'moer': tft_config.get('lags')},
-        add_relative_time_idx=True,
-        add_target_scales=True,
-        add_encoder_length=True,
-        allow_missing_timesteps=True
+        lags=tft_config.get("lags"),
+        add_relative_time_idx=tft_config.get("add_relative_time_idx"),
+        add_target_scales=tft_config.get("add_target_scales"),
+        add_encoder_length=tft_config.get("add_encoder_length"),
+        allow_missing_timesteps=tft_config.get("allow_missing_timesteps")
     )
     training_dataset_params = training_dataset.get_parameters()
     training_params_save_path = f"{wandb.run.dir}/training_dataset_params.pth"
@@ -113,7 +114,7 @@ def create_tft_checkpoints():
 
 
 def create_tft_trainer():
-    wandb_logger = WandbLogger(name="tsf_tft", project="tsf_tft")
+    wandb_logger = WandbLogger(name="moer_tsf_tft", project="moer_tsf_tft")
     trainer = pl.Trainer(
         max_epochs=tft_config.get('max_epochs'),
         accelerator="auto",
@@ -125,9 +126,9 @@ def create_tft_trainer():
 
 
 def train_tft(final_data):
-    run = wandb.init(project="tsf_tft", config=dict(tft_config))
+    run = wandb.init(project="moer_tsf_tft", config=dict(tft_config))
 
-    final_data = final_data[final_data['country'] == 'SE'].copy()
+    # final_data = final_data[final_data['country'] == 'DE']
 
     training_dataset = create_tft_training_dataset(final_data)
     validation_dataset = create_tft_validation_dataset(final_data, training_dataset)
@@ -159,5 +160,41 @@ def train_tft(final_data):
     model_save_path = f"{wandb.run.dir}/tft_model.pth"
     torch.save(tft_model.state_dict(), model_save_path)
     wandb.save(model_save_path)
+
+    # validation visualization
+    val_prediction_results = trainer.predict(tft_model, dataloaders=val_dataloader, return_predictions=True)
+
+    for val_idx, result in enumerate(val_prediction_results):
+        fig, ax = plt.subplots(figsize=(23, 5))
+        tft_model.plot_prediction(
+            result.x,
+            result.output,
+            idx=val_idx,
+            add_loss_to_title=True,
+            ax=ax
+        )
+        plt.show()
+        val_plot_file_path = f"plot_val_group_{val_idx}.png"
+        plt.savefig(val_plot_file_path)
+        plt.close()
+        wandb.log({f"plot_val_group_{val_idx}": wandb.Image(val_plot_file_path)})
+
+    # test visualization
+    test_prediction_results = trainer.predict(tft_model, dataloaders=test_dataloader, return_predictions=True)
+
+    for test_idx, result in enumerate(test_prediction_results):
+        fig, ax = plt.subplots(figsize=(23, 5))
+        tft_model.plot_prediction(
+            result.x,
+            result.output,
+            idx=test_idx,
+            add_loss_to_title=True,
+            ax=ax
+        )
+        plt.show()
+        test_plot_file_path = f"plot_test_group_{test_idx}.png"
+        plt.savefig(test_plot_file_path)
+        plt.close()
+        wandb.log({f"plot_test_group_{test_idx}": wandb.Image(test_plot_file_path)})
 
     run.finish()
