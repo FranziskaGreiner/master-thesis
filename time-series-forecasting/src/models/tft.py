@@ -41,6 +41,7 @@ def create_tft_training_dataset(final_data):
         max_encoder_length=tft_config.get('max_encoder_length'),
         max_prediction_length=tft_config.get('max_prediction_length'),
         static_categoricals=tft_config.get("static_categoricals"),
+        time_varying_known_categoricals= tft_config.get("time_varying_known_categoricals"),
         time_varying_known_reals=tft_config.get("time_varying_known_reals"),
         time_varying_unknown_reals=tft_config.get("time_varying_unknown_reals"),
         target_normalizer=target_normalizer,
@@ -155,38 +156,38 @@ def train_tft(final_data):
         val_dataloaders=val_dataloader,
     )
 
-    trainer.test(dataloaders=test_dataloader)
+    test_prediction_results = trainer.test(dataloaders=test_dataloader)
 
     model_save_path = f"{wandb.run.dir}/tft_model.pth"
     torch.save(tft_model.state_dict(), model_save_path)
     wandb.save(model_save_path)
 
-    # validation visualization
-    val_prediction_results = trainer.predict(tft_model, dataloaders=val_dataloader, return_predictions=True)
-
-    for val_idx, result in enumerate(val_prediction_results):
-        fig, ax = plt.subplots(figsize=(23, 5))
-        tft_model.plot_prediction(
-            result.x,
-            result.output,
-            idx=val_idx,
-            add_loss_to_title=True,
-            ax=ax
-        )
-        plt.show()
-        val_plot_file_path = f"plot_val_group_{val_idx}.png"
-        plt.savefig(val_plot_file_path)
-        plt.close()
-        wandb.log({f"plot_val_group_{val_idx}": wandb.Image(val_plot_file_path)})
-
-    # test visualization
-    test_prediction_results = trainer.predict(tft_model, dataloaders=test_dataloader, return_predictions=True)
+    # # validation visualization
+    # val_prediction_results = trainer.predict(tft_model, dataloaders=val_dataloader, return_predictions=True)
+    #
+    # for val_idx, result in enumerate(val_prediction_results):
+    #     fig, ax = plt.subplots(figsize=(23, 5))
+    #     tft_model.plot_prediction(
+    #         result.x,
+    #         result.output,
+    #         idx=val_idx,
+    #         add_loss_to_title=True,
+    #         ax=ax
+    #     )
+    #     plt.show()
+    #     val_plot_file_path = f"plot_val_group_{val_idx}.png"
+    #     plt.savefig(val_plot_file_path)
+    #     plt.close()
+    #     wandb.log({f"plot_val_group_{val_idx}": wandb.Image(val_plot_file_path)})
+    #
+    # # test visualization
+    # test_prediction_results = trainer.predict(tft_model, dataloaders=test_dataloader, return_predictions=True)
 
     for test_idx, result in enumerate(test_prediction_results):
         fig, ax = plt.subplots(figsize=(23, 5))
         tft_model.plot_prediction(
-            result.x,
-            result.output,
+            result.get('x'),
+            result.get('output'),
             idx=test_idx,
             add_loss_to_title=True,
             ax=ax
