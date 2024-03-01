@@ -5,13 +5,20 @@ Der Klimawandel stellt eine der größten Herausforderungen unserer Zeit dar.
 Seine Realität und die dringende Notwendigkeit, seine Hauptverursacher und Treibfaktoren zu bremsen, sind längst unbestreitbar.
 Dies wird unter anderem durch den im März 2023 veröffentlichten Bericht des \ac{IPCC} deutlich bestätigt.
 Der Bericht zeigt auf, dass die globale Oberflächentemperatur im Zeitraum von 2011 bis 2020 um 1,09 Grad Celsius höher lag als im Zeitraum von 1850 bis 1900 und identifiziert die nicht nachhaltige Energienutzung als einen der Haupttreiber dieser Veränderungen~\cite{IPCC.2023}.
+Auch die neuesten Zahlen des EU-Erdbeobachtungsdienstes Copernicus bekräftigen diesen Trend.
+Dieser gab bekannt, dass das Jahr 2023 das wärmste Jahr seit Beginn der globalen Temperaturaufzeichnungen (1850) ist~\cite{CopernicusClimateChangeService.09.01.2024}.
+Die neuesten Veröffentlichungen des Beobachtungsdienstes von Anfang Februar diesen Jahres beschreiben außerdem, dass die 1,5-Grad-Marke des Pariser Abkommens in den vergangenen zwölf Monaten erstmals gebrochen wurde.
+Die globale Durchschnittstemperatur der Monate Februar 2023 bis Januar 2024 liegt 1,52 Grad über dem vorindustriellen Niveau~\cite{Eichhorn.8.2.2024}.
 %!Gleichzeitig war es lange Zeit üblich, quasi unendlich Rechenkapazität etc. zur Verfügung zu haben und auch zu nutzen
-In diesem Kontext spielt die Technologiebranche eine zentrale Rolle.
+
+%In diesem Zusammenhang stellt sich natürlich die Frage nach der Ursache für diese Entwicklung.
+In diesem Kontext spielt die Technologiebranche eine zweischneidige Rolle.
 Der rasante technologische Fortschritt hat zu einem exponentiellen Wachstum der Rechenkapazitäten geführt.
 %Besonders im Bereich der Softwareentwicklung ist ein stetiges Wachstum von Technologien und Anwendungen zu verzeichnen.
 %!Kommentar Thomas: Übergang zu Technologiebranche zu groß. Technologie kann alles mögliche sein.
-Jedoch geht dieses Wachstum mit einem erheblichen Anstieg des Energieverbrauchs einher.
+Einerseits geht dieses Wachstum mit einem erheblichen Anstieg des Energieverbrauchs einher.
 Schätzungen zufolge trägt die Technologiebranche mit mehr als 10\% zu den jährlichen globalen Kohlenstoffemissionen bei~\cite{Buchanan.2023}.
+Andererseits steckt in dieser Branche auch das Potenzial, erheblich zur Verringerung dieser Auswirkungen beizutragen.
 
 Angesichts dieser Entwicklungen hat die Bedeutung nachhaltiger Technologien und Praktiken signifikant zugenommen.
 Es ist von entscheidender Wichtigkeit, dass die \ac{IT}-Branche ihre Verantwortung wahrnimmt und aktiv dazu beiträgt, den Klimawandel durch innovative und nachhaltige Lösungen zu bekämpfen.
@@ -67,7 +74,7 @@ Die Arbeit wird durch folgende spezifische Forschungsfragen definiert:
 %Wie kann ein KI-basiertes Prognosemodell effektiv die Kohlenstoffintensität des Stromnetzes vorhersagen?
 %Wie können die Vorhersagen genutzt werden, um nachhaltige Scheduling-Strategien in Softwarearchitekturen zu implementieren?
 %Ist die dadurch gewonnene Verbesserung der Nachhaltigkeit von Softwareanwendungen lohnenswert?
-
+\section{Related Work}
 \section{Struktur der Arbeit}
 \section{Themenabgrenzung}
 Im Folgenden werden gezielte Abgrenzungen vorgenommen, um den Umfang und Fokus der Arbeit zu definieren und gleichzeitig relevante, jedoch nicht zentrale Themen auszugrenzen.
@@ -326,42 +333,35 @@ Die Kohlenstoffintensität kann dadurch um bis zu 75\% reduziert werden~\cite{Do
 
 \chapter{KI-basierte API zur Prognose der Kohlenstoffintensität}
 \section{Entwicklung des KI-Zeitreihenprognosemodells}
-Der potenzielle Ablauf eines Zeitreihenprognose-Projekts ist in Abbildung~\ref{FIG:process-time-series-forecasting} zu sehen.
-Er dient als Richtlinie für die einzelnen Arbeitsschritte eines solchen Prognoseprojekts und deren Reihenfolge.
-
-%\begin{figure}
-% \caption{Eine vereinfachte Darstellung, wie ein Prognoseprojekt in einzelnen Schritten ablaufen kann~\cite{Peixeiro.2022}.}
-% {\includegraphics[width=0.5\textwidth]{\figdir/process-time-series-forecasting}}
-% \label{FIG:process-time-series-forecasting}
-%\end{figure}
-
-Diesem Ablauf soll im vorliegenden Projekt Folge geleistet werden.
-Zu Beginn gilt es, das Ziel festzulegen: Die Kohlenstoffintensität des Stromnetzes vorherzusagen.
-Im nächsten Schritt soll definiert werden, was vorhergesagt werden muss, um das zuvor definierte Ziel zu erreichen.
-Einen Horizont abzustecken gestaltet sich für das vorliegende Projekt schwierig.
-Es handelt sich hier nicht um einen konkreten Zeitrahmen, denn die Prognose soll für einen beliebigen Zeitpunkt in der Zukunft verwendet werden können.
-Waren die bisherigen Schritte rein konzeptioneller Natur, beginnt nun die praktische Umsetzung~\cite{Peixeiro.2022}.
-
-%Quelle~\cite{iamleonie.15.3.2022}
 
 \subsection{Datenauswahl und -vorverarbeitung}
 Zum einen werden Werte der Kohlenstoffintensität aus der Vergangenheit benötigt, um die Kohlenstoffintensität abhängig von der Zeit vorhersagen zu können.
 Als Maß wird dabei die marginale Kohlenstoffintensität verwendet.
 Diese gibt die Emissionsintensität der Grenzkraftwerke an, die auf die veränderte Stromnachfrage (z.B. durch Scheduling) reagieren~\cite{Buchanan.2023}.
 Dadurch ist diese sehr gut für den vorliegenden Anwendungsfall geeignet.
-Als Datengrundlage dient das Datenmodell zur Marginal Operating Emissions Rate (MOER, zu Deutsch Grenzbetriebsemissionsrate) von WattTime.
-Die MOER wird für einen bestimmten Zeitpunkt und Ort angegeben und kann dadurch gut verglichen werden.
+Als Datengrundlage dient das Datenmodell zur \ac{MOER}, zu Deutsch Grenzbetriebsemissionsrate, von WattTime.
+Die \ac{MOER} wird für einen bestimmten Zeitpunkt und Ort angegeben und kann dadurch gut verglichen werden.
 Ziel ist es, die elektrische Last auf Zeiten mit niedrigen Werten zu verlagern, um die Umwelt weniger zu belasten.
-Wie gut die Daten dafür geeignet sind, hängt von verschiedenen Faktoren ab, zum Beispiel ob MOER-Werte in Echtzeit vorliegen oder wie genau diese Werte sind.
+Wie gut die Daten dafür geeignet sind, hängt von verschiedenen Faktoren ab, zum Beispiel ob \ac{MOER}-Werte in Echtzeit vorliegen oder wie genau diese Werte sind.
 Die Schwierigkeit besteht darin, dass zwei Fälle miteinander verglichen werden müssen, nämlich dass die Lastverschiebung stattfindet und dass sie nicht stattfindet, von denen nicht beide gleichzeitig umgesetzt werden können.
-Durch schwankende Bedingungen im Stromnetz ändert sich die MOER ständig, weshalb man den Fall der Lastverschiebung und den Fall, in dem keine Last verschoben wird, nicht einfach hintereinander ausprobieren kann.
+Durch schwankende Bedingungen im Stromnetz ändert sich die \ac{MOER} ständig, weshalb man den Fall der Lastverschiebung und den Fall, in dem keine Last verschoben wird, nicht einfach hintereinander ausprobieren kann.
 Eine mögliche Lösung dieses Problems ist, die Netzbedingungen mitzubetrachten und davon auszugehen, dass bei gleichen Bedingungen auch die MOER gleich ist.
 Diesen Ansatz nutzt WattTime und überprüft dessen Genauigkeit durch verschiedenste Experimente~\cite{WattTime.2022}.
 % pro kWh wird soviel mehr g CO2 ausgestossen
 % Electricity Maps Beitrag zu MOER !
 
+Die \ac{MOER}-Werte werden über die \ac{API} von WattTime pro Monat für die Länder Deutschland und Schweden abgefragt.
+Zur Verwendung für die Vorhersage sind ein paar Vorverarbeitungsschritte nötig.
+Die Daten stehen in einem Intervall von fünf Minuten zur Verfügung, was insgesamt zu einer sehr großen Datenmenge führen würde, z.B. für Deutschland $12 * 24 * 457 = 131 616$ Datenpunkte.
+Außerdem wird ein stündliches Intervall für die Vorhersage als ausreichend angesehen.
+Die \ac{MOER}-Werte werden von der Einheit lbs/\ac{kWh} in g/MWh umgerechnet und die Informationen über die Zeitzone werden entfernt, da sich die Daten bereits in \ac{UTC} befinden.
+Diese Zeitzone wird als Standard für alle Daten verwendet, sodass später ein einfaches Zusammenfügen aus einzelnen Datenquellen und Vergleichen der Daten untereinander ohne Konvertierung möglich ist.
+
+Die Daten zur \ac{MOER} sollen zunächst für die beiden Länder analysiert werden, um ein Bild über die Beschaffenheit der Daten zu erhalten.
+Dafür werden sie, wie in Kapitel xy beschrieben, in Trend, Saisonalität und Residual zerlegt.
+
 Die Verfügbarkeit erneuerbarer Energien hängt maßgeblich vom Wetter ab.
-Dieser Zusammenhang kann für die Vorhersage genutzt werden, weshalb Wetterdaten zum Modell hinzugefügt werden.
+Dieser Zusammenhang kann für die Vorhersage genutzt werden, weshalb Wetterdaten zum Datensatz hinzugefügt werden.
 Dafür wird auf den Copernicus Climate Change Service~\cite{Copernicus.20231212T14:09:40.000Z} zurückgegriffen, der umfangreiche Datensätze rund um das weltweite Klima und den Klimawandel zur Verfügung stellt.
 Konkret wurden drei mögliche Einflussfaktoren für die Kohlenstoffintensität als wichtig identifiziert und ausgewählt: die Lufttemperatur in 2 m Höhe, die Windgeschwindigkeit in 100 m Höhe und die globale horizontale Bestrahlungsstärke (im Englischen als \ac{GHI} bezeichnet).
 Letztere wird durch die atmosphärische Zusammensetzung mit Aerosolen, Wasserdampf und Ozon, hauptsächliche jedoch von Wolken beeinflusst~\cite{KallioMyers.2020}.
@@ -385,20 +385,57 @@ Die Lufttemperatur wurde in zwei Metern Höhe gemessen und die Windgeschwindigke
  \label{FIG:ghi_de_2015-2022}
 \end{figure}
 Bei den Werten handelt es sich um Daten des ERA5 Reanalysis Datensatzes.
-Dies sind von verschiedenen Quellen, wie Satelliten oder Wetterstationen, gemessene Daten, bei denen fehlende Werte durch physikalische Gesetze oder historische Verlaufsmuster generierte Daten ergänzt wurden.
+Dies sind von verschiedenen Quellen, wie Satelliten oder Wetterstationen, gemessene Daten, bei denen fehlende Werte mit durch physikalische Gesetze oder historische Verlaufsmuster generierte Daten ergänzt wurden.
 Grundsätzlich sind die Daten also echt gemessene Daten, die zur Vollständigkeit mit generierten Daten ergänzt wurden~\cite{CopernicusClimateChangeService.2020}~\cite{CopernicusKnowledgeBase.20231009}.
 
+Außerdem werden zeitliche Variablen hinzugefügt, die den MOER-Wert ebenfalls beeinflussen können: Wochentag, Jahreszeit und, ob es sich um einen Feiertag handelt.
+Die jeweiligen Werte für die Variablen werden kodiert, sodass sie verarbeitet werden können.
+
 \subsection{Entwurf des Vorhersagemodells}
-Zunächst sollen die Anforderungen an das Modell beschrieben werden, um dann die Wahl des Modells festzulegen und diese zu begründen.
-Das Modell soll in der Lage sein, den Zusammenhang zwischen Wetterdaten und den Werten der marginalen Kohlenstoffintensität für ein bestimmtes Land zu einem bestimmten Zeitpunkt zu erlernen.
+Für die Zeitreihenprognose soll ein statistisches Modell namens SARIMAX als Basismodell dienen.
+SARIMAX (Seasonal Auto-Regressive Integrated Moving Average with exogenous variables) kommt folgendermaßen zustande:
+Für das ARMA-Modell werden die autoregressive (AR) und die Moving-Average- (MA) Komponente zusammengefügt.
+Ein autoregressiver Prozess geht davon aus, dass die Zielvariable linear von ihren eigenen Werten in der Vergangenheit abhängen.
+Beim Moving-Average-Prozess (zu Deutsch gleitender Durchschnittsprozess) wird der aktuelle Wert als lineare Kombination des Mittelwerts der aktuellen und vergangenen Fehlerterme dargestellt.
+Das \ac{ARIMA}-Modell enthält zusätzlich noch einen Vorverarbeitungsschritt (I), um nicht stationäre Zeitreihen modellieren zu können.
+Um saisonale Muster berücksichtigen zu können, wird aus dem \ac{ARIMA}-Modell das SARIMA-Modell, welches schließlich um exogene Variablen (X), also von extern beeinflussende Variablen, erweitert wird.
+Das ARIMA-Modell in Abhängigkeit von der Ordnung des AR-Prozesses $p$ (linear Regression auf die letzten $p$ Werte der Zeitreihe), der Ordnung der Integration $d$ und der Ordnung des MV-Prozesses $q$ (lineare Regression auf die letzten $q$ Fehlerwerte), kann durch Formel~\ref{eq:arima} ausgedrückt werden~\cite{Peixeiro.2022}.
+$p$ gibt an, wie viele verzögerte Werte hinzugegeben werden, wohingegen $q$ die Anzahl der verzögerten Fehlerterme definiert.
+\begin{equation}
+ \label{eq:arima}
+ y'_t = C + \phi_1 y'_{t-1} + \ldots + \phi_p y'_{t-p} + \theta_1 \varepsilon_{t-1} + \ldots + \theta_q \varepsilon_{t-q} + \varepsilon_t
+\end{equation}
+Der aktuelle Wert der differenzierten Reihe $y'_t$ ist somit die Summe aus einer Konstanten $C$, den Vergangenheitswerten dieser differenzierten Reihe $\phi_p y'_{t-p}$, vergangenen Fehlertermen $\theta_1 \varepsilon_{t-1}$ und dem aktuellen Fehlerterm $\varepsilon_t$.
+$d$ ist hier nicht explizit angegeben, definiert jedoch die Anzahl der Differenzierungen, bis eine Reihe stationär wird.
+
+Basierend auf Formel~\ref{eq:arima} ergibt sich Formel~\ref{eq:sarimax} für das SARIMAX-Modell.
+\begin{equation}
+ \label{eq:sarimax}
+ d_t = C + \sum_{n=1}^{p} \alpha_n d_{t-n} + \sum_{n=1}^{q} \theta_n e_{t-n} + \sum_{n=1}^{P} \phi_n d_{t-sn} + \sum_{n=1}^{Q} \eta_n e_{t-sn} + \sum_{n=1}^{r} \beta_n x_{t-n} + \varepsilon_t
+\end{equation}
+Ergänzt wurde die Formel durch die Saisonalität in Form einer zusätzlichen AR- ($\phi_n d_{t-sn}$) und MA- ($\eta_n e_{t-sn}$) Komponente verschoben um die Frequenz der Saisonalität ($s$, z.B.\ 12: monatlich oder 24: stündlich) und um die exogenen Variablen ($\sum_{n=1}^{r} \beta_n x_{t-n}$)~\cite{Artley.26.4.2022}.
+
+
+
+Neben SARIMAX, das als Ausgangslage dient, soll ein sogenannter \ac{TFT} angewendet werden.
+
+Wissenschaftlern von Google gelang 2017 eine Forschungsarbeit~\cite{Vaswani.2017}, die die Forschung zur künstlichen Intelligenz vor allem im Bereich der natürlichen Sprachverarbeitung maßgeblich beeinflusste.
+Sie stellten eine neue Architektur für neuronale Netze vor, sogenannte Transformer, die zunächst nur für die Sprachverarbeitung angewendet und getestet wurden, aber als grundlegendes Konzept auch andere Bereiche revolutionierten.
+Anstelle von Feedback-Schleifen durch \ac{RNN}s, die üblicherweise in Encoder-Decoder-Architekturen verwendet wurden, setzten sie auf eine Methode namens \glqq Multi-headed Self-Attention\grqq{}.
+Es stellte sich heraus, dass dieser neue Architekturansatz sich für verschiedenste Zwecke eignet und große Vorteile bietet, wie zum Beispiel die Parallelisierbarkeit, die Vielseitigkeit und nicht zuletzt die hohe Qualität der erzielten Ergebnisse~\cite{Vaswani.2017}.
+Heute basieren bedeutende Modelle wie ChatGPT unter anderem auf Transformern.
 
 Ein \ac{TFT} ist ein \ac{DNN} mit besonderer Architektur für das Multi-Horizon Forecasting, also die Vorhersage für mehrere zukünftige Zeitschritte.
-\ac{DNN}s werden zunehmen für diese Aufgabe herangezogen, weil sie verglichen mit herkömmlichen Zeitreihenmodellen große Leistungsverbesserungen aufzeigen.
+Zunehmend wurden für diesen Anwendungsfall \ac{DNN}s eingesetzt, da sie die Leistung herkömmlicher Modelle übertreffen~\cite{Lim.19.12.2019}.
+Die Idee des Attention-Mechanismus, der den Kern der Transformer-Architektur bildet, wurde für \ac{TFT} übernommen.
+Um die Architektur auf die Varietät der Eingabedaten und deren zeitliche Beziehungen auszurichten, werden Codierer für die Static Covariates eingesetzt, Gating-Mechanismen und stichprobenabhängige Variablenauswahl zur Minimierung irrelevanter Eingaben, eine Sequence-to-Sequence-Schicht zur Verarbeitung der Known und Observed Inputs und ein Self-Attention Decodierer zur Analyse der Eingabedaten auf langfristige Abhängigkeiten.
 Bei anderen aufmerksamkeitsbasierten Methoden, die auch Transformer-basierte Modelle mit einschließen, besteht oft das Problem, dass die verschiedenen Datenquellen (z.B. Static Covariates) nicht ausreichend berücksichtigt werden.
 Außerdem können sie oft die Bedeutung verschiedener Daten in einem bestimmten Zeitabschnitt unterscheiden.
 Andere \ac{DNN}s neben dem \ac{TFT} haben zum Beispiel den Nachteil, dass sie die zeitliche Anordnung der Eingangsmerkmale nicht berücksichtigen (konventionelle Formen von LIME und SHAP), obwohl diese Abhängigkeit in Zeitreihen signifikant sind~\cite{Lim.19.12.2019}.
+%\ac{DNN}s werden zunehmen für diese Aufgabe herangezogen, weil sie verglichen mit herkömmlichen Zeitreihenmodellen große Leistungsverbesserungen aufzeigen.
 
 Auch wenn der \ac{TFT} ein großes Modell ist und am besten für große Datenmengen geeignet ist, erzielt er auch für kleine Datensätze mit ca. 20 000 Samples gute Ergebnisse~\cite{Beitner.2020}.
+Zeitreihenprognosen mit mehreren Zeithorizonten verwenden meist verschiedene Arten von Datenquellen, die zusammen mit dem zu definierenden Zusammenhang dieser Daten eine der größten Herausforderungen darstellt.
 Er verwendet als Input verschiedenste Daten, wie in Abbildung~\ref{FIG:tft-forecasting} dargestellt~\cite{Lim.19.12.2019}:
 \begin{itemize}
  \item Werte der Zielvariablen aus der Vergangenheit (Past Targets)
@@ -407,7 +444,7 @@ Er verwendet als Input verschiedenste Daten, wie in Abbildung~\ref{FIG:tft-forec
  \item Feststehende, zeitunabhängige Daten, die einen kontextuellen Zusammenhang bieten (Static Covariates)
 \end{itemize}
 \begin{figure}
- \caption{Multi-horizon Forecasting mit dem \ac{TFT}~\cite{Lim.19.12.2019}.}
+ \caption{Multi-horizon Forecasting mit dem Temporal Fusion Transformer~\cite{Lim.19.12.2019}.}
  {\includegraphics[width=0.7\textwidth]{\figdir/TFT_multi-horizon-forecasting}}
  \label{FIG:tft-forecasting}
 \end{figure}
@@ -415,7 +452,7 @@ Die Ausgabe des Modells ist nicht ein einziger Wert, sondern ein Werteintervall 
 Die Multi-Horizon Vorhersage ist deshalb so komplex, weil trotz weniger Informationen darüber, das Zusammenspiel und die Abhängigkeit der Daten untereinander erlernt werden müssen~\cite{Lim.19.12.2019}.
 
 Jeder Wert der Zielvariablen $i$ ist an eine oder mehrere Static Covariates $s_i$, an zeitabhängige Variablen $\chi_{i,t}$ und skalare Zielvariablen $y_{i,t}$ zu jedem Zeitschritt $t$ gebunden.
-Wie in vorheriger Auflistung deutlich wurde, können die zeitabhängigen Variablen weiter unterteil werden in Known Inputs ($x_{i,t}$) und Observed Inputs ($z_{i,t}$).
+Wie in vorheriger Auflistung deutlich wurde, können die zeitabhängigen Variablen weiter unterteilt werden in Known Inputs ($x_{i,t}$) und Observed Inputs ($z_{i,t}$).
 Wichtig sind außerdem sogenannte Quantile, denn sie ermöglichen die Vorhersage von Ergebnisintervallen, anstatt nur einzelner Werte und bieten auf diese Weise die Aussage über Best- und Worst-Case Werte (z.B. Ausgabe des 10., 50. und 90. Perzentil jedes Zeitschrittes)~\cite{Lim.19.12.2019}.
 
 Formel~\ref{eq:tft} beschreibt die Prognose des $q$-ten Quantils des $\tau$-ten Vorhersageschrittes zum Zeitpunkt $t$.
@@ -430,7 +467,7 @@ Die statische Co-Variate ist das Land Deutschland oder Schweden und die unbekann
 
 Abbildung~\ref{FIG:tft-architecture} zeigt den Aufbau eines \ac{TFT}s, wovon die wichtigsten Bestandteile im Folgenden kurz erklärt werden.
 \begin{figure}
- \caption{Vereinfachte Darstellung des Aufbaus eines \ac{TFT}~\cite{Labiadh.2023}.}
+ \caption{Vereinfachte Darstellung des Aufbaus eines Temporal Fusion Transformers~\cite{Labiadh.2023}.}
  {\includegraphics[width=0.90\textwidth]{\figdir/TFT-architecture}}
  \label{FIG:tft-architecture}
 \end{figure}
@@ -470,35 +507,20 @@ Bei Unterschätzungen wird der erste Summand der Funktion für obere Quantile ho
 Die neue Form der Interpretierbarkeit eines \ac{TFT} ermöglicht ein einfaches Zurückverfolgen der relevantesten Zeitschritte für jede Prognose, was traditionelle Saisonalitäts- und Autokorrelationsanalysen ersetzen kann.
 Außerdem hilft sie, signifikante Veränderungen zu erkennen, indem ein durchschnittlicher Aufmerksamkeitswert pro Vorhersagebereich berechnet wird und zu jedem Zeitpunkt als Vergleich dient~\cite{Labiadh.2023}.
 
-
-
-Verglichen werden soll das \ac{TFT}-Modell mit einem traditionellen, statistischen Modell, dem SARIMAX-Modell.
-Das SARIMAX-Modell kommt folgendermaßen zustande:
-Für das ARMA-Modell werden die autoregressive (AR) und die Moving-Average- (MA) Komponente zusammengefügt.
-Ein autoregressiver Prozess geht davon aus, dass die Zielvariable linear von ihren eigenen Werten in der Vergangenheit abhängt.
-Beim Moving-Average-Prozess (zu Deutsch gleitender Durchschnittsprozess) wird der aktuelle Wert als lineare Kombination des Mittelwerts der aktuellen und vergangenen Fehlerterme dargestellt.
-Das \ac{ARIMA}-Modell enthält zusätzlich noch einen Vorverarbeitungsschritt (I), um nicht stationäre Zeitreihen modellieren zu können.
-Um saisonale Muster berücksichtigen zu können, wird aus dem \ac{ARIMA}-Modell das SARIMA-Modell, welches schließlich um exogene Variablen (X), also von extern beeinflussende Variablen, erweitert wird.
-Das ARIMA-Modell in Abhängigkeit von der Ordnung des AR-Prozesses $p$, der Ordnung der Integration $d$ und der Ordnung des MV-Prozesses $q$, kann durch Formel~\ref{eq:arima} ausgedrückt werden~\cite{Peixeiro.2022}.
-$p$ gibt an, wie viele verzögerte Werte hinzugegeben werden, wohingegen $q$ die Anzahl der verzögerten Fehlerterme definiert.
-\begin{equation}
- \label{eq:arima}
- y'_t = C + \phi_1 y'_{t-1} + \ldots + \phi_p y'_{t-p} + \theta_1 \varepsilon_{t-1} + \ldots + \theta_q \varepsilon_{t-q} + \varepsilon_t
-\end{equation}
-Der aktuelle Wert der differenzierten Reihe $y'_t$ ist somit die Summe aus einer Konstanten $C$, den Vergangenheitswerten dieser differenzierten Reihe $\phi_p y'_{t-p}$, vergangenen Fehlertermen $\theta_1 \varepsilon_{t-1}$ und dem aktuellen Fehlerterm $\varepsilon_t$.
-$d$ ist hier nicht explizit angegeben, definiert jedoch die Anzahl der Differenzierungen, bis eine Reihe stationär wird.
-
-Basierend auf Formel~\ref{eq:arima} ergibt sich Formel~\ref{eq:sarimax} für das SARIMAX-Modell.
-\begin{equation}
- \label{eq:sarimax}
- d_t = C + \sum_{n=1}^{P} \phi_n d_{t-sn} + \sum_{n=1}^{q} \theta_n e_{t-n} + \varepsilon_t + \sum_{n=1}^{p} \alpha_n d_{t-n} + \sum_{n=1}^{Q} \eta_n e_{t-sn} + \sum_{n=1}^{r} \beta_n x_{t-n}
-\end{equation}
-Ergänzt wurde die Formel durch die Saisonalität in Form einer zusätzlichen AR- ($$) und MA- ($$) Komponente verschoben um die Frequenz der Saisonalität (z.B.\ 12: monatlich oder 24: stündlich) und um die exogenen Variablen ($\sum_{n=1}^{r} \beta_n x_{t-n}$)~\cite{Artley.26.4.2022}.
-
 \subsection{Implementierung und Trainingsprozess}
 Für die Implementierung soll eine Pipeline verwendet werden, um sich wiederholende Schritte problemlos und ohne nötigen Mehraufwand ausführen zu können.
 Die Idee dabei ist, dass die Modell-übergreifenden Schritte, wie Datenvorverarbeitung und Feature-Engineering, für die beiden Modelle gleichermaßen verwendet werden, wohingegen Modell-spezifische Schritte separat umgesetzt werden.
 Der Vorteil der Pipeline-Struktur besteht darin, dass
+
+Der zuvor beschriebene Datensatz wird aufgeteilt in einen Trainingsdatensatz, einen Validierungsdatensatz und einen Testdatensatz, wie in Abbildung~\ref{FIG:moer_de_train_validation_test} sichtbar wird.
+Als Unterteilung wird das Datum 30.09.2023, bzw. 30.11.2023 verwendet.
+So wird sichergestellt, dass die Saisonalität vom Modell erkannt werden kann, denn es bekommt im Training genau ein Jahr an Daten für Deutschland zu sehen.
+\begin{figure}
+ \caption{Die Unterteilung der MOER-Werte für Deutschland in Trainings-, Validierungs- und Testdatensatz}
+ {\includegraphics[width=0.99\textwidth]{\figdir/moer_de_train_validation_test}}
+ \label{FIG:moer_de_train_validation_test}
+\end{figure}
+
 \section{Erstellung der Prognose-API}
 \subsection{Konzeption der API-Architektur}
 \subsection{Implementierung der API}
