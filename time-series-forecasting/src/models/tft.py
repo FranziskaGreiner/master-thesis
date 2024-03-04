@@ -16,13 +16,13 @@ tft_config = get_tft_config()
 
 
 def create_tft_training_dataset(final_data):
-    final_data['date'] = pd.to_datetime(final_data['date'])
-    final_data['is_holiday'] = final_data['is_holiday'].astype(str)
+    final_data.loc[:, 'date'] = pd.to_datetime(final_data['date'])
+    final_data.loc[:, 'is_holiday'] = final_data['is_holiday'].astype(str)
 
     scaler = StandardScaler()
     features_to_normalize = ['temperature', 'radiation', 'wind_speed']
     scaler.fit(final_data[features_to_normalize])
-    final_data[features_to_normalize] = scaler.transform(final_data[features_to_normalize])
+    final_data.loc[:, features_to_normalize] = scaler.transform(final_data[features_to_normalize])
 
     scaler_save_path = f"{wandb.run.dir}/feature_scaler.joblib"
     joblib.dump(scaler, scaler_save_path)
@@ -129,7 +129,7 @@ def create_tft_trainer():
 def train_tft(final_data):
     run = wandb.init(project="moer_tsf_tft", config=dict(tft_config))
 
-    # final_data = final_data[final_data['country'] == 'DE']
+    final_data = final_data[final_data['country'] == 'DE']
 
     training_dataset = create_tft_training_dataset(final_data)
     validation_dataset = create_tft_validation_dataset(final_data, training_dataset)
@@ -156,46 +156,31 @@ def train_tft(final_data):
         val_dataloaders=val_dataloader,
     )
 
-    test_prediction_results = trainer.test(dataloaders=test_dataloader)
+    trainer.test(dataloaders=test_dataloader)
 
     model_save_path = f"{wandb.run.dir}/tft_model.pth"
     torch.save(tft_model.state_dict(), model_save_path)
     wandb.save(model_save_path)
 
-    # # validation visualization
-    # val_prediction_results = trainer.predict(tft_model, dataloaders=val_dataloader, return_predictions=True)
-    #
-    # for val_idx, result in enumerate(val_prediction_results):
-    #     fig, ax = plt.subplots(figsize=(23, 5))
-    #     tft_model.plot_prediction(
-    #         result.x,
-    #         result.output,
-    #         idx=val_idx,
-    #         add_loss_to_title=True,
-    #         ax=ax
-    #     )
-    #     plt.show()
-    #     val_plot_file_path = f"plot_val_group_{val_idx}.png"
-    #     plt.savefig(val_plot_file_path)
-    #     plt.close()
-    #     wandb.log({f"plot_val_group_{val_idx}": wandb.Image(val_plot_file_path)})
-    #
-    # # test visualization
-    # test_prediction_results = trainer.predict(tft_model, dataloaders=test_dataloader, return_predictions=True)
+    best_model_path = trainer.checkpoint_callback.best_model_path
+    best_tft = TemporalFusionTransformer.load_from_checkpoint(best_model_path)
+    val_prediction_results = best_tft.predict(val_dataloader, mode="raw", return_x=True)
 
-    for test_idx, result in enumerate(test_prediction_results):
+    print(len(val_prediction_results))
+    print(val_prediction_results.shape)
+
+    for idx in range(31):
         fig, ax = plt.subplots(figsize=(23, 5))
-        tft_model.plot_prediction(
-            result.get('x'),
-            result.get('output'),
-            idx=test_idx,
-            add_loss_to_title=True,
-            ax=ax
-        )
+        ax.set_xlim(min(val_prediction_results.x["encoder_target"].index), max(val_prediction_results.x["decoder_target"].index))
+        best_tft.plot_prediction(val_prediction_results.x,
+                                 val_prediction_results.output,
+                                 idx=idx,
+                                 add_loss_to_title=True,
+                                 ax=ax)
+        val_plot_file_path = f"plot_val_group_{idx}.png"
+        plt.savefig(val_plot_file_path)
+        wandb.log({f"plot_val_group_{idx}": wandb.Image(val_plot_file_path)})
         plt.show()
-        test_plot_file_path = f"plot_test_group_{test_idx}.png"
-        plt.savefig(test_plot_file_path)
         plt.close()
-        wandb.log({f"plot_test_group_{test_idx}": wandb.Image(test_plot_file_path)})
 
     run.finish()

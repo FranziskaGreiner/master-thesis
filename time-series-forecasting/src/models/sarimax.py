@@ -9,20 +9,17 @@ sarimax_config = get_sarimax_config()
 
 
 def create_sarimax_datasets(final_data):
-    final_data = final_data.copy()
-    final_data['date'] = pd.to_datetime(final_data['date'])
+    final_data.loc[:, 'date'] = pd.to_datetime(final_data['date'])
+    final_data.set_index('date', inplace=True)
+    final_data.index = pd.DatetimeIndex(final_data.index).to_period('H')
 
-    train_data = final_data[final_data['date'] <= sarimax_config.get('training_cutoff_date')].copy()
-    train_data.loc[:, 'time_idx'] = train_data['time_idx'].astype(int)
+    train_data = final_data[:sarimax_config.get('training_cutoff_date')]
     validation_data = final_data[
-        (final_data['date'] > sarimax_config.get('training_cutoff_date')) &
-        (final_data['date'] <= sarimax_config.get('validation_cutoff_date'))
-        ].copy()
-    validation_data.loc[:, 'time_idx'] = validation_data['time_idx'].astype(int)
-    test_data = final_data[final_data['date'] > sarimax_config.get('validation_cutoff_date')].copy()
-    test_data.loc[:, 'time_idx'] = test_data['time_idx'].astype(int)
+                      sarimax_config.get('training_cutoff_date'):sarimax_config.get('validation_cutoff_date')]
+    test_data = final_data[sarimax_config.get('validation_cutoff_date'):]
 
-    exog_variables = ['temperature', 'radiation', 'wind_speed']
+    # all feature variables ??
+    exog_variables = ['temperature', 'radiation', 'wind_speed', 'day_of_week', 'is_holiday', 'season']
     exog_train = train_data[exog_variables] if not train_data.empty else None
     exog_validation = validation_data[exog_variables] if not validation_data.empty else None
     exog_test = test_data[exog_variables] if not test_data.empty else None
@@ -36,7 +33,6 @@ def create_sarimax_model(train_data, exog_train):
                             seasonal_order=(
                                 sarimax_config.get('P'), sarimax_config.get('D'), sarimax_config.get('Q'),
                                 sarimax_config.get('s')))
-    # save_config_and_results(run_dir, sarimax_config, None)
     return sarimax_model
 
 
@@ -50,7 +46,6 @@ def train_sarimax(final_data):
             country_data)
         sarimax_model = create_sarimax_model(train_data, exog_train)
         results = sarimax_model.fit(disp=False)
-        models_results[country] = results
 
         model_file_path = f"{wandb.run.dir}/sarimax_model_{country}.joblib"
         joblib.dump(results, model_file_path)
@@ -58,35 +53,25 @@ def train_sarimax(final_data):
         artifact.add_file(model_file_path)
         run.log_artifact(artifact)
 
+        if not validation_data.empty:
+            val_predictions = results.get_prediction(start=len(train_data),
+                                                     end=len(train_data) + len(validation_data) - 1,
+                                                     exog=exog_validation, dynamic=False).predicted_mean
+            val_mse = mean_squared_error(validation_data['moer'], val_predictions)
+            val_mae = mean_absolute_error(validation_data['moer'], val_predictions)
+            wandb.log({f"{country}_validation_MSE": val_mse, f"{country}_validation_MAE": val_mae})
+
+        # if not test_data.empty:
+        #     test_predictions = results.get_prediction(start=len(train_data) + len(validation_data),
+        #     end= len(train_data) + len(validation_data) + len(test_data) - 1, exog=exog_test).predicted_mean
+        #     test_mse = mean_squared_error(test_data['moer'], test_predictions)
+        #     test_mae = mean_absolute_error(test_data['moer'], test_predictions)
+        #     wandb.log({f"{country}_test_MSE": test_mse, f"{country}_test_MAE": test_mae})
+
+        # Log diagnostics
         fig = results.plot_diagnostics(figsize=(10, 8))
         diagnostics_path = f"{wandb.run.dir}/diagnostics_{country}.png"
         fig.savefig(diagnostics_path)
         wandb.log({f"diagnostics_{country}": wandb.Image(diagnostics_path)})
-        wandb.log({f"model_{country}_summary": results.summary().as_text()})
-
-        if not validation_data.empty:
-            val_metrics, val_predictions = predict_and_evaluate(validation_data, exog_validation, results)
-            wandb.log({"validation_metrics": val_metrics})
-            wandb.log({"val_predictions": wandb.Table(dataframe=val_predictions.to_frame(name='predictions'))})
-
-        if not test_data.empty:
-            test_metrics, test_predictions = predict_and_evaluate(test_data, exog_test, results)
-            wandb.log({"test_metrics": test_metrics})
-            wandb.log({"test_predictions": wandb.Table(dataframe=test_predictions.to_frame(name='predictions'))})
 
     run.finish()
-    return models_results
-
-
-def calculate_metrics(y_true, y_pred):
-    mae = mean_absolute_error(y_true, y_pred)
-    mse = mean_squared_error(y_true, y_pred)
-    r2 = r2_score(y_true, y_pred)
-    return {"MAE": mae, "MSE": mse, "R^2": r2}
-
-
-def predict_and_evaluate(data, exog, results):
-    predictions = results.get_prediction(start=data.index[0], end=data.index[-1], exog=exog, dynamic=False)
-    pred_mean = predictions.predicted_mean
-    metrics = calculate_metrics(data['moer'], pred_mean)
-    return metrics, pred_mean
