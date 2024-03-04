@@ -1,1 +1,4 @@
 /.idea
+/time-series-forecasting/wandb
+/time-series-forecasting/data
+*.iml
