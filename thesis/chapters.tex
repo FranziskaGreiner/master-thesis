@@ -26,6 +26,8 @@ Angesichts dieser Entwicklungen hat die Bedeutung nachhaltiger Technologien und 
 Es ist von entscheidender Wichtigkeit, dass die \ac{IT}-Branche ihre Verantwortung wahrnimmt und aktiv dazu beiträgt, den Klimawandel durch innovative und nachhaltige Lösungen zu bekämpfen.
 Die Entwicklung und Implementierung von energieeffizienten und kohlenstoffarmen Technologien und Methoden in der Softwareentwicklung ist daher nicht nur eine technologische Herausforderung, sondern auch eine moralische Verpflichtung gegenüber zukünftigen Generationen.
 
+Zwar werden die Stromnetze weltweit auf kohlenstoffärmere Quellen umgestellt, doch dieser Wandel kann nicht unmittelbar geschehen, sondern benötigt Zeit und ist nur möglich, wenn die Stromnachfrage nach wie vor gedeckt werden kann.
+Um dieser Schwierigkeit Abhilfe zu schaffen, soll betrachtet werden, wie der Übergang beschleunigt werden kann und fossile Brennstoffe verzichtbarer gemacht werden können, indem die Nutzung erneuerbarer Energiequellen priorisiert wird~\cite{GreenSoftwareFoundation.2022}.
 %effizienter Code oft sowohl grüner als auch schneller ist als ineffizienter Code
 %aber: keine Selbstverständlichkeit, "grün", "effizient" und "performant" sind keine Synonyme
 %offensichtlichste Zweck der Code-Effizienz: Anzahl und Größe der Maschinen zu reduzieren, die für das Hosting Ihrer Dienste erforderlich sind --> Anzahl der Nutzer, Zuverlässigkeit und Leistungsniveau; = Maximierung der Hardwareproduktivität, sehr umweltfreundliches Konzept
@@ -258,14 +260,15 @@ Zur Veranschaulichung, welchen Einfluss die zeitliche Verschiebung von Workloads
  {\includegraphics[width=0.9\textwidth]{\figdir/grid-supply-demand}}
  \label{FIG:grid-supply-demand}
 \end{figure}
-In dieser Darstellung wird ersichtlich, dass zur Mittagszeit die Verfügbarkeit von Solarstrom besonders hoch ist.
-Gleichzeitig übersteigt das Angebot in diesem Zeitraum die Nachfrage.
-Dieses überschüssige Angebot könnte genutzt werden und der höhere Stromverbrauch würde keine zusätzlichen Emissionen verursachen~\cite{Buchanan.2023}.
-Eine Studie von Microsoft (\cite{Dodge.06212022}) aus dem Jahr 2022 hat aufgezeigt, dass durch Zeitverschiebung durchschnittlich 15\% weniger Kohlenstoffintensität (gemessen am \ac{SCI}) erreicht werden kann.
-Diese hat sich zwar auf Aufgaben von Künstlicher Intelligenz in der Cloud konzentriert, sie zeigt jedoch auf, dass die zeitliche Verlagerung von rechenintensiven Workloads ein großes Verbesserungspotenzial birgt.
+In dieser vereinfachten Darstellung wird davon ausgegangen, dass zur Mittagszeit die Verfügbarkeit von Solarstrom besonders hoch ist.
+Aus diesem Grund übersteigt das Angebot in diesem Zeitraum die Nachfrage.
+Dieses überschüssige Angebot könnte genutzt werden und der höhere Stromverbrauch würde keine zusätzlichen Emissionen verursachen.
+Andererseits muss zu den Zeiten, zu denen kein oder nur wenig Solarstrom zur Verfügung steht, auf Gas zurückgegriffen werden, um die Nachfrage decken zu können~\cite{Buchanan.2023}.
+Eine Studie von Microsoft~\cite{Dodge.06212022} aus dem Jahr 2022 hat aufgezeigt, dass durch Zeitverschiebung durchschnittlich 15\% weniger Kohlenstoffintensität (gemessen am \ac{SCI}) erreicht werden kann.
+Diese hat sich zwar auf Aufgaben von Künstlicher Intelligenz in der Cloud konzentriert, sie zeigt jedoch, dass die zeitliche Verlagerung von rechenintensiven Workloads ein großes Verbesserungspotenzial birgt.
 Das größte Potenzial der Zeitverschiebung liegt demnach in der Verschiebung von Workloads mit kurzer Dauer und großem Volumen in Regionen mit großer Unstetigkeit~\cite{Buchanan.2023}.
 
-Einen weitaus größeren Einfluss als die zeitliche Verlagerung kann laut der gleichen Studie jedoch die örtliche Verlagerung haben.
+Einen weitaus größeren Einfluss als die zeitliche Verlagerung kann laut der Studie jedoch die örtliche Verlagerung haben.
 Die Kohlenstoffintensität kann dadurch um bis zu 75\% reduziert werden~\cite{Dodge.06212022}.
 
 \subsection{Dynamische Scheduling Modelle}
@@ -297,25 +300,43 @@ Betrachtet man ein zeitintensiveres Experiment, wie das Training eines Language 
 Beim flexiblen Start ist das Optimierungspotential sehr gering (meist weniger als 1\%), jedoch bietet das Anhalten und Fortsetzen gute Optimierungsergebnisse.
 In vielen Regionen sind Emissionsreduzierungen um mehr als 10\% und in der Region West US erneut am meisten mit ungefähr 28\% möglich~\cite{Dodge.06212022}.
 
-\section{Demand Shifting}
-Eine Software-Anwendung kann nachhaltiger betrieben werden, indem der Strombedarf auf die Kohlenstoffintensität ausgerichtet wird.
-Durch sogenanntes Demand-Shifting, also der Verschiebung der Nachfrage je nach Kohlenstoffintensität, kann zwischen 45\% und 90\% Kohlenstoff eingespart werden.
-Diese Verlagerung kann sowohl auf zeitlicher Ebene als auch auf örtlicher Ebene (Location Shifting) stattfinden~\cite{GreenSoftwareFoundation.2022}.
-
-\section{Demand Shaping}
-Eine ähnliche Methode, die ebenfalls das Ziel verfolgt, die Kohlenstoffemissionen zu senken, ist das Demand-Shaping.
-Dabei wird bei geringer Kohlenstoffintensität die volle Funktionalität geboten und bei hoher Kohlenstoffintensität Einschränkungen getroffen oder die Funktionalität reduziert.
-Am besten anwendbar sind diese Methoden bei nicht-zeitkritischen Aufgaben.
-Diese können auf Zeiten mit niedriger Kohlenstoffintensität verschoben werden (Demand-Shifting) und zu solchen Zeiten können viele dieser Aufgaben abgearbeitet werden, wodurch sich der Bedarf erhöht (Demand-Shaping)~\cite{Currie.2024}.
-
 \section{Scaling (vertikal und horizontal)}
 Skalierung bedeutet im Kontext des Softwarebetriebs eine Erhöhung oder Verringerung der Rechen-, Speicher- oder Netzwerkressourcen, die für einen bestimmten Workload genutzt werden.
 Wohingegen man in herkömmlichen, dedizierten Hosting-Umgebungen durch die verfügbaren Hardwareressourcen begrenzt ist, bietet eine Cloud-basierte Anwendung diese Möglichkeit.
 Es kann zudem zwischen vertikaler Skalierung (Scaling Up) und horizontaler Skalierung (Scaling Out) unterschieden werden.
 Bei der vertikalen Skalierung wird die Rechenleistung erhöht und die Infrastruktur beibehalten~\cite{AlibabaCloudCommunity.20240118T09:19:15.000Z}.
 
+\section{Demand Shifting}
+Eine Software-Anwendung kann nachhaltiger betrieben werden, indem der Strombedarf auf die Kohlenstoffintensität ausgerichtet wird.
+Durch sogenanntes Demand-Shifting, also der Verschiebung der Nachfrage je nach Kohlenstoffintensität, kann Studien zufolge zwischen 45\% und 99\% Kohlenstoff eingespart werden.
+Diese Verlagerung kann sowohl auf zeitlicher Ebene als auch auf örtlicher Ebene stattfinden.
+Bei der örtlichen Verlagerung wird ein Ort, bei dem der Strom im Moment kohlenstoffärmer ist, gewählt.
+Für die örtliche Verlagerung kann man sich die unterschiedlichen Wetterverhältnisse weltweit zu nutzen machen, denn wenn es z.B. in Deutschland im Moment wolkig und windstill ist, können an einem anderen Ort bei wolkenfreiem Himmel und Sonnenschein die perfekten Verhältnisse für die Solarstrom-Erzeugung herrschen.
+Für die zeitliche Verlagerung ist ein umfangreiches Wissen über die Kohlenstoffintensität bzw. die Wetterverhältnisse im Verlauf der Zeit nötig.
+Auf Grundlage dessen können Workloads in Zeiten mit geringer Kohlenstoffintensität verlagert werden~\cite{GreenSoftwareFoundation.2022}.
+Das Demand Shifting auf örtlicher Ebene kann als eine Form des Scheduling betrachtet werden, denn beide verfolgen das Grundprinzip der optimalen zeitlichen Planung der Ausführung eines Workloads.
+
+\section{Demand Shaping}
+Eine ähnliche Methode, die ebenfalls das Ziel verfolgt, die Kohlenstoffemissionen zu senken, ist das Demand-Shaping.
+Dabei wird bei geringer Kohlenstoffintensität die volle Funktionalität geboten und bei hoher Kohlenstoffintensität Einschränkungen getroffen oder die Funktionalität reduziert~\cite{Currie.2024}.
+
+Man kann Demand Shifting und Demand Shaping also voneinander abgrenzen, indem man beim Demand Shifting einen bestimmten Workload betrachtet und die Verhältnisse dafür entweder auf örtlicher oder auf zeitlicher Ebene anpasst.
+Beim Demand Shaping werden die aktuellen Verhältnisse betrachtet (Ort und Zeit sind unveränderlich) und der Workload, genauer gesagt die Höhe der Stromnachfrage, wird an diese angepasst.
+
+Am besten anwendbar sind diese Methoden bei nicht-zeitkritischen Aufgaben.
+Diese können auf Zeiten mit niedriger Kohlenstoffintensität verschoben werden (Demand-Shifting) und zu solchen Zeiten können viele dieser Aufgaben abgearbeitet werden, wodurch sich der Bedarf erhöht (Demand-Shaping)~\cite{Currie.2024}.
+Das Demand Shaping kann als eine Form des Scalings betrachtet werden, weil beide Prinzipien die Betriebsgröße bzw. Kapazität unter bestimmten Voraussetzungen anpassen.
+
 \section{Herausforderungen und vorhandene Tools}
-%Verwaltete Cloud-Dienste bieten aufgrund ihrer hohen Rechendichte und ihrer enormen Hardware- und Energienutzung ein großes Potenzial zur Effizienzverbesserung~\cite{Currie.2024}.
+Zwei konkrete Beispiele für Demand Shifting ist zum einen ein Projekt von Google, bei dem ein Modell entwickelt wurde, um die Kohlenstoffintensität und die Arbeitslast für den jeweils folgenden Tag vorherzusagen und entsprechend die Arbeitslast an die Kohlenstoffintensität zu binden.
+Zum anderen hat Microsoft für Windows 11 einen Ansatz etabliert, bei dem sich die Ausführung von Windows-Updates nach der Kohlenstoffintensität richtet~\cite{GreenSoftwareFoundation.2022}.
+
+Ein allgegenwärtiges Beispiel für Demand Shaping ist der bei Geräten wie Autos, Waschmaschinen oder Spülmaschinen verfügbare Eco-Modus.
+Das Prinzip dahinter ist, dass auf Leistung verzichtet wird für weniger Ressourcenverbrauch.
+Dies könnte auch auf Software-Anwendungen ausgeweitet werden.
+Wichtig ist dabei, dass der Eco-Modus lediglich eine Option ist, aber der Leistungsverzicht nicht dauerhaft oder verpflichtend ist~\cite{GreenSoftwareFoundation.2022}.
+
+Verwaltete Cloud-Dienste bieten aufgrund ihrer hohen Rechendichte und ihrer enormen Hardware- und Energienutzung ein großes Potenzial zur Effizienzverbesserung~\cite{Currie.2024}.
 Die drei großen Cloud-Anbieter Google Cloud, Azure und AWS haben sich zur Kohlenstoffneutralität verpflichtet.
 Dies bedeutet jedoch nicht, dass es allein ausreichend ist, eine Anwendung auf einer dieser Plattformen bereitzustellen und sich nicht weiter mit dem Thema Nachhaltigkeit auseinander setzten muss.
 Auch die Anwendung selbst muss für Nachhaltigkeit optimiert sein und die vorhanden Möglichkeiten müssen genutzt werden~\cite{Newman.2023}.
@@ -329,13 +350,6 @@ Der Cloud-Nutzer ist für die Nachhaltigkeit in der Cloud verantwortlich, also z
  {\includegraphics[width=1\textwidth]{\figdir/SustainabilityOfAndOnInfrastructure}}
  \label{FIG:sustainability-infrastructure}
 \end{figure}
-
-Eine große Herausforderung besteht darin, das Thema Nachhaltigkeit in der \ac{IT} anzubringen.
-Lange wurde diesem keine Aufmerksamkeit geschenkt und Optimierungen fanden hauptsächlich für anfallende Kosten statt.
-Wenn der Umweltaspekt nicht Motivation genug ist, können noch zwei weitere Aspekte hilfreich sein.
-Zum einen gehen mit der Optimierung des Energieverbrauchs und der Umstellung auf grüne Energiequellen oft verminderte Stromkosten einher, was als Anreiz dienen kann.
-Zum anderen werden immer mehr Vorschriften und Berichtsanforderungen in Bezug auf verursachte Emissionen eingeführt~\cite{GreenSoftwareFoundation.2023}.
-Dies sind weitere Gründe, sich mit der Energienutzung zu beschäftigen.
 
 Für Großbritannien besteht ein Zusammenschluss zwischen dem nationalen Stromnetz, mehreren Nichtregierungsorganisationen und akademischen Einrichtungen, der eine \ac{API} konzipiert hat, um die Kohlenstoffintensität für verschiedene Regionen Großbritanniens vorherzusagen.
 Diese Schnittstelle basiert auf maschinellem Lernen und ermöglicht Anwendern, ihren Stromverbrauch so zu planen, dass die Kohlenstoffemissionen auf regionaler Ebene minimiert werden~\cite{Currie.2024}.
@@ -356,7 +370,7 @@ Die Daten sind in einem Intervall von fünf Minuten erhältlich~\cite{WattTime.2
 %!
 %!
 \chapter{Grundlagen zur Zeitreihenprognose}
-\section{Einführung in die Zeitreihenprognose}
+\section{Einführung in die Zeitreihenprognose}\label{CAP:intor-time-series-forecasting}
 Zeitreihenprognose lässt sich unterteilen in die beiden Begriffe Zeitreihe und Prognose.
 Eine Zeitreihe ist eine Reihe von Datenpunkten in zeitlicher Abfolge~\cite{Peixeiro.2022}.
 Es ist eine Art von Datensatz, die angibt, wie sich ein bestimmter Sachverhalt im Laufe der Zeit verhält.
@@ -518,20 +532,60 @@ Diesen Ansatz nutzt WattTime und überprüft dessen Genauigkeit durch verschiede
 % pro kWh wird soviel mehr g CO2 ausgestossen
 % Electricity Maps Beitrag zu MOER !
 
-Die \ac{MOER}-Werte werden über die \ac{API} von WattTime pro Monat für die Länder Deutschland und Schweden abgefragt.
+Die \ac{MOER}-Werte werden über die \ac{API} von WattTime pro Monat für die Länder Deutschland und Norwegen abgefragt.
 Um auf die Daten zugreifen zu können, registrieren sich berechtigte Nutzer mit ihrer E-Mail-Adresse über einen Endpunkt und loggen sich anschließend über einen Login-Endpunkt ein, um einen Token zu erhalten.
 Dieser Token ist eine halbe Stunde lang gültig und ermöglicht durch Setzen im Header die Abfrage der Daten über die \ac{API}~\cite{.20240220T17:59:19.000Z}.
 Der Vorgang der Datenabfrage und Speicherung ist in Code-Ausschnitt~\ref{CODE:watttime_get_moer} zu sehen.
+Die Daten werden ab dem frühst möglichen Zeitpunkt, also dem Zeitpunkt ab dem WattTime mit der Datenerfassung begonnen hat, abgefragt.
+Für Deutschland ist das ab Oktober 2022 und für Norwegen ab Januar 2021.
 Zur Verwendung der Daten für die Vorhersage sind ein paar Vorverarbeitungsschritte nötig.
 Die Daten stehen in einem Intervall von fünf Minuten zur Verfügung, was insgesamt zu einer sehr großen Datenmenge führen würde, z.B. für Deutschland $12 * 24 * 457 = 131 616$ Datenpunkte.
 Außerdem wird ein stündliches Intervall für die Vorhersage als ausreichend angesehen.
 Die \ac{MOER}-Werte werden von der Einheit lbs/\ac{kWh} in g/MWh umgerechnet und die Informationen über die Zeitzone werden entfernt, da sich die Daten bereits in \ac{UTC} befinden.
 Diese Zeitzone wird als Standard für alle Daten verwendet, sodass später ein einfaches Zusammenfügen aus einzelnen Datenquellen und Vergleichen der Daten untereinander ohne Konvertierung möglich ist.
 \lstinputlisting[language=Python, caption=Python-Code zur Abfrage der MOER-Werte, label=CODE:watttime_get_moer]{\codedir/wattime_get_moer.m}
-
+Die \ac{MOER}-Werte der beiden Länder werden separat in eine CSV-Datei eingelesen.
 
 Die Daten zur \ac{MOER} sollen zunächst für die beiden Länder analysiert werden, um ein Bild über die Beschaffenheit der Daten zu erhalten.
-Dafür werden sie, wie in Kapitel xy beschrieben, in Trend, Saisonalität und Residual zerlegt.
+Zwischen den beiden Ländern ist ein deutlicher Unterschied für die MOER-Werte zu erkennen.
+In Abbildung~\ref{FIG:moer_distribution} wird ersichtlich, dass Norwegen weitaus niedrigere Werte hat als Deutschland.
+\begin{figure}
+ \caption{Die Verteilung der MOER-Werte von Deutschland und Norwegen (eigene Darstellung)}
+ {\includegraphics[width=0.6\textwidth]{\figdir/moer_distribution}}
+ \label{FIG:moer_distribution}
+\end{figure}
+Der Mittelwert für Deutschland ist mit rund 762g/kWh mehr als dreimal so hoch wie der Mittelwert Norwegens (rund 236g/kWh).
+Bei Betrachtung der Häufigkeit der Werte muss berücksichtigt werden, dass für die beiden Länder nicht die gleiche Anzahl an Werten vorliegt.
+Für Deutschland liegen insgesamt 10986 Werte vor und für Norwegen 26280.
+
+Die Daten werden außerdem mit Hilfe eines sogenannten Augmented Dickey-Fuller Tests auf Stationarität geprüft, um zu analysieren, ob die Daten einen Trend und eine Saisonalität aufweisen oder stationär sind (Quelle).
+Dafür wird die Implementierung von statsmodels verwendet, bei der die Werte lediglich in die adfuller Funktion eingesetzt werden müssen (Quelle).
+Wie in Code-Ausschnitt~\ref{} zu sehen ist, sind die Daten stationär.
+Das wird daran festgemacht, dass der p-value, der misst wie stark die Nullhypothese abgelehnt wird, sehr klein ist.
+Da die Nullhypothese für \glqq nicht stationär\grqq steht, bedeutet eine Ablehnung dieser, dass die Daten stationär sind.
+Somit verneint der Augmented Dickey-Fuller Test das Vorhandensein eines Trends oder einer Saisonalität in den Daten.
+
+Eine Zerlegung in Trend, Saisonalität und Residual, wie in Kapitel~\ref{CAP:intor-time-series-forecasting} beschrieben, soll mehr Aufschluss über die Daten geben.
+Die Zerlegung für die Werte von Deutschland ist in Abbildung~\ref{FIG:moer_decomposition_DE} zu sehen.
+\begin{figure}
+ \caption{Die Dokomposition der MOER-Werte von Deutschland (eigene Darstellung)}
+ {\includegraphics[width=0.99\textwidth]{\figdir/moer_decomposition_DE}}
+ \label{FIG:moer_decomposition_DE}
+\end{figure}
+Bei der Trend-Komponente ist zu erkennen, dass die Werte zwar teils starke, teils weniger starke Schwankungen haben, jedoch über die Zeit kein klarer Aufwärts- oder Abwärtstrend erkennbar ist.
+Für die Saisonalität wird lediglich ein Ausschnitt der Daten (Oktober 2022 bis Dezember 2022) abgebildet, weil sonst die Menge der Daten zu groß wäre, um die Saisonalität zu erkennen.
+Die Daten weisen deutlich eine tägliche Saisonalität auf, weil sich je Tag immer der gleiche Zyklus wiederholt.
+Zuerst fällt der Wert stark ab und steigt anschließend wieder stark an.
+Die Residuals sind die durch den Trend und die Saisonalität noch nicht abgedeckte Komponente, die vorhandene Schwankungen in den Daten abbildet, doch insgesamt zeigt, dass die Daten stationär sind.
+
+Für Vorhersagen der \ac{MOER} soll die Zusammensetzung der Stromproduktion betrachtet werden, um wichtige Faktoren ausfindig machen zu können.
+Die Quellen der Stromproduktion in Deutschland und Norwegen im Jahr 2023 sind in Tabelle~\ref{TAB:energyproduction_de_no} aufgelistet.
+\begin{table}[t]
+ \centering\small
+ \caption{Der Anteil der Energiequellen an der Stromproduktion in Deutschland und Norwegen im Jahr 2023 (\cite{ElectricityMaps.20240305T20:54:29.000Z})}
+ \label{TAB:energyproduction_de_no}
+ \input{\tabledir/energyproduction_de_no.tex}
+\end{table}
 
 Die Verfügbarkeit erneuerbarer Energien hängt maßgeblich vom Wetter ab.
 Dieser Zusammenhang kann für die Vorhersage genutzt werden, weshalb Wetterdaten zum Datensatz hinzugefügt werden.
@@ -540,23 +594,10 @@ Konkret wurden drei mögliche Einflussfaktoren für die Kohlenstoffintensität a
 Letztere wird durch die atmosphärische Zusammensetzung mit Aerosolen, Wasserdampf und Ozon, hauptsächliche jedoch von Wolken beeinflusst~\cite{KallioMyers.2020}.
 Für die Stromerzeugung durch Photovoltaik ist in erster Linie die Sonneneinstrahlung, die auf das Solarmodul einfällt, entscheidend~\cite{James.}.
 Die Erzeugung durch Windkraft hängt hauptsächlich von der Windgeschwindigkeit ab.
+Für die Wasserkraft ist unter anderem der Niederschlag ausschlaggebend.
 Der Verlauf der drei Kennwerte in Deutschland ist in den Abbildungen~\ref{FIG:temp_de_2015-2022},~\ref{FIG:ws_de_2015-2022} und~\ref{FIG:ghi_de_2015-2022} dargestellt, er wurde alle drei Stunden aufgezeichnet.
 Die Lufttemperatur wurde in zwei Metern Höhe gemessen und die Windgeschwindigkeit in 100 Metern Höhe~\cite{Copernicus.20231212T14:09:40.000Z}.
-\begin{figure}
- \caption{Die Lufttemperatur in Deutschland von 2015 bis 2022~\cite{Copernicus.20231212T14:09:40.000Z}.}
- {\includegraphics[width=0.99\textwidth]{\figdir/temp_de_15-22}}
- \label{FIG:temp_de_2015-2022}
-\end{figure}
-\begin{figure}
- \caption{Die Windgeschwindigkeit in Deutschland von 2015 bis 2022~\cite{Copernicus.20231212T14:09:40.000Z}.}
- {\includegraphics[width=0.99\textwidth]{\figdir/ws_de_15-22}}
- \label{FIG:ws_de_2015-2022}
-\end{figure}
-\begin{figure}
- \caption{Die globale horizontale Strahlungsstärke in Deutschland von 2015 bis 2022~\cite{Copernicus.20231212T14:09:40.000Z}.}
- {\includegraphics[width=0.99\textwidth]{\figdir/ghi_de_15-22}}
- \label{FIG:ghi_de_2015-2022}
-\end{figure}
+
 Bei den Werten handelt es sich um Daten des ERA5 Reanalysis Datensatzes.
 Dies sind von verschiedenen Quellen, wie Satelliten oder Wetterstationen, gemessene Daten, bei denen fehlende Werte mit durch physikalische Gesetze oder historische Verlaufsmuster generierte Daten ergänzt wurden.
 Grundsätzlich sind die Daten also echt gemessene Daten, die zur Vollständigkeit mit generierten Daten ergänzt wurden~\cite{CopernicusClimateChangeService.2020}~\cite{CopernicusKnowledgeBase.20231009}.
@@ -569,17 +610,24 @@ Für die Implementierung soll eine Pipeline verwendet werden, um sich wiederhole
 Die Idee dabei ist, dass die Modell-übergreifenden Schritte, wie Datenvorverarbeitung und Feature-Engineering, für die beiden Modelle gleichermaßen verwendet werden, wohingegen Modell-spezifische Schritte separat umgesetzt werden.
 Der Vorteil der Pipeline-Struktur besteht darin, dass
 
-Der zuvor beschriebene Datensatz wird aufgeteilt in einen Trainingsdatensatz, einen Validierungsdatensatz und einen Testdatensatz, wie in Abbildung~\ref{FIG:moer_de_train_validation_test} sichtbar wird.
+Der zuvor beschriebene Datensatz wird aufgeteilt in einen Trainingsdatensatz, einen Validierungsdatensatz und einen Testdatensatz, wie in Abbildung~\ref{FIG:moer_train_validation_test} sichtbar wird.
 Als Unterteilung wird das Datum 30.09.2023, bzw. 30.11.2023 verwendet.
 So wird sichergestellt, dass die Saisonalität vom Modell erkannt werden kann, denn es bekommt im Training genau ein Jahr an Daten für Deutschland zu sehen.
 \begin{figure}
- \caption{Die Unterteilung der MOER-Werte für Deutschland in Trainings-, Validierungs- und Testdatensatz}
- {\includegraphics[width=0.99\textwidth]{\figdir/moer_de_train_validation_test}}
- \label{FIG:moer_de_train_validation_test}
+ \caption{Die Unterteilung der MOER-Werte in Trainings-, Validierungs- und Testdatensatz}
+ {\includegraphics[width=0.99\textwidth]{\figdir/moer_train_validation_test}}
+ \label{FIG:moer_train_validation_test}
 \end{figure}
 
 \section{Modellentwicklung und Training mit SARIMAX}
 \section{Modellentwicklung und Training mit Temporal Fusion Transformer}
+\begin{itemize}
+ \item Hinzufügen des Time Index
+ \item Normalisierung der Merkmale, für ähnliche Werteskala der numerischen Merkmale
+ \item Vorbereitung der kategorischen Variablen
+ \item Zielvariable
+ \item Aufteilung des Datensatzes
+\end{itemize}
 \section{Evaluierung und Vergleich der Modelle}
 
 %!
@@ -605,7 +653,14 @@ Es ist deshalb stets wichtig, die Vorteile der eingesetzten Maßnahmen gegenübe
 %!
 %!
 \chapter{Ergebnisse und Diskussion}
+Eine große Herausforderung besteht darin, das Thema Nachhaltigkeit in der \ac{IT} anzubringen.
+Lange wurde diesem keine Aufmerksamkeit geschenkt und Optimierungen fanden hauptsächlich für anfallende Kosten statt.
+Wenn der Umweltaspekt nicht Motivation genug ist, können noch zwei weitere Aspekte hilfreich sein.
+Zum einen gehen mit der Optimierung des Energieverbrauchs und der Umstellung auf grüne Energiequellen oft verminderte Stromkosten einher, was als Anreiz dienen kann.
+Zum anderen werden immer mehr Vorschriften und Berichtsanforderungen in Bezug auf verursachte Emissionen eingeführt~\cite{GreenSoftwareFoundation.2023}.
+Dies sind weitere Gründe, sich mit der Energienutzung zu beschäftigen.
 
+Der primäre Antrieb für den Übergang zu erneuerbaren Energien mag ökonomischer, nicht ökologischer Natur sein
 %!
 %!
 \chapter{Fazit und Ausblick}
