@@ -12,7 +12,7 @@ output_path = general_config.get('output_path')
 def get_preprocessed_data():
     preprocessed_data_file_name = general_config.get('preprocessed_data_file_name')
     if os.getenv("COLAB_RELEASE_TAG"):
-        data_path = '/content/drive/My Drive/data-collection/'
+        data_path = '/content/drive/My Drive/data_collection/'
         print('running in colab')
     else:
         data_path = general_config.get('data_path')
