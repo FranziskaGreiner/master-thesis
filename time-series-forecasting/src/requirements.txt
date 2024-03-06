@@ -51,7 +51,7 @@ multidict==6.0.5
 networkx==3.2.1
 numpy==1.26.3
 oauthlib==3.2.2
-optuna==3.5.0
+optuna==3.4.0
 packaging==23.2
 pandas==1.5.3
 patsy==0.5.6

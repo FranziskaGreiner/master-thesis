@@ -1,9 +1,7 @@
-import pandas as pd
 import argparse
 import wandb
 
-from src.config import get_general_config, get_tft_config, get_sarimax_config
-from src.util import check_if_preprocessed_data_exists
+from src.util import get_preprocessed_data
 from src.data_preprocessing import preprocess_data
 from src.feature_engineering import add_features
 from src.models.sarimax import train_sarimax
@@ -11,11 +9,10 @@ from src.models.tft import train_tft
 
 
 def main(model_type):
-    general_config = get_general_config()
-    preprocessed_feature_engineered_data_exists = check_if_preprocessed_data_exists()
+    preprocessed_feature_engineered_data = get_preprocessed_data()
     wandb.login(key="361ced3122f96ccbe37b41a4ec49c643503bc408")
 
-    if not preprocessed_feature_engineered_data_exists:
+    if not preprocessed_feature_engineered_data:
         print('preprocessing data')
         # 1. data preprocessing
         preprocessed_data = preprocess_data()
@@ -23,7 +20,6 @@ def main(model_type):
         preprocessed_feature_engineered_data = add_features(preprocessed_data)
     else:
         print('using existing data file')
-        preprocessed_feature_engineered_data = pd.read_csv(general_config.get('data_path') + general_config.get('preprocessed_data_file_name'), index_col='date')
 
     # 3. training and 4. evaluation
     if model_type == 'sarimax':
