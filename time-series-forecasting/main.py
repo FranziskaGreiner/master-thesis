@@ -12,7 +12,7 @@ def main(model_type):
     preprocessed_feature_engineered_data = get_preprocessed_data()
     wandb.login(key="361ced3122f96ccbe37b41a4ec49c643503bc408")
 
-    if not preprocessed_feature_engineered_data:
+    if preprocessed_feature_engineered_data is None:
         print('preprocessing data')
         # 1. data preprocessing
         preprocessed_data = preprocess_data()
