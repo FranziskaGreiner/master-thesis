@@ -9,9 +9,9 @@ sarimax_config = get_sarimax_config()
 
 
 def create_sarimax_datasets(final_data):
-    final_data.loc[:, 'date'] = pd.to_datetime(final_data['date'])
-    final_data.set_index('date', inplace=True)
-    final_data.index = pd.DatetimeIndex(final_data.index).to_period('H')
+    # final_data.loc[:, 'date'] = pd.to_datetime(final_data['date'])
+    # final_data.set_index('date', inplace=True)
+    # final_data.index = pd.DatetimeIndex(final_data.index).to_period('H')
 
     train_data = final_data[:sarimax_config.get('training_cutoff_date')]
     validation_data = final_data[
@@ -19,7 +19,7 @@ def create_sarimax_datasets(final_data):
     test_data = final_data[sarimax_config.get('validation_cutoff_date'):]
 
     # all feature variables ??
-    exog_variables = ['temperature', 'radiation', 'wind_speed', 'day_of_week', 'is_holiday', 'season']
+    exog_variables = ['temperature', 'ghi', 'wind_speed', 'precipitation', 'day_of_week', 'is_holiday', 'season']
     exog_train = train_data[exog_variables] if not train_data.empty else None
     exog_validation = validation_data[exog_variables] if not validation_data.empty else None
     exog_test = test_data[exog_variables] if not test_data.empty else None
@@ -40,7 +40,7 @@ def train_sarimax(final_data):
     run = wandb.init(project="tsf_sarimax", config=sarimax_config)
     models_results = {}
 
-    for country in ['DE', 'SE']:
+    for country in ['DE', 'NO']:
         country_data = final_data.loc[final_data['country'] == country]
         train_data, validation_data, test_data, exog_train, exog_validation, exog_test = create_sarimax_datasets(
             country_data)

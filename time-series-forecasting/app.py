@@ -18,7 +18,7 @@ general_config = get_general_config()
 tft_model_path = f"{tft_config.get('output_path')}/tft_model.pth"
 checkpoint_path = f"{tft_config.get('output_path')}/tft-epoch=09-val_loss=3.16.ckpt"
 tft_model = TemporalFusionTransformer.load_from_checkpoint(checkpoint_path)
-exog_variables = ['temperature', 'radiation', 'wind_speed', 'day_of_week', 'is_holiday', 'season']
+exog_variables = ['temperature', 'ghi', 'wind_speed', 'precipitation', 'day_of_week', 'is_holiday', 'season']
 
 de_start_date = datetime.strptime('2022-10-01 00:00:00', '%Y-%m-%d %H:%M:%S')
 se_start_date = datetime.strptime('2021-01-01 00:00:00', '%Y-%m-%d %H:%M:%S')
@@ -127,7 +127,7 @@ def find_optimal_start_time(model_type, model, duration, earliest_time, latest_t
 
 def predict_with_tft(model, start_time_idx, duration, data):
     scaler = joblib.load(f"{general_config.get('output_path')}feature_scaler.joblib")
-    features_to_normalize = ['temperature', 'radiation', 'wind_speed']
+    features_to_normalize = ['temperature', 'ghi', 'precipitation', 'wind_speed']
     target_normalizer = GroupNormalizer(groups=["country"], transformation="softplus")
 
     data[features_to_normalize] = scaler.transform(data[features_to_normalize])

@@ -23,7 +23,7 @@ def main(model_type):
         preprocessed_feature_engineered_data = add_features(preprocessed_data)
     else:
         print('using existing data file')
-        preprocessed_feature_engineered_data = pd.read_csv(general_config.get('data_path') + general_config.get('preprocessed_data_file_name'))
+        preprocessed_feature_engineered_data = pd.read_csv(general_config.get('data_path') + general_config.get('preprocessed_data_file_name'), index_col='date')
 
     # 3. training and 4. evaluation
     if model_type == 'sarimax':

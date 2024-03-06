@@ -11,30 +11,47 @@ from pytorch_lightning.loggers import WandbLogger
 from pytorch_forecasting.data.encoders import GroupNormalizer
 from pytorch_forecasting import TimeSeriesDataSet, QuantileLoss, TemporalFusionTransformer
 from src.config import get_tft_config
+from pytorch_forecasting.models.temporal_fusion_transformer.tuning import optimize_hyperparameters
 
 tft_config = get_tft_config()
 
 
-def create_tft_training_dataset(final_data):
-    final_data.loc[:, 'date'] = pd.to_datetime(final_data['date'])
-    final_data.loc[:, 'is_holiday'] = final_data['is_holiday'].astype(str)
+def add_time_idx(weather_time_moer_data):
+    weather_time_moer_data.reset_index(inplace=True)
+    weather_time_moer_data.loc[:, 'date'] = pd.to_datetime(weather_time_moer_data['date'])
+    min_date_per_group = weather_time_moer_data.groupby('country')['date'].transform('min')
+    weather_time_moer_data.loc[:, 'time_idx'] = ((weather_time_moer_data['date'] - min_date_per_group)
+                                          .dt.total_seconds() / 3600).astype(int)
+    return weather_time_moer_data
 
+
+def normalize_features(weather_time_moer_data):
     scaler = StandardScaler()
-    features_to_normalize = ['temperature', 'radiation', 'wind_speed']
-    scaler.fit(final_data[features_to_normalize])
-    final_data.loc[:, features_to_normalize] = scaler.transform(final_data[features_to_normalize])
+    features_to_normalize = ['temperature', 'ghi', 'wind_speed', 'precipitation']
+    scaler.fit(weather_time_moer_data[features_to_normalize])
+    weather_time_moer_data.loc[:, features_to_normalize] = scaler.transform(
+        weather_time_moer_data[features_to_normalize])
 
     scaler_save_path = f"{wandb.run.dir}/feature_scaler.joblib"
     joblib.dump(scaler, scaler_save_path)
+    return weather_time_moer_data
 
-    train_data = final_data[final_data['date'] <= tft_config.get('training_cutoff_date')].copy()
-    train_data.loc[:, 'time_idx'] = train_data['time_idx'].astype(int)
+
+def convert_categoricals(weather_time_moer_data):
+    weather_time_moer_data.loc[:, 'season'] = weather_time_moer_data['season'].astype(str)
+    weather_time_moer_data.loc[:, 'day_of_week'] = weather_time_moer_data['day_of_week'].astype(str)
+    weather_time_moer_data.loc[:, 'is_holiday'] = weather_time_moer_data['is_holiday'].astype(str)
+    return weather_time_moer_data
+
+
+def create_tft_training_dataset(weather_time_moer_data):
+    train_data = weather_time_moer_data[weather_time_moer_data['date'] <= tft_config.get('training_cutoff_date')].copy()
 
     target_normalizer = GroupNormalizer(groups=["country"], transformation="softplus")
     training_cutoff = train_data["time_idx"].max() - tft_config.get('max_prediction_length')
 
     training_dataset = TimeSeriesDataSet(
-        train_data[lambda x: x.time_idx <= training_cutoff],
+        train_data,
         time_idx=tft_config.get("time_idx"),
         target=tft_config.get("target"),
         group_ids=tft_config.get("group_ids"),
@@ -57,12 +74,11 @@ def create_tft_training_dataset(final_data):
     return training_dataset
 
 
-def create_tft_validation_dataset(final_data, training_dataset):
-    validation_data = final_data[
-        (final_data['date'] > tft_config.get('training_cutoff_date')) &
-        (final_data['date'] <= tft_config.get('validation_cutoff_date'))
+def create_tft_validation_dataset(weather_time_moer_data, training_dataset):
+    validation_data = weather_time_moer_data[
+        (weather_time_moer_data['date'] > tft_config.get('training_cutoff_date')) &
+        (weather_time_moer_data['date'] <= tft_config.get('validation_cutoff_date'))
         ].copy()
-    validation_data.loc[:, 'time_idx'] = validation_data['time_idx'].astype(int)
 
     validation_dataset = TimeSeriesDataSet.from_dataset(
         training_dataset,
@@ -73,9 +89,8 @@ def create_tft_validation_dataset(final_data, training_dataset):
     return validation_dataset
 
 
-def create_tft_test_dataset(final_data, training_dataset):
-    test_data = final_data[final_data['date'] > tft_config.get('validation_cutoff_date')].copy()
-    test_data.loc[:, 'time_idx'] = test_data['time_idx'].astype(int)
+def create_tft_test_dataset(weather_time_moer_data, training_dataset):
+    test_data = weather_time_moer_data[weather_time_moer_data['date'] > tft_config.get('validation_cutoff_date')].copy()
 
     test_dataset = TimeSeriesDataSet.from_dataset(
         training_dataset,
@@ -115,7 +130,7 @@ def create_tft_checkpoints():
 
 
 def create_tft_trainer():
-    wandb_logger = WandbLogger(name="moer_tsf_tft", project="moer_tsf_tft")
+    wandb_logger = WandbLogger(name="tsf_moer_tft", project="tsf_moer_tft")
     trainer = pl.Trainer(
         max_epochs=tft_config.get('max_epochs'),
         accelerator="auto",
@@ -126,14 +141,17 @@ def create_tft_trainer():
     return trainer
 
 
-def train_tft(final_data):
-    run = wandb.init(project="moer_tsf_tft", config=dict(tft_config))
+def train_tft(weather_time_moer_data):
+    run = wandb.init(project="tsf_moer__tft", config=dict(tft_config))
+    # weather_time_moer_data = weather_time_moer_data[weather_time_moer_data['country'] == 'DE']
 
-    final_data = final_data[final_data['country'] == 'DE']
+    weather_time_moer_data = add_time_idx(weather_time_moer_data)
+    weather_time_moer_data = normalize_features(weather_time_moer_data)
+    weather_time_moer_data = convert_categoricals(weather_time_moer_data)
 
-    training_dataset = create_tft_training_dataset(final_data)
-    validation_dataset = create_tft_validation_dataset(final_data, training_dataset)
-    test_dataset = create_tft_test_dataset(final_data, training_dataset)
+    training_dataset = create_tft_training_dataset(weather_time_moer_data)
+    validation_dataset = create_tft_validation_dataset(weather_time_moer_data, training_dataset)
+    test_dataset = create_tft_test_dataset(weather_time_moer_data, training_dataset)
 
     train_dataloader = training_dataset.to_dataloader(train=True,
                                                       batch_size=tft_config.get('batch_size'),
@@ -156,7 +174,28 @@ def train_tft(final_data):
         val_dataloaders=val_dataloader,
     )
 
-    trainer.test(dataloaders=test_dataloader)
+    study = optimize_hyperparameters(
+        train_dataloader,
+        val_dataloader,
+        model_path="optuna_test",
+        n_trials=200,
+        max_epochs=50,
+        gradient_clip_val_range=(0.01, 1.0),
+        hidden_size_range=(8, 128),
+        hidden_continuous_size_range=(8, 128),
+        attention_head_size_range=(1, 4),
+        learning_rate_range=(0.001, 0.1),
+        dropout_range=(0.1, 0.3),
+        trainer_kwargs=dict(limit_train_batches=30),
+        reduce_on_plateau_patience=4,
+        use_learning_rate_finder=False,
+    )
+
+    hyperparameter_study_save_path = f"{wandb.run.dir}/hyperparameter_study.pkl"
+    joblib.dump(study, hyperparameter_study_save_path)
+    print(study.best_trial.params)
+
+    trainer.test(dataloaders=test_dataloader, ckpt_path='best')
 
     model_save_path = f"{wandb.run.dir}/tft_model.pth"
     torch.save(tft_model.state_dict(), model_save_path)
@@ -166,18 +205,18 @@ def train_tft(final_data):
     best_tft = TemporalFusionTransformer.load_from_checkpoint(best_model_path)
     val_prediction_results = best_tft.predict(val_dataloader, mode="raw", return_x=True)
 
-    print(len(val_prediction_results))
-    print(val_prediction_results.shape)
-
-    for idx in range(31):
+    for idx in range(10):
         fig, ax = plt.subplots(figsize=(23, 5))
-        ax.set_xlim(min(val_prediction_results.x["encoder_target"].index), max(val_prediction_results.x["decoder_target"].index))
+        # ax.set_xlim(min(val_prediction_results.x["encoder_target"].index),
+        #             max(val_prediction_results.x["decoder_target"].index))
+        # ax.set_xlim(min(val_prediction_results.x[encoder_target[idx]]),
+        #             max(val_prediction_results.x[decoder_target[idx]]))
         best_tft.plot_prediction(val_prediction_results.x,
                                  val_prediction_results.output,
                                  idx=idx,
                                  add_loss_to_title=True,
                                  ax=ax)
-        val_plot_file_path = f"plot_val_group_{idx}.png"
+        val_plot_file_path = f"{wandb.run.dir}/plot_val_group_{idx}.png"
         plt.savefig(val_plot_file_path)
         wandb.log({f"plot_val_group_{idx}": wandb.Image(val_plot_file_path)})
         plt.show()
