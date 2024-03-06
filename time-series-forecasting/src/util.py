@@ -10,7 +10,7 @@ output_path = general_config.get('output_path')
 
 def check_if_preprocessed_data_exists():
     preprocessed_data_file_name = general_config.get('preprocessed_data_file_name')
-    if 'COLAB_GPU' in os.environ:
+    if os.getenv("COLAB_RELEASE_TAG"):
         data_path = '/content/drive/My Drive/data-collection/'
     else:
         data_path = general_config.get('data_path')
