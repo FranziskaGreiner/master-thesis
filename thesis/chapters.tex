@@ -390,13 +390,8 @@ Im Gegensatz dazu können die Datensätze von Zeitreihenprognosen wesentlich sch
 Jede Zeitreihe kann in drei verschiedene Komponenten zerlegt werden.
 Der zugrunde liegende Vorgang wird als Dekomposition bezeichnet.
 Diese Komponenten enthüllen Merkmale, die die Daten aufweisen:
-Der Trend beschreibt die Veränderungen in einer Zeitreihe, die Saisonalität stellt sich wiederholende Zyklen über einen bestimmten Zeitraum dar und die Residuen, auch als Noise bezeichnet, definieren nicht durch den Trend oder die Saisonalität abzubildende, zufällige Fehler~\cite{Peixeiro.2022}.
-
-Zeitreihenvorhersagen eignen sich besonders gut, um den Verlauf und die Entwicklung von Werten über die Zeit analysieren zu können.
-Das Potenzial eines solchen Machine-Learning-Modells soll deshalb zum Einsatz kommen.
-Die Kohlenstoffintensität von Strom hängt stark von der Verfügbarkeit erneuerbarer Energien ab und diese sind wiederum auf bestimmte Wetterverhältnisse angewiesen.
-Um eine aussagekräftige Vorhersage machen zu können ist es deshalb sinnvoll, sowohl eine Beobachtung der Kohlenstoffintensitätswerte in der Vergangenheit anzustellen, als auch den Einfluss des Wetters zu beobachten.
-Für einen Zeitpunkt in der Zukunft kann dann ein möglichst wahrscheinlicher Wert ausgehend vom zu erwartenden Wetter vorhergesagt werden.
+Der Trend beschreibt die Veränderungen in einer Zeitreihe, die Saisonalität stellt sich wiederholende Zyklen über einen bestimmten Zeitraum dar und die Residuen, auch als Noise bezeichnet, definieren nicht durch den Trend oder die Saisonalität abzubildende, zufällige Fehler.
+Zeitreihenvorhersagen eignen sich besonders gut, um den Verlauf und die Entwicklung von Werten über die Zeit analysieren zu können~\cite{Peixeiro.2022}.
 
 \section{SARIMAX als statistisches Basismodell}
 Für die Zeitreihenprognose soll ein statistisches Modell namens SARIMAX als Basismodell dienen.
@@ -404,10 +399,9 @@ SARIMAX (Seasonal Auto-Regressive Integrated Moving Average with exogenous varia
 Für das ARMA-Modell werden die autoregressive (AR) und die Moving-Average- (MA) Komponente zusammengefügt.
 Ein autoregressiver Prozess geht davon aus, dass die Zielvariable linear von ihren eigenen Werten in der Vergangenheit abhängen.
 Beim Moving-Average-Prozess (zu Deutsch gleitender Durchschnittsprozess) wird der aktuelle Wert als lineare Kombination des Mittelwerts der aktuellen und vergangenen Fehlerterme dargestellt.
-Das \ac{ARIMA}-Modell enthält zusätzlich noch einen Vorverarbeitungsschritt (I), um nicht stationäre Zeitreihen modellieren zu können.
-Um saisonale Muster berücksichtigen zu können, wird aus dem \ac{ARIMA}-Modell das SARIMA-Modell, welches schließlich um exogene Variablen (X), also von extern beeinflussende Variablen, erweitert wird.
+Das \ac{ARIMA}-Modell enthält zusätzlich noch einen Vorverarbeitungsschritt (I) für die Modellierung nicht-stationärer Zeitreihen.
 Das ARIMA-Modell in Abhängigkeit von der Ordnung des AR-Prozesses $p$ (linear Regression auf die letzten $p$ Werte der Zeitreihe), der Ordnung der Integration $d$ und der Ordnung des MV-Prozesses $q$ (lineare Regression auf die letzten $q$ Fehlerwerte), kann durch Formel~\ref{eq:arima} ausgedrückt werden~\cite{Peixeiro.2022}.
-$p$ gibt an, wie viele verzögerte Werte hinzugegeben werden, wohingegen $q$ die Anzahl der verzögerten Fehlerterme definiert.
+$p$ gibt an, wie viele zeitversetzte Werte hinzugegeben werden, wohingegen $q$ die Anzahl der zeitversetzten Fehlerterme definiert.
 \begin{equation}
  \label{eq:arima}
  y'_t = C + \phi_1 y'_{t-1} + \ldots + \phi_p y'_{t-p} + \theta_1 \varepsilon_{t-1} + \ldots + \theta_q \varepsilon_{t-q} + \varepsilon_t
@@ -415,6 +409,7 @@ $p$ gibt an, wie viele verzögerte Werte hinzugegeben werden, wohingegen $q$ die
 Der aktuelle Wert der differenzierten Reihe $y'_t$ ist somit die Summe aus einer Konstanten $C$, den Vergangenheitswerten dieser differenzierten Reihe $\phi_p y'_{t-p}$, vergangenen Fehlertermen $\theta_1 \varepsilon_{t-1}$ und dem aktuellen Fehlerterm $\varepsilon_t$.
 $d$ ist hier nicht explizit angegeben, definiert jedoch die Anzahl der Differenzierungen, bis eine Reihe stationär wird.
 
+Um saisonale Muster berücksichtigen zu können, wird aus dem \ac{ARIMA}-Modell das SARIMA-Modell, welches schließlich um exogene Variablen (X), also die Zielvariable zusätzlich beeinflussende Variablen, erweitert wird.
 Basierend auf Formel~\ref{eq:arima} ergibt sich Formel~\ref{eq:sarimax} für das SARIMAX-Modell.
 \begin{equation}
  \label{eq:sarimax}
@@ -423,7 +418,7 @@ Basierend auf Formel~\ref{eq:arima} ergibt sich Formel~\ref{eq:sarimax} für das
 Ergänzt wurde die Formel durch die Saisonalität in Form einer zusätzlichen AR- ($\phi_n d_{t-sn}$) und MA- ($\eta_n e_{t-sn}$) Komponente verschoben um die Frequenz der Saisonalität ($s$, z.B.\ 12: monatlich oder 24: stündlich) und um die exogenen Variablen ($\sum_{n=1}^{r} \beta_n x_{t-n}$)~\cite{Artley.26.4.2022}.
 
 \section{Temporal Fusion Transformer als KI-basiertes Modell}
-Neben SARIMAX, das als Ausgangslage dient, soll ein sogenannter \ac{TFT} angewendet werden.
+Neben dem Einsatz von SARIMAX als Basismodell, soll ein sogenannter \ac{TFT} angewendet werden.
 
 Wissenschaftlern von Google gelang 2017 eine Forschungsarbeit~\cite{Vaswani.2017}, die die Forschung zur künstlichen Intelligenz vor allem im Bereich der natürlichen Sprachverarbeitung maßgeblich beeinflusste.
 Sie stellten eine neue Architektur für neuronale Netze vor, sogenannte Transformer, die zunächst nur für die Sprachverarbeitung angewendet und getestet wurden, aber als grundlegendes Konzept auch andere Bereiche revolutionierten.
@@ -434,20 +429,19 @@ Heute basieren bedeutende Modelle wie ChatGPT unter anderem auf Transformern.
 Ein \ac{TFT} ist ein \ac{DNN} mit besonderer Architektur für das Multi-Horizon Forecasting, also die Vorhersage für mehrere zukünftige Zeitschritte.
 Zunehmend wurden für diesen Anwendungsfall \ac{DNN}s eingesetzt, da sie die Leistung herkömmlicher Modelle übertreffen~\cite{Lim.19.12.2019}.
 Die Idee des Attention-Mechanismus, der den Kern der Transformer-Architektur bildet, wurde für \ac{TFT} übernommen.
-Um die Architektur auf die Varietät der Eingabedaten und deren zeitliche Beziehungen auszurichten, werden Codierer für die Static Covariates eingesetzt, Gating-Mechanismen und stichprobenabhängige Variablenauswahl zur Minimierung irrelevanter Eingaben, eine Sequence-to-Sequence-Schicht zur Verarbeitung der Known und Observed Inputs und ein Self-Attention Decodierer zur Analyse der Eingabedaten auf langfristige Abhängigkeiten.
-Bei anderen aufmerksamkeitsbasierten Methoden, die auch Transformer-basierte Modelle mit einschließen, besteht oft das Problem, dass die verschiedenen Datenquellen (z.B. Static Covariates) nicht ausreichend berücksichtigt werden.
+Um die Architektur auf die Varietät der Eingabedaten und deren zeitliche Beziehungen auszurichten, werden Codierer für die statischen Kovariaten, also Variablen zusätzlich zur Zielvariable, die Informationen über diese enthalten, eingesetzt, Gating-Mechanismen und stichprobenabhängige Variablenauswahl zur Minimierung irrelevanter Eingaben, eine Sequence-to-Sequence-Schicht zur Verarbeitung der Known und Observed Inputs und ein Self-Attention Decodierer zur Analyse der Eingabedaten auf langfristige Abhängigkeiten.
+Bei anderen aufmerksamkeitsbasierten Methoden, die auch Transformer-basierte Modelle mit einschließen, besteht oft das Problem, dass die verschiedenen Datenquellen (z.B. statische Kovariaten) nicht ausreichend berücksichtigt werden.
 Außerdem können sie oft die Bedeutung verschiedener Daten in einem bestimmten Zeitabschnitt unterscheiden.
 Andere \ac{DNN}s neben dem \ac{TFT} haben zum Beispiel den Nachteil, dass sie die zeitliche Anordnung der Eingangsmerkmale nicht berücksichtigen (konventionelle Formen von LIME und SHAP), obwohl diese Abhängigkeit in Zeitreihen signifikant sind~\cite{Lim.19.12.2019}.
 %\ac{DNN}s werden zunehmen für diese Aufgabe herangezogen, weil sie verglichen mit herkömmlichen Zeitreihenmodellen große Leistungsverbesserungen aufzeigen.
 
 Auch wenn der \ac{TFT} ein großes Modell ist und am besten für große Datenmengen geeignet ist, erzielt er auch für kleine Datensätze mit ca. 20 000 Samples gute Ergebnisse~\cite{Beitner.2020}.
-Zeitreihenprognosen mit mehreren Zeithorizonten verwenden meist verschiedene Arten von Datenquellen, die zusammen mit dem zu definierenden Zusammenhang dieser Daten eine der größten Herausforderungen darstellt.
 Er verwendet als Input verschiedenste Daten, wie in Abbildung~\ref{FIG:tft-forecasting} dargestellt~\cite{Lim.19.12.2019}:
 \begin{itemize}
  \item Werte der Zielvariablen aus der Vergangenheit (Past Targets)
  \item Zeitlich abhängige bekannte Informationen sowohl für die Vergangenheit, als auch für die Zukunft (Known Inputs)
  \item Zeitlich abhängige jedoch nur in der Vergangenheit bekannte Eingabewerte (Observed Inputs)
- \item Feststehende, zeitunabhängige Daten, die einen kontextuellen Zusammenhang bieten (Static Covariates)
+ \item Feststehende, zeitunabhängige Daten, die einen kontextuellen Zusammenhang bieten (statische Kovariaten)
 \end{itemize}
 \begin{figure}
  \caption{Multi-horizon Forecasting mit dem Temporal Fusion Transformer~\cite{Lim.19.12.2019}.}
@@ -457,7 +451,7 @@ Er verwendet als Input verschiedenste Daten, wie in Abbildung~\ref{FIG:tft-forec
 Die Ausgabe des Modells ist nicht ein einziger Wert, sondern ein Werteintervall (Prediction Interval).
 Die Multi-Horizon Vorhersage ist deshalb so komplex, weil trotz weniger Informationen darüber, das Zusammenspiel und die Abhängigkeit der Daten untereinander erlernt werden müssen~\cite{Lim.19.12.2019}.
 
-Jeder Wert der Zielvariablen $i$ ist an eine oder mehrere Static Covariates $s_i$, an zeitabhängige Variablen $\chi_{i,t}$ und skalare Zielvariablen $y_{i,t}$ zu jedem Zeitschritt $t$ gebunden.
+Jeder Wert der Zielvariablen $i$ ist an eine oder mehrere statische Kovariaten $s_i$, an zeitabhängige Variablen $\chi_{i,t}$ und skalare Zielvariablen $y_{i,t}$ zu jedem Zeitschritt $t$ gebunden.
 Wie in vorheriger Auflistung deutlich wurde, können die zeitabhängigen Variablen weiter unterteilt werden in Known Inputs ($x_{i,t}$) und Observed Inputs ($z_{i,t}$).
 Wichtig sind außerdem sogenannte Quantile, denn sie ermöglichen die Vorhersage von Ergebnisintervallen, anstatt nur einzelner Werte und bieten auf diese Weise die Aussage über Best- und Worst-Case Werte (z.B. Ausgabe des 10., 50. und 90. Perzentil jedes Zeitschrittes)~\cite{Lim.19.12.2019}.
 
@@ -467,9 +461,6 @@ Dabei werden alle Informationen innerhalb des endlichen Look-Back-Windows $k$ mi
  \label{eq:tft}
  \hat{y}_i(q, \tau, T) = f_q(\tau, y_{j,t-k:t}, z_{i,t-k:t}, x_{j,t-k:t+T}, s_i)
 \end{equation}
-
-Im betrachteten Anwendungsfall der Vorhersage von \ac{MOER}-Werten sind die bekannten Variablen die Wetterdaten, sowie die jeweilige Jahreszeit, der Wochentag und, ob es sich um einen Feier-/Ferientag handelt.
-Die statische Co-Variate ist das Land Deutschland oder Schweden und die unbekannte Variable ist die \ac{MOER}~\cite{Labiadh.2023}.
 
 Abbildung~\ref{FIG:tft-architecture} zeigt den Aufbau eines \ac{TFT}s, wovon die wichtigsten Bestandteile im Folgenden kurz erklärt werden.
 \begin{figure}
@@ -513,14 +504,28 @@ Bei Unterschätzungen wird der erste Summand der Funktion für obere Quantile ho
 Die neue Form der Interpretierbarkeit eines \ac{TFT} ermöglicht ein einfaches Zurückverfolgen der relevantesten Zeitschritte für jede Prognose, was traditionelle Saisonalitäts- und Autokorrelationsanalysen ersetzen kann.
 Außerdem hilft sie, signifikante Veränderungen zu erkennen, indem ein durchschnittlicher Aufmerksamkeitswert pro Vorhersagebereich berechnet wird und zu jedem Zeitpunkt als Vergleich dient~\cite{Labiadh.2023}.
 
+Die Vorteile der Architektur eines \ac{TFT} sind unter anderem die Möglichkeit zur Verwendung der Kovariaten, was auch dazu führt, dass es auch für kurze Zeitreihen gute Ergebnisse erzielen kann.
+Weitere Vorteile sind, dass mehrere Ziele gleichzeitig und sogar heterogene Ziele mit kontinuierlichen und kategorischen Variablen, also Regression und Klassifikation zur selben Zeit, unterstützt werden.
+Die Anwendung von sowohl Regression als auch Klassifikation unterscheidet ihn zum Beispiel von DeepAR, einem Modell zur Zeitreihenprognose von Amazon, welches ausschließlich die Regression anwendet.
+Der \ac{TFT} berücksichtigt zudem die Unsicherheit in Form von Quantilen, was ihn von RecurrentNetwork mit einfacher \ac{LSTM}- oder \ac{GRU}-Schicht und Ausgabeschicht oder von NBeats und NHiTS unterscheidet.
+Durch die Nutzung statischer Kovariaten kann der \ac{TFT} auch mit sogenannten \glqq Cold-Start-Problemen \grqq{}, also Prognosen ohne oder mit nur sehr wenigen historischen Daten, umgehen.
+Die komplexe Architektur kann mit Blick auf Anforderungen an die Rechenleistung zum Nachteil werden.
+Im Vergleich zu anderen Aufgaben zum Beispiel im Bereich Computer Vision oder Sprachverarbeitung sind Zeitreihendaten meist kleiner, wodurch eine höhere Komplexität des verwendeten Modells den positiven Effekt haben kann, dass die verwendete Hardware ausgereizt wird~\cite{PytorchForecastingDocumentation.20230410T20:05:43.000Z}.
+Dies ist auch im Hinblick auf Nachhaltigkeit ein guter Ansatz, weil die Hardware effizient genutzt wird.
 %!
 %!
 \chapter{Prognose der Kohlenstoffintensität}
 \section{Auswahl, Vorverarbeitung und Analyse der Daten}
+Die Kohlenstoffintensität von Strom hängt stark von der Verfügbarkeit erneuerbarer Energien ab und diese sind wiederum auf bestimmte Wetterverhältnisse angewiesen.
+Um eine aussagekräftige Vorhersage machen zu können ist es deshalb sinnvoll, sowohl eine Beobachtung der Kohlenstoffintensitätswerte in der Vergangenheit anzustellen, als auch den Einfluss des Wetters zu beobachten.
+Für einen Zeitpunkt in der Zukunft kann dann ein möglichst wahrscheinlicher Wert ausgehend vom zu erwartenden Wetter vorhergesagt werden.
+
 Zum einen werden Werte der Kohlenstoffintensität aus der Vergangenheit benötigt, um die Kohlenstoffintensität abhängig von der Zeit vorhersagen zu können.
 Als Maß wird dabei die marginale Kohlenstoffintensität verwendet.
-Diese gibt die Emissionsintensität der Grenzkraftwerke an, die auf die veränderte Stromnachfrage (z.B. durch Scheduling) reagieren~\cite{Buchanan.2023}.
+Diese gibt die Emissionsintensität der Grenzkraftwerke an, die auf die veränderte Stromnachfrage reagieren~\cite{Buchanan.2023}.
 Dadurch ist diese sehr gut für den vorliegenden Anwendungsfall geeignet.
+
+
 Als Datengrundlage dient das Datenmodell zur \ac{MOER}, zu Deutsch Grenzbetriebsemissionsrate, von WattTime.
 Die \ac{MOER} wird für einen bestimmten Zeitpunkt und Ort angegeben und kann dadurch gut verglichen werden.
 Ziel ist es, die elektrische Last auf Zeiten mit niedrigen Werten zu verlagern, um die Umwelt weniger zu belasten.
@@ -557,13 +562,6 @@ In Abbildung~\ref{FIG:moer_distribution} wird ersichtlich, dass Norwegen weitaus
 Der Mittelwert für Deutschland ist mit rund 762g/kWh mehr als dreimal so hoch wie der Mittelwert Norwegens (rund 236g/kWh).
 Bei Betrachtung der Häufigkeit der Werte muss berücksichtigt werden, dass für die beiden Länder nicht die gleiche Anzahl an Werten vorliegt.
 Für Deutschland liegen insgesamt 10986 Werte vor und für Norwegen 26280.
-
-Die Daten werden außerdem mit Hilfe eines sogenannten Augmented Dickey-Fuller Tests auf Stationarität geprüft, um zu analysieren, ob die Daten einen Trend und eine Saisonalität aufweisen oder stationär sind (Quelle).
-Dafür wird die Implementierung von statsmodels verwendet, bei der die Werte lediglich in die adfuller Funktion eingesetzt werden müssen (Quelle).
-Wie in Code-Ausschnitt~\ref{} zu sehen ist, sind die Daten stationär.
-Das wird daran festgemacht, dass der p-value, der misst wie stark die Nullhypothese abgelehnt wird, sehr klein ist.
-Da die Nullhypothese für \glqq nicht stationär\grqq steht, bedeutet eine Ablehnung dieser, dass die Daten stationär sind.
-Somit verneint der Augmented Dickey-Fuller Test das Vorhandensein eines Trends oder einer Saisonalität in den Daten.
 
 Eine Zerlegung in Trend, Saisonalität und Residual, wie in Kapitel~\ref{CAP:intor-time-series-forecasting} beschrieben, soll mehr Aufschluss über die Daten geben.
 Die Zerlegung für die Werte von Deutschland ist in Abbildung~\ref{FIG:moer_decomposition_DE} zu sehen.
@@ -605,6 +603,17 @@ Grundsätzlich sind die Daten also echt gemessene Daten, die zur Vollständigkei
 Außerdem werden zeitliche Variablen hinzugefügt, die den MOER-Wert ebenfalls beeinflussen können: Wochentag, Jahreszeit und, ob es sich um einen Feiertag handelt.
 Die jeweiligen Werte für die Variablen werden kodiert, sodass sie verarbeitet werden können.
 
+In einer sogenannten Correlation Matrix soll analysiert werden, ob und wie die einzelnen Variablen zusammenhängen.
+Für Deutschland und Norwegen wird je eine dieser Matrizen erstellt, zu sehen in Abbildung~\ref{FIG:correlation_matrix}.
+\begin{figure}
+ \caption{Der Zusammenhang zwischen den verwendeten Variablen für Deutschland und Norwegen dargestellt in je einer Correlation Matrix (eigene Darstellung)}
+ {\includegraphics[width=0.99\textwidth]{\figdir/correlation_matrix}}
+ \label{FIG:correlation_matrix}
+\end{figure}
+Insgesamt geht hervor, dass der lineare Zusammenhang zwischen den \ac{MOER}-Werten und den anderen Variablen eher gering ist.
+Der größte Zusammenhang besteht mit der Windgeschwindigkeit (-0,31) und der Sonneneinstrahlung (-0,24) in Deutschland.
+Das bedeutet, dass sich bei höheren Werten für diese beiden Variablen, niedrigere Werte für die \ac{MOER} verzeichnen lassen.
+Vor dem Hintergrund der Energiequellen des deutschen Stromnetzes scheint die Interpretation sinnvoll, dass bei steigender Windstärke und Sonneneinstrahlung mehr Strom durch Solarstrom und Strom aus Windkraftwerken gewonnen werden kann und somit die Emissionsgröße sinkt.
 
 Für die Implementierung soll eine Pipeline verwendet werden, um sich wiederholende Schritte problemlos und ohne nötigen Mehraufwand ausführen zu können.
 Die Idee dabei ist, dass die Modell-übergreifenden Schritte, wie Datenvorverarbeitung und Feature-Engineering, für die beiden Modelle gleichermaßen verwendet werden, wohingegen Modell-spezifische Schritte separat umgesetzt werden.
@@ -620,16 +629,93 @@ So wird sichergestellt, dass die Saisonalität vom Modell erkannt werden kann, d
 \end{figure}
 
 \section{Modellentwicklung und Training mit SARIMAX}
-\section{Modellentwicklung und Training mit Temporal Fusion Transformer}
-\begin{itemize}
- \item Hinzufügen des Time Index
- \item Normalisierung der Merkmale, für ähnliche Werteskala der numerischen Merkmale
- \item Vorbereitung der kategorischen Variablen
- \item Zielvariable
- \item Aufteilung des Datensatzes
-\end{itemize}
-\section{Evaluierung und Vergleich der Modelle}
+Für die Verwendung von auf ARIMA basierenden Modellen ist es zu aller Erst nötig, die Daten auf Stationarität zu untersuchen, weil diese eine Voraussetzung für die Modelle ist.
+Stationär ist eine Zeitreihe dann, wenn ihr Mittelwert, ihre Varianz und ihre Autokorrelation konstant und zeitunabhängig sind.
+Mit Hilfe eines \ac{ADF} Tests werden die Daten auf eine Einheitswurzel getestet (Nullhypothese).
+Gibt es keine Einheitswurzel in der Zeitreihe (Alternativhypothese), so ist sie stationär.
+Dafür wird die Implementierung von statsmodels verwendet, bei der die Daten lediglich in die \lstinline[columns=fixed]{adfuller} Funktion eingesetzt werden müssen.
+Der Test liefert die ADF-Statistik, eine negative Zahl, die je kleiner sie ist desto stärker die Nullhypothese ablehnt und den p-Wert, der der Nullhypothese widerspricht, wenn er kleiner als 0,05 ist.
+Code-Ausschnitt~\ref{CODE:adf-test_moer-de} zeigt den \ac{ADF} Test für die \ac{MOER}-Zeitreihe für Deutschland.
+\lstinputlisting[language=Python, caption=Python-Code zur Überprüfung der MOER-Werte für Deutschland auf Stationarität mithilfe des ADF-Tests, label=CODE:adf-test_moer-de]{\codedir/adf-test_moer-de.m}
+Das Ergebnis zeigt, dass die Nullhypothese aufgrund des p-Wertes abgelehnt wird und die Daten somit stationär sind.
+Die \ac{MOER}-Werte für Norwegen sind ebenfalls stationär, jedoch ist die Ablehnung der Nullhypothese mit einer ADF-Statisik von rund -4 weniger stark.
+Wären die Daten nicht stationär, müssten sie solange differenziert werden, bis sie Stationarität aufweisen~\cite{Peixeiro.2022}~\cite{Rahmadhan.8.5.2023}.
 
+Zur Anwendung des SARIMAX-Modells wird die Implementierung von \glqq statsmodels\grqq{} verwendet.
+Ein SARIMAX-Modell muss, anders als beim \ac{TFT} mit der Möglichkeit separater Gruppen-Ids, für jedes der beiden Länder separat erstellt werden
+Definiert wird das Modell durch die Angabe der Zielvariable, der exogenen Variablen, der Parameter für den nicht-saisonalen Teil des Modells (\lstinline[columns=fixed]{p,d,q}) und diejenigen für den saisonalen Teil des Modells (\lstinline[columns=fixed]{P,D,Q,s}).
+
+Als nächstes gilt es, die Parameter für SARIMAX festzulegen.
+Diese können durch Analyse der \ac{ACF} und der \ac{PACF} gewählt werden.
+Eine Alternativmethode ist, verschiedene Werte für die Parameter automatisch überprüfen zu lassen.
+Dafür kann die \lstinline[columns=fixed]{auto_arima} Funktion der pmdarima Bibliothek verwendet werden.
+Sie hilft, die optimalen Parameterwerte zu finden, indem sie die Kombination ausfindig macht, bei der das \ac{AIC} am niedrigsten ist~\cite{Rahmadhan.8.5.2023}.
+Das \ac{AIC} bewertet die Qualität eines Modells im Vergleich zu anderen Modellen durch Messen der durch das Modell verlorenen Informationen.
+Ein niedrigerer \ac{AIC}-Wert bedeutet demnach, dass weniger Informationen verloren gingen und das Modell deshalb besser abschneidet.
+Für die Funktion kann unter anderem die Testmethode angegeben werden, hier wird der \ac{ADF} Test verwendet.
+Außerdem werden für \lstinline[columns=fixed]{p} und \lstinline[columns=fixed]{q} Start- und Maximalwerte definiert.
+Als Startwert wird für beide Parameter 0 gewählt und als Maximalwert 24, um dem Modell zu ermöglichen, 24 Zeitschritte zurück zu gehen und so die Saisonalität von einem Tag abzubilden~\cite{Peixeiro.2022}.
+Die Frequenz wird in dieser Implementierung als Parameter m angegeben, entspricht aber dem sonst verwendet s und wird der Saisonalität wegen ebenfalls auf 24 gesetzt.
+Der Test ergibt, dass das Modell am besten als \lstinline[columns=fixed]{ARIMA(2,0,0)(0,0,0)[12] intercept} funktioniert.
+Zu beachten ist, dass bei Setzen von \lstinline[columns=fixed]{P, D} und \lstinline[columns=fixed]{Q} auf 0 das Modell keine Saisonalität berücksichtigt und somit einem ARIMA-Modell entspricht.
+
+Basierend auf diesem Ergebnis, wird das Modell mit diesen Parametern erstellt und trainiert, zu sehen in Code-Ausschnitt~\ref{CODE:sarimax_model-train}
+\lstinputlisting[language=Python, caption=Python-Code zum Erstellen und Trainieren des SARIMAX-Modells, label=CODE:sarimax_model-train]{\codedir/sarimax_model-train.m}
+
+Nach automatischer Wahl der Parameter soll nun trotzdem noch die \ac{ACF} und \ac{PACF} der Zeitreihe analysiert werden.
+Korrelation ist ein Maß, um die lineare Beziehung zweier Variablen zu messen.
+Die \ac{ACF} misst für eine Zeitreihe diese Beziehung zwischen zwei um eine bestimmte Anzahl an Zeitschritten versetzten Werten.
+Sie misst dadurch die Korrelation der Zeitreihe mit sich selbst~\cite{Peixeiro.2022}.
+Das \ac{ACF}-Diagramm für die \ac{MOER}-Werte für Deutschland ist in Abbildung~\ref{FIG:acf_moer_de} zu sehen.
+\begin{figure}
+ \caption{Die ACF der MOER-Werte für Deutschland}
+ {\includegraphics[width=0.5\textwidth]{\figdir/acf_moer_de}}
+ \label{FIG:acf_moer_de}
+\end{figure}
+Die x-Achse des Diagramms repräsentiert die Anzahl der zeitlichen Verzögerungen, während die y-Achse das Ausmaß der Korrelation zwischen den Zeitpunkten darstellt.
+Zu sehen ist eine Abnahme der Korrelation bei den ersten Zeitversetzungen, was auf eine starke Korrelation der zeitlich nahe beieinander liegenden Werte hinweist.
+Das bedeutet, dass die Messwerte aus den vergangenen Stunden einen signifikanten Einfluss auf die der folgenden Stunden ausüben.
+Die \ac{ACF} zeigt außerdem, dass die Daten trotz ihrer Stationarität saisonale Muster aufweisen.
+Nach 24 Zeitschritten, also einem Tag, ist eine wiederkehrende Spitze in den Daten erkennbar und das schwingende Muster scheint sich mit einem täglichen Ryhtmus zu wiederholen.
+Dies weist auf einen täglichen Zyklus der Zeitreihe hin.
+Gegen Ende der aufgezeigten Zeitverzögerungen nähern sich die Korrelationswerte der Nulllinie an und liegen innerhalb des Konfidenzintervalls (als hellblauer Bereich gekennzeichnet), was bestätigt, dass die Daten stationär sind.
+Statistisch signifikante Werte außerhalb des Konfidenzintervalls deuten darauf hin, dass die Daten mithilfe vergangener Werte vorhersagbar sind.
+
+\section{Modellentwicklung und Training mit Temporal Fusion Transformer}
+Für die Implementierung des \ac{TFT} wird das Modell von \glqq pytorch forecasting\grqq{}, einem Package für Zeitreihenvorhersage mit neuronalen Netzen, verwendet~\cite{PytorchForecastingDocumentation.20230410T20:05:46.000Z}.
+Zunächst muss dem Zeitreihen-Datensatz ein Zeitindex hinzugefügt werden, der sich bei jedem Zeitschritt (hier eine Stunde) um eins erhöht.
+Die Daten werden in einen Trainings-, einen Validierungs- und einen Testdatensatz eingeteilt und je ein dataloader dafür erstellt.
+Code-Ausschnitt~\ref{CODE:tft_training-dataset} zeigt das Vorgehen.
+\lstinputlisting[language=Python, caption=Python-Code zur Erstellung des Trainingsdatensatzes für den TFT, label=CODE:tft_training-dataset]{\codedir/tft_training-dataset.m}
+Dem Trainingsdatensatz werden Parameter mitgegeben, um den Aufbau und die Struktur der Eingabedaten für das Modell zu definieren.
+Wichtig ist vor allem das richtige Zuordnen der Variablen zu den verschiedenen Variablenarten~\cite{GitHub}.
+Im betrachteten Anwendungsfall der Vorhersage von \ac{MOER}-Werten, werden diese als Zielvariable gesetzt.
+Das Land wird als Gruppen-Id gesetzt, um zu definieren, dass ausgehend vom Land zwei verschiedene Zeitreihen existieren.
+Zwei für die Vorhersage wichtige Angaben sind die Länge der verwendeten Vergangenheitswerte (\lstinline[columns=fixed]{max_encoder_length}) und wie weit in die Zukunf vorhergesagt wird (\lstinline[columns=fixed]{max_predicition_length}).
+Da die vorherige Analyse der Daten eine deutliche tägliche Saisonalität in den Daten ersichtlich machte, wird für beide größen die Länge eines Tages (24 Stunden) gesetzt.
+Das Land wird außerdem auch als statische, kategorische Variable \lstinline[columns=fixed]{static_categoricals} angegeben, da sich die Werte im Lauf der Zeit nicht verändern.
+Kategorische Werte, die sich über die Zeit ändern, aber im Voraus bekannt sind (Jahreszeit, Wochentag und, ob es sich um einen Feiertag handelt), werden als \lstinline[columns=fixed]{time_varying_known_categoricals} gesetzt.
+Sich über die Zeit ändernde, im Voraus bekannte, aber kontinuierliche Werte, sind die Wetterdaten (Temperatur, Windgeschwindigkeit, \ac{GHI} und Niederschlag).
+Sie werden als \lstinline[columns=fixed]{time_varying_known_reals} gesetzt, nachdem sie durch Normalisierung mithilfe des \lstinline[columns=fixed]{StandardScaler} vom Package \glqq sktlearn\grqq auf eine ähnliche Werteskala gebracht wurden.
+Gibt es für diese Art von Werten Variablen, die im Voraus nicht bekannt sind, werden sie als \lstinline[columns=fixed]{time_varying_unknown_reals} gesetzt.
+Welche Variable zu dieser Kategorie auf jeden Fall dazu gehört ist die die Zielvariable.
+Die statische Kovariate ist das Land, welches gleichzeitig auch
+Zu diesem Zweck wird außerdem eine Normalisierung anhand der Gruppen durch die Softplus-Funktion durchgeführt, um positive Ausgabewerte zu garantieren.
+Durch die Angabe sogenannter \lstinline[columns=fixed]{lags} wird die Eingabe um vergangene Werte der Zielvariablen, verschoben um den angegebenen Zeitraum, erweitert.
+Ausgehend von der Saisonalität der Daten werden hier die Werte verschoben um einen Tag verwendet.
+Zuletzt werden dem Modell zusätzliche Merkmale und Kontext hinzugefügt, wie ein relativer Zeitindex um das Verhältnis jeden Datenpunkts zum Vorhersagepunkt zu erfassen, das Ausmaß der Zielvariable in Form von Mittelwert und Standardabweichung, und die Größe des Vorhersagefensters.
+Außerdem wird festgelegt, dass fehlende Zeitschritte geduldet werden.
+Die Datensätze zur Validierung und zum Testen werden dann ausgehend vom Trainingsdatensatz erstellt, wobei für diese angegeben wird, dass eine Vorhersage ausgeführt werden soll (\lstinline[columns=fixed]{predict=True})~\cite{Labiadh.2023}~\cite{GitHub}.
+
+Zunächst soll der \ac{MAE} des Baseline-Modells errechnet werden, um eine Ausgangslage zu haben.
+
+Für die optimierte Einstellung der Parameter des Modells wird das Hyperparamter-Training von pytorch forecasting getestet.
+Dafür werden die Trainings- und Validierungsdaten benötigt und Werteräume für die zu analysierenden Parameter definiert.
+Die am besten funktionierenden Parameter sind laut erstellter Studie folgende:
+\lstinline[columns=fixed]{gradient_clip_val: 0.7704201821245052, hidden_size: 101, dropout: 0.16435100042063222, hidden_continuous_size: 14, attention_head_size: 2, learning_rate: 0.00560374967}.
+
+
+\section{Evaluierung und Vergleich der Modelle}
 %!
 %!
 \chapter{Anwendung der Prognose}
