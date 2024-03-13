@@ -6,10 +6,11 @@ import joblib
 import matplotlib.pyplot as plt
 from sklearn.preprocessing import StandardScaler
 from pathlib import Path
-from lightning.pytorch.callbacks import ModelCheckpoint
+from lightning.pytorch.callbacks import ModelCheckpoint, EarlyStopping
 from pytorch_lightning.loggers import WandbLogger
 from pytorch_forecasting.data.encoders import GroupNormalizer
-from pytorch_forecasting import TimeSeriesDataSet, QuantileLoss, TemporalFusionTransformer
+from pytorch_forecasting import TimeSeriesDataSet, QuantileLoss, TemporalFusionTransformer, Baseline
+from pytorch_forecasting.metrics import MAE
 from src.config import get_tft_config
 from pytorch_forecasting.models.temporal_fusion_transformer.tuning import optimize_hyperparameters
 
@@ -17,11 +18,10 @@ tft_config = get_tft_config()
 
 
 def add_time_idx(weather_time_moer_data):
-    weather_time_moer_data.reset_index(inplace=True)
     weather_time_moer_data.loc[:, 'date'] = pd.to_datetime(weather_time_moer_data['date'])
     min_date_per_group = weather_time_moer_data.groupby('country')['date'].transform('min')
     weather_time_moer_data.loc[:, 'time_idx'] = ((weather_time_moer_data['date'] - min_date_per_group)
-                                          .dt.total_seconds() / 3600).astype(int)
+                                                 .dt.total_seconds() / 3600).astype(int)
     return weather_time_moer_data
 
 
@@ -51,7 +51,7 @@ def create_tft_training_dataset(weather_time_moer_data):
     training_cutoff = train_data["time_idx"].max() - tft_config.get('max_prediction_length')
 
     training_dataset = TimeSeriesDataSet(
-        train_data,
+        train_data[lambda x: x.time_idx <= training_cutoff],
         time_idx=tft_config.get("time_idx"),
         target=tft_config.get("target"),
         group_ids=tft_config.get("group_ids"),
@@ -101,6 +101,12 @@ def create_tft_test_dataset(weather_time_moer_data, training_dataset):
     return test_dataset
 
 
+def create_baseline_model(val_dataloader):
+    baseline_predictions = Baseline().predict(val_dataloader, return_y=True)
+    MAE()(baseline_predictions.output, baseline_predictions.y)
+    print(f"Baseline MAE: {MAE}")
+
+
 def create_tft_model(training_dataset):
     tft_model = TemporalFusionTransformer.from_dataset(
         training_dataset,
@@ -131,12 +137,14 @@ def create_tft_checkpoints():
 
 def create_tft_trainer():
     wandb_logger = WandbLogger(name="tsf_moer_tft", project="tsf_moer_tft")
+    early_stop_callback = EarlyStopping(monitor="val_loss", min_delta=1e-4, patience=10, verbose=False, mode="min")
     trainer = pl.Trainer(
         max_epochs=tft_config.get('max_epochs'),
         accelerator="auto",
         enable_model_summary=True,
+        gradient_clip_val=tft_config.get('gradient_clip_val'),
         logger=wandb_logger,
-        callbacks=[create_tft_checkpoints()]
+        callbacks=[create_tft_checkpoints(), early_stop_callback]
     )
     return trainer
 
@@ -165,6 +173,7 @@ def train_tft(weather_time_moer_data):
                                                  batch_size=tft_config.get('batch_size') * 10,
                                                  num_workers=tft_config.get('num_workers'),
                                                  persistent_workers=True)
+    create_baseline_model(val_dataloader)
     trainer = create_tft_trainer()
     tft_model = create_tft_model(training_dataset)
 
@@ -174,26 +183,26 @@ def train_tft(weather_time_moer_data):
         val_dataloaders=val_dataloader,
     )
 
-    study = optimize_hyperparameters(
-        train_dataloader,
-        val_dataloader,
-        model_path="optuna_test",
-        n_trials=200,
-        max_epochs=50,
-        gradient_clip_val_range=(0.01, 1.0),
-        hidden_size_range=(8, 128),
-        hidden_continuous_size_range=(8, 128),
-        attention_head_size_range=(1, 4),
-        learning_rate_range=(0.001, 0.1),
-        dropout_range=(0.1, 0.3),
-        trainer_kwargs=dict(limit_train_batches=30),
-        reduce_on_plateau_patience=4,
-        use_learning_rate_finder=False,
-    )
-
-    hyperparameter_study_save_path = f"{wandb.run.dir}/hyperparameter_study.pkl"
-    joblib.dump(study, hyperparameter_study_save_path)
-    print(study.best_trial.params)
+    # study = optimize_hyperparameters(
+    #     train_dataloader,
+    #     val_dataloader,
+    #     model_path="optuna_test",
+    #     n_trials=200,
+    #     max_epochs=50,
+    #     gradient_clip_val_range=(0.01, 1.0),
+    #     hidden_size_range=(8, 128),
+    #     hidden_continuous_size_range=(8, 128),
+    #     attention_head_size_range=(1, 4),
+    #     learning_rate_range=(0.001, 0.1),
+    #     dropout_range=(0.1, 0.3),
+    #     trainer_kwargs=dict(limit_train_batches=30),
+    #     reduce_on_plateau_patience=4,
+    #     use_learning_rate_finder=False,
+    # )
+    #
+    # hyperparameter_study_save_path = f"{wandb.run.dir}/hyperparameter_study.pkl"
+    # joblib.dump(study, hyperparameter_study_save_path)
+    # print(study.best_trial.params)
 
     trainer.test(dataloaders=test_dataloader, ckpt_path='best')
 
