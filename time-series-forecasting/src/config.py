@@ -15,6 +15,7 @@ def get_general_config():
 def get_tft_config():
     general_config = get_general_config()
     tft_specific_config = {
+        "gradient_clip_val": 0.8,
         "time_idx": "time_idx",
         "target": "moer",
         "group_ids": ["country"],
@@ -31,13 +32,13 @@ def get_tft_config():
         "allow_missing_timesteps": True,
         "batch_size": 32,
         "num_workers": 2,
-        "max_epochs": 5,
+        "max_epochs": 20,
         "accelerator:": "auto",
         "enable_model_summary": True,
         "learning_rate": 0.02,
-        "hidden_size": 27,
-        "attention_head_size": 1,
-        "dropout": 0.1,
+        "hidden_size": 32,
+        "attention_head_size": 4,
+        "dropout": 0.4,
         "hidden_continuous_size": 8,
         "output_size": 7,
         "log_interval": 10,
@@ -48,14 +49,24 @@ def get_tft_config():
 
 def get_sarimax_config():
     general_config = get_general_config()
-    sarimax_specific_config = {
-        # Direct SARIMAX parameters
-        "p": 1, "d": 1, "q": 1,  # Non-seasonal order
-        "P": 1, "D": 1, "Q": 1, "s": 24,  # Seasonal order
+    sarimax_config = {
+        "de": {
+            # SARIMAX parameters
+            "p": 1, "d": 0, "q": 0,
+            "P": 2, "D": 0, "Q": 0, "s": 24,
 
-        # Parameters for auto_arima (if used for model selection)
-        "start_p": 1, "start_q": 1, "max_p": 3, "max_q": 3, "m": 12,
-        "start_P": 0, "seasonal": True,
-        "trace": False, "error_action": 'ignore', "suppress_warnings": True, "stepwise": True,
+            # auto_arima parameters
+            "start_p": 0, "start_q": 0, "max_p": 24, "max_q": 24, "m": 24, "seasonal": True,
+            "test": "adf", "trace": True, "suppress_warnings": True, "stepwise": True,
+        },
+        "no": {
+            # SARIMAX parameters
+            "p": 1, "d": 0, "q": 0,
+            "P": 2, "D": 0, "Q": 1, "s": 24,
+
+            # auto_arima parameters
+            "start_p": 0, "start_q": 0, "max_p": 24, "max_q": 24, "m": 24, "seasonal": True,
+            "test": "adf", "trace": True, "suppress_warnings": True, "stepwise": True,
+        }
     }
-    return {**general_config, **sarimax_specific_config}
+    return {**general_config, **sarimax_config}

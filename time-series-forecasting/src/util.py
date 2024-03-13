@@ -16,7 +16,7 @@ def get_preprocessed_data():
         print('running in colab')
     else:
         data_path = general_config.get('data_path')
-    return pd.read_csv(data_path + preprocessed_data_file_name, index_col='date')
+    return pd.read_csv(data_path + preprocessed_data_file_name)
 
 
 def save_config_and_results(run_dir, config, results):
