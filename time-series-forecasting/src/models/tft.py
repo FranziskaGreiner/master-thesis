@@ -155,7 +155,6 @@ def train_tft(weather_time_moer_data):
     weather_time_moer_data = add_time_idx(weather_time_moer_data)
     weather_time_moer_data = normalize_features(weather_time_moer_data)
     weather_time_moer_data = convert_categoricals(weather_time_moer_data)
-    weather_time_moer_data.to_csv(f"{tft_config.get('data_path')}/tft_weather_time_moer_2021_2023_DE_NO.csv")
 
     training_dataset = create_tft_training_dataset(weather_time_moer_data)
     validation_dataset = create_tft_validation_dataset(weather_time_moer_data, training_dataset)
