@@ -151,11 +151,11 @@ def create_tft_trainer():
 
 def train_tft(weather_time_moer_data):
     run = wandb.init(project="tsf_moer__tft", config=dict(tft_config))
-    # weather_time_moer_data = weather_time_moer_data[weather_time_moer_data['country'] == 'DE']
 
     weather_time_moer_data = add_time_idx(weather_time_moer_data)
     weather_time_moer_data = normalize_features(weather_time_moer_data)
     weather_time_moer_data = convert_categoricals(weather_time_moer_data)
+    weather_time_moer_data.to_csv(f"{tft_config.get('data_path')}/tft_weather_time_moer_2021_2023_DE_NO.csv")
 
     training_dataset = create_tft_training_dataset(weather_time_moer_data)
     validation_dataset = create_tft_validation_dataset(weather_time_moer_data, training_dataset)
@@ -183,26 +183,26 @@ def train_tft(weather_time_moer_data):
         val_dataloaders=val_dataloader,
     )
 
-    # study = optimize_hyperparameters(
-    #     train_dataloader,
-    #     val_dataloader,
-    #     model_path="optuna_test",
-    #     n_trials=200,
-    #     max_epochs=50,
-    #     gradient_clip_val_range=(0.01, 1.0),
-    #     hidden_size_range=(8, 128),
-    #     hidden_continuous_size_range=(8, 128),
-    #     attention_head_size_range=(1, 4),
-    #     learning_rate_range=(0.001, 0.1),
-    #     dropout_range=(0.1, 0.3),
-    #     trainer_kwargs=dict(limit_train_batches=30),
-    #     reduce_on_plateau_patience=4,
-    #     use_learning_rate_finder=False,
-    # )
-    #
-    # hyperparameter_study_save_path = f"{wandb.run.dir}/hyperparameter_study.pkl"
-    # joblib.dump(study, hyperparameter_study_save_path)
-    # print(study.best_trial.params)
+    study = optimize_hyperparameters(
+        train_dataloader,
+        val_dataloader,
+        model_path="optuna_test",
+        n_trials=200,
+        max_epochs=50,
+        gradient_clip_val_range=(0.01, 1.0),
+        hidden_size_range=(8, 128),
+        hidden_continuous_size_range=(8, 128),
+        attention_head_size_range=(1, 4),
+        learning_rate_range=(0.001, 0.1),
+        dropout_range=(0.1, 0.3),
+        trainer_kwargs=dict(limit_train_batches=30),
+        reduce_on_plateau_patience=4,
+        use_learning_rate_finder=False,
+    )
+
+    hyperparameter_study_save_path = f"{wandb.run.dir}/hyperparameter_study.pkl"
+    joblib.dump(study, hyperparameter_study_save_path)
+    print(study.best_trial.params)
 
     trainer.test(dataloaders=test_dataloader, ckpt_path='best')
 
