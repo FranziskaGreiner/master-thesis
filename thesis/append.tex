@@ -1,8 +1,16 @@
-\chapter{Erstes Kapitel des Anhangs}
-\label{a:somelabel}
-Wenn Sie keinen Anhang benötigen, dann bitte einfach rausnehmen.
+\chapter{Abbildungen}
+\begin{figure}
+    \caption{Die Dokomposition der MOER-Werte von Norwegen (eigene Darstellung)}
+    {\includegraphics[width=0.99\textwidth]{\figdir/moer_decomposition_NO}}
+    \label{FIG:moer_decomposition_NO}
+\end{figure}
 
-%%% Local Variables: 
-%%% mode: latex
-%%% TeX-master: "thesis.tex"
-%%% End: 
+\begin{figure}
+    \caption{Die Unterteilung der MOER-Werte in Trainings-, Validierungs- und Testdatensatz}
+    {\includegraphics[width=0.99\textwidth]{\figdir/moer_train_validation_test}}
+    \label{FIG:moer_train_validation_test}
+\end{figure}
+
+
+\chapter{Code-Ausschnitte}
+\lstinputlisting[language=Python, caption=Python-Code zur Abfrage der MOER-Werte, label=CODE:watttime_get_moer]{\codedir/wattime_get_moer.m}
