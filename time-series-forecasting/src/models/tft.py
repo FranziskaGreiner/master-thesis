@@ -186,14 +186,14 @@ def train_tft(weather_time_moer_data):
         train_dataloader,
         val_dataloader,
         model_path="optuna_test",
-        n_trials=100,
+        n_trials=50,
         max_epochs=10,
         gradient_clip_val_range=(0.01, 1.0),
         hidden_size_range=(8, 128),
         hidden_continuous_size_range=(8, 128),
         attention_head_size_range=(1, 4),
         learning_rate_range=(0.001, 0.1),
-        dropout_range=(0.1, 0.3),
+        dropout_range=(0.1, 0.4),
         trainer_kwargs=dict(limit_train_batches=30),
         reduce_on_plateau_patience=4,
         use_learning_rate_finder=False,
@@ -213,12 +213,8 @@ def train_tft(weather_time_moer_data):
     best_tft = TemporalFusionTransformer.load_from_checkpoint(best_model_path)
     val_prediction_results = best_tft.predict(val_dataloader, mode="raw", return_x=True)
 
-    for idx in range(10):
+    for idx in range(1):
         fig, ax = plt.subplots(figsize=(23, 5))
-        # ax.set_xlim(min(val_prediction_results.x["encoder_target"].index),
-        #             max(val_prediction_results.x["decoder_target"].index))
-        # ax.set_xlim(min(val_prediction_results.x[encoder_target[idx]]),
-        #             max(val_prediction_results.x[decoder_target[idx]]))
         best_tft.plot_prediction(val_prediction_results.x,
                                  val_prediction_results.output,
                                  idx=idx,

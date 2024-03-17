@@ -15,12 +15,12 @@ def get_general_config():
 def get_tft_config():
     general_config = get_general_config()
     tft_specific_config = {
-        "gradient_clip_val": 0.8,
+        "gradient_clip_val": 0.1,
         "time_idx": "time_idx",
         "target": "moer",
         "group_ids": ["country"],
         "max_encoder_length": 168,
-        "max_prediction_length": 168,
+        "max_prediction_length": 24,
         "static_categoricals": ["country"],
         "time_varying_known_categoricals": ["season", "day_of_week", "is_holiday"],
         "time_varying_known_reals": ["ghi", "temperature", "wind_speed", "precipitation"],
@@ -32,17 +32,17 @@ def get_tft_config():
         "allow_missing_timesteps": True,
         "batch_size": 32,
         "num_workers": 2,
-        "max_epochs": 20,
+        "max_epochs": 10,
         "accelerator:": "auto",
         "enable_model_summary": True,
         "learning_rate": 0.02,
         "hidden_size": 32,
-        "attention_head_size": 2,
-        "dropout": 0.1,
-        "hidden_continuous_size": 8,
+        "attention_head_size": 4,
+        "dropout": 0.4,
+        "hidden_continuous_size": 16,
         "output_size": 7,
         "log_interval": 10,
-        "reduce_on_plateau_patience": 2,
+        "reduce_on_plateau_patience": 4,
     }
     return {**general_config, **tft_specific_config}
 
