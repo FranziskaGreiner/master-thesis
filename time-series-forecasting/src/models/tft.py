@@ -47,13 +47,22 @@ def convert_categoricals(weather_time_moer_data):
 
 def create_tft_training_dataset(weather_time_moer_data):
     train_data = weather_time_moer_data[weather_time_moer_data['date'] <= tft_config.get('training_cutoff_date')].copy()
-    print(train_data['time_idx'].min())
 
     target_normalizer = GroupNormalizer(groups=["country"], transformation="softplus")
-    training_cutoff = train_data["time_idx"].max() - tft_config.get('max_prediction_length')
+
+    cutoffs = {}
+    for country in ['DE', 'NO']:
+        country_data = train_data[train_data['country'] == country]
+        max_time_idx = country_data["time_idx"].max()
+        cutoffs[country] = max_time_idx - tft_config.get('max_prediction_length')
+
+    filtered_train_data = pd.concat([
+        train_data[(train_data['country'] == country) & (train_data['time_idx'] <= cutoff)]
+        for country, cutoff in cutoffs.items()
+    ])
 
     training_dataset = TimeSeriesDataSet(
-        train_data[lambda x: x.time_idx <= training_cutoff],
+        filtered_train_data,
         time_idx=tft_config.get("time_idx"),
         target=tft_config.get("target"),
         group_ids=tft_config.get("group_ids"),
@@ -81,7 +90,6 @@ def create_tft_validation_dataset(weather_time_moer_data, training_dataset):
         (weather_time_moer_data['date'] > tft_config.get('training_cutoff_date')) &
         (weather_time_moer_data['date'] <= tft_config.get('validation_cutoff_date'))
         ].copy()
-    print(validation_data['time_idx'].min())
 
     validation_dataset = TimeSeriesDataSet.from_dataset(
         training_dataset,
