@@ -12,6 +12,7 @@ from pytorch_forecasting.data.encoders import GroupNormalizer
 from pytorch_forecasting import TimeSeriesDataSet, QuantileLoss, TemporalFusionTransformer, Baseline
 from pytorch_forecasting.metrics import MAE
 from src.config import get_tft_config
+from lightning.pytorch.tuner import Tuner
 from pytorch_forecasting.models.temporal_fusion_transformer.tuning import optimize_hyperparameters
 
 tft_config = get_tft_config()
@@ -46,6 +47,7 @@ def convert_categoricals(weather_time_moer_data):
 
 def create_tft_training_dataset(weather_time_moer_data):
     train_data = weather_time_moer_data[weather_time_moer_data['date'] <= tft_config.get('training_cutoff_date')].copy()
+    print(train_data['time_idx'].min())
 
     target_normalizer = GroupNormalizer(groups=["country"], transformation="softplus")
     training_cutoff = train_data["time_idx"].max() - tft_config.get('max_prediction_length')
@@ -55,7 +57,7 @@ def create_tft_training_dataset(weather_time_moer_data):
         time_idx=tft_config.get("time_idx"),
         target=tft_config.get("target"),
         group_ids=tft_config.get("group_ids"),
-        max_encoder_length=tft_config.get('max_encoder_length'),
+        max_encoder_length=tft_config.get('max_encoder_length'),  # lookback window
         max_prediction_length=tft_config.get('max_prediction_length'),
         static_categoricals=tft_config.get("static_categoricals"),
         time_varying_known_categoricals=tft_config.get("time_varying_known_categoricals"),
@@ -79,6 +81,7 @@ def create_tft_validation_dataset(weather_time_moer_data, training_dataset):
         (weather_time_moer_data['date'] > tft_config.get('training_cutoff_date')) &
         (weather_time_moer_data['date'] <= tft_config.get('validation_cutoff_date'))
         ].copy()
+    print(validation_data['time_idx'].min())
 
     validation_dataset = TimeSeriesDataSet.from_dataset(
         training_dataset,
@@ -172,9 +175,23 @@ def train_tft(weather_time_moer_data):
                                                  batch_size=tft_config.get('batch_size') * 10,
                                                  num_workers=tft_config.get('num_workers'),
                                                  persistent_workers=True)
+
     create_baseline_model(val_dataloader)
     trainer = create_tft_trainer()
     tft_model = create_tft_model(training_dataset)
+
+    # find optimal learning rate
+    res = Tuner(trainer).lr_find(
+        tft_model,
+        train_dataloaders=train_dataloader,
+        val_dataloaders=val_dataloader,
+        max_lr=10.0,
+        min_lr=1e-6,
+    )
+
+    print(f"suggested learning rate: {res.suggestion()}")
+    fig = res.plot(show=True, suggest=True)
+    fig.show()
 
     trainer.fit(
         tft_model,
@@ -182,26 +199,26 @@ def train_tft(weather_time_moer_data):
         val_dataloaders=val_dataloader,
     )
 
-    study = optimize_hyperparameters(
-        train_dataloader,
-        val_dataloader,
-        model_path="optuna_test",
-        n_trials=50,
-        max_epochs=10,
-        gradient_clip_val_range=(0.01, 1.0),
-        hidden_size_range=(8, 128),
-        hidden_continuous_size_range=(8, 128),
-        attention_head_size_range=(1, 4),
-        learning_rate_range=(0.001, 0.1),
-        dropout_range=(0.1, 0.4),
-        trainer_kwargs=dict(limit_train_batches=30),
-        reduce_on_plateau_patience=4,
-        use_learning_rate_finder=False,
-    )
-
-    hyperparameter_study_save_path = f"{wandb.run.dir}/hyperparameter_study.pkl"
-    joblib.dump(study, hyperparameter_study_save_path)
-    print(study.best_trial.params)
+    # study = optimize_hyperparameters(
+    #     train_dataloader,
+    #     val_dataloader,
+    #     model_path="optuna_test",
+    #     n_trials=50,
+    #     max_epochs=10,
+    #     gradient_clip_val_range=(0.01, 1.0),
+    #     hidden_size_range=(8, 128),
+    #     hidden_continuous_size_range=(8, 128),
+    #     attention_head_size_range=(1, 4),
+    #     learning_rate_range=(0.001, 0.1),
+    #     dropout_range=(0.1, 0.4),
+    #     trainer_kwargs=dict(limit_train_batches=30),
+    #     reduce_on_plateau_patience=4,
+    #     use_learning_rate_finder=False,
+    # )
+    #
+    # hyperparameter_study_save_path = f"{wandb.run.dir}/hyperparameter_study.pkl"
+    # joblib.dump(study, hyperparameter_study_save_path)
+    # print(study.best_trial.params)
 
     trainer.test(dataloaders=test_dataloader, ckpt_path='best')
 
@@ -213,7 +230,7 @@ def train_tft(weather_time_moer_data):
     best_tft = TemporalFusionTransformer.load_from_checkpoint(best_model_path)
     val_prediction_results = best_tft.predict(val_dataloader, mode="raw", return_x=True)
 
-    for idx in range(1):
+    for idx in range(2):
         fig, ax = plt.subplots(figsize=(23, 5))
         best_tft.plot_prediction(val_prediction_results.x,
                                  val_prediction_results.output,
