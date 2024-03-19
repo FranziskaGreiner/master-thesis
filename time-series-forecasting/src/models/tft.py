@@ -46,20 +46,19 @@ def convert_categoricals(weather_time_moer_data):
 
 
 def create_tft_training_dataset(weather_time_moer_data):
-    train_data = weather_time_moer_data[weather_time_moer_data['date'] <= tft_config.get('training_cutoff_date')].copy()
-
     target_normalizer = GroupNormalizer(groups=["country"], transformation="softplus")
 
     cutoffs = {}
     for country in ['DE', 'NO']:
-        country_data = train_data[train_data['country'] == country]
+        country_data = weather_time_moer_data[weather_time_moer_data['country'] == country]
         max_time_idx = country_data["time_idx"].max()
         cutoffs[country] = max_time_idx - tft_config.get('max_prediction_length')
 
     filtered_train_data = pd.concat([
-        train_data[(train_data['country'] == country) & (train_data['time_idx'] <= cutoff)]
+        weather_time_moer_data[(weather_time_moer_data['country'] == country) & (weather_time_moer_data['time_idx'] <= cutoff)]
         for country, cutoff in cutoffs.items()
     ])
+    print(filtered_train_data.tail())
 
     training_dataset = TimeSeriesDataSet(
         filtered_train_data,
@@ -85,15 +84,10 @@ def create_tft_training_dataset(weather_time_moer_data):
     return training_dataset
 
 
-def create_tft_validation_dataset(weather_time_moer_data, training_dataset):
-    validation_data = weather_time_moer_data[
-        (weather_time_moer_data['date'] > tft_config.get('training_cutoff_date')) &
-        (weather_time_moer_data['date'] <= tft_config.get('validation_cutoff_date'))
-        ].copy()
-
+def create_tft_validation_dataset(training_dataset, weather_time_moer_data):
     validation_dataset = TimeSeriesDataSet.from_dataset(
         training_dataset,
-        validation_data,
+        weather_time_moer_data,
         predict=True,  # predict the decoder length on the last entries in the time index
         stop_randomization=True,
     )
@@ -168,8 +162,7 @@ def train_tft(weather_time_moer_data):
     weather_time_moer_data = convert_categoricals(weather_time_moer_data)
 
     training_dataset = create_tft_training_dataset(weather_time_moer_data)
-    validation_dataset = create_tft_validation_dataset(weather_time_moer_data, training_dataset)
-    test_dataset = create_tft_test_dataset(weather_time_moer_data, training_dataset)
+    validation_dataset = create_tft_validation_dataset(training_dataset, weather_time_moer_data)
 
     train_dataloader = training_dataset.to_dataloader(train=True,
                                                       batch_size=tft_config.get('batch_size'),
@@ -179,10 +172,6 @@ def train_tft(weather_time_moer_data):
                                                       batch_size=tft_config.get('batch_size') * 10,
                                                       num_workers=tft_config.get('num_workers'),
                                                       persistent_workers=True)
-    test_dataloader = test_dataset.to_dataloader(train=False,
-                                                 batch_size=tft_config.get('batch_size') * 10,
-                                                 num_workers=tft_config.get('num_workers'),
-                                                 persistent_workers=True)
 
     create_baseline_model(val_dataloader)
     trainer = create_tft_trainer()
@@ -209,6 +198,7 @@ def train_tft(weather_time_moer_data):
         val_dataloaders=val_dataloader,
     )
 
+    # hyperparameter tuning
     # study = optimize_hyperparameters(
     #     train_dataloader,
     #     val_dataloader,
@@ -230,7 +220,7 @@ def train_tft(weather_time_moer_data):
     # joblib.dump(study, hyperparameter_study_save_path)
     # print(study.best_trial.params)
 
-    trainer.test(dataloaders=test_dataloader, ckpt_path='best')
+    # trainer.test(dataloaders=test_dataloader, ckpt_path='best')
 
     model_save_path = f"{wandb.run.dir}/tft_model.pth"
     torch.save(tft_model.state_dict(), model_save_path)
