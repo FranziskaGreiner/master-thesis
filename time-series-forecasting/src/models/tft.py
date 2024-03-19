@@ -114,8 +114,8 @@ def create_tft_test_dataset(weather_time_moer_data, training_dataset):
 
 def create_baseline_model(val_dataloader):
     baseline_predictions = Baseline().predict(val_dataloader, return_y=True)
-    MAE()(baseline_predictions.output, baseline_predictions.y)
-    print(f"Baseline MAE: {MAE}")
+    mae_value = MAE()(baseline_predictions.output, baseline_predictions.y)
+    print(f"Baseline MAE: {mae_value.item()}")
 
 
 def create_tft_model(training_dataset):
@@ -199,7 +199,9 @@ def train_tft(weather_time_moer_data):
 
     print(f"suggested learning rate: {res.suggestion()}")
     fig = res.plot(show=True, suggest=True)
-    fig.show()
+    lr_plot_file_path = f"{wandb.run.dir}/learning_rate.png"
+    plt.savefig(lr_plot_file_path)
+    plt.close(fig)
 
     trainer.fit(
         tft_model,
