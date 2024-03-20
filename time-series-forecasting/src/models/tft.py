@@ -95,10 +95,10 @@ def create_tft_training_dataset(train_data):
     return training_dataset
 
 
-def create_tft_validation_dataset(training_dataset, validation_data):
+def create_tft_validation_dataset(training_dataset, weather_time_moer_data):
     validation_dataset = TimeSeriesDataSet.from_dataset(
         training_dataset,
-        validation_data,
+        weather_time_moer_data,
         predict=True,  # predict the decoder length on the last entries in the time index
         stop_randomization=True,
     )
@@ -175,7 +175,7 @@ def train_tft(weather_time_moer_data):
     train_data, validation_data = create_training_validation_data(weather_time_moer_data)
 
     training_dataset = create_tft_training_dataset(train_data)
-    validation_dataset = create_tft_validation_dataset(training_dataset, validation_data)
+    validation_dataset = create_tft_validation_dataset(training_dataset, weather_time_moer_data)
 
     train_dataloader = training_dataset.to_dataloader(train=True,
                                                       batch_size=tft_config.get('batch_size'),
