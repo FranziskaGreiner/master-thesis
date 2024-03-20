@@ -20,7 +20,7 @@ def get_tft_config():
         "target": "moer",
         "group_ids": ["country"],
         "max_encoder_length": 168,  # 1 week
-        "max_prediction_length": 168,  # 1 week
+        "max_prediction_length": 96,  # 4 days
         "static_categoricals": ["country"],
         "time_varying_known_categoricals": ["season", "day_of_week", "is_holiday"],
         "time_varying_known_reals": ["ghi", "temperature", "wind_speed", "precipitation"],
@@ -32,7 +32,7 @@ def get_tft_config():
         "allow_missing_timesteps": True,
         "batch_size": 32,
         "num_workers": 2,
-        # "max_epochs": 20,
+        "max_epochs": 50,
         "accelerator:": "auto",
         "enable_model_summary": True,
         "learning_rate": 0.02,

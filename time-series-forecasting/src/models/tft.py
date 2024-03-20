@@ -62,9 +62,6 @@ def create_training_validation_data(weather_time_moer_data):
                                                          (weather_time_moer_data['time_idx'] > cutoff)]
         train_data = pd.concat([train_data, country_train_data])
         validation_data = pd.concat([validation_data, country_validation_data])
-
-    print(train_data.tail())
-    print(validation_data.tail())
     return train_data, validation_data
 
 
@@ -76,6 +73,7 @@ def create_tft_training_dataset(train_data):
         time_idx=tft_config.get("time_idx"),
         target=tft_config.get("target"),
         group_ids=tft_config.get("group_ids"),
+        min_encoder_length=tft_config.get('max_encoder_length') // 2,
         max_encoder_length=tft_config.get('max_encoder_length'),  # lookback window
         max_prediction_length=tft_config.get('max_prediction_length'),
         static_categoricals=tft_config.get("static_categoricals"),
@@ -156,6 +154,7 @@ def create_tft_trainer():
     trainer = pl.Trainer(
         accelerator="auto",
         enable_model_summary=True,
+        max_epochs=tft_config.get('max_epochs'),
         gradient_clip_val=tft_config.get('gradient_clip_val'),
         logger=wandb_logger,
         callbacks=[create_tft_checkpoints(), early_stop_callback]
