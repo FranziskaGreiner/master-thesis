@@ -19,7 +19,7 @@ def get_tft_config():
         "time_idx": "time_idx",
         "target": "moer",
         "group_ids": ["country"],
-        "max_encoder_length": 336,  # 2 weeks
+        "max_encoder_length": 168,  # 1 week
         "max_prediction_length": 168,  # 1 week
         "static_categoricals": ["country"],
         "time_varying_known_categoricals": ["season", "day_of_week", "is_holiday"],
@@ -32,15 +32,14 @@ def get_tft_config():
         "allow_missing_timesteps": True,
         "batch_size": 32,
         "num_workers": 2,
-        "max_epochs": 20,
+        # "max_epochs": 20,
         "accelerator:": "auto",
         "enable_model_summary": True,
-        "learning_rate": 0.03,
+        "learning_rate": 0.02,
         "hidden_size": 32,
         "attention_head_size": 1,
-        "dropout": 0.5,
+        "dropout": 0.1,
         "hidden_continuous_size": 8,
-        "output_size": 7,
         "log_interval": 10,
         "reduce_on_plateau_patience": 4,
     }
