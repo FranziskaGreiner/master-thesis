@@ -45,23 +45,34 @@ def convert_categoricals(weather_time_moer_data):
     return weather_time_moer_data
 
 
-def create_tft_training_dataset(weather_time_moer_data):
-    target_normalizer = GroupNormalizer(groups=["country"], transformation="softplus")
-
+def create_training_validation_data(weather_time_moer_data):
     cutoffs = {}
     for country in ['DE', 'NO']:
         country_data = weather_time_moer_data[weather_time_moer_data['country'] == country]
         max_time_idx = country_data["time_idx"].max()
         cutoffs[country] = max_time_idx - tft_config.get('max_prediction_length')
 
-    filtered_train_data = pd.concat([
-        weather_time_moer_data[(weather_time_moer_data['country'] == country) & (weather_time_moer_data['time_idx'] <= cutoff)]
-        for country, cutoff in cutoffs.items()
-    ])
-    print(filtered_train_data.tail())
+    train_data = pd.DataFrame()
+    validation_data = pd.DataFrame()
+
+    for country, cutoff in cutoffs.items():
+        country_train_data = weather_time_moer_data[(weather_time_moer_data['country'] == country) &
+                                                    (weather_time_moer_data['time_idx'] <= cutoff)]
+        country_validation_data = weather_time_moer_data[(weather_time_moer_data['country'] == country) &
+                                                         (weather_time_moer_data['time_idx'] > cutoff)]
+        train_data = pd.concat([train_data, country_train_data])
+        validation_data = pd.concat([validation_data, country_validation_data])
+
+    print(train_data.tail())
+    print(validation_data.tail())
+    return train_data, validation_data
+
+
+def create_tft_training_dataset(train_data):
+    target_normalizer = GroupNormalizer(groups=["country"], transformation="softplus")
 
     training_dataset = TimeSeriesDataSet(
-        filtered_train_data,
+        train_data,
         time_idx=tft_config.get("time_idx"),
         target=tft_config.get("target"),
         group_ids=tft_config.get("group_ids"),
@@ -84,10 +95,10 @@ def create_tft_training_dataset(weather_time_moer_data):
     return training_dataset
 
 
-def create_tft_validation_dataset(training_dataset, weather_time_moer_data):
+def create_tft_validation_dataset(training_dataset, validation_data):
     validation_dataset = TimeSeriesDataSet.from_dataset(
         training_dataset,
-        weather_time_moer_data,
+        validation_data,
         predict=True,  # predict the decoder length on the last entries in the time index
         stop_randomization=True,
     )
@@ -161,8 +172,10 @@ def train_tft(weather_time_moer_data):
     weather_time_moer_data = normalize_features(weather_time_moer_data)
     weather_time_moer_data = convert_categoricals(weather_time_moer_data)
 
-    training_dataset = create_tft_training_dataset(weather_time_moer_data)
-    validation_dataset = create_tft_validation_dataset(training_dataset, weather_time_moer_data)
+    train_data, validation_data = create_training_validation_data(weather_time_moer_data)
+
+    training_dataset = create_tft_training_dataset(train_data)
+    validation_dataset = create_tft_validation_dataset(training_dataset, validation_data)
 
     train_dataloader = training_dataset.to_dataloader(train=True,
                                                       batch_size=tft_config.get('batch_size'),
@@ -187,9 +200,10 @@ def train_tft(weather_time_moer_data):
     )
 
     print(f"suggested learning rate: {res.suggestion()}")
-    fig = res.plot(show=True, suggest=True)
+    fig = res.plot(suggest=True, show=False)
     lr_plot_file_path = f"{wandb.run.dir}/learning_rate.png"
-    plt.savefig(lr_plot_file_path)
+    fig.savefig(lr_plot_file_path)
+    plt.show()
     plt.close(fig)
 
     trainer.fit(
