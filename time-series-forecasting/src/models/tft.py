@@ -163,7 +163,7 @@ def create_tft_trainer():
 
 
 def train_tft(weather_time_moer_data):
-    run = wandb.init(project="tsf_moer__tft", config=dict(tft_config))
+    run = wandb.init(project="tsf_moer_tft", config=dict(tft_config))
 
     weather_time_moer_data = add_time_idx(weather_time_moer_data)
     weather_time_moer_data = normalize_features(weather_time_moer_data)

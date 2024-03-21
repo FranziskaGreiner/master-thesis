@@ -35,7 +35,7 @@ def get_tft_config():
         "max_epochs": 50,
         "accelerator:": "auto",
         "enable_model_summary": True,
-        "learning_rate": 0.01,
+        "learning_rate": 0.03,
         "hidden_size": 64,
         "attention_head_size": 2,
         "dropout": 0.2,
