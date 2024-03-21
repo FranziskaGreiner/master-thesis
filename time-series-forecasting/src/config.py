@@ -50,22 +50,16 @@ def get_sarimax_config():
     general_config = get_general_config()
     sarimax_config = {
         "de": {
-            # SARIMAX parameters
             "p": 1, "d": 0, "q": 0,
-            "P": 2, "D": 0, "Q": 0, "s": 24,
-
-            # auto_arima parameters
-            "start_p": 0, "start_q": 0, "max_p": 24, "max_q": 24, "m": 24, "seasonal": True,
-            "test": "adf", "trace": True, "suppress_warnings": True, "stepwise": True,
+            "P": 2, "D": 0, "Q": 2, "s": 24,
         },
         "no": {
-            # SARIMAX parameters
-            "p": 1, "d": 0, "q": 0,
+            "p": 2, "d": 0, "q": 0,
             "P": 2, "D": 0, "Q": 1, "s": 24,
-
-            # auto_arima parameters
-            "start_p": 0, "start_q": 0, "max_p": 24, "max_q": 24, "m": 24, "seasonal": True,
-            "test": "adf", "trace": True, "suppress_warnings": True, "stepwise": True,
+        },
+        "auto_arima": {
+            "start_p": 0, "start_q": 0, "max_p": 3, "max_q": 3, "m": 24, "d":0,
+            "seasonal": True, "trace": True, "suppress_warnings": True, "stepwise": True,
         }
     }
     return {**general_config, **sarimax_config}

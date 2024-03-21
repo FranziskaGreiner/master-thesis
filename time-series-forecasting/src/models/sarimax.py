@@ -47,11 +47,11 @@ def train_sarimax(final_data):
         sarimax_model = create_sarimax_model(train_data, exog_train, sarimax_country_config)
         results = sarimax_model.fit(disp=False)
 
-        model_file_path = f"{wandb.run.dir}/sarimax_model_{country}.joblib"
-        joblib.dump(results, model_file_path)
-        artifact = wandb.Artifact(f'sarimax_model_{country}', type='model')
-        artifact.add_file(model_file_path)
-        run.log_artifact(artifact)
+        # model_file_path = f"{wandb.run.dir}/sarimax_model_{country}.joblib"
+        # joblib.dump(results, model_file_path)
+        # artifact = wandb.Artifact(f'sarimax_model_{country}', type='model')
+        # artifact.add_file(model_file_path)
+        # run.log_artifact(artifact)
 
         if not validation_data.empty:
             val_predictions = results.get_prediction(start=len(train_data),
@@ -71,6 +71,8 @@ def train_sarimax(final_data):
             plt.savefig(val_plot_file_path)
             plt.close()
             wandb.log({f"plot_val_{country}": wandb.Image(val_plot_file_path)})
+
+        # if not test_data.empty:
 
         # Log diagnostics
         fig = results.plot_diagnostics(figsize=(10, 8))
