@@ -210,25 +210,25 @@ def train_tft(weather_time_moer_data):
     )
 
     # hyperparameter tuning
-    # study = optimize_hyperparameters(
-    #     train_dataloader,
-    #     val_dataloader,
-    #     model_path="optuna_test",
-    #     n_trials=50,
-    #     gradient_clip_val_range=(0.01, 1.0),
-    #     hidden_size_range=(8, 128),
-    #     hidden_continuous_size_range=(8, 128),
-    #     attention_head_size_range=(1, 4),
-    #     learning_rate_range=(0.001, 0.1),
-    #     dropout_range=(0.1, 0.4),
-    #     trainer_kwargs=dict(limit_train_batches=30),
-    #     reduce_on_plateau_patience=4,
-    #     use_learning_rate_finder=False,
-    # )
-    #
-    # hyperparameter_study_save_path = f"{wandb.run.dir}/hyperparameter_study.pkl"
-    # joblib.dump(study, hyperparameter_study_save_path)
-    # print(study.best_trial.params)
+    study = optimize_hyperparameters(
+        train_dataloader,
+        val_dataloader,
+        model_path="optuna_test",
+        n_trials=50,
+        gradient_clip_val_range=(0.01, 1.0),
+        hidden_size_range=(8, 128),
+        hidden_continuous_size_range=(8, 128),
+        attention_head_size_range=(1, 4),
+        learning_rate_range=(0.001, 0.1),
+        dropout_range=(0.1, 0.4),
+        trainer_kwargs=dict(limit_train_batches=30),
+        reduce_on_plateau_patience=5,
+        use_learning_rate_finder=False,
+    )
+
+    hyperparameter_study_save_path = f"{wandb.run.dir}/hyperparameter_study.pkl"
+    joblib.dump(study, hyperparameter_study_save_path)
+    print(study.best_trial.params)
 
     model_save_path = f"{wandb.run.dir}/tft_model.pth"
     torch.save(tft_model.state_dict(), model_save_path)
