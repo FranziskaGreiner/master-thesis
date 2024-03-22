@@ -39,9 +39,9 @@ def normalize_features(weather_time_moer_data):
 
 
 def convert_categoricals(weather_time_moer_data):
-    weather_time_moer_data.loc[:, 'season'] = weather_time_moer_data['season'].astype(str)
-    weather_time_moer_data.loc[:, 'day_of_week'] = weather_time_moer_data['day_of_week'].astype(str)
-    weather_time_moer_data.loc[:, 'is_holiday'] = weather_time_moer_data['is_holiday'].astype(str)
+    weather_time_moer_data.loc[:, 'season'] = weather_time_moer_data['season'].astype(str).astype("category")
+    weather_time_moer_data.loc[:, 'day_of_week'] = weather_time_moer_data['day_of_week'].astype(str).astype("category")
+    weather_time_moer_data.loc[:, 'is_holiday'] = weather_time_moer_data['is_holiday'].astype(str).astype("category")
     return weather_time_moer_data
 
 
@@ -166,7 +166,6 @@ def train_tft(weather_time_moer_data):
     run = wandb.init(project="tsf_moer_tft", config=dict(tft_config))
 
     weather_time_moer_data = add_time_idx(weather_time_moer_data)
-    weather_time_moer_data = normalize_features(weather_time_moer_data)
     weather_time_moer_data = convert_categoricals(weather_time_moer_data)
 
     train_data, validation_data = create_training_validation_data(weather_time_moer_data)

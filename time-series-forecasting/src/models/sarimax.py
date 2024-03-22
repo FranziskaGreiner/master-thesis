@@ -15,15 +15,12 @@ def create_sarimax_datasets(final_data):
     final_data.index = pd.DatetimeIndex(final_data.index)
 
     train_data = final_data[:sarimax_config.get('training_cutoff_date')]
-    validation_data = final_data[
-                      sarimax_config.get('training_cutoff_date'):sarimax_config.get('validation_cutoff_date')]
-    test_data = final_data[sarimax_config.get('validation_cutoff_date'):]
+    validation_data = final_data[sarimax_config.get('training_cutoff_date'):]
 
     exog_variables = ['temperature', 'ghi', 'wind_speed', 'precipitation', 'day_of_week', 'is_holiday', 'season']
     exog_train = train_data[exog_variables] if not train_data.empty else None
     exog_validation = validation_data[exog_variables] if not validation_data.empty else None
-    exog_test = test_data[exog_variables] if not test_data.empty else None
-    return train_data, validation_data, test_data, exog_train, exog_validation, exog_test
+    return train_data, validation_data, exog_train, exog_validation
 
 
 def create_sarimax_model(train_data, exog_train, config):
@@ -42,8 +39,7 @@ def train_sarimax(final_data):
     for country in ['DE', 'NO']:
         sarimax_country_config = sarimax_config.get(country.lower())
         country_data = final_data.loc[final_data['country'] == country]
-        train_data, validation_data, test_data, exog_train, exog_validation, exog_test = create_sarimax_datasets(
-            country_data)
+        train_data, validation_data, exog_train, exog_validation = create_sarimax_datasets(country_data)
         sarimax_model = create_sarimax_model(train_data, exog_train, sarimax_country_config)
         results = sarimax_model.fit(disp=False)
 
@@ -71,8 +67,6 @@ def train_sarimax(final_data):
             plt.savefig(val_plot_file_path)
             plt.close()
             wandb.log({f"plot_val_{country}": wandb.Image(val_plot_file_path)})
-
-        # if not test_data.empty:
 
         # Log diagnostics
         fig = results.plot_diagnostics(figsize=(10, 8))

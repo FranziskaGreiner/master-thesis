@@ -7,15 +7,14 @@ def get_general_config():
         "data_path": os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), 'data/'),
         "output_path": os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), 'out/'),
         "preprocessed_data_file_name": "weather_time_moer_2021_2023_DE_NO.csv",
-        "training_cutoff_date": pd.to_datetime('2023-09-30 23:00'),
-        "validation_cutoff_date": pd.to_datetime('2023-11-30 23:00'),
+        "training_cutoff_date": pd.to_datetime('2023-11-30 23:00'),
     }
 
 
 def get_tft_config():
     general_config = get_general_config()
     tft_specific_config = {
-        "gradient_clip_val": 0.1,
+        "gradient_clip_val": 0.8,
         "time_idx": "time_idx",
         "target": "moer",
         "group_ids": ["country"],
@@ -36,10 +35,10 @@ def get_tft_config():
         "accelerator:": "auto",
         "enable_model_summary": True,
         "learning_rate": 0.01,
-        "hidden_size": 64,
-        "attention_head_size": 1,
+        "hidden_size": 18,
+        "attention_head_size": 3,
         "dropout": 0.2,
-        "hidden_continuous_size": 16,
+        "hidden_continuous_size": 14,
         "log_interval": 10,
         "reduce_on_plateau_patience": 5,
     }
@@ -50,15 +49,15 @@ def get_sarimax_config():
     general_config = get_general_config()
     sarimax_config = {
         "de": {
-            "p": 3, "d": 1, "q": 0,
+            "p": 3, "d": 0, "q": 0,
             "P": 2, "D": 0, "Q": 0, "s": 24,
         },
         "no": {
-            "p": 3, "d": 1, "q": 0,
+            "p": 3, "d": 0, "q": 0,
             "P": 2, "D": 0, "Q": 0, "s": 24,
         },
         "auto_arima": {
-            "start_p": 0, "start_q": 0, "max_p": 3, "max_q": 3, "m": 24, "d":0,
+            "start_p": 0, "start_q": 0, "max_p": 3, "max_q": 3, "m": 24, "d": 0,
             "seasonal": True, "trace": True, "suppress_warnings": True, "stepwise": True,
         }
     }
