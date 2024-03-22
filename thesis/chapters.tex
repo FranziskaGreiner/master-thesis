@@ -10,7 +10,7 @@ Der Bericht zeigt auf, dass die globale Oberflächentemperatur im Zeitraum von 2
 Auch die neuesten Zahlen des EU-Erdbeobachtungsdienstes Copernicus bekräftigen den Trend.
 Dieser gab bekannt, dass das Jahr 2023 das wärmste Jahr seit Beginn der globalen Temperaturaufzeichnungen im Jahr 1850 war~\cite{CopernicusClimateChangeService.09.01.2024}.
 Die neuesten Veröffentlichungen des Beobachtungsdienstes von Anfang Februar diesen Jahres beschreiben außerdem, dass die 1,5-Grad-Marke des Pariser Abkommens in den vergangenen zwölf Monaten erstmals gebrochen wurde.
-Die globale Durchschnittstemperatur der Monate Februar 2023 bis Januar 2024 liegt 1,52 Grad über dem vorindustriellen Niveau~\cite{Eichhorn.8.2.2024}.
+Die globale Durchschnittstemperatur der Monate Februar 2023 bis Januar 2024 lag 1,52 Grad über dem vorindustriellen Niveau~\cite{Eichhorn.8.2.2024}.
 %!Gleichzeitig war es lange Zeit üblich, quasi unendlich Rechenkapazität etc. zur Verfügung zu haben und auch zu nutzen
 
 %In diesem Zusammenhang stellt sich natürlich die Frage nach der Ursache für diese Entwicklung.
@@ -60,16 +60,21 @@ Um dieser Schwierigkeit Abhilfe zu schaffen, soll betrachtet werden, wie der Üb
 %Das rasche Wachstum von Softwaretechnologien und die steigende Popularität von Cloud-Diensten haben einen scheinbar unendlichen Zugang zu Rechenleistung verschafft.
 %Damit einher kommt ein steigender Energieverbrauch
 
-\section{Forschungsziele und Fragestellungen}
+\section{Forschungsziele}
 Das primäre Ziel dieser Arbeit liegt darin, die Nachhaltigkeit von Softwareanwendungen durch die Entwicklung eines Prognosemodells zur Vorhersage der Kohlenstoffintensität zu verbessern.
-Insbesondere soll untersucht werden, wie die genauen Vorhersagen genutzt werden können, um den Aufbau der Softwarearchitektur und den Betrieb der Anwendung möglichst nachhaltig zu gestalten.
+Insbesondere soll untersucht werden, wie die Vorhersagen genutzt werden können, um den Aufbau der Softwarearchitektur und den Betrieb der Anwendung möglichst nachhaltig zu gestalten.
 Die Arbeit wird durch folgende spezifische Forschungsfragen definiert:
 
 \begin{enumerate}
- \item Entwicklung eines Vorhersagemodells: Wie kann ein effektives Modell zur Vorhersage der Kohlenstoffintensität des Stromnetzes entwickelt werden? Ist ein statistisches Modell dafür ausreichend oder erzielt ein auf \ac{KI} basierendes Modell bessere Ergebnisse? Welche Rolle spielen dabei verschiedene Eingabedaten, wie zum Beispiel bestimmte Klimadaten?
- \item Nachhaltigkeitsoptimierung von Softwareanwendungen: Welche Strategien zur Nachhaltigkeitsoptimierung von Software gibt es? Inwiefern können die Vorhersagen der Kohlenstoffintensität dazu verwendet werden, um die Architektur und den Betrieb von Software nachhaltiger zu gestalten?
- \item Simulation und Bewertung: Wie kann die Wirksamkeit der entwickelten Strategien durch Simulationen getestet und bewertet werden?
- \item Beitrag zur nachhaltigen Softwareentwicklung: Wie trägt diese Arbeit zur Förderung der Nachhaltigkeit in der Softwareentwicklung bei? Welche praktischen Erkenntnisse und Empfehlungen können abgeleitet werden? Stehen die gewonnenen Verbesserungen der Nachhaltigkeit im Verhältnis zum Aufwand der Implementierung?
+ \item Entwicklung eines Vorhersagemodells: Wie kann ein effektives Modell zur Vorhersage der Kohlenstoffintensität des Stromnetzes entwickelt werden?
+ Ist ein statistisches Modell dafür ausreichend oder erzielt ein auf \ac{KI} basierendes Modell bessere Ergebnisse?
+ Welche Rolle spielen dabei verschiedene Eingabedaten, wie zum Beispiel bestimmte Wetterdaten?
+ \item Nachhaltigkeitsoptimierung von Softwareanwendungen: Welche Strategien zur Nachhaltigkeitsoptimierung von Software gibt es?
+ Inwiefern können die Vorhersagen der Kohlenstoffintensität dazu verwendet werden, um die Architektur und den Betrieb von Software nachhaltiger zu gestalten?
+ % \item Simulation und Bewertung: Wie kann die Wirksamkeit der entwickelten Strategien durch Simulationen getestet und bewertet werden?
+ \item Beitrag zur nachhaltigen Softwareentwicklung: Wie trägt diese Arbeit zur Förderung der Nachhaltigkeit in der Softwareentwicklung bei?
+ Welche praktischen Erkenntnisse und Empfehlungen können abgeleitet werden?
+ Stehen die gewonnenen Verbesserungen der Nachhaltigkeit im Verhältnis zum Aufwand der Implementierung?
 \end{enumerate}
 %Das Ziel dieser Arbeit ist die Entwicklung eines KI-basierten Prognosemodells, das mithilfe von Zeitreihenanalysen die Kohlenstoffintensität des Stromnetzes von Ländern in Europa vorhersagt.
 %Durch die Integration dieses Modells in eine \ac{API} soll eine Schnittstelle geschaffen werden, die es Softwareanwendungen ermöglicht, ihre Betriebszeiten an die Kohlenstoffintensität des Stromnetzes anzupassen.
@@ -79,6 +84,7 @@ Die Arbeit wird durch folgende spezifische Forschungsfragen definiert:
 %Wie können die Vorhersagen genutzt werden, um nachhaltige Scheduling-Strategien in Softwarearchitekturen zu implementieren?
 %Ist die dadurch gewonnene Verbesserung der Nachhaltigkeit von Softwareanwendungen lohnenswert?
 \section{Struktur der Arbeit}
+tbd
 \section{Themenabgrenzung}
 Im Folgenden werden gezielte Abgrenzungen vorgenommen, um den Umfang und Fokus der Arbeit zu definieren und gleichzeitig relevante, jedoch nicht zentrale Themen auszugrenzen.
 Diese Abgrenzungen schaffen einen klaren und strukturierten Rahmen für die Forschung und legen den Grundstein für mögliche zukünftige Arbeiten.
@@ -108,36 +114,36 @@ Weitere möglicherweise passende Ansätze zur Umsetzung werden nicht untersucht.
 Die Analyse beschränkt sich auf die Stromnetze Deutschlands und Norwegens.
 Diese beiden Länder eignen sich gut für den Vergleich, wie in Kapitel~\ref{CAP:data-preparation-analysis} erklärt wird.
 Außerdem würde ein größerer Umfang eine enorm größer Datenmenge bedeuten, was dem Rahmen dieser Arbeit nicht gerecht werden würde.
+
 \section{Verwandte Arbeiten}
 Nachfolgend soll der Stand der Forschung betrachtet und verwandte Arbeiten identifiziert werden, um die Relevanz und den Beitrag dieser Arbeit aufzuzeigen.
-Zur Vorhersage der Kohlenstoffintensität gibt es einige Arbeiten mit unterschiedlilchem Umfang.
-Electricity Maps und WattTime sind die wohl am häufigsten verwendeten und gängigsten Projekte.
-Sie verfügen beide nicht nur über ein umfangreiches Datenportfolio und Übersichten, sondern machen auch Vorhersagen.
 
-Electricity Maps bietet eine \ac{API} an, über die verschiedene Daten wie z.B.\ die Kohlenstoffintensität oder die Zusammensetzung des Strommixes abgefragt werden können.
+Zur Vorhersage der Kohlenstoffintensität gibt es einige Arbeiten mit unterschiedlichem Umfang.
+Electricity Maps und WattTime sind die wohl am häufigsten verwendeten und gängigsten Anbieter für Daten zur Kohlenstoffintensität.
+Sie verfügen beide nicht nur über ein umfangreiches Datenportfolio historischer Daten und Übersichten, sondern auch über Vorhersagen.
+Electricity Maps bietet eine \ac{API} an, über die verschiedene Daten wie u.a. die Kohlenstoffintensität oder die Zusammensetzung des Strommixes abgefragt werden können.
 Die Abdeckung umfasst über 160 Regionen weltweit und es sind historische, aktuelle und zukünftige (24 Stunden im Voraus) Werte verfügbar~\cite{ElectricityMaps.20231220T09:16:49.000Z}.
-
 WattTime stellt ebenfalls eine \ac{API} zur Verfügung.
 Über diese kann z.B.\ die marginale und die durchschnittliche Kohlenstoffintensität in der Vergangenheit, in Echtzeit oder 24 Stunden im Voraus abgefragt werden.
 Die Daten sind in einem Intervall von fünf Minuten erhältlich~\cite{WattTime.20231130T19:28:06+00:00}.
 
 Längerfristige Vorhersagen bietet nach jetzigem Stand lediglich die Carbon Intensity \ac{API}~\cite{LyndonRuff.20220420T15:34:17.000Z}.
-Diese ~\ac{API} ist ein Projekt aus und für Großbritannien.
+Diese \ac{API} ist ein Projekt aus und für Großbritannien.
 Es ist entstanden aus einem Zusammenschluss zwischen dem nationalen Stromnetz, mehreren Nichtregierungsorganisationen und akademischen Einrichtungen, um die Kohlenstoffintensität für verschiedene Regionen Großbritanniens vorherzusagen.
 Die Schnittstelle basiert auf maschinellem Lernen und ermöglicht Anwendern, ihren Stromverbrauch so zu planen, dass die Kohlenstoffemissionen auf regionaler Ebene minimiert werden~\cite{Currie.2024}.
 Die Vorhersagen sind 96 Stunden im Voraus verfügbar.
-Dafür wurde der Berechnungsansatz, der im vorherigen Kapitel (Formel~\ref{eq:ci}) erklärt wurde, verwendet.
-Der Intensitätsfaktor der verschiedenen Energiequellen ist dabei spezifisch für die jeweilige Region oder das jeweilige Land.
+% Dafür wurde der Berechnungsansatz, der im vorherigen Kapitel (Formel~\ref{eq:ci}) erklärt wurde, verwendet.
+% Der Intensitätsfaktor der verschiedenen Energiequellen ist dabei spezifisch für die jeweilige Region oder das jeweilige Land.
 
-Es existieren auch Arbeiten zur Anwendung der Vorhersagen.
+Darüber hinaus existieren auch Arbeiten zur Anwendung der Vorhersagen.
 Ein Projekt, dass sich konkret mit der Anwendung der Vorhersagen zur Kohlenstoffintensität befasst, wurde von der Green Software Foundation ins Leben gerufen.
 Es bietet eine erleichterte Integration von Vorhersagen in bestehende Anwendungen.
-Es wurde eine \ac{SDK} entwickelt, mit Hilfe dessen herausgefunden werden kann, wann und wo ein Workload mit der geringsten Menge an Kohlenstoff ausgeführt werden kann.
+Dafür wurde eine \ac{SDK} entwickelt, mit Hilfe dessen herausgefunden werden kann, wann und wo ein Workload mit der geringsten Menge an Kohlenstoff ausgeführt werden kann.
 Carbon Aware \ac{SDK} kann als Web\ac{API} und als Command Line Interface verwendet werden und steht als Open-Source-Projekt zur Verfügung.
-Es kann dabei helfen, die Ausführung nicht zeitkritischer Workloads auf Zeiten mit geringeren Emissionen zu verschieben und in andere Rechenzentren zu verschieben~\cite{GreenSoftwareFoundation.20231212T09:58:27.000Z}.
-Angeboten werden unterschiedliche Abfragen, zum Beispiel die Ausgabe der besten Startzeit und des besten Ortes unter Angabe eines Zeitintervalls und der Workload-Dauer oder die Ausgabe der aktuellsten Vorhersagedaten inklusive Berechnung des Zeitfensters mit der geringsten \ac{MOER}~\cite{carbon-aware-sdk}.
+Es kann dabei helfen, die Ausführung nicht zeitkritischer Workloads auf Zeiten mit geringeren Emissionen zu verschieben und in andere Rechenzentren zu verlagern~\cite{GreenSoftwareFoundation.20231212T09:58:27.000Z}.
+Angeboten werden unterschiedliche Abfragen, zum Beispiel die Ausgabe der besten Startzeit und des besten Ortes unter Angabe eines Zeitintervalls und der Workload-Dauer oder die Ausgabe der aktuellsten Vorhersagedaten inklusive Berechnung des Zeitfensters mit der geringsten \ac{MOER}~\cite{GreenSoftwareFoundation.20240316T16:54:58.000Z}.
 
-Ein weiteres relevantes Projekt ist der Carbon Aware Scheduler~\cite{siemers}.
+Ein weiteres relevantes Projekt ist der Carbon Aware Scheduler~\cite{Siemers.20240319T14:09:25.000Z}.
 Es handelt sich dabei um ein Command Line Tool für das Scheduling von Unix Jobs.
 Basierend auf der Kohlenstoffintensität des Stromnetzes wird die beste Zeit für das Ausführen eines Jobs ausfindig gemacht.
 Zum jetzigen Stand ist der Carbon Aware Scheduler jedoch nur für die Niederlande verfügbar.
@@ -148,21 +154,25 @@ Sie verwenden die Carbon Aware \ac{SDK}, um einen Prototypen zur zeitlichen Vers
 Das Projekt zeigt, wie das Tool im laufenden Betrieb eingesetzt werden kann.
 
 Die örtliche Verlagerung von Workloads kann mit einem Kostenmehraufwand verbunden sein, der nicht nur die Verlagerung an sich sondern möglicherweise auch den höheren Preis der ausgewählten Region umfasst.
-Diese zusätzlichen Kosten können von der Umsetzung der Verlagerung abhalten, weshalb Microsoft für Azure ein Werkzeug zusätzlich zur Carbon Aware \ac{SDK} entwickelt hat das auf diesem aufbaut.
+Diese zusätzlichen Kosten können von der Umsetzung der Verlagerung abhalten, weshalb Microsoft für Azure ein Werkzeug zusätzlich zur Carbon Aware \ac{SDK} entwickelt hat, das auf dieser aufbaut.
 Die Carbon Economy \ac{SDK} errechnet für die von der Carbon Aware \ac{SDK} ausgegebene optimale Zeit und Region die Kosten, um einen Workload in diese andere Region zu verlagern.
 Unter Verwendung einer normalisierten Gewichtung werden geringere Kohlenstoffemissionen gegenüber zusätzlichen Kosten priorisiert.
-Anhand diesem Gewicht kann entschieden werden, wie viel einem die geringeren Emissionen Wert sind~\cite{Norlander}.
+Anhand diesem Gewicht kann entschieden werden, wie viel einem die geringeren Emissionen Wert sind~\cite{Norlander.2023}.
 
-Als bedeutend wurde vor allem die Arbeit~\cite{Wiesner.2021} identifiziert.
-Diese untersucht das Potenzial zeitlicher Verlagerung von Workloads in Rechenzentren, um emissionsarme Energie zu verwenden.
+Als bedeutend wurde vor allem das Paper~\cite{Wiesner.2021} identifiziert, welches das Potenzial zeitlicher Verlagerung von Workloads in Rechenzentren, um emissionsarme Energie zu verwenden, untersucht.
 Die Autoren konzentrierten sich dabei insbesondere darauf, über welche Eigenschaften Workloads verfügen müssen, sodass sie gut für die Verschiebung geeignet sind und auf die Kohlenstoffintensität vom Stromnetz vier verschiedener Länder.
 Sie kamen zu dem Ergebnis, dass das Verlagerungspotenzial in Ländern mit einem hohen Anteil von Solarenergie vor Sonnenaufgang und abends hoch ist und dass eine Verlagerung auf die Wochenenden zu Einsparungen von mehr als 20\% führen können.
-Außerdem stellte es sich als besonders hilfreich heraus, wenn für Workloads die zeitlichen Beschränkungen gelockert und mögliche Unterbrechungen genutzt werden~\cite{while}.
+Außerdem stellte es sich als besonders hilfreich heraus, wenn für Workloads die zeitlichen Beschränkungen gelockert und die Möglichkeit für Unterbrechungen genutzt werden~\cite{Wiesner.2021}.
+
+Eine jüngst veröffentlichte Forschungsarbeit beschäftigt sich mit den Einschränkungen zeitlicher und örtlicher Verlagerungen von Workloads in der Cloud anhand der Kohlenstoffintensität~\cite{Sukprasert.2023}.
+Sie zeigt, dass eine räumlich-zeitliche Verlagerung von Workloads deren Kohlenstoffemissionen zwar reduzieren kann, das Potenzial aber dennoch durch eine praktische Obergrenze reguliert und deshalb weit von Idealwerten entfernt ist.
+Die größte Wirkung liegt dabei in einfachen Scheduling-Strategien.
+Wenig überraschend ist die Erkenntnis, dass ein Wandel der Energieversorgung hin zu \glqq grüneren\grqq{} Stromquellen den Nutzen der kohlenstoffbewussten Planung senken~\cite{Sukprasert.2023}.
 %!
 %!
 \chapter{Grundlagen nachhaltiger Softwarearchitektur}
 \section{Definition von Nachhaltigkeit in der Softwareentwicklung}
-Das Ziel der vorliegenden Arbeit besteht darin, eine Möglichkeit zu finden, die Nachhaltigkeit von Softwarearchitekturen zu optimieren.
+Das Ziel der vorliegenden Arbeit besteht darin, eine Möglichkeit zu finden, die Nachhaltigkeit von Software zu optimieren.
 An dieser Stelle wird deshalb als Grundlage der Begriff der Nachhaltigkeit definiert und erklärt, welche Rolle Nachhaltigkeit in der Softwareentwicklung spielt.
 
 Vom Bundesministerium für wirtschaftliche Zusammenarbeit und Entwicklung~\cite{BundesministeriumWirtschaftlicheZusammenarbeitundEntwicklung} wird Nachhaltigkeit wie folgt definiert:
@@ -205,15 +215,16 @@ Diese Arbeit konzentriert sich nicht auf die Hardware-bezogenen Aspekte.
 Sie thematisiert die Kohlenstoffintensität und damit die Emissionen, die Software verursacht und ist deshalb der Kategorie Green in Software zuzuordnen.
 Betrachtet man die Prognose der Kohlenstoffintensität mithilfe von Künstlicher Intelligenz, so könnte man dabei die \ac{IT} auch als Hilfsmittel zur Verbesserung der Nachhaltigkeit ansehen und somit Green by Software zuordnen~\cite{Calero.2015}.
 
-Von der Green Software Foundation werden die Stellschrauben für nachhaltige Software in drei Faktoren unterteilt, nämlich Energie-Effizienz, Hardware-Effizienz und Kohlenstoff-Bewusstsein.
+Von der Green Software Foundation werden die Stellschrauben für nachhaltige Software in drei Faktoren unterteilt, nämlich Energie-Effizienz, Hardware-Effizienz und Kohlenstoff-Bewusstsein (siehe Abbildung~\ref{FIG:types-green-software}).
 \begin{figure}
- \caption{Die unterschiedlichen Dimensionen nachhaltiger Software laut~\cite{GreenSoftwareFoundation}}
- {\includegraphics[width=0.8\textwidth]{\figdir/types-of-green-software}}
+ \caption{Die unterschiedlichen Dimensionen nachhaltiger Software laut~\cite{GreenSoftwareFoundation.20240316T16:54:58.000Z}}
+ {\includegraphics[width=0.6\textwidth]{\figdir/types-of-green-software}}
  \label{FIG:types-green-software}
 \end{figure}
 Energieeffiziente Software zeichnet sich dadurch aus, dass sie so wenig Energie wie möglich verbraucht.
 Hardware-Effizienz wird erreicht, wenn weniger Hardware für die gleiche Aufgabe benötigt wird.
 Diese beiden Faktoren sind zwar wichtig, aber werden in der vorliegenden Arbeit nicht weiter berücksichtigt, denn der Fokus liegt auf dem bewussten Umgang mit Kohlenstoff.
+Kohlenstoffbewusstsein meint eine Modifizierung von Berechnungen, um die Umwelt so wenig wie möglich zu belasten.
 Ein bewusster Umgang mit Kohlenstoff setzt voraus zu verstehen, dass die gleiche Menge an verbrauchter Energie nicht immer die gleiche Kohlenstoffintensität hat, da diese je nach Zeitpunkt und Ort des Verbrauchs variiert~\cite{GreenSoftwareFoundation.2022}.
 
 \section{Kohlenstoffintensität als Maß für Nachhaltigkeit}
@@ -240,7 +251,7 @@ Die Zeit ist ein wichtiger Faktor, weil ein direkter Zusammenhang zwischen Zeit 
 Außerdem verfügen verschiedene Länder und Regionen über eine unterschiedliche Zusammensetzung des Stromnetzes.
 Um die \ac{CO2}-Bilanz des verwendeten Stroms so gering wie möglich zu halten, ist es deshalb wichtig zu wissen, wann und wo die Kohlenstoffintensität des Stromnetzes gering ist.
 %So kann zum Beispiel, wenn es die Anforderungen erlauben, die Nutzung des Stroms auf kohlenstoffarme Zeiten verschoben werden.
-Hinzu kommt, dass erneuerbare Energien in Betrieb und Wartung verhältnismäßig billig sind, was dazu führt, dass deren erzeugter Strom nicht nur umweltfreundlicher, sondern meist auch kostengünstiger ist~\cite{NationalGrid.20231106T13:28:05.000Z}.
+Hinzu kommt, dass erneuerbare Energien in Betrieb und Wartung verhältnismäßig günstig sind, was dazu führt, dass deren erzeugter Strom nicht nur umweltfreundlicher, sondern meist auch kostengünstiger ist~\cite{NationalGrid.20231106T13:28:05.000Z}.
 
 Ein weiterer wichtiger Faktor ist das Zusammenspiel aus Energieangebot und -nachfrage.
 Die Nachfrage kann stark schwanken, doch muss das Stromnetz trotzdem immer in der Lage sein, diese zu decken.
@@ -248,7 +259,7 @@ Optimal wäre es natürlich, das Angebot unverzüglich an die Nachfrage anpassen
 Betrachtet man zum Beispiel Windenergie, liegt auf der Hand, dass diese über eine sehr geringe Flexibilität verfügt, weil die Windstärke nicht kontrolliert werden kann.
 Mit Kohleenergie ist es hingegen weitaus einfacher, auf ein Angebotsdefizit zu reagieren.
 Eine wichtige Größe ist dabei die marginale Kohlenstoffintensität~\cite{GreenSoftwareFoundation.2022}.
-Übersteigt der Strombedarf plötzlich die vorhandene Energie(?), wird die benötigte Energie aus dem sogenannten Grenzkraftwerk bezogen.
+Übersteigt der Strombedarf plötzlich die vorhandene Energie, wird die benötigte Energie aus dem sogenannten Grenzkraftwerk bezogen.
 %Steigt der Strombedarf plötzlich an,
 Dieses zeichnet sich dadurch aus, dass es auf solche Änderungen schnell reagieren kann.
 Um den Strompreis so gering wie möglich zu halten, werden die verfügbaren Energiequellen aufsteigend ihres Preises angeordnet~\cite{Corradi.20231207T10:48:51.000Z}.
@@ -265,7 +276,7 @@ Daraus lässt sich schließen, dass der Strom sowohl günstiger als auch grüner
 
 Es bestehen verschiedene Ansätze für die Berechnung der Kohlenstoffintensität.
 Allgemein stellt sich die Berechnung als anspruchsvoll heraus, vor allem weil jedes Land seine eigene Zusammenstellung verschiedener Kraftwerke hat~\cite{Currie.2024}.
-Für eine Berechnungsweise (Formel~\ref{eq:ci}), die Forscher aus Großbritannien für die Carbon Intensity \ac{API} verwendet haben, wird der Anteil der verschiedenen Energiequellen, ein Intensitätsfaktor je Energiequelle und die Stromnachfrage benötigt.
+Für eine Berechnungsweise (Formel~\ref{eq:ci}), die Forscher aus Großbritannien für die Carbon Intensity \ac{API} verwendet haben, wird der Anteil der verschiedenen Energiequellen, ein Intensitätsfaktor je Energiequelle, der spezifisch für eine Region ist, und die Stromnachfrage benötigt.
 \begin{equation}
  \label{eq:ci}
  C_t = \frac{\sum_{g=1}^{G} P_{g,t} \times c_g}{D_t}
@@ -291,9 +302,11 @@ Anhand dieser Formel ergeben sich die Optimierungspunkte des \ac{CO2}-Fußabdruc
 %!
 %!
 \chapter{Strategien zur Nachhaltigkeitsoptimierung}\label{CAP:strategies}
+Für viele Unternehmen bietet die Verlagerung in die Cloud einen Ansatz der Verbesserung der Nachhaltigkeit durch zentrale Verwaltung, Konsolidierung von Ressourcen und Effizienzsteigerungen.
+Durch zunehmendes Migrieren in die Cloud wird es umso wichtiger, dass die entsprechenden Betreiber sich um den ökologischen Fußabdruck ihres Services kümmern~\cite{Buchanan.2023}.
 Verwaltete Cloud-Dienste bieten aufgrund ihrer hohen Rechendichte und ihrer enormen Hardware- und Energienutzung ein großes Potenzial zur Effizienzverbesserung~\cite{Currie.2024}.
 Die drei großen Cloud-Anbieter Google Cloud, Azure und AWS haben sich zur Kohlenstoffneutralität verpflichtet.
-Dies bedeutet jedoch nicht, dass es allein ausreichend ist, eine Anwendung auf einer dieser Plattformen bereitzustellen und sich nicht weiter mit dem Thema Nachhaltigkeit auseinander setzten muss.
+Dies bedeutet jedoch nicht, dass es allein ausreichend ist, eine Anwendung auf einer dieser Plattformen bereitzustellen und sich nicht weiter mit dem Thema Nachhaltigkeit auseinander setzten zu müssen.
 Auch die Anwendung selbst muss für Nachhaltigkeit optimiert sein und die vorhanden Möglichkeiten müssen genutzt werden~\cite{Newman.2023}.
 Der deutsche Bitkom hat in einer Metastudie auf Grundlage von mehreren Studien aus den Jahren 2012 bis 2019 zwei Hauptkategorien für Energieensparungen definiert: Anwendungen und Infrastruktur.
 In Abbildung~\ref{FIG:sustainability-infrastructure} werden die Facetten der Nachhaltigkeit auf Anwendungs- und Infrastrukturebene dargestellt.
@@ -305,43 +318,37 @@ Der Cloud-Nutzer ist für die Nachhaltigkeit in der Cloud verantwortlich, also z
  {\includegraphics[width=0.99\textwidth]{\figdir/SustainabilityOfAndOnInfrastructure}}
  \label{FIG:sustainability-infrastructure}
 \end{figure}
+Im folgenden soll deshalb analysiert werden, welche Optimierungsstrategien für den Cloud-Nutzer zur Verfügung stehen.
 
-
-even a static selection of where to host your workload can make a big difference~\cite{Norlander}
-
-Eine Strategie im Cloud-Umfeld ist die Verwendung sogenannter Spot Virtual Machines.
-Der Gedanke dahinter ist, nicht verwendete Instanzen von anderen virtuellen Maschinen herzunehmen, wenn diese nicht benötigt werden, anstatt eigene anzufragen.
-Das wirkt sich nicht nur positiv auf die Kosten (bei Azure laut Microsoft bis zu 90\% Preisnachlass), sondern auch auf den Energieverbrauch aus, weil die Kapazität der VMs genutzt wird, anstatt dass sie sich im Leerlauf befinden.
-Dieser Ansatz hat jedoch den Nachteil, dass der Workload bei fehlenden Kapazitäten nicht gestartet oder möglicherweise abgebrochen und nicht fortgesetzt werden kann~\cite{Norlander}
-\section{Scheduling}
-\subsection{Grundlagen des Scheduling}
+%Eine Strategie im Cloud-Umfeld ist die Verwendung sogenannter Spot Virtual Machines.
+%Der Gedanke dahinter ist, nicht verwendete Instanzen von anderen virtuellen Maschinen herzunehmen, wenn diese nicht benötigt werden, anstatt eigene anzufragen.
+%Das wirkt sich nicht nur positiv auf die Kosten (bei Azure laut Microsoft bis zu 90\% Preisnachlass), sondern auch auf den Energieverbrauch aus, weil die Kapazität der VMs genutzt wird, anstatt dass sie sich im Leerlauf befinden.
+%Dieser Ansatz hat jedoch den Nachteil, dass der Workload bei fehlenden Kapazitäten nicht gestartet oder möglicherweise abgebrochen und nicht fortgesetzt werden kann~\cite{Norlander}
+\section{Scheduling}\label{CAP:scheduling}
+% \subsection{Grundlagen des Scheduling}
 Unter Scheduling versteht man im Allgemeinen die optimierte Zuteilung von Ressourcen zu Aufgaben in bestimmten Zeiträumen.
 Dabei kann die zum Ziel gesetzte Optimierung vielerlei Ausführungen haben, zum Beispiel die Fertigstellungszeit so gering wie möglich zu halten oder die Anzahl der zu spät vollendeten Aufgaben zu minimieren~\cite{Gawiejnowicz.2020}.
 
-Ein Scheduling-Problem S wird durch vier verschiedene Größen definiert~\cite{Gawiejnowicz.2020}:
+Ein Scheduling-Problem wird durch vier verschiedene Größen definiert~\cite{Gawiejnowicz.2020}:
 \begin{itemize}
- \item Die Menge an auszuführenden Arbeiten J
- \item Die Menge an ausführenden Einheiten M
- \item Die Menge an zusätzlichen für die Ausführung benötigten Einheiten R
- \item Ein Maß für die Qualität der Lösung %ϕ.
+ \item Die Menge an auszuführenden Arbeiten
+ \item Die Menge an ausführenden Einheiten
+ \item Die Menge an zusätzlichen für die Ausführung benötigten Einheiten
+ \item Ein Maß für die Qualität der Lösung
 \end {itemize}
 Außerdem hat ein Scheduling-Problem verschiedene Eigenschaften, die im Folgenden kurz erklärt werden~\cite{Pinedo.2022}:
 \begin{itemize}
  \item Bearbeitungszeit: Die Bearbeitungszeit eines Auftrags auf einer Maschine. Diese kann abhängig von der jeweiligen Maschine sein.
  \item Freigabedatum: Der Zeitpunkt, an dem der Auftrag im System eintritt und somit der frühestmögliche Zeitpunkt für den Beginn des Auftrags
  \item Fälligkeitsdatum: Der Zeitpunkt der zugesagten Fertigstellung. Muss das Fälligkeitsdatum eingehalten werden, wird es als Frist bezeichnet.
- \item Gewicht: Ein Prioritätsfaktor, der die Bedeutung des Auftrags im Verhältnis zu den anderen Aufgaben im System angibt
+ \item Gewichtung: Ein Prioritätsfaktor, der die Bedeutung des Auftrags im Verhältnis zu den anderen Aufgaben im System angibt
 \end{itemize}
 
-\subsection{Möglicher Einfluss von Scheduling auf Kohlenstoffemissionen}
-Die Green Software Foundation definiert Kohlenstoffbewusstsein als Modifizierung von Berechnungen, um die Umwelt so wenig wie möglich zu belasten~\cite{GreenSoftwareFoundation.2022}.
-Als Lösung sollen Software-Workloads, die viel Rechenleistung benötigen, auf Zeiten und Orte verlagert werden, bei denen der Strommix zu den geringst möglichen Kohlenstoffemissionen führt.
-Für viele Unternehmen bietet die Verlagerung in die Cloud einen Ansatz der Verbesserung durch zentrale Verwaltung, Konsolidierung von Ressourcen und Effizienzsteigerungen.
-Durch zunehmendes Migrieren in die Cloud wird es umso wichtiger, dass die entsprechenden Betreiber sich um den ökologischen Fußabdruck ihres Services kümmern~\cite{Buchanan.2023}.
-
+% \subsection{Möglicher Einfluss von Scheduling auf Kohlenstoffemissionen}
+% Die Green Software Foundation definiert ~\cite{GreenSoftwareFoundation.2022}.
 Zur Veranschaulichung, welchen Einfluss die zeitliche Verschiebung von Workloads haben kann, soll zunächst ein beispielhaftes Verhältnis von Stromangebot und -nachfrage betrachtet werden (Abbildung~\ref{FIG:grid-supply-demand}).
 \begin{figure}
- \caption{Eine beispielfhafte Darstellung von Angebot und Nachfrage eines Stromnetzes~\cite{Peixeiro.2022}.}
+ \caption{Eine beispielfhafte Darstellung von Angebot und Nachfrage eines Stromnetzes~\cite{Buchanan.2023}.}
  {\includegraphics[width=0.9\textwidth]{\figdir/grid-supply-demand}}
  \label{FIG:grid-supply-demand}
 \end{figure}
@@ -353,12 +360,7 @@ Eine Studie von Microsoft~\cite{Dodge.06212022} aus dem Jahr 2022 hat aufgezeigt
 Die Studie hat sich zwar auf Aufgaben von Künstlicher Intelligenz in der Cloud konzentriert, sie zeigt jedoch, dass die zeitliche Verlagerung von rechenintensiven Workloads ein großes Verbesserungspotenzial birgt.
 Das größte Potenzial der Zeitverschiebung liegt demnach in der Verschiebung von Workloads mit kurzer Dauer und großem Volumen in Regionen mit großer Unstetigkeit~\cite{Buchanan.2023}.
 
-Einen weitaus größeren Einfluss als die zeitliche Verlagerung kann laut der Studie jedoch die örtliche Verlagerung haben.
-Die Kohlenstoffintensität kann dadurch um bis zu 75\% reduziert werden~\cite{Dodge.06212022}.
-
-Unterschied Kohlenstoffintensität auf zeitlicher und örtlicher Ebene!
-
-\subsection{Dynamische Scheduling Modelle}\label{CAP:dynamic-scheduling-models}
+% \subsection{Dynamische Scheduling Modelle}\label{CAP:dynamic-scheduling-models}
 Es sollen zwei zeitliche Optimierungsmethoden untersucht werden, die im folgenden kurz beschrieben werden~\cite{Dodge.06212022}:
 \begin{itemize}
  \item Flexibler Start: Ein flexibler Workload wird zu einem Zeitpunkt mit minimaler marginalen Kohlenstoffintensität in den nächsten N Stunden gestartet.
@@ -391,13 +393,13 @@ In vielen Regionen sind Emissionsreduzierungen um mehr als 10\% und in der Regio
 Skalierung bedeutet im Kontext des Softwarebetriebs eine Erhöhung oder Verringerung der Rechen-, Speicher- oder Netzwerkressourcen, die für einen bestimmten Workload genutzt werden.
 Wohingegen man in herkömmlichen, dedizierten Hosting-Umgebungen durch die verfügbaren Hardwareressourcen begrenzt ist, bietet eine Cloud-basierte Anwendung diese Möglichkeit.
 Es kann zudem zwischen vertikaler Skalierung (Scaling Up) und horizontaler Skalierung (Scaling Out) unterschieden werden.
-Bei der vertikalen Skalierung wird die Rechenleistung erhöht und die Infrastruktur beibehalten~\cite{AlibabaCloudCommunity.20240118T09:19:15.000Z}.
+Bei der vertikalen Skalierung wird die Rechenleistung erhöht (oder auch verringert) und die Infrastruktur beibehalten, die horizontale Skalierung vergrößert oder verkleinert die Ressourcen bei gleichbleibender Rechenleistung~\cite{AlibabaCloudCommunity.20240118T09:19:15.000Z}.
 % Load shifting
 \section{Demand Shifting}
 Eine Software-Anwendung kann nachhaltiger betrieben werden, indem der Strombedarf auf die Kohlenstoffintensität ausgerichtet wird.
+Als Lösung sollen Software-Workloads, die viel Rechenleistung benötigen, auf Zeiten und Orte verlagert werden, bei denen der Strommix zu den geringst möglichen Kohlenstoffemissionen führt.
 Durch sogenanntes Demand-Shifting, also der Verschiebung der Nachfrage je nach Kohlenstoffintensität, kann Studien zufolge zwischen 45\% und 99\% Kohlenstoff eingespart werden.
-Diese Verlagerung kann sowohl auf zeitlicher Ebene als auch auf örtlicher Ebene stattfinden.
-Bei der örtlichen Verlagerung wird ein Ort, bei dem der Strom im Moment kohlenstoffärmer ist, gewählt.
+Bei der örtlichen Verlagerung wird ein Ort, bei dem der Strom im Moment \glqq kohlenstoffärmer\grqq{} ist, gewählt.
 Für die örtliche Verlagerung kann man sich die unterschiedlichen Wetterverhältnisse weltweit zu nutzen machen, denn wenn es z.B. in Deutschland im Moment wolkig und windstill ist, können an einem anderen Ort bei wolkenfreiem Himmel und Sonnenschein die perfekten Verhältnisse für die Solarstrom-Erzeugung herrschen.
 Für die zeitliche Verlagerung ist ein umfangreiches Wissen über die Kohlenstoffintensität bzw. die Wetterverhältnisse im Verlauf der Zeit nötig.
 Auf Grundlage dessen können Workloads in Zeiten mit geringer Kohlenstoffintensität verlagert werden~\cite{GreenSoftwareFoundation.2022}.
@@ -408,13 +410,15 @@ Eine beispielhafte Darstellung der zeitlichen Verlagerung ist in Abbildung~\ref{
  \label{FIG:time-shifting}
 \end{figure}
 Die Kohlenstoffintensität (blaue Linie) schwankt im Laufe der Zeit stark.
-Der Beispiel-Workload dauert eine Stunde lang und wird lediglich um eine Stunde verschoben, verbraucht aber dennoch deutlich weniger Kohlensoff.
+Der Beispiel-Workload dauert eine Stunde lang und wird lediglich um eine Stunde verschoben, verbraucht aber dadurch deutlich weniger Kohlenstoff.
 Ein Szenario, das von der zeitlichen Verschiebung profitieren kann ist zum Beispiel das Batch Processing.
 Ein Batch-Job eignet sich besonders gut dafür, da mehrere Aufgaben gruppiert und nacheinander ohne Benutzereingabe ausgeführt werden.
 Außerdem sind sie oft zu einer beliebigen Zeit innerhalb eines bestimmten Zeitraums ausführbar.
 Dazu zählen unter anderem Software-Updates und System-Backups.
 Microsoft nutzt diesen Ansatz für Windows-Updates und erzielt damit eine Verringerung der Kohlenstoffemissionen um bis zu 99\%~\cite{Currie.2024}.
-Das Demand Shifting auf örtlicher Ebene kann als eine Form des Scheduling betrachtet werden, denn beide verfolgen das Grundprinzip der optimalen zeitlichen Planung der Ausführung eines Workloads.
+Die örtliche Verlagerung kann laut einer Studie jedoch einen weitaus größeren Einfluss haben, als die Verschiebung auf zeitlicher Ebene.
+Die Kohlenstoffintensität kann dadurch um bis zu 75\% reduziert werden~\cite{Dodge.06212022}.
+% Das Demand Shifting auf örtlicher Ebene kann als eine Form des Scheduling betrachtet werden, denn beide verfolgen das Grundprinzip der optimalen zeitlichen Planung der Ausführung eines Workloads.
 
 \section{Demand Shaping}
 Eine ähnliche Methode, die ebenfalls das Ziel verfolgt, die Kohlenstoffemissionen zu senken, ist das Demand-Shaping.
@@ -433,30 +437,30 @@ Laut Google zeigt die Lastverteilung Erfolge und die Verwendung kohlenstoffarmer
 
 Ein allgegenwärtiges Beispiel für Demand Shaping ist der bei Geräten wie Autos, Waschmaschinen oder Spülmaschinen verfügbare Eco-Modus.
 Das Prinzip dahinter ist, dass auf Leistung verzichtet wird für weniger Ressourcenverbrauch.
-Dies könnte auch auf Software-Anwendungen ausgeweitet werden.
 Wichtig ist dabei, dass der Eco-Modus lediglich eine Option ist, aber der Leistungsverzicht nicht dauerhaft oder verpflichtend ist~\cite{GreenSoftwareFoundation.2022}.
 Das Konzept eines Eco-Modus könnte auch für Software-Anwendungen basierend auf der Kohlenstoffintensität angewandt werden.
-Dieser könnte eingeschränkte Funktionalitäten
+Dieser könnte die Funktionalitäten der Software an die Kohlenstoffintensität anpassen, indem lediglich eingeschränkte Funktionalitäten geboten werden, wenn der Strommix \glqq kohlenstoffreich\grqq{} ist, und ansonsten die gesamte Funktonalität.
 
-\section{Geeignete Workloads}
-Im Folgenden sollen die Eigenschaften für Workloads, die für zeitliche Verschiebungen geeignet sind, analysiert werden.
-Konkret werden die Dauer, der Zeitpunkt der Ausführung und die Möglichkeit für Unterbrechungen untersucht.
-Bezüglich der Dauer lassen sich Workloads grob in drei Kategorien unterteilen: kurze, lange und kontinuierliche Workloads.
+\section{Voraussetzungen zur Anwendung der Strategien}
+% Geeignete Workloads
+Im Folgenden sollen die Eigenschaften für Workloads, die für zeitliche Verschiebungen geeignet sind, gefolgt von Voraussetzungen für die örtliche Verschiebung analysiert werden.
+Für die zeitliche Verschiebung werden die Bearbeitungszeit, der Zeitpunkt der Ausführung und die Möglichkeit für Unterbrechungen untersucht.
+Bezüglich der Bearbeitungszeit lassen sich Workloads grob in drei Kategorien unterteilen: kurze, lange und kontinuierliche Workloads.
 Für die vorliegende Arbeit werden folgende Definitionen verwendet:
 Als kurz wird ein Workload dann definiert, wenn er eine Laufzeit von wenigen Minuten bis hin zu ein paar Stunden hat.
 Lang dauernde Workloads benötigen bis zu ihrer Fertigstellung mehrere Stunden bis hin zu einigen Tagen.
-Bei kontinuierlichen Workloads ist die Ausführungszeit mehrere Wochen oder Monate lang oder es gibt kein definiertes Ende der Ausführung~\cite{Wiesner.2021}.
+Bei kontinuierlichen Workloads ist die Ausführungszeit mehrere Wochen oder Monate lang oder es gibt kein definiertes Ende~\cite{Wiesner.2021}.
 
 Die kurzen Workloads machen den Großteil aus, wie Untersuchungen für Google oder Alibaba gezeigt haben.
-Diese haben analysiert, dass bei Google die meisten Workloads nur wenige Minuten dauern und bei Alibaba 90\% der Batch-Jobs weniger als 15 Minuten benötigen.
+Dabei hat sich gezeigt, dass bei Google die meisten Workloads nur wenige Minuten dauern und bei Alibaba 90\% der Batch-Jobs weniger als 15 Minuten benötigen.
 Wichtig für die Verschiebung sind vor allem zeitliche Beschränkungen.
 Haben die Workloads eine baldige Frist, wie zum Beispiel CI-/CD-Läufe, so eignen sie sich nicht zur späteren Ausführung.
 Jedoch können einige Batch-Jobs, darunter zum Beispiel nächtliche Backups, an bestimmte Vereinbarungen gekoppelt sein und deshalb eine höhere Flexibilität hinsichtlich des Ausführungszeitpunkts bieten.
 Für länger laufende Workloads wie zum Beispiel das Trainieren von Machine-Learning-Modellen besteht das Problem, dass sie oft mehr Ressourcen anfragen, als eigentlich nötig.
-Wegen ihrer oft Energie-intensiven Arbeit und der Tatsache, dass auf ihre Fertigstellung manchmal ein menschlicher Eingriff erfolgt, sind sie gut für die zeitliche Verschiebung geeignet.
+Wegen ihrer oft Energie-intensiven Arbeit und der Tatsache, dass auf ihre Fertigstellung oft ein menschlicher Eingriff folgt, sind sie gut für die zeitliche Verschiebung geeignet.
 Ist es dafür beispielsweise nicht entscheidend, ob der Workload direkt gestartet wird und dann nachts fertig ist, oder später gestartet wird und bis zum nächsten Morgen vollendet ist, ist das die perfekte Vorassetzung für eine mögliche spätere Ausführung.
 Kontinuierliche Workloads umfassen zum Beispiel Blockchain-Mining, langandauernde wissenschaftliche Simulationen oder durchgehend verfügbare Benutzerschnittstellen.
-Sie bieten zwar den Vorteil, dass in ihnen möglicherweise ein großes Einsparungspotenzial steckt, jedoch macht die lange oder unendliche Laufzeit eine zeitliche Verschiebung nur schwer oder gar nicht möglich~\cite{Wiesner.2021}
+Sie bieten zwar den Vorteil, dass in ihnen möglicherweise ein großes Einsparungspotenzial steckt, jedoch macht die lange oder unendliche Laufzeit eine zeitliche Verschiebung nur schwer oder gar nicht möglich~\cite{Wiesner.2021}.
 
 Betrachtet man den Zeitpunkt der Ausführung, können im wesentlichen zwei Unterscheidungen getroffen werden:
 Ad-hoc-, also sofort auszuführende, und geplante Workloads.
@@ -465,9 +469,9 @@ Ein Großteil der kurzen und langen Workloads sind Ad-hoc-Workloads.
 Die Schwierigkeit besteht darin, die Ausstellung eines solchen Workloads im Voraus zu wissen.
 Erst wenn der Workload erstellt wurde, kann anhand seiner zeitlichen Beschränkungen die Ausführung geplant werden.
 Beispiel sind erneut CI-/CD-Läufe und Machine-Learning Trainings und zudem von bestimmten Ereignissen ausgelöste Workloads oder von Nutzern direkt für die Ausführung erstellte Workloads.
-Geplante Workloads sind solche, deren Ausführung für einen Zeitpunkt in der Zukunft geplant ist.
+Geplante Workloads sind solche, deren Ausführung für einen Zeitpunkt in der Zukunft geplant ist, wie bereits in Kapitel~\ref{CAP:scheduling} beschrieben.
 Typisch dafür sind periodisch auftretende Workloads, wie beispielsweise nachts ausgeführte Integrationstests und Builds oder regelmäßige Backups, Aktualisierung von Suchindizes in Datenbanken und automatisch erstellte Berichte.
-Der große Vorteil dieser ist, dass sie oft zeitlich sowohl zurück, als auch vor verschoben werden können.
+Der große Vorteil ist, dass sie oft zeitlich sowohl nach hinten, als auch nach vorne verschoben werden können, abhängig vom Fälligkeitsdatum.
 Bei einem regelmäßig in der Nacht ausgeführten Integrationstests mag es zum Beispiel egal sein, ob er statt um 1 Uhr schon um 23 Uhr oder erst um 3 Uhr ausgeführt wird.
 Diese Art von Workload eignet sich also meist hervorragend für eine zeitliche Verschiebung und kommt darüber hinaus auch oft vor.
 Bei Microsoft sind bis zu 60\% der auf großen Klustern laufenden Workloads wiederkehrende Batch-Jobs, wovon mehr als 40\% täglich ausgeführt werden.
@@ -483,14 +487,28 @@ Bei Google zeigte sich zwischen 2011 und 2019 eine Veränderung hin zu mehr gepl
 \end{figure}
 
 Eine Unterscheidung kann außerdem zwischen unterbrechbaren und nicht unterbrechbaren Workloads gemacht werden.
-Unterbrechbare Checkpoints verfügen über einen Checkpoint-Mechanismus oder speichern Zwischenergebnisse, sodass sie pausiert und später fortgeführt werden können.
+Unterbrechbare Workloads verfügen über einen Checkpoint-Mechanismus oder speichern Zwischenergebnisse, sodass sie pausiert und später fortgeführt werden können.
 Ein Beispiel dafür ist ein Training eines Machine-Learning-Modells, bei dem in regelmäßigen Abständen Checkpoints gespeichert werden, die später zur Analyse, zur Fortführung oder zur Fehlerbehebung hergenommen werden können.
 Dabei handelt es sich vermehrt um lange Workloads.
+Workloads mit Möglichkeit zur Unterbrechung eignen sich gut für die im vorherigen Kapitel beschriebene Methode des Anhaltens und Fortsetzens.
 Ein weiteres Beispiel könnte die Erstellung von monatlichen Geschäftsberichten für verschiedene Kunden sein, wobei die Workloads hier aus vielen kleineren Aufgaben bestehen und somit gut aufgeteilt werden können.
 Daneben kann für andere Workloads die Unterbrechung nicht möglich oder nicht sinnvoll sein.
 Bei bestimmten CI-/CD-Läufen oder Kompilierungsprozessen überwiegt die benötigte Energie zum Starten und Stoppen der Workloads der erzielbaren Einsparung, weil sie oft eine lange Setup- und Tear-Down-Zeit haben.
 Bei Datenbankmigrationen oder -backups gilt es, Dateninkonsistenzen zu vermeiden, weshalb ein Abbruch nicht möglich ist.
 Aufgrund der Notwendigkeit, solche Workloads am Stück auszuführen, sind diese weniger flexibel, wenn es um die Vermeidung von Emissionshöchstwerten des Stromnetzes geht~\cite{Wiesner.2021}.
+
+Als nächstes sollen die Voraussetzungen für örtliche Verschiebungen analysiert werden.
+Hürden für diese Art von Verschiebung können Regulierungen, wie zum Beispiel Datenschutzgesetze sein~\cite{Sukprasert.2023}~\cite{Koningstein.18.5.2021}.
+Darüber hinaus kann die Möglichkeit der örtlichen Verschiebung durch die Verfügbarkeit der Datencenter des verwendeten Cloud-Anbieters limitiert sein.
+Um einen Workload in eine wegen niedriger Kohlenstoffintensität ausgewählte Region verschieben zu können, muss der Cloud-Anbieter Rechenzentren in dieser Region stationiert haben.
+Zusätzlich müssen diese Rechenzentren ausreichend Ressourcen verfügbar haben.
+Eine wichtige Rolle neben der Kapazität spielen Latenzbeschränkungen.
+Bestimmte Latenzziele, wie Anforderungen an die Antwortzeit führen zu einer geringen Toleranz gegenüber Latenzzeiten und schränken das Potenzial der räumlichen Verlagerung stark ein.
+Ideale Voraussetzungen bieten beispielsweise interaktive Anfragen von webbasierten Diensten oder Inferenz-liefernde Machine-Learning Systeme.
+Diese Workloads sind für gewöhnlich nicht datenabhängig, wodurch ihre Anfragen an jedem beliebigen Ort weltweit bearbeitet werden kann, vorausgesetzt die zeitlichen Beschränkungen des Nutzers werden nicht verletzt.
+Vor dem Hintergrund, dass die Kohlenstoffintensität verschiedener Länder täglich, wöchentlich oder je nach Saisonalität schwankt, könnte statt einer einmaligen Verlagerung eines Workloads auch die mehrfache Verlagerung in verschiedene Rechenzentren zu Emissionsreduzierungen führen.
+Für diesen Anwendungsfall ist vor allem die Dauer und die zusätzlich benötigte Energie für die Verlagerung entscheidend~\cite{Sukprasert.2023}.
+Einer ausführlichen Studie zur räumlichen Verlagerung von Workloads zur Folge~\cite{Sukprasert.2023} bringt diese Strategie, selbst unter Vernachlässigung des zusätzlichen Aufwands durch die Mehrzahl der Verschiebungen, keine besseren Einsparungen als die einmalige Verlagerung in ein grüneres Rechenzentrum.
 %!
 %!
 \chapter{Grundlagen zur Zeitreihenprognose}
@@ -633,8 +651,8 @@ Im Vergleich zu anderen Aufgaben zum Beispiel im Bereich Computer Vision oder Sp
 Dies ist auch im Hinblick auf Nachhaltigkeit ein guter Ansatz, weil die Hardware effizient genutzt wird.
 %!
 %!
-\chapter{Prognose der Kohlenstoffintensität}
-\section{Auswahl, Vorverarbeitung und Analyse der Daten}\label{CAP:data-preparation-analysis}
+\chapter{Prognose der Kohlenstoffintensität}\label{CAP:prediction}
+\section{Auswahl und Vorverarbeitung der Daten}\label{CAP:data-preparation-analysis}
 Die Kohlenstoffintensität von Strom hängt stark von der Verfügbarkeit erneuerbarer Energien ab und diese sind wiederum auf bestimmte Wetterverhältnisse angewiesen.
 Um präzise Vorhersagen zu treffen, ist es daher wichtig, sowohl historische Kohlenstoffintensitätswerte zu analysieren, als auch den Einfluss des Wetters zu berücksichtigen.
 Auf dieser Grundlage kann dann eine möglichst genaue Prognose für zukünftige Zeitpunkte erstellt werden.
@@ -679,6 +697,31 @@ Die \ac{MOER}-Werte werden von der Einheit lbs/\ac{kWh} in g/MWh umgerechnet und
 Diese Zeitzone wird als Standard für alle Daten verwendet, sodass später ein einfaches Zusammenfügen aus einzelnen Datenquellen und Vergleichen der Daten untereinander ohne Konvertierung möglich ist.
 Die \ac{MOER}-Werte der beiden Länder werden separat in eine CSV-Datei eingelesen.
 
+Die Verfügbarkeit erneuerbarer Energien hängt maßgeblich vom Wetter ab.
+Dieser Zusammenhang kann für die Vorhersage genutzt werden, weshalb Wetterdaten zum Datensatz hinzugefügt werden.
+Dafür wird auf den Copernicus Climate Change Service~\cite{Copernicus.20231212T14:09:40.000Z} zurückgegriffen, der umfangreiche Datensätze rund um das weltweite Klima und den Klimawandel zur Verfügung stellt.
+Konkret wurden vier mögliche Einflussfaktoren für die Kohlenstoffintensität auf Basis von Tablle~\ref{TAB:energyproduction_de_no} als wichtig identifiziert und ausgewählt:
+die Lufttemperatur in 2 m Höhe, die Windgeschwindigkeit in 100 m Höhe, der Niederschlag und die globale horizontale Bestrahlungsstärke (im Englischen als \ac{GHI} bezeichnet).
+Letztere wird durch die atmosphärische Zusammensetzung mit Aerosolen, Wasserdampf und Ozon, hauptsächliche jedoch von Wolken beeinflusst~\cite{KallioMyers.2020}.
+Für die Stromerzeugung durch Photovoltaik ist in erster Linie die Sonneneinstrahlung, die auf das Solarmodul einfällt, entscheidend~\cite{James.}.
+Die Erzeugung durch Windkraft hängt hauptsächlich von der Windgeschwindigkeit ab.
+Für die Wasserkraft ist unter anderem der Niederschlag ausschlaggebend~\cite{Copernicus.20231212T14:09:40.000Z}.
+
+Bei den Werten handelt es sich um Daten des ERA5 Reanalysis Datensatzes.
+Dies sind von verschiedenen Quellen, wie Satelliten oder Wetterstationen, gemessene Daten, bei denen fehlende Werte mit durch physikalische Gesetze oder historische Verlaufsmuster generierten Daten ergänzt wurden.
+Grundsätzlich sind die Daten also echt gemessene Daten, die zur Vollständigkeit mit generierten Daten ergänzt wurden~\cite{CopernicusClimateChangeService.2020}~\cite{CopernicusKnowledgeBase.20231009}.
+
+Außerdem werden zeitliche Variablen hinzugefügt, die den MOER-Wert ebenfalls beeinflussen können: Wochentag, Jahreszeit und, ob es sich um einen Feiertag handelt.
+Die jeweiligen Werte für die Variablen werden kodiert, sodass sie verarbeitet werden können.
+
+Der zuvor beschriebene Datensatz wird aufgeteilt in einen Trainingsdatensatz, einen Validierungsdatensatz und einen Testdatensatz.
+Als Unterteilung wird das Datum 30.09.2023, bzw. 30.11.2023 verwendet.
+Auf diese Weise wird sichergestellt, dass die Saisonalität vom Modell erkannt werden kann, denn es bekommt im Training genau ein Jahr an Daten für Deutschland zu sehen.
+Für Deutschland ergibt sich daraus ein Trainingszeitraum von einem Jahre, ein Validierungszeitraum von zwei Monaten und ein Testzeitraum von einem Monat.
+Für Norwegen stehen für das Training 33 Monate zur Verfügung, die anderen beiden Zeiträume sind identisch.
+
+\section{Analyse der Kohlenstoffintensität des deutschen und norwegischen Stromnetzes}
+tbd: Analyse des Potenzials zeitlicher Verschiebungen, Analyse des Potenzials örtlicher Verschiebungen
 Die Daten zur \ac{MOER} sollen zunächst für die beiden Länder analysiert werden, um ein Bild über deren Beschaffenheit zu erhalten.
 Zwischen den beiden Ländern ist ein deutlicher Unterschied für die MOER-Werte zu erkennen.
 In Abbildung~\ref{FIG:moer_distribution} wird ersichtlich, dass Norwegens Werte weitaus niedriger sind, als die Deutschlands.
@@ -712,29 +755,17 @@ Für Vorhersagen der \ac{MOER} soll die Zusammensetzung der Stromproduktion betr
 Die Energiequellen der Stromproduktion in Deutschland und Norwegen im Jahr 2023 sind in Tabelle~\ref{TAB:energyproduction_de_no} aufgelistet.
 \begin{table}[t]
  \centering\small
- \caption{Der Anteil der Energiequellen an der Stromproduktion in Deutschland und Norwegen im Jahr 2023 (\cite{ElectricityMaps.20240305T20:54:29.000Z})}
+ \caption{Der Anteil der Energiequellen an der Stromproduktion in Deutschland und Norwegen im Jahr 2023 (\cite{ElectricityMaps.20240305T20:54:29.000Z}), tbd: schönere Ansicht, Kreisdiagramm statt Tabelle}
  \label{TAB:energyproduction_de_no}
  \input{\tabledir/energyproduction_de_no.tex}
 \end{table}
 Ersichtlich wird, dass Deutschland eine Vielfalt an Energiequellen einschließlich Kohle, Gas, Kernenergie und erneuerbaren Energien hat.
 Norwegen ist durch einen sehr großen Anteil fast vollständig auf Wasserkraft als erneuerbare Energiequelle angewiesen.
 
-Die Verfügbarkeit erneuerbarer Energien hängt maßgeblich vom Wetter ab.
-Dieser Zusammenhang kann für die Vorhersage genutzt werden, weshalb Wetterdaten zum Datensatz hinzugefügt werden.
-Dafür wird auf den Copernicus Climate Change Service~\cite{Copernicus.20231212T14:09:40.000Z} zurückgegriffen, der umfangreiche Datensätze rund um das weltweite Klima und den Klimawandel zur Verfügung stellt.
-Konkret wurden vier mögliche Einflussfaktoren für die Kohlenstoffintensität auf Basis von Tablle~\ref{TAB:energyproduction_de_no} als wichtig identifiziert und ausgewählt:
-die Lufttemperatur in 2 m Höhe, die Windgeschwindigkeit in 100 m Höhe, der Niederschlag und die globale horizontale Bestrahlungsstärke (im Englischen als \ac{GHI} bezeichnet).
-Letztere wird durch die atmosphärische Zusammensetzung mit Aerosolen, Wasserdampf und Ozon, hauptsächliche jedoch von Wolken beeinflusst~\cite{KallioMyers.2020}.
-Für die Stromerzeugung durch Photovoltaik ist in erster Linie die Sonneneinstrahlung, die auf das Solarmodul einfällt, entscheidend~\cite{James.}.
-Die Erzeugung durch Windkraft hängt hauptsächlich von der Windgeschwindigkeit ab.
-Für die Wasserkraft ist unter anderem der Niederschlag ausschlaggebend~\cite{Copernicus.20231212T14:09:40.000Z}.
-
-Bei den Werten handelt es sich um Daten des ERA5 Reanalysis Datensatzes.
-Dies sind von verschiedenen Quellen, wie Satelliten oder Wetterstationen, gemessene Daten, bei denen fehlende Werte mit durch physikalische Gesetze oder historische Verlaufsmuster generierten Daten ergänzt wurden.
-Grundsätzlich sind die Daten also echt gemessene Daten, die zur Vollständigkeit mit generierten Daten ergänzt wurden~\cite{CopernicusClimateChangeService.2020}~\cite{CopernicusKnowledgeBase.20231009}.
-
-Außerdem werden zeitliche Variablen hinzugefügt, die den MOER-Wert ebenfalls beeinflussen können: Wochentag, Jahreszeit und, ob es sich um einen Feiertag handelt.
-Die jeweiligen Werte für die Variablen werden kodiert, sodass sie verarbeitet werden können.
+Der Strommix verschiedener Länder unterscheidet sich aufgrund des jeweiligen Klimas und des Zugangs zu natürlichen Ressourcen.
+Regionen mit großen Flüssen haben oft einen hohen Anteil an Wasserkraft.
+Die stärkeren Schwankungen in den Werten des deutschen Stromnetzes sind vermutlich auf die Schwankungen in der Verfügbarkeit von Solar- und Windenergie zurückzuführen.
+Regionen mit einem hohen Anteil dieser beiden Energiequellen zeigen tendenziell eine größere Schwankung in der Kohlenstoffintensität auf~\cite{Sukprasert.2023}.
 
 In einer Correlation Matrix soll analysiert werden, ob und wie die einzelnen Variablen zusammenhängen.
 Für Deutschland und Norwegen wird je eine dieser Matrizen erstellt, zu sehen in Abbildung~\ref{FIG:correlation_matrix}.
@@ -748,12 +779,6 @@ Der größte Zusammenhang besteht mit der Windgeschwindigkeit (-0,31) und der So
 Das bedeutet, dass sich bei höheren Werten für diese beiden Variablen, niedrigere Werte für die \ac{MOER} verzeichnen lassen.
 Vor dem Hintergrund der Energiequellen des deutschen Stromnetzes scheint die Interpretation sinnvoll, dass bei steigender Windstärke und Sonneneinstrahlung mehr Strom durch Solarstrom und Strom aus Windkraftwerken gewonnen werden kann und somit die Emissionsgröße sinkt.
 Für Norwegen zeigt die Windgeschwindigkeit die höchste Abhängigkeit aller analysierten Werte, die mit eineme Wert von -0,13 jedoch eher zu vernachlässigen ist.
-
-Der zuvor beschriebene Datensatz wird aufgeteilt in einen Trainingsdatensatz, einen Validierungsdatensatz und einen Testdatensatz, wie in Abbildung~\ref{FIG:moer_train_validation_test} sichtbar wird.
-Als Unterteilung wird das Datum 30.09.2023, bzw. 30.11.2023 verwendet.
-Auf diese Weise wird sichergestellt, dass die Saisonalität vom Modell erkannt werden kann, denn es bekommt im Training genau ein Jahr an Daten für Deutschland zu sehen.
-Für Deutschland ergibt sich daraus ein Trainingszeitraum von einem Jahre, ein Validierungszeitraum von zwei Monaten und ein Testzeitraum von einem Monat.
-Für Norwegen stehen für das Training 33 Monate zur Verfügung, die anderen beiden Zeiträume sind identisch.
 
 \section{Modellentwicklung und Training mit SARIMAX}
 Für die Verwendung von auf ARIMA basierenden Modellen ist es zu aller Erst nötig, die Daten auf Stationarität zu untersuchen, weil diese eine Voraussetzung für die Modelle ist.
@@ -867,10 +892,46 @@ Die am besten funktionierenden Parameter sind laut erstellter Studie folgende:
 
 
 \section{Evaluierung und Vergleich der Modelle}
+tbd
+
+\begin{figure}
+ \caption{Die Vorhersage der MOER für Deutschland durch den TFT}
+ {\includegraphics[width=0.99\textwidth]{\figdir/tft_plot_de}}
+ \label{FIG:}
+\end{figure}
+
+\begin{figure}
+ \caption{Die Vorhersage der MOER für Norwegen durch den TFT}
+ {\includegraphics[width=0.99\textwidth]{\figdir/tft_plot_no}}
+ \label{FIG:}
+\end{figure}
 %!
 %!
-\chapter{Anwendung der Prognose}
-\section{Anwendungsmöglichkeiten}
+\chapter{Anwendungsmöglichkeiten der Strategien auf Basis der Prognose}
+\section{Verfügbare Tools}\label{CAP:tools}
+Zur Anwendung der im vorherigen Kapitel beschriebenen Prognose der Kohlenstoffintensität, sollen als Erstes bereits verfügbare Tools zur Ausrichtung von Software an Emissionswerte betrachtet werden.
+
+Der Carbon Aware KEDA Operator~\cite{Azure.20240321T11:03:47.000Z} ist eine Erweiterung zum \ac{KEDA}, um Kubernetes-Workloads anhand der Kohlenstoffintensität zu skalieren.
+Mithilfe von \ac{KEDA}, einer Kubernetes-Komponente zur Ereignis-gesteuerten Skalierung, können Anwendungs-Container anhand bestimmter Ereginisse skaliert werden.
+Es ermöglicht eine einfache Integration in ein Kubernets-Cluster und bietet verschiedene Quellen zur Skalierung an.
+Die Idee hinter dem Carbon Aware \ac{KEDA} Operator ist, die standardmäßig verfügbaren Ereignis-Metriken um die Kohlenstoffintensität zu erweitern.
+Die Funktionsweise des Tools wird in Abbildung~\ref{FIG:carbon-aware-keda-operator} veranschaulicht.
+\begin{figure}
+ \caption{Die Funktionsweise des Carbon Aware KEDA Operators zur Skalierung von Containern in Kubernetes anhand der Kohlenstoffintensität~\cite{Azure.20240321T11:03:47.000Z}}
+ {\includegraphics[width=0.8\textwidth]{\figdir/CarbonAwareKedaOperator}}
+ \label{FIG:carbon-aware-keda-operator}
+\end{figure}
+Daten zur Kohlenstoffintensität von Drittanbietern (z.B. WattTime oder Electricity Maps) werden dem Operator in Form einer ConfigMap zur Verfügung gestellt.
+In Abbildung~\ref{FIG:carbon-aware-keda-operator} wurde der Kubernetes Carbon Intensity Exporter zur Bereitstellung der Daten verwendet, der auf der Carbon Aware \ac{SDK} basiert.
+Der Administrator erstellt eine Spezifikation über den CarbonAwareKedaScaler, die auf ein bestimmtes Skalierungsobjekt oder einen Skalierungsjob verweist.
+Die maximale Anzahl von Replikaten (\lstinline[columns=fixed]{maxReplicaCount}) wird dann durch den Operator an die aktuelle Kohlenstoffintensität angepasst.
+Dies führt zu einer Einschränkung der Workloads während Perioden mit hoher Kohlenstoffintensität und zur maximalen Skalierung zu Zeiten niedriger Kohlenstoffintensität~\cite{Azure.20240321T11:03:47.000Z}.
+
+tbd: weitere Tools
+
+\section{Anwendungsszenarien}
+% even a static selection of where to host your workload can make a big difference~\cite{Norlander}
+
 Die Analyse der \ac{MOER} hat eine deutliche tägliche Saisonalität der Daten gezeigt (siehe Kapitel~\ref{CAP:data-preparation-analysis}).
 Für Deutschland zeigen die Daten täglich folgendes Muster auf:
 Zu Beginn des Tages ist die \ac{MOER} relativ hoch, bevor sie zuerst langsam, dann schneller absinkt.
@@ -883,6 +944,10 @@ Ein Cron Job dient dazu, Jobs gemäß einem wiederkehrenden Zeitplan zu erstelle
 Regelmäßig anfallende Aufgaben, wie das Erstellen von Backups oder das Generieren von Berichten, können dadurch automatisiert zu bestimmten Zeiten abgearbeitet werden.
 Durch die Definition eines Zeitplans kann ein Job in festgelegten Intervallen ausgeführt werden~\cite{TheKubernetesAuthors.20240119T14:53:20+01:00}.
 Diesen Zeitplan nach der Kohlenstoffintensität des Stromnetzes auszurichten, kann eine Reduzierung der Emissionen begünstigen.
+In gängige Cloud-Plattformen oder dem Container-Orchestrierungs-Tool Kubernetes können Cron Jobs konfiguriert werden.
+Eine Möglichkeit, dies umzusetzen, ist mit dem Cloud Scheduler von Google Cloud.
+Mit diesem können Cronjobs erstellt werden, die Jobs regelmäßig zu bestimmten Zeiten ausführen.
+Auf diese Weise kann die Ausführung regelmäßig anstehender Aufgaben, wie zum Beispiel Batch-Jobs, durch einen Zeitplan konfiguriert werden
 
 Eine weitere Möglichkeit besteht darin, Auto Scaling Tools von Cloud-Plattformen auf die Kohlenstoffintensität auszurichten.
 Auto-Scaling zielt eigentlich auf eine automatische Skalierung der Anwendungsressourcen je nach Lastnachfrage ab.
@@ -890,7 +955,7 @@ Auf diese Weise soll sichergestellt werden, dass zwar immer ausreichend viele In
 Die Optimierung ist dabei auf eine Reduzierung der Kosten ausgelegt, denn im Vordergrund steht, dass bei geringer Nachfrage die Kapazitäten reduziert werden, um Kosten zu sparen.
 Zudem können zum Beispiel bei der Auto-Scaling Funktion von Amazon EC2-Instanzen mehrere Regionen für die Verteilung der Ressourcen angegeben werden, um eine hohe Ausfallsicherheit zu garantieren~\cite{AmazonWebServices.20240229}.
 
-ist ein Umdenken erforderlich.
+% ist ein Umdenken erforderlich.
 Ziel ist es nicht, die Kapazität auf die Nachfrage anzupassen, sondern die Kapazität auf die Kohlenstoffintensität.
 Das hat Auswirkungen auf die Nachfrage, weil diese durch eine eingeschränkte Kapazität möglicherweise nicht mehr gedeckt werden kann.
 Es gilt also, teils Kompromisse bei der Nachfrage zu machen, um eine Skalierung entlang der Kohlenstoffintensität zu ermöglichen.
@@ -901,7 +966,7 @@ Für CloudWatch können aber auch eigene Metriken konfiguriert werden.
 Auf diese Weise könnten für die prognostizierte Kohlenstoffintensität bestimmte Schwellwerte festgelegt werden, anhand dieser der Auto-Scaler die Anzahl der Instanzen erhöht oder verringert.
 Die Funktionsweise von CloudWatch, inklusive Bestandteile und dem Ablauf, ist in Abbildung~\ref{FIG:aws-cloudwatch} dargestellt.
 \begin{figure}
- \caption{Die Funktionsweise von AWS Cloudwatch zur automatischen Skalierung von Cloud-Instanzen anhand spezifischer Metriken~\cite{amazonwebservices}}
+ \caption{Die Funktionsweise von AWS Cloudwatch zur automatischen Skalierung von Cloud-Instanzen anhand spezifischer Metriken~\cite{AmazonWebServices.20240320T16:42:17.000Z}}
  {\includegraphics[width=0.8\textwidth]{\figdir/aws-cloudwatch}}
  \label{FIG:aws-cloudwatch}
 \end{figure}
@@ -912,64 +977,92 @@ Auf Basis dieses Alarms können spezifische Aktionen ausgeführt werden, wie das
 Beispielsweise könnte ein niedriger \ac{MOER}-Wert das Scaling-Out bewirken, um vom grünen Strom zu profitieren.
 Die AWS Management Konsole dient zur Beobachtung und Analyse der Metriken und Statistiken, sowie dem Konfigurieren des Alarms.
 Außerdem können die von CloudWatch generierten Statistiken weiter verarbeitet werden durch einen Statistics Consumer.
+
 Das Hinzufügen einer eigenen Metrik zu CloudWatch erfolgt durch die Angabe verschiedener Parameter.
 Code-Ausschnitt~\ref{CODE:aws-cloudwatch} zeigt, wie ein Befehl in der Kommandozeile von AWS zur Definition eines vorhergesagten \ac{MOER}-Werts aussehen könnte.
 \lstinputlisting[language=sh, caption=Kommandozeilenbefehl zur Definition eines prognostizierten \ac{MOER}-Werts für CloudWatch, label=CODE:aws-cloudwatch]{\codedir/aws-cloudwatch_put-custom-metric.m}
 Angegeben wird der Name der benutzerdefinierten Metrik, gefolgt vom Name der Metrik-Sammlung.
-\lstinline[columns=fixed]{--value} ist der prognostizierte Wert, der für einen bestimmten Zeitpunkt und eine bestimmte Region angegeben wird~\cite{amazonwebservices}.
+\lstinline[columns=fixed]{--value} ist der prognostizierte Wert, der für einen bestimmten Zeitpunkt und eine bestimmte Region angegeben wird~\cite{AmazonWebServices.20240320T16:42:17.000Z}.
 
-Ein mögliches Umsetzungsfeld ist Cron Jobs nach diesen Zeiten auszurichten.
-Cron Jobs führen Jobs zu bestimmten geplanten Zeiten aus.
-Gängige Cloud-Plattformen oder das Orchestrierungs Kubernetes bieten dafür Lösungen an.
-Eine Möglichkeit, dies umzusetzen, ist mit dem Cloud Scheduler von Google Cloud.
-Mit diesem können Cronjobs erstellt werden, die Jobs regelmäßig zu bestimmten Zeiten ausführen.
-Auf diese Weise kann die Ausführung regelmäßig anstehender Aufgaben, wie zum Beispiel Batch-Jobs, durch einen Zeitplan konfiguriert werden
+Der unter~\ref{CAP:tools} vorgestellte Carbon Aware \ac{KEDA} Operator steuert die Skalierung von Workloads in Kubernetes-Umgebungen anhand der Kohlenstoffintensität.
+Standardmäßig wird dafür die Carbon Aware SDK mit Vorhersagen der nächsten 24 Stunden alle 12 Stunden herangezogen.
+Der Eco-Modus, also die Skalierung anhand bestimmter Schwellenwerte der Kohlenstoffintensität, kann jedoch auch für bestimmte Zeiträume deaktiviert werden.
+Ausgehend von dieser Funktion, könnte eine geplante Skalierung konfiguriert werden.
+Anhand der Prognose der Kohlenstoffintensität könnte ein Zeitplan für die Deaktivierung des Eco-Modus erstellt werden.
+So kann die ein-wöchige Prognose genutzt werden, um die Workloads nur dann zu Drosseln, wenn die Kohlenstoffintensität hoch ist.
+
+tbd: weitere Szenarien
+
 \section{API zur Abfrage der Prognose}
-Die Prognose soll dazu dienen, für einen fiktiven Workload die Startzeit auszuwählen, bei der die Summe der \ac{MOER}-Werte über die Dauer des Workloads am geringsten sind.
-Der Ansatz entspricht dem in Kapitel~\ref{CAP:dynamic-scheduling-models} beschriebenen Scheduling-Verfahrens \glqq Flexibler Start \grqq{}.
-Dazu sollen die prognostizierten Werte über eine \ac{API} abgefragt werden können.
-Um dies mit so wenig Overhead wie möglich zu machen, wird Flask, ein Mikro-Frontend zur einfachen Erstellung von Webanwendungen und ~\ac{API}s mit Python, verwendet~\cite{.20240203T21:13:11.000Z}.
-Zur Konfiguration der Abfrage sollen folgende Parameter angegeben werden: Welches Prognose-Modell verwendet werden soll (SARIMAX oder \ac{TFT}, default ist \ac{TFT}), die geschätzte Dauer des Workloads in Minuten, ein Fälligkeitsdatum und für welche Länder die \ac{MOER}-Wert abgefragt werden sollen.
+Um die Prognosen aus Kapitel~\ref{CAP:prediction} abrufbar zu machen, sollen sie über eine \ac{API} zur Verfügung gestellt werden.
+Mit Hilfe der \ac{API} kann für einen fiktiven Workload die Startzeit ausfindig gemacht werden, bei der die Summe der \ac{MOER}-Werte über die Dauer des Workloads am geringsten sind.
+Der Ansatz entspricht dem in Kapitel~\ref{CAP:strategies} beschriebenen Scheduling-Verfahrens \glqq Flexibler Start \grqq{}.
+
+Um dies mit so wenig Overhead wie möglich umzusetzen, wird Flask, ein Mikro-Frontend zur einfachen Erstellung von Webanwendungen und \ac{API}s mit Python, verwendet~\cite{.20240203T21:13:11.000Z}.
+Zur Konfiguration der Abfrage sollen folgende Parameter angegeben werden:
+Welches Prognose-Modell verwendet werden soll (SARIMAX oder \ac{TFT}, default ist \ac{TFT}), die geschätzte Bearbeitungszeit des Workloads in Minuten, ein Fälligkeitsdatum und das Land (Deutschland oder Norwegen).
+Durch Angabe des Landes können die \ac{MOER}-Werte der beiden Länder verglichen werden, was wiederum als Basis für eine örtliche Verschiebung dienen kann.
 Die Erstellung des Prognose-Endpunkts mit Parametern ist in Code-Ausschnitt~\ref{CODE:prediction_endpoint} zu sehen.
 \lstinputlisting[language=Python, caption=Python-Code zur Erstellung der Prognose API mit Flask, label=CODE:prediction_endpoint]{\codedir/flask_prediction_endpoint.m}
-\section{Grenzen}
+
+tbd: Umsetzung Abfrage der prognostizierten Werte
+\section{Herausforderungen und Grenzen}
 %Für welche Architektur geeignet
-Echtzeit
-
-Es gilt zu beachten, dass die analysierten Optimierungen ihre Grenzen haben.
-Es handelt sich nicht um allgemein gültige, immer anwendbare Lösungen, sondern vielmehr um Vorschläge oder Richtlinien, die unter bestimmten Umständen durchaus positive Auswirkungen haben können.
-Eine wichtige Einschränkung kann ein mögliches Fälligkeitsdatum oder eine hohe Dringlichkeit sein~\cite{Dodge.06212022}.
-Ist bekannt, dass eine Aufgabe zu einem bestimmten Zeitpunkt angefangen oder sogar bereits abgeschlossen sein muss, hat es keinen Nutzen, wenn der nächste kohlenstoffarme Zeitraum nach diesem Fälligkeitsdatum liegt.
-Allgemein können die zeitlichen Verschiebungen zu Verspätungen führen und diese können wiederum einen Anstieg von Emissionen durch andere Teile des Projekts verursachen.
-Es ist deshalb stets wichtig, die Vorteile der eingesetzten Maßnahmen gegenüber ihrem Aufwand abzuwägen~\cite{Dodge.06212022}.
-
-Die örtliche Verlagerung ist nicht immer sinnvoll.
-Bei Workloads, die eine große Datenmenge erfordern überwiegt der Energieaufwand für die Verlagerung der Daten in ein anderes Rechenzentrum möglicherweise den Einsparungen durch dieses umweltfreundlichere Rechenzentrum~\cite{Norlander}.
+%Echtzeit
+Die Herausforderungen und Grenzen beim Anwenden der Prognosen für Software haben zwei Quellen.
+Zum einen ergeben sie sich aus der Prognose und zum anderen aus den Strategien zur Optimierung der Software.
 
 Mit größerer Vorhersagelänge steigen auch die Fehleranfälligkeit der Vorhersagen.
 Sowohl eine fehlerhafte Vorhersage des Wetters, als auch Fehler der Zeitreihenvorhersage selbst sind mögliche Fehlerquellen~\cite{Wiesner.2021}.
-%!
-%!
-\chapter{Ergebnisse und Diskussion}
-Eine große Herausforderung besteht darin, das Thema Nachhaltigkeit in der \ac{IT} anzubringen.
-Lange wurde diesem keine Aufmerksamkeit geschenkt und Optimierungen fanden hauptsächlich für anfallende Kosten statt.
-Wenn der Umweltaspekt nicht Motivation genug ist, können noch zwei weitere Aspekte hilfreich sein.
-Zum einen gehen mit der Optimierung des Energieverbrauchs und der Umstellung auf grüne Energiequellen oft verminderte Stromkosten einher, was als Anreiz dienen kann.
-Zum anderen werden immer mehr Vorschriften und Berichtsanforderungen in Bezug auf verursachte Emissionen eingeführt~\cite{GreenSoftwareFoundation.2023}.
-Dies sind weitere Gründe, sich mit der Energienutzung zu beschäftigen.
 
-Der primäre Antrieb für den Übergang zu erneuerbaren Energien mag ökonomischer, nicht ökologischer Natur sein
+Außerdem schränkt die Beschaffenheit der \ac{MOER}-Werte des deutschen und norwegischen Stromnetzes die Anwendbarkeit stark ein.
+Entgegen anderer Ergebnisse~(\cite{Wiesner.2021}), die einen großen Unterschied zwischen unter der Woche und am Wochenende gemessenen Werten verzeichneten, weisen sie keine großen Unterschiede zwischen diesen Zeiträumen auf.
+Die \ac{MOER} des deutschen Stromnetzes ist am Wochenende um 0,53\% geringer als unter der Woche und die des norwegischen Stromnetzes ist am Wochenende sogar um 0,74\% geringer.
+Beides sind zu vernachlässigende Unterschiede, die das Verschieben von Workloads auf das Wochenende und die Relevanz einer ein-wöchigen Vorhersage rechtfertigen würden.
+Bei~\cite{Wiesner.2021} wurde gemessen, dass die Kohlenstoffintensität Deutschlands am Wochenende ungefähr 25\% geringer ist, was eine Verlagerung hin zum Wochenende durchaus sinnvoll machen würde.
+Die verschiedenen Messungen kommen höchstwahrscheinlich daher, dass bei~\cite{Wiesner.2021} die durchschnittliche Kohlenstoffintensität des Stromnetzes verwendet wurde, die sich schlecht für die Analyse von Laständerungen eignet.
 
-Inwiefern ist die Vorhersage für Länder sinnvoll auf die Regionen der Datencenter übertragbar?
+Die Umsetzung der Strategien ist je nach Strategie auf bestimmte Workloads begrenzt.
+Eine zeitliche Verschiebung eignet sich nicht gut für lang andauernde oder kontinuierliche Workloads, sowie solche mit strikten Fristen oder Notwendigkeit zur sofortigen Ausführung.
+Nicht unterbrechbare Workloads, die an einem Stück ausgeführt werden müssen, bieten weniger Flexibilität für Verschiebungen.
+Örtliche Verlagerungen sind teilweise durch regulatorische Anforderungen oder möglicherweise durch mangelnde Ressourcen in der gewünschten Region beschränkt.
+
+Eine Skalierung von Anwendungen muss oft kurzfristig bzw. in Echtzeit stattfinden, unter Wissen der momentanen Last auf das System.
+Aus diesem Grund sind Vorhersagen für mehr als einen Tag im Voraus für dieses Szenario oft nicht nötig.
+
+tbd: Weitere Herausforderungen und Grenzen
+
+%Es gilt zu beachten, dass die analysierten Optimierungen ihre Grenzen haben.
+%Es handelt sich nicht um allgemein gültige, immer anwendbare Lösungen, sondern vielmehr um Vorschläge oder Richtlinien, die unter bestimmten Umständen durchaus positive Auswirkungen haben können.
+%Eine wichtige Einschränkung kann ein mögliches Fälligkeitsdatum oder eine hohe Dringlichkeit sein~\cite{Dodge.06212022}.
+%Ist bekannt, dass eine Aufgabe zu einem bestimmten Zeitpunkt angefangen oder sogar bereits abgeschlossen sein muss, hat es keinen Nutzen, wenn der nächste kohlenstoffarme Zeitraum nach diesem Fälligkeitsdatum liegt.
+%Allgemein können die zeitlichen Verschiebungen zu Verspätungen führen und diese können wiederum einen Anstieg von Emissionen durch andere Teile des Projekts verursachen.
+%Es ist deshalb stets wichtig, die Vorteile der eingesetzten Maßnahmen gegenüber ihrem Aufwand abzuwägen~\cite{Dodge.06212022}.
+%
+%Die örtliche Verlagerung ist nicht immer sinnvoll.
+%Bei Workloads, die eine große Datenmenge erfordern überwiegt der Energieaufwand für die Verlagerung der Daten in ein anderes Rechenzentrum möglicherweise den Einsparungen durch dieses umweltfreundlichere Rechenzentrum~\cite{Norlander.2023}.
+
+\section{Ergebnisse und Diskussion}
+tbd: Zusammenfassung der Ergebnisse für verfügbare Tools, mögliche Anwendungsszenarien und Verwenden der \ac{API}
+%Eine große Herausforderung besteht darin, das Thema Nachhaltigkeit in der \ac{IT} anzubringen.
+%Lange wurde diesem keine Aufmerksamkeit geschenkt und Optimierungen fanden hauptsächlich für anfallende Kosten statt.
+%Wenn der Umweltaspekt nicht Motivation genug ist, können noch zwei weitere Aspekte hilfreich sein.
+%Zum einen gehen mit der Optimierung des Energieverbrauchs und der Umstellung auf grüne Energiequellen oft verminderte Stromkosten einher, was als Anreiz dienen kann.
+%Zum anderen werden immer mehr Vorschriften und Berichtsanforderungen in Bezug auf verursachte Emissionen eingeführt~\cite{GreenSoftwareFoundation.2023}.
+%Dies sind weitere Gründe, sich mit der Energienutzung zu beschäftigen.
+%
+%Der primäre Antrieb für den Übergang zu erneuerbaren Energien mag ökonomischer, nicht ökologischer Natur sein
+%
+%Inwiefern ist die Vorhersage für Länder sinnvoll auf die Regionen der Datencenter übertragbar?
 %!
 %!
 \chapter{Fazit und Ausblick}
 Diese Arbeit untersucht das Potenzial der Nachhaltigkeitsoptimierung von Software anhand der Zeitreihenvorhersage der marginalen Kohlenstoffintensität zwei spezifischer Stromnetze.
 Neben der Vorhersage durch ein statistisches Modell wurde mit dem \ac{TFT} auch ein Neuronales Netz trainiert und die Ergebnisse der beiden Modelle verglichen.
-Für die Optimierungsmöglichkeiten wurden unterschiedliche Strategien untersucht und die Anwendbarkeit der zeitlichen Verschiebung für verschiedene Workloads bewertet.
+Für die Optimierungsmöglichkeiten wurden unterschiedliche Strategien untersucht und die Anwendbarkeit der zeitlichen und örtlichen Verschiebung für verschiedene Workloads bewertet.
 Die Ergebnisse zeigen sowohl für Deutschland, als auch für Norwegen, ein sich täglich wiederholendes Muster im Verlauf der marginalen Kohlenstoffintensität, wobei sich die Muster je Land geringfügig unterscheiden.
 Die Minimalwerte zur Mittagszeit können für eine generelle Verschiebung in diese Zeiten genutzt werden.
-Darüber hinaus kann die Vorhersage der Intensität zwei Wochen im Voraus jederzeit unter Angabe von Dauer und Fälligkeitsdatum des betrachteten Workloads abgerufen werden.
+Darüber hinaus kann die Vorhersage der Intensität eine Woche im Voraus jederzeit unter Angabe von Dauer und Fälligkeitsdatum des betrachteten Workloads abgerufen werden.
 
 Cloud- und Service-Anbieter sollten Nutzer ermutigen, ihre Workloads möglichst zeitlich flexibel und unterbrechbar zu gestalten und sie dementsprechend zu deklarieren.
 Spot-Instanzen sind bereits bei vielen Anbietern verfügbar, sodass die Cloud besser ausgelastet und zugleich niedrige Kosten angeboten werden können.
@@ -983,9 +1076,7 @@ Zur Unterstützung könnten Tools zur Bereitstellung dieser Informationen einges
 So könnten Schnittstellen bereitgestellt werden, um zeitliche Beschränkungen und andere Eigenschaften programmatisch zu deklarieren oder diese automatisch zu erkennen.
 Die benötigte Zeit für das Anhalten und Wiederaufnehmen eines Workloads könnte erfasst und dieser anhand dessen automatisch als unterbrechbar oder nicht unterbrechbar gekennzeichnet werden
 Zeitliche Beschränkungen könnten zum Beispiel vom Abhängigkeitsgraphen eines Workloads abgeleitet werden~\cite{Wiesner.2021}.
-%Geplante Skalierung
-%Dynamische Skalierung
-%Dynamische Ressourcenanpassung
-%Optimierung des Datenzugriffs
+
+tbd: konkretes identifiziertes Potenzial in örtlicher und zeitlicher Verschiebung, Vergleich Kohlenstoffintensität und Strompreis?, mögliche anschließende Forschungsarbeiten
 
 
