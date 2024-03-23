@@ -18,8 +18,8 @@ def get_tft_config():
         "time_idx": "time_idx",
         "target": "moer",
         "group_ids": ["country"],
-        "max_encoder_length": 672,  # 4 weeks
-        "max_prediction_length": 336,  # 2 week
+        "max_encoder_length": 168,  # 1 week
+        "max_prediction_length": 24,  # 1 day
         "static_categoricals": ["country"],
         "time_varying_known_categoricals": ["season", "day_of_week", "is_holiday"],
         "time_varying_known_reals": ["ghi", "temperature", "wind_speed", "precipitation"],
