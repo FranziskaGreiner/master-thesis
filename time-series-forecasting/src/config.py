@@ -49,11 +49,11 @@ def get_sarimax_config():
     general_config = get_general_config()
     sarimax_config = {
         "de": {
-            "p": 3, "d": 0, "q": 0,
+            "p": 1, "d": 0, "q": 0,
             "P": 2, "D": 0, "Q": 0, "s": 24,
         },
         "no": {
-            "p": 3, "d": 0, "q": 0,
+            "p": 1, "d": 0, "q": 0,
             "P": 2, "D": 0, "Q": 0, "s": 24,
         },
         "auto_arima": {
