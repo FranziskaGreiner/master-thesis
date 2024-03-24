@@ -45,24 +45,19 @@ def convert_categoricals(weather_time_moer_data):
     return weather_time_moer_data
 
 
-def create_training_validation_data(weather_time_moer_data):
+def create_cut_training_data(weather_time_moer_data, max_prediction_length):
     cutoffs = {}
-    for country in ['DE', 'NO']:
+    for country in ['DE']:
         country_data = weather_time_moer_data[weather_time_moer_data['country'] == country]
         max_time_idx = country_data["time_idx"].max()
-        cutoffs[country] = max_time_idx - tft_config.get('max_prediction_length')
+        cutoffs[country] = max_time_idx - max_prediction_length
 
     train_data = pd.DataFrame()
-    validation_data = pd.DataFrame()
-
     for country, cutoff in cutoffs.items():
         country_train_data = weather_time_moer_data[(weather_time_moer_data['country'] == country) &
                                                     (weather_time_moer_data['time_idx'] <= cutoff)]
-        country_validation_data = weather_time_moer_data[(weather_time_moer_data['country'] == country) &
-                                                         (weather_time_moer_data['time_idx'] > cutoff)]
         train_data = pd.concat([train_data, country_train_data])
-        validation_data = pd.concat([validation_data, country_validation_data])
-    return train_data, validation_data
+    return train_data
 
 
 def create_tft_training_dataset(train_data):
@@ -155,7 +150,7 @@ def create_tft_trainer():
         accelerator="auto",
         enable_model_summary=True,
         max_epochs=tft_config.get('max_epochs'),
-        gradient_clip_val=tft_config.get('gradient_clip_val'),
+        # gradient_clip_val=tft_config.get('gradient_clip_val'),
         logger=wandb_logger,
         callbacks=[create_tft_checkpoints(), early_stop_callback]
     )
@@ -163,12 +158,17 @@ def create_tft_trainer():
 
 
 def train_tft(weather_time_moer_data):
+    # only DE prediction
+    weather_time_moer_data = weather_time_moer_data.loc[weather_time_moer_data['country'] == 'DE']
+
     run = wandb.init(project="tsf_moer_tft", config=dict(tft_config))
 
     weather_time_moer_data = add_time_idx(weather_time_moer_data)
     weather_time_moer_data = convert_categoricals(weather_time_moer_data)
 
-    train_data, validation_data = create_training_validation_data(weather_time_moer_data)
+    train_data = create_cut_training_data(weather_time_moer_data, tft_config.get('max_prediction_length'))
+    # train_data = weather_time_moer_data[weather_time_moer_data['date'] <= tft_config.get('training_cutoff_date')]
+    # validation_data = weather_time_moer_data[weather_time_moer_data['date'] > tft_config.get('training_cutoff_date')]
 
     training_dataset = create_tft_training_dataset(train_data)
     validation_dataset = create_tft_validation_dataset(training_dataset, weather_time_moer_data)
@@ -209,25 +209,26 @@ def train_tft(weather_time_moer_data):
     )
 
     # hyperparameter tuning
-    # study = optimize_hyperparameters(
-    #     train_dataloader,
-    #     val_dataloader,
-    #     model_path="optuna_test",
-    #     n_trials=50,
-    #     gradient_clip_val_range=(0.01, 1.0),
-    #     hidden_size_range=(8, 128),
-    #     hidden_continuous_size_range=(8, 128),
-    #     attention_head_size_range=(1, 4),
-    #     learning_rate_range=(0.001, 0.1),
-    #     dropout_range=(0.1, 0.4),
-    #     trainer_kwargs=dict(limit_train_batches=30),
-    #     reduce_on_plateau_patience=5,
-    #     use_learning_rate_finder=False,
-    # )
-    #
-    # hyperparameter_study_save_path = f"{wandb.run.dir}/hyperparameter_study.pkl"
-    # joblib.dump(study, hyperparameter_study_save_path)
-    # print(study.best_trial.params)
+    study = optimize_hyperparameters(
+        train_dataloader,
+        val_dataloader,
+        model_path="optuna_test",
+        n_trials=50,
+        max_epochs=10,
+        gradient_clip_val_range=(0.01, 1.0),
+        hidden_size_range=(8, 128),
+        hidden_continuous_size_range=(8, 128),
+        attention_head_size_range=(1, 4),
+        learning_rate_range=(0.001, 0.1),
+        dropout_range=(0.1, 0.4),
+        trainer_kwargs=dict(limit_train_batches=30),
+        reduce_on_plateau_patience=5,
+        use_learning_rate_finder=False
+    )
+
+    hyperparameter_study_save_path = f"{wandb.run.dir}/hyperparameter_study.pkl"
+    joblib.dump(study, hyperparameter_study_save_path)
+    print(study.best_trial.params)
 
     model_save_path = f"{wandb.run.dir}/tft_model.pth"
     torch.save(tft_model.state_dict(), model_save_path)
@@ -237,7 +238,7 @@ def train_tft(weather_time_moer_data):
     best_tft = TemporalFusionTransformer.load_from_checkpoint(best_model_path)
     val_prediction_results = best_tft.predict(val_dataloader, mode="raw", return_x=True)
 
-    for idx in range(2):
+    for idx in range(1):
         fig, ax = plt.subplots(figsize=(23, 5))
         best_tft.plot_prediction(val_prediction_results.x,
                                  val_prediction_results.output,
@@ -249,5 +250,22 @@ def train_tft(weather_time_moer_data):
         wandb.log({f"plot_val_group_{idx}": wandb.Image(val_plot_file_path)})
         plt.show()
         plt.close()
+
+        # actuals vs. predictions by variables
+        predictions = best_tft.predict(val_dataloader, return_x=True)
+        predictions_vs_actuals = best_tft.calculate_prediction_actual_by_variable(predictions.x, predictions.output)
+        features = list(set(predictions_vs_actuals['support'].keys())-set(['moer_lagged_by_24', 'moer_lagged_by_168']))
+        for feature in features:
+            best_tft.plot_prediction_actual_by_variable(predictions_vs_actuals, name=feature)
+            act_vs_predict_file_path = f"{wandb.run.dir}/{feature}_act_vs_predict.png"
+            plt.savefig(act_vs_predict_file_path)
+            wandb.log({f"act_vs_predict": wandb.Image(act_vs_predict_file_path)})
+
+        # variable importance
+        interpretation = best_tft.interpret_output(val_prediction_results.output, reduction="sum")
+        best_tft.plot_interpretation(interpretation)
+        interpretation_file_path = f"{wandb.run.dir}/interpretation.png"
+        plt.savefig(interpretation_file_path)
+        wandb.log({f"interpretation": wandb.Image(interpretation_file_path)})
 
     run.finish()
