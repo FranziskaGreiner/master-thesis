@@ -161,6 +161,78 @@ def create_tft_trainer():
     return trainer
 
 
+def find_optimal_learning_rate(trainer, tft_model, train_dataloader, val_dataloader):
+    res = Tuner(trainer).lr_find(
+        tft_model,
+        train_dataloaders=train_dataloader,
+        val_dataloaders=val_dataloader,
+        max_lr=10.0,
+        min_lr=1e-6,
+    )
+
+    print(f"suggested learning rate: {res.suggestion()}")
+    fig = res.plot(suggest=True, show=False)
+    lr_plot_file_path = f"{wandb.run.dir}/learning_rate.png"
+    fig.savefig(lr_plot_file_path)
+    plt.show()
+    plt.close(fig)
+
+
+def tune_hyperparameters(train_dataloader, val_dataloader):
+    study = optimize_hyperparameters(
+        train_dataloader,
+        val_dataloader,
+        model_path="optuna_test",
+        n_trials=25,
+        max_epochs=10,
+        gradient_clip_val_range=(0.01, 1.0),
+        hidden_size_range=(8, 128),
+        hidden_continuous_size_range=(8, 128),
+        attention_head_size_range=(1, 4),
+        learning_rate_range=(0.001, 0.1),
+        dropout_range=(0.1, 0.4),
+        trainer_kwargs=dict(limit_train_batches=30),
+        reduce_on_plateau_patience=5,
+        use_learning_rate_finder=False
+    )
+
+    hyperparameter_study_save_path = f"{wandb.run.dir}/hyperparameter_study.pkl"
+    joblib.dump(study, hyperparameter_study_save_path)
+    print(study.best_trial.params)
+
+
+def plot_evaluations(best_tft, val_prediction_results, val_dataloader):
+    for idx in range(2):
+        fig, ax = plt.subplots(figsize=(23, 5))
+        best_tft.plot_prediction(val_prediction_results.x,
+                                 val_prediction_results.output,
+                                 idx=idx,
+                                 add_loss_to_title=True,
+                                 ax=ax)
+        val_plot_file_path = f"{wandb.run.dir}/plot_val_group_{idx}.png"
+        plt.savefig(val_plot_file_path)
+        wandb.log({f"plot_val_group_{idx}": wandb.Image(val_plot_file_path)})
+        plt.show()
+        plt.close()
+
+        # actuals vs. predictions by variables
+        predictions = best_tft.predict(val_dataloader, return_x=True)
+        predictions_vs_actuals = best_tft.calculate_prediction_actual_by_variable(predictions.x, predictions.output)
+        features = list(set(predictions_vs_actuals['support'].keys()) - {'moer_lagged_by_168'})
+        for feature in features:
+            best_tft.plot_prediction_actual_by_variable(predictions_vs_actuals, name=feature)
+            act_vs_predict_file_path = f"{wandb.run.dir}/{feature}_act_vs_predict.png"
+            plt.savefig(act_vs_predict_file_path)
+            wandb.log({f"act_vs_predict": wandb.Image(act_vs_predict_file_path)})
+
+        # variable importance
+        interpretation = best_tft.interpret_output(val_prediction_results.output, reduction="sum")
+        best_tft.plot_interpretation(interpretation)
+        interpretation_file_path = f"{wandb.run.dir}/interpretation.png"
+        plt.savefig(interpretation_file_path)
+        wandb.log({f"interpretation": wandb.Image(interpretation_file_path)})
+
+
 def train_tft(weather_time_moer_data):
     run = wandb.init(project="tsf_moer_tft", config=dict(tft_config))
 
@@ -191,43 +263,8 @@ def train_tft(weather_time_moer_data):
     trainer = create_tft_trainer()
     tft_model = create_tft_model(training_dataset)
 
-    # # find optimal learning rate
-    # res = Tuner(trainer).lr_find(
-    #     tft_model,
-    #     train_dataloaders=train_dataloader,
-    #     val_dataloaders=val_dataloader,
-    #     max_lr=10.0,
-    #     min_lr=1e-6,
-    # )
-    #
-    # print(f"suggested learning rate: {res.suggestion()}")
-    # fig = res.plot(suggest=True, show=False)
-    # lr_plot_file_path = f"{wandb.run.dir}/learning_rate.png"
-    # fig.savefig(lr_plot_file_path)
-    # plt.show()
-    # plt.close(fig)
-    #
-    # # hyperparameter tuning
-    # study = optimize_hyperparameters(
-    #     train_dataloader,
-    #     val_dataloader,
-    #     model_path="optuna_test",
-    #     n_trials=25,
-    #     max_epochs=10,
-    #     gradient_clip_val_range=(0.01, 1.0),
-    #     hidden_size_range=(8, 128),
-    #     hidden_continuous_size_range=(8, 128),
-    #     attention_head_size_range=(1, 4),
-    #     learning_rate_range=(0.001, 0.1),
-    #     dropout_range=(0.1, 0.4),
-    #     trainer_kwargs=dict(limit_train_batches=30),
-    #     reduce_on_plateau_patience=5,
-    #     use_learning_rate_finder=False
-    # )
-    #
-    # hyperparameter_study_save_path = f"{wandb.run.dir}/hyperparameter_study.pkl"
-    # joblib.dump(study, hyperparameter_study_save_path)
-    # print(study.best_trial.params)
+    find_optimal_learning_rate(trainer, tft_model, train_dataloader, val_dataloader)
+    tune_hyperparameters(train_dataloader, val_dataloader)
 
     trainer.fit(
         tft_model,
@@ -244,35 +281,6 @@ def train_tft(weather_time_moer_data):
     best_model_path = trainer.checkpoint_callback.best_model_path
     best_tft = TemporalFusionTransformer.load_from_checkpoint(best_model_path)
     val_prediction_results = best_tft.predict(val_dataloader, mode="raw", return_x=True)
-
-    for idx in range(2):
-        fig, ax = plt.subplots(figsize=(23, 5))
-        best_tft.plot_prediction(val_prediction_results.x,
-                                 val_prediction_results.output,
-                                 idx=idx,
-                                 add_loss_to_title=True,
-                                 ax=ax)
-        val_plot_file_path = f"{wandb.run.dir}/plot_val_group_{idx}.png"
-        plt.savefig(val_plot_file_path)
-        wandb.log({f"plot_val_group_{idx}": wandb.Image(val_plot_file_path)})
-        plt.show()
-        plt.close()
-
-        # actuals vs. predictions by variables
-        predictions = best_tft.predict(val_dataloader, return_x=True)
-        predictions_vs_actuals = best_tft.calculate_prediction_actual_by_variable(predictions.x, predictions.output)
-        features = list(set(predictions_vs_actuals['support'].keys()) - {'moer_lagged_by_168'})
-        for feature in features:
-            best_tft.plot_prediction_actual_by_variable(predictions_vs_actuals, name=feature)
-            act_vs_predict_file_path = f"{wandb.run.dir}/{feature}_act_vs_predict.png"
-            plt.savefig(act_vs_predict_file_path)
-            wandb.log({f"act_vs_predict": wandb.Image(act_vs_predict_file_path)})
-
-        # variable importance
-        interpretation = best_tft.interpret_output(val_prediction_results.output, reduction="sum")
-        best_tft.plot_interpretation(interpretation)
-        interpretation_file_path = f"{wandb.run.dir}/interpretation.png"
-        plt.savefig(interpretation_file_path)
-        wandb.log({f"interpretation": wandb.Image(interpretation_file_path)})
+    plot_evaluations(best_tft, val_prediction_results, val_dataloader)
 
     run.finish()

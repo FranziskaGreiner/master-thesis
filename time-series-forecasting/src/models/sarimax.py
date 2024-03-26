@@ -15,10 +15,13 @@ def create_sarimax_datasets(final_data):
     final_data.set_index('date', inplace=True)
     final_data.index = pd.DatetimeIndex(final_data.index)
 
-    train_data = final_data[:sarimax_config.get('training_cutoff_date')]
-    validation_data = final_data[sarimax_config.get('training_cutoff_date'):]
+    train_data = final_data[final_data.index <= sarimax_config.get('training_cutoff_date')]
+    validation_data = final_data[final_data.index > sarimax_config.get('training_cutoff_date'):]
 
-    exog_variables = ['temperature', 'ghi', 'wind_speed', 'precipitation', 'day_of_week', 'is_holiday', 'season']
+    exog_variables = [
+        'temperature', 'ghi', 'wind_speed', 'precipitation', 'hour_of_day', 'day_of_week',
+        'day_of_year', 'is_holiday_or_weekend', 'season'
+    ]
     exog_train = train_data[exog_variables] if not train_data.empty else None
     exog_validation = validation_data[exog_variables] if not validation_data.empty else None
     return train_data, validation_data, exog_train, exog_validation
@@ -34,26 +37,72 @@ def create_sarimax_model(train_data, exog_train, config):
     return sarimax_model
 
 
-def calculate_monthly_metrics(actual, predicted):
-    # Group by month and calculate metrics
-    actual_grouped = actual.groupby(actual.index.to_period('M'))
-    predicted_grouped = predicted.groupby(predicted.index.to_period('M'))
+def calculate_and_plot_metrics(results, train_data, validation_data, exog_validation, country):
+    if not validation_data.empty:
+        val_predictions = results.get_prediction(start=len(train_data),
+                                                 end=len(train_data) + len(validation_data) - 1,
+                                                 exog=exog_validation, dynamic=False).predicted_mean
+        # overall metrics
+        val_mse = mean_squared_error(validation_data['moer'], val_predictions)
+        val_rmse = np.sqrt(val_mse)
+        val_mae = mean_absolute_error(validation_data['moer'], val_predictions)
+        wandb.log({f"{country}_validation_MSE": val_mse,
+                   f"{country}_validation_RMSE": val_rmse,
+                   f"{country}_validation_MAE": val_mae})
 
-    monthly_metrics = {}
+        # weekly metrics
+        weekly_metrics = calculate_weekly_metrics(validation_data['moer'], val_predictions)
+        for week, metrics in weekly_metrics.items():
+            wandb.log({f"{country}_{week}_validation_MSE": metrics['MSE'],
+                       f"{country}_{week}_validation_RMSE": metrics['RMSE'],
+                       f"{country}_{week}_validation_MAE": metrics['MAE']})
 
-    for (actual_month, actual_values), (_, predicted_values) in zip(actual_grouped, predicted_grouped):
-        monthly_mse = mean_squared_error(actual_values, predicted_values)
-        monthly_rmse = np.sqrt(monthly_mse)
-        monthly_mae = mean_absolute_error(actual_values, predicted_values)
+        plt.figure(figsize=(10, 5))
+        plt.plot(validation_data.index, validation_data['moer'], label='Actual')
+        plt.plot(validation_data.index, val_predictions, label='Prediction', linestyle='--')
+        plt.xticks(rotation=45)
+        plt.title(f'validation prediction vs. actual ({country})')
+        plt.legend()
+        plt.tight_layout()
+        val_plot_file_path = f"{wandb.run.dir}/plot_val_{country}.png"
+        plt.savefig(val_plot_file_path)
+        plt.close()
+        wandb.log({f"plot_val_{country}": wandb.Image(val_plot_file_path)})
 
-        # Store the metrics for the month
-        monthly_metrics[actual_month] = {
-            'MSE': monthly_mse,
-            'RMSE': monthly_rmse,
-            'MAE': monthly_mae
-        }
 
-    return monthly_metrics
+def calculate_weekly_metrics(actual, predicted):
+    predicted = pd.Series(predicted, index=actual.index)
+
+    actual_grouped = actual.groupby(actual.index.to_period('W'))
+    predicted_grouped = predicted.groupby(predicted.index.to_period('W'))
+
+    weekly_metrics = {}
+
+    for (period, actual_values) in actual_grouped:
+        if period in predicted_grouped.groups:  # check if the period exists in predicted groups
+            predicted_values = predicted_grouped.get_group(period)
+
+            if len(actual_values) == len(predicted_values):
+                weekly_mse = mean_squared_error(actual_values, predicted_values)
+                weekly_rmse = np.sqrt(weekly_mse)
+                weekly_mae = mean_absolute_error(actual_values, predicted_values)
+
+                weekly_metrics[period] = {
+                    'MSE': weekly_mse,
+                    'RMSE': weekly_rmse,
+                    'MAE': weekly_mae
+                }
+        else:
+            print(f"No predictions available for {period}")
+
+    return weekly_metrics
+
+
+def log_diagnostics(results, country):
+    fig = results.plot_diagnostics(figsize=(10, 8))
+    diagnostics_path = f"{wandb.run.dir}/diagnostics_{country}.png"
+    fig.savefig(diagnostics_path)
+    wandb.log({f"diagnostics_{country}": wandb.Image(diagnostics_path)})
 
 
 def train_sarimax(final_data):
@@ -72,41 +121,7 @@ def train_sarimax(final_data):
         # artifact.add_file(model_file_path)
         # run.log_artifact(artifact)
 
-        if not validation_data.empty:
-            val_predictions = results.get_prediction(start=len(train_data),
-                                                     end=len(train_data) + len(validation_data) - 1,
-                                                     exog=exog_validation, dynamic=False).predicted_mean
-            # overall metrics
-            val_mse = mean_squared_error(validation_data['moer'], val_predictions)
-            val_rmse = np.sqrt(val_mse)
-            val_mae = mean_absolute_error(validation_data['moer'], val_predictions)
-            wandb.log({f"{country}_validation_MSE": val_mse,
-                       f"{country}_validation_RMSE": val_rmse,
-                       f"{country}_validation_MAE": val_mae})
-
-            # monthly metrics
-            monthly_metrics = calculate_monthly_metrics(validation_data['moer'], val_predictions)
-            for month, metrics in monthly_metrics.items():
-                wandb.log({f"{country}_{month}_validation_MSE": metrics['MSE'],
-                           f"{country}_{month}_validation_RMSE": metrics['RMSE'],
-                           f"{country}_{month}_validation_MAE": metrics['MAE']})
-
-            plt.figure(figsize=(10, 5))
-            plt.plot(validation_data.index, validation_data['moer'], label='Actual')
-            plt.plot(validation_data.index, val_predictions, label='Prediction', linestyle='--')
-            plt.xticks(rotation=45)
-            plt.title(f'validation prediction vs. actual ({country})')
-            plt.legend()
-            plt.tight_layout()
-            val_plot_file_path = f"{wandb.run.dir}/plot_val_{country}.png"
-            plt.savefig(val_plot_file_path)
-            plt.close()
-            wandb.log({f"plot_val_{country}": wandb.Image(val_plot_file_path)})
-
-        # Log diagnostics
-        fig = results.plot_diagnostics(figsize=(10, 8))
-        diagnostics_path = f"{wandb.run.dir}/diagnostics_{country}.png"
-        fig.savefig(diagnostics_path)
-        wandb.log({f"diagnostics_{country}": wandb.Image(diagnostics_path)})
+        calculate_and_plot_metrics(results, train_data, validation_data, exog_validation, country)
+        log_diagnostics(results, country)
 
     run.finish()
