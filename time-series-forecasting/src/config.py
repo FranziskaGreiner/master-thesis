@@ -37,9 +37,9 @@ def get_tft_config():
         "max_epochs": 10,
         "accelerator:": "auto",
         "enable_model_summary": True,
-        "learning_rate": 0.01,
+        "learning_rate": 0.02,
         "hidden_size": 32,
-        "attention_head_size": 3,
+        "attention_head_size": 1,
         "dropout": 0.4,
         "hidden_continuous_size": 8,
         "log_interval": 10,
@@ -56,7 +56,7 @@ def get_sarimax_config():
             "P": 2, "D": 0, "Q": 0, "s": 24,
         },
         "no": {
-            "p": 2, "d": 1, "q": 0,
+            "p": 1, "d": 0, "q": 0,
             "P": 2, "D": 0, "Q": 2, "s": 24,
         },
         "auto_arima": {
