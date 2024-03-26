@@ -40,8 +40,10 @@ def normalize_features(weather_time_moer_data):
 
 def convert_categoricals(weather_time_moer_data):
     weather_time_moer_data.loc[:, 'season'] = weather_time_moer_data['season'].astype(str).astype("category")
+    weather_time_moer_data.loc[:, 'hour_of_day'] = weather_time_moer_data['hour_of_day'].astype(str).astype("category")
     weather_time_moer_data.loc[:, 'day_of_week'] = weather_time_moer_data['day_of_week'].astype(str).astype("category")
-    weather_time_moer_data.loc[:, 'is_holiday'] = weather_time_moer_data['is_holiday'].astype(str).astype("category")
+    weather_time_moer_data.loc[:, 'day_of_year'] = weather_time_moer_data['day_of_year'].astype(str).astype("category")
+    weather_time_moer_data.loc[:, 'is_holiday_or_weekend'] = weather_time_moer_data['is_holiday_or_weekend'].astype(str).astype("category")
     return weather_time_moer_data
 
 
