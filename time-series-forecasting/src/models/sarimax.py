@@ -128,7 +128,7 @@ def train_sarimax(final_data):
         sarimax_country_config = sarimax_config.get(country.lower())
         country_data = final_data.loc[final_data['country'] == country]
         train_data, validation_data, exog_train, exog_validation = create_sarimax_datasets(country_data)
-        create_auto_arima()
+        create_auto_arima(train_data, exog_train)
         # sarimax_model = create_sarimax_model(train_data, exog_train, sarimax_country_config)
         # results = sarimax_model.fit(disp=False)
 
