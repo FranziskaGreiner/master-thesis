@@ -3,6 +3,7 @@ import pandas as pd
 import wandb
 import joblib
 import matplotlib.pyplot as plt
+import pmdarima as pm
 from statsmodels.tsa.statespace.sarimax import SARIMAX
 from src.config import get_sarimax_config
 from sklearn.metrics import mean_squared_error, mean_absolute_error
@@ -16,7 +17,7 @@ def create_sarimax_datasets(final_data):
     final_data.index = pd.DatetimeIndex(final_data.index)
 
     train_data = final_data[final_data.index <= sarimax_config.get('training_cutoff_date')]
-    validation_data = final_data[final_data.index > sarimax_config.get('training_cutoff_date'):]
+    validation_data = final_data[final_data.index > sarimax_config.get('training_cutoff_date')]
 
     exog_variables = [
         'temperature', 'ghi', 'wind_speed', 'precipitation', 'hour_of_day', 'day_of_week',
@@ -25,6 +26,21 @@ def create_sarimax_datasets(final_data):
     exog_train = train_data[exog_variables] if not train_data.empty else None
     exog_validation = validation_data[exog_variables] if not validation_data.empty else None
     return train_data, validation_data, exog_train, exog_validation
+
+
+def create_auto_arima(train_data, exog_train):
+    auto_arima_config = sarimax_config.get("auto_arima")
+    sarimax_model = pm.auto_arima(train_data['moer'],
+                                  exogenous=exog_train,
+                                  start_p=auto_arima_config.get('start_p'), start_q=auto_arima_config.get('start_q'),
+                                  max_p=auto_arima_config.get('max_p'), max_q=auto_arima_config.get('max_q'),
+                                  m=auto_arima_config.get('m'),
+                                  d=auto_arima_config.get('d'),
+                                  seasonal=auto_arima_config.get('seasonal'),
+                                  trace=auto_arima_config.get('trace'),
+                                  suppress_warnings=auto_arima_config.get('suppress_warnings'),
+                                  stepwise=auto_arima_config.get('stepwise'))
+    print(sarimax_model.summary())
 
 
 def create_sarimax_model(train_data, exog_train, config):
@@ -51,11 +67,11 @@ def calculate_and_plot_metrics(results, train_data, validation_data, exog_valida
                    f"{country}_validation_MAE": val_mae})
 
         # weekly metrics
-        weekly_metrics = calculate_weekly_metrics(validation_data['moer'], val_predictions)
-        for week, metrics in weekly_metrics.items():
-            wandb.log({f"{country}_{week}_validation_MSE": metrics['MSE'],
-                       f"{country}_{week}_validation_RMSE": metrics['RMSE'],
-                       f"{country}_{week}_validation_MAE": metrics['MAE']})
+        # weekly_metrics = calculate_weekly_metrics(validation_data['moer'], val_predictions)
+        # for week, metrics in weekly_metrics.items():
+        #     wandb.log({f"{country}_{week}_validation_MSE": metrics['MSE'],
+        #                f"{country}_{week}_validation_RMSE": metrics['RMSE'],
+        #                f"{country}_{week}_validation_MAE": metrics['MAE']})
 
         plt.figure(figsize=(10, 5))
         plt.plot(validation_data.index, validation_data['moer'], label='Actual')
@@ -108,12 +124,13 @@ def log_diagnostics(results, country):
 def train_sarimax(final_data):
     run = wandb.init(project="tsf_moer_sarimax", config=sarimax_config)
 
-    for country in ['DE', 'NO']:
+    for country in ['NO']:
         sarimax_country_config = sarimax_config.get(country.lower())
         country_data = final_data.loc[final_data['country'] == country]
         train_data, validation_data, exog_train, exog_validation = create_sarimax_datasets(country_data)
-        sarimax_model = create_sarimax_model(train_data, exog_train, sarimax_country_config)
-        results = sarimax_model.fit(disp=False)
+        # create_auto_arima()
+        # sarimax_model = create_sarimax_model(train_data, exog_train, sarimax_country_config)
+        # results = sarimax_model.fit(disp=False)
 
         # model_file_path = f"{wandb.run.dir}/sarimax_model_{country}.joblib"
         # joblib.dump(results, model_file_path)
@@ -121,7 +138,7 @@ def train_sarimax(final_data):
         # artifact.add_file(model_file_path)
         # run.log_artifact(artifact)
 
-        calculate_and_plot_metrics(results, train_data, validation_data, exog_validation, country)
-        log_diagnostics(results, country)
+        # calculate_and_plot_metrics(results, train_data, validation_data, exog_validation, country)
+        # log_diagnostics(results, country)
 
     run.finish()

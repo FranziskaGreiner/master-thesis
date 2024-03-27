@@ -7,8 +7,6 @@ def get_general_config():
         "data_path": os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), 'data/'),
         "output_path": os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), 'out/'),
         "preprocessed_data_file_name": "weather_time_moer_2021_2024_DE_NO.csv",
-        "training_cutoff_date": pd.to_datetime('2024-01-31 23:00'),
-        "validation_cutoff_date": pd.to_datetime('2023-11-30 23:00'),
     }
 
 
@@ -51,13 +49,14 @@ def get_tft_config():
 def get_sarimax_config():
     general_config = get_general_config()
     sarimax_config = {
+        "training_cutoff_date": pd.to_datetime('2024-02-24 23:00'),
         "de": {
             "p": 1, "d": 0, "q": 0,
-            "P": 2, "D": 0, "Q": 0, "s": 24,
+            "P": 1, "D": 0, "Q": 1, "s": 24,
         },
         "no": {
             "p": 1, "d": 0, "q": 0,
-            "P": 2, "D": 0, "Q": 2, "s": 24,
+            "P": 1, "D": 0, "Q": 1, "s": 24,
         },
         "auto_arima": {
             "start_p": 0, "start_q": 0, "max_p": 3, "max_q": 3, "m": 24, "d": 0,
