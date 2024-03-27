@@ -124,7 +124,7 @@ def log_diagnostics(results, country):
 def train_sarimax(final_data):
     run = wandb.init(project="tsf_moer_sarimax", config=sarimax_config)
 
-    for country in ['DE', 'NO']:
+    for country in ['NO']:
         sarimax_country_config = sarimax_config.get(country.lower())
         country_data = final_data.loc[final_data['country'] == country]
         train_data, validation_data, exog_train, exog_validation = create_sarimax_datasets(country_data)
