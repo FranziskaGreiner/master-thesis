@@ -5,6 +5,33 @@
     \label{FIG:moer_decomposition_NO}
 \end{figure}
 
+\begin{figure}
+    \centering
+    \subfloat[\centering Positive Einsparungen durch Verschiebungen von Deutschland nach Norwegen]{{\includegraphics[width=.99\textwidth]{\figdir/location-shifting-potential-de_pos} }}%
+    \qquad
+    \subfloat[\centering Negative Einsparungen durch Verschiebungen von Deutschland nach Norwegen]{{\includegraphics[width=.99\textwidth]{\figdir/location-shifting-potential-de_neg} }}%
+    \qquad
+    \subfloat[\centering Einsparungen durch Verschiebungen von Norwegen nach Deutschland]{{\includegraphics[width=.99\textwidth]{\figdir/location-shifting-potential-no} }}%
+    \caption{Das Potenzial örtlicher Verschiebungen für Deutschland und Norwegen anhand der MOER (eigene Darstellungen)}%
+    \label{FIG:location-shifting-potential}%
+\end{figure}
+
+
+\chapter{Tabellen}
+\begin{table}[t]
+    \centering\small
+    \caption{TFT Hyperparameter Tuning}
+    \label{TAB:hyperparameter-trained}
+    \input{\tabledir/HyperparameterTrained.tex}
+\end{table}
+
+\begin{table}[t]
+    \centering\small
+    \caption{TFT Verwendete Hyperparameter}
+    \label{TAB:hyperparameter-used}
+    \input{\tabledir/HyperparameterUsed.tex}
+\end{table}
+
 
 \chapter{Code-Ausschnitte}
 \lstinputlisting[language=Python, caption=Python-Code zur Abfrage der MOER-Werte, label=CODE:watttime_get_moer]{\codedir/wattime_get_moer.m}
