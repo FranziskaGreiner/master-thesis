@@ -49,17 +49,18 @@ def get_tft_config():
 def get_sarimax_config():
     general_config = get_general_config()
     sarimax_config = {
-        "training_cutoff_date": pd.to_datetime('2024-02-24 23:00'),
+        "start_date": pd.to_datetime('2023-09-01 00:00'),
+        "training_cutoff_date": pd.to_datetime('2024-02-22 23:00'),
         "de": {
-            "p": 1, "d": 0, "q": 0,
-            "P": 1, "D": 0, "Q": 1, "s": 24,
+            "p": 2, "d": 0, "q": 0,
+            "P": 1, "D": 0, "Q": 0, "s": 24,
         },
         "no": {
-            "p": 1, "d": 0, "q": 0,
-            "P": 1, "D": 0, "Q": 1, "s": 24,
+            "p": 2, "d": 0, "q": 1,
+            "P": 2, "D": 0, "Q": 0, "s": 24,
         },
         "auto_arima": {
-            "start_p": 0, "start_q": 0, "max_p": 3, "max_q": 3, "m": 24, "d": 0,
+            "start_p": 0, "start_q": 0, "max_p": 5, "max_q": 5, "m": 24, "d": 0,
             "seasonal": True, "trace": True, "suppress_warnings": True, "stepwise": True,
         }
     }
