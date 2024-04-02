@@ -1,0 +1,10 @@
+model = pm.auto_arima(train_de['moer'],
+                      exogenous=exog_train_de,
+                      m=24,
+                      seasonal=True,
+                      start_p=0, start_q=0,
+                      max_p=5, max_q=5,
+                      d=0,
+                      trace=True,
+                      suppress_warnings=True,
+                      stepwise=True)

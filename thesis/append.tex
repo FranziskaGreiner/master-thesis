@@ -7,6 +7,15 @@
 
 \begin{figure}
     \centering
+    \subfloat[\centering ACF]{{\includegraphics[width=.4\textwidth]{\figdir/acf_moer_no} }}%
+    \qquad
+    \subfloat[\centering PACF]{{\includegraphics[width=.4\textwidth]{\figdir/pacf_moer_no} }}%
+    \caption{Die ACF und PACF der MOER-Zeitreihe für Norwegen (eigene Darstellung)}%
+    \label{FIG:acf_pacf_moer_no}%
+\end{figure}
+
+\begin{figure}
+    \centering
     \subfloat[\centering Positive Einsparungen durch Verschiebungen von Deutschland nach Norwegen]{{\includegraphics[width=.99\textwidth]{\figdir/location-shifting-potential-de_pos} }}%
     \qquad
     \subfloat[\centering Negative Einsparungen durch Verschiebungen von Deutschland nach Norwegen]{{\includegraphics[width=.99\textwidth]{\figdir/location-shifting-potential-de_neg} }}%
@@ -16,21 +25,6 @@
     \label{FIG:location-shifting-potential}%
 \end{figure}
 
-
-\chapter{Tabellen}
-\begin{table}[t]
-    \centering\small
-    \caption{TFT Hyperparameter Tuning}
-    \label{TAB:hyperparameter-trained}
-    \input{\tabledir/HyperparameterTrained.tex}
-\end{table}
-
-\begin{table}[t]
-    \centering\small
-    \caption{TFT Verwendete Hyperparameter}
-    \label{TAB:hyperparameter-used}
-    \input{\tabledir/HyperparameterUsed.tex}
-\end{table}
 
 
 \chapter{Code-Ausschnitte}
