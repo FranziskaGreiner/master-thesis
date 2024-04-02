@@ -37,29 +37,39 @@ def normalize_features(weather_time_moer_data):
 
 
 def convert_categoricals(weather_time_moer_data):
-    weather_time_moer_data.loc['season'] = weather_time_moer_data['season'].astype(str).astype("category")
-    weather_time_moer_data.loc['hour_of_day'] = weather_time_moer_data['hour_of_day'].astype(str).astype("category")
-    weather_time_moer_data.loc['day_of_week'] = weather_time_moer_data['day_of_week'].astype(str).astype("category")
-    weather_time_moer_data.loc['day_of_year'] = weather_time_moer_data['day_of_year'].astype(str).astype("category")
-    weather_time_moer_data.loc['is_holiday_or_weekend'] = weather_time_moer_data['is_holiday_or_weekend'].astype(str).astype("category")
+    weather_time_moer_data['season'] = weather_time_moer_data['season'].astype(str).astype("category")
+    weather_time_moer_data['hour_of_day'] = weather_time_moer_data['hour_of_day'].astype(str).astype("category")
+    weather_time_moer_data['day_of_week'] = weather_time_moer_data['day_of_week'].astype(str).astype("category")
+    weather_time_moer_data['day_of_year'] = weather_time_moer_data['day_of_year'].astype(str).astype("category")
+    weather_time_moer_data['is_holiday_or_weekend'] = weather_time_moer_data['is_holiday_or_weekend'].astype(str).astype("category")
     return weather_time_moer_data
 
 
-def create_cut_training_data(weather_time_moer_data, max_prediction_length):
-    train_data = weather_time_moer_data
+def create_cut_data(weather_time_moer_data, cut_length):
+    data = weather_time_moer_data.copy()
     cutoffs = {}
     for country in ['DE', 'NO']:
-        country_data = train_data[train_data['country'] == country]
+        country_data = data[data['country'] == country]
         max_time_idx = country_data["time_idx"].max()
-        cutoffs[country] = max_time_idx - max_prediction_length
+        cutoffs[country] = max_time_idx - cut_length
 
-    cut_train_data = pd.DataFrame()
+    cut_data = pd.DataFrame()
     for country, cutoff in cutoffs.items():
-        country_train_data = train_data[(train_data['country'] == country) &
-                                        (train_data['time_idx'] <= cutoff)]
-        cut_train_data = pd.concat([cut_train_data, country_train_data])
-    cut_train_data['time_idx'] = pd.to_numeric(cut_train_data['time_idx'], downcast='integer')
-    return cut_train_data
+        country_train_data = data[(data['country'] == country) &
+                                        (data['time_idx'] <= cutoff)]
+        cut_data = pd.concat([cut_data, country_train_data])
+    return cut_data
+
+
+def create_last_data_segment(weather_time_moer_data, cut_length):
+    data = weather_time_moer_data.copy()
+    last_data_segments = pd.DataFrame()
+    for country in ['DE', 'NO']:
+        country_data = data[data['country'] == country]
+        country_data_sorted = country_data.sort_values(by="time_idx")
+        last_segment = country_data_sorted.tail(cut_length)
+        last_data_segments = pd.concat([last_data_segments, last_segment])
+    return last_data_segments
 
 
 def create_tft_training_dataset(train_data):
@@ -89,21 +99,19 @@ def create_tft_training_dataset(train_data):
     return training_dataset
 
 
-def create_tft_validation_dataset(training_dataset, weather_time_moer_data):
+def create_tft_validation_dataset(training_dataset, validation_data):
     validation_dataset = TimeSeriesDataSet.from_dataset(
         training_dataset,
-        weather_time_moer_data,
+        validation_data,
         predict=True,  # predict the decoder length on the last entries in the time index
         stop_randomization=True,
     )
     return validation_dataset
 
 
-def create_tft_test_dataset(weather_time_moer_data, training_dataset):
-    test_data = weather_time_moer_data[weather_time_moer_data['date'] > tft_config.get('training_cutoff_date')].copy()
-
+def create_tft_test_dataset(validation_dataset, test_data):
     test_dataset = TimeSeriesDataSet.from_dataset(
-        training_dataset,
+        validation_dataset,
         test_data,
         predict=True,  # predict the decoder length on the last entries in the time index
         stop_randomization=True,
@@ -213,7 +221,7 @@ def plot_evaluations(best_tft, val_prediction_results, val_dataloader):
         # actuals vs. predictions by variables
         predictions = best_tft.predict(val_dataloader, return_x=True)
         predictions_vs_actuals = best_tft.calculate_prediction_actual_by_variable(predictions.x, predictions.output)
-        features = list(set(predictions_vs_actuals['support'].keys()) - {'moer_lagged_by_168'})
+        features = list(set(predictions_vs_actuals['support'].keys()) - {f"moer_lagged_by_{tft_config.get('lags')['moer'][0]}"})
         for feature in features:
             best_tft.plot_prediction_actual_by_variable(predictions_vs_actuals, name=feature)
             act_vs_predict_file_path = f"{wandb.run.dir}/{feature}_act_vs_predict.png"
@@ -232,14 +240,17 @@ def train_tft(weather_time_moer_data):
     run = wandb.init(project="tsf_moer_tft", config=dict(tft_config))
 
     weather_time_moer_data = add_time_idx(weather_time_moer_data)
-    # weather_time_moer_data = normalize_features(weather_time_moer_data)
+    weather_time_moer_data = normalize_features(weather_time_moer_data)
     weather_time_moer_data = convert_categoricals(weather_time_moer_data)
 
-    train_data = create_cut_training_data(weather_time_moer_data, tft_config.get('max_prediction_length'))
+    train_data = create_cut_data(weather_time_moer_data, tft_config.get('max_prediction_length') * 2)
+    validation_data = create_cut_data(weather_time_moer_data, tft_config.get('max_prediction_length'))
+    test_data = create_last_data_segment(weather_time_moer_data, tft_config.get('max_prediction_length'))
+    test_data = pd.concat([validation_data, test_data])
 
     training_dataset = create_tft_training_dataset(train_data)
-    validation_dataset = create_tft_validation_dataset(training_dataset, weather_time_moer_data)
-    # test_dataset = create_tft_test_dataset(weather_time_moer_data, training_dataset)
+    validation_dataset = create_tft_validation_dataset(training_dataset, validation_data)
+    test_dataset = create_tft_test_dataset(validation_dataset, test_data)
 
     train_dataloader = training_dataset.to_dataloader(train=True,
                                                       batch_size=tft_config.get('batch_size'),
@@ -249,10 +260,10 @@ def train_tft(weather_time_moer_data):
                                                       batch_size=tft_config.get('batch_size') * 10,
                                                       num_workers=tft_config.get('num_workers'),
                                                       persistent_workers=True)
-    # test_dataloader = test_dataset.to_dataloader(train=False,
-    #                                              batch_size=tft_config.get('batch_size') * 10,
-    #                                              num_workers=tft_config.get('num_workers'),
-    #                                              persistent_workers=True)
+    test_dataloader = test_dataset.to_dataloader(train=False,
+                                                 batch_size=tft_config.get('batch_size') * 10,
+                                                 num_workers=tft_config.get('num_workers'),
+                                                 persistent_workers=True)
 
     create_baseline_model(val_dataloader)
     trainer = create_tft_trainer()
@@ -267,7 +278,7 @@ def train_tft(weather_time_moer_data):
         val_dataloaders=val_dataloader,
     )
 
-    # trainer.test(dataloaders=test_dataloader, ckpt_path='best')
+    trainer.test(dataloaders=test_dataloader, ckpt_path='best')
 
     model_save_path = f"{wandb.run.dir}/tft_model.pth"
     torch.save(tft_model.state_dict(), model_save_path)
@@ -277,5 +288,7 @@ def train_tft(weather_time_moer_data):
     best_tft = TemporalFusionTransformer.load_from_checkpoint(best_model_path)
     val_prediction_results = best_tft.predict(val_dataloader, mode="raw", return_x=True)
     plot_evaluations(best_tft, val_prediction_results, val_dataloader)
+    test_prediction_results = best_tft.predict(test_dataloader, mode="raw", return_index=True, return_x=True)
+    plot_evaluations(best_tft, test_prediction_results, test_dataloader)
 
     run.finish()
