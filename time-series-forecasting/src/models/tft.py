@@ -19,10 +19,8 @@ tft_config = get_tft_config()
 
 
 def add_time_idx(weather_time_moer_data):
-    weather_time_moer_data.loc[:, 'date'] = pd.to_datetime(weather_time_moer_data['date'])
-    min_date_per_group = weather_time_moer_data.groupby('country')['date'].transform('min')
-    weather_time_moer_data.loc[:, 'time_idx'] = ((weather_time_moer_data['date'] - min_date_per_group)
-                                                 .dt.total_seconds() / 3600).astype(int)
+    weather_time_moer_data = weather_time_moer_data.sort_values(by='date')
+    weather_time_moer_data['time_idx'] = weather_time_moer_data.groupby('country').cumcount()
     return weather_time_moer_data
 
 
@@ -39,16 +37,16 @@ def normalize_features(weather_time_moer_data):
 
 
 def convert_categoricals(weather_time_moer_data):
-    weather_time_moer_data.loc[:, 'season'] = weather_time_moer_data['season'].astype(str).astype("category")
-    weather_time_moer_data.loc[:, 'hour_of_day'] = weather_time_moer_data['hour_of_day'].astype(str).astype("category")
-    weather_time_moer_data.loc[:, 'day_of_week'] = weather_time_moer_data['day_of_week'].astype(str).astype("category")
-    weather_time_moer_data.loc[:, 'day_of_year'] = weather_time_moer_data['day_of_year'].astype(str).astype("category")
-    weather_time_moer_data.loc[:, 'is_holiday_or_weekend'] = weather_time_moer_data['is_holiday_or_weekend'].astype(str).astype("category")
+    weather_time_moer_data.loc['season'] = weather_time_moer_data['season'].astype(str).astype("category")
+    weather_time_moer_data.loc['hour_of_day'] = weather_time_moer_data['hour_of_day'].astype(str).astype("category")
+    weather_time_moer_data.loc['day_of_week'] = weather_time_moer_data['day_of_week'].astype(str).astype("category")
+    weather_time_moer_data.loc['day_of_year'] = weather_time_moer_data['day_of_year'].astype(str).astype("category")
+    weather_time_moer_data.loc['is_holiday_or_weekend'] = weather_time_moer_data['is_holiday_or_weekend'].astype(str).astype("category")
     return weather_time_moer_data
 
 
 def create_cut_training_data(weather_time_moer_data, max_prediction_length):
-    train_data = weather_time_moer_data[weather_time_moer_data['date'] <= tft_config.get('training_cutoff_date')].copy()
+    train_data = weather_time_moer_data
     cutoffs = {}
     for country in ['DE', 'NO']:
         country_data = train_data[train_data['country'] == country]
@@ -58,8 +56,9 @@ def create_cut_training_data(weather_time_moer_data, max_prediction_length):
     cut_train_data = pd.DataFrame()
     for country, cutoff in cutoffs.items():
         country_train_data = train_data[(train_data['country'] == country) &
-                                                    (train_data['time_idx'] <= cutoff)]
+                                        (train_data['time_idx'] <= cutoff)]
         cut_train_data = pd.concat([cut_train_data, country_train_data])
+    cut_train_data['time_idx'] = pd.to_numeric(cut_train_data['time_idx'], downcast='integer')
     return cut_train_data
 
 
@@ -91,11 +90,9 @@ def create_tft_training_dataset(train_data):
 
 
 def create_tft_validation_dataset(training_dataset, weather_time_moer_data):
-    validation_data = weather_time_moer_data[weather_time_moer_data['date'] > tft_config.get('training_cutoff_date')].copy()
-
     validation_dataset = TimeSeriesDataSet.from_dataset(
         training_dataset,
-        validation_data,
+        weather_time_moer_data,
         predict=True,  # predict the decoder length on the last entries in the time index
         stop_randomization=True,
     )
@@ -184,15 +181,13 @@ def tune_hyperparameters(train_dataloader, val_dataloader):
         val_dataloader,
         model_path="optuna_test",
         n_trials=25,
-        max_epochs=10,
+        max_epochs=8,
         gradient_clip_val_range=(0.01, 1.0),
         hidden_size_range=(8, 128),
         hidden_continuous_size_range=(8, 128),
         attention_head_size_range=(1, 4),
-        learning_rate_range=(0.001, 0.1),
         dropout_range=(0.1, 0.4),
-        trainer_kwargs=dict(limit_train_batches=30),
-        reduce_on_plateau_patience=5,
+        reduce_on_plateau_patience=3,
         use_learning_rate_finder=False
     )
 
@@ -237,8 +232,9 @@ def train_tft(weather_time_moer_data):
     run = wandb.init(project="tsf_moer_tft", config=dict(tft_config))
 
     weather_time_moer_data = add_time_idx(weather_time_moer_data)
-    weather_time_moer_data = normalize_features(weather_time_moer_data)
+    # weather_time_moer_data = normalize_features(weather_time_moer_data)
     weather_time_moer_data = convert_categoricals(weather_time_moer_data)
+    weather_time_moer_data.to_csv(f"{tft_config.get('output_path')}tft_weather_time_moer.csv")
 
     train_data = create_cut_training_data(weather_time_moer_data, tft_config.get('max_prediction_length'))
 
@@ -263,8 +259,8 @@ def train_tft(weather_time_moer_data):
     trainer = create_tft_trainer()
     tft_model = create_tft_model(training_dataset)
 
-    find_optimal_learning_rate(trainer, tft_model, train_dataloader, val_dataloader)
-    tune_hyperparameters(train_dataloader, val_dataloader)
+    # find_optimal_learning_rate(trainer, tft_model, train_dataloader, val_dataloader)
+    # tune_hyperparameters(train_dataloader, val_dataloader)
 
     trainer.fit(
         tft_model,

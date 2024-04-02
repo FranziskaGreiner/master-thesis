@@ -13,17 +13,17 @@ def get_general_config():
 def get_tft_config():
     general_config = get_general_config()
     tft_specific_config = {
-        # "gradient_clip_val": 0.2,
+        # "gradient_clip_val": 0.08,
         "time_idx": "time_idx",
         "target": "moer",
         "group_ids": ["country"],
-        "max_encoder_length": 168,  # 1 week
-        "max_prediction_length": 168,  # 1 week
+        "max_encoder_length": 720,  # 1 month
+        "max_prediction_length": 720,  # 1 month
         "static_categoricals": ["country"],
         "time_varying_known_categoricals": [
-            "hour_of_day", "day_of_week", "day_of_week", "is_holiday_or_weekend", "season"
+            "hour_of_day", "day_of_week", "day_of_year", "is_holiday_or_weekend", "season"
         ],
-        "time_varying_known_reals": ["time_idx", "ghi", "temperature", "wind_speed", "precipitation"],
+        "time_varying_known_reals": ["time_idx"],
         "time_varying_unknown_reals": ["moer"],
         "lags": {'moer': [168]},
         "add_relative_time_idx": True,
@@ -32,12 +32,12 @@ def get_tft_config():
         "allow_missing_timesteps": True,
         "batch_size": 32,
         "num_workers": 2,
-        "max_epochs": 10,
+        "max_epochs": 5,
         "accelerator:": "auto",
         "enable_model_summary": True,
-        "learning_rate": 0.02,
+        "learning_rate": 0.01,
         "hidden_size": 32,
-        "attention_head_size": 1,
+        "attention_head_size": 3,
         "dropout": 0.4,
         "hidden_continuous_size": 8,
         "log_interval": 10,
