@@ -234,7 +234,6 @@ def train_tft(weather_time_moer_data):
     weather_time_moer_data = add_time_idx(weather_time_moer_data)
     # weather_time_moer_data = normalize_features(weather_time_moer_data)
     weather_time_moer_data = convert_categoricals(weather_time_moer_data)
-    weather_time_moer_data.to_csv(f"{tft_config.get('output_path')}tft_weather_time_moer.csv")
 
     train_data = create_cut_training_data(weather_time_moer_data, tft_config.get('max_prediction_length'))
 

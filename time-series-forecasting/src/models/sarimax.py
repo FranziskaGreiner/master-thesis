@@ -138,16 +138,16 @@ def train_sarimax(weather_time_moer_data):
         train_data, validation_data, exog_train, exog_validation = create_sarimax_datasets(country_data)
         # create_auto_arima(train_data, exog_train)
         sarimax_model = create_sarimax_model(train_data, exog_train, sarimax_country_config)
-        # results = sarimax_model.fit(disp=False)
+        results = sarimax_model.fit(disp=False)
 
         # print(results.summary())
-        calculate_and_plot_metrics(sarimax_model, train_data, validation_data, exog_validation, country)
-        log_diagnostics(sarimax_model, country)
+        calculate_and_plot_metrics(results, train_data, validation_data, exog_validation, country)
+        log_diagnostics(results, country)
 
-        # model_file_path = f"{wandb.run.dir}/sarimax_model_{country}.joblib"
-        # joblib.dump(results, model_file_path)
-        # artifact = wandb.Artifact(f'sarimax_model_{country}', type='model')
-        # artifact.add_file(model_file_path)
-        # run.log_artifact(artifact)
+        model_file_path = f"{wandb.run.dir}/sarimax_model_{country}.joblib"
+        joblib.dump(results, model_file_path)
+        artifact = wandb.Artifact(f'sarimax_model_{country}', type='model')
+        artifact.add_file(model_file_path)
+        run.log_artifact(artifact)
 
     run.finish()
