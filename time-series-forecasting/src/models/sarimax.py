@@ -45,18 +45,12 @@ def create_auto_arima(train_data, exog_train):
 
 
 def create_sarimax_model(train_data, exog_train, config):
-    auto_arima_config = sarimax_config.get("auto_arima")
-    sarimax_model = pm.auto_arima(train_data['moer'],
-                                  exogenous=exog_train,
-                                  start_p=auto_arima_config.get('start_p'), start_q=auto_arima_config.get('start_q'),
-                                  max_p=auto_arima_config.get('max_p'), max_q=auto_arima_config.get('max_q'),
-                                  m=auto_arima_config.get('m'),
-                                  d=auto_arima_config.get('d'),
-                                  seasonal=auto_arima_config.get('seasonal'),
-                                  trace=auto_arima_config.get('trace'),
-                                  suppress_warnings=auto_arima_config.get('suppress_warnings'),
-                                  stepwise=auto_arima_config.get('stepwise'))
-    print(sarimax_model.summary())
+    sarimax_model = SARIMAX(train_data['moer'],
+                            exog=exog_train,
+                            order=(config.get('p'), config.get('d'), config.get('q')),
+                            seasonal_order=(
+                                config.get('P'), config.get('D'), config.get('Q'),
+                                config.get('s')))
     return sarimax_model
 
 
@@ -140,7 +134,7 @@ def train_sarimax(weather_time_moer_data):
         sarimax_model = create_sarimax_model(train_data, exog_train, sarimax_country_config)
         results = sarimax_model.fit(disp=False)
 
-        # print(results.summary())
+        print(results.summary())
         calculate_and_plot_metrics(results, train_data, validation_data, exog_validation, country)
         log_diagnostics(results, country)
 
