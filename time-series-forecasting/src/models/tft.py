@@ -187,16 +187,10 @@ def tune_hyperparameters(train_dataloader, val_dataloader):
     study = optimize_hyperparameters(
         train_dataloader,
         val_dataloader,
-        model_path="optuna_test",
-        n_trials=25,
-        max_epochs=8,
-        gradient_clip_val_range=(0.01, 1.0),
+        model_path=f"{wandb.run.dir}/optuna_test",
+        n_trials=20,
         hidden_size_range=(8, 128),
-        hidden_continuous_size_range=(8, 128),
-        attention_head_size_range=(1, 4),
         dropout_range=(0.1, 0.4),
-        reduce_on_plateau_patience=3,
-        use_learning_rate_finder=False
     )
 
     hyperparameter_study_save_path = f"{wandb.run.dir}/hyperparameter_study.pkl"
@@ -278,25 +272,25 @@ def train_tft(weather_time_moer_data):
     tft_model = create_tft_model(training_dataset)
 
     # find_optimal_learning_rate(trainer, tft_model, train_dataloader, val_dataloader)
-    # tune_hyperparameters(train_dataloader, val_dataloader)
+    tune_hyperparameters(train_dataloader, val_dataloader)
 
-    trainer.fit(
-        tft_model,
-        train_dataloaders=train_dataloader,
-        val_dataloaders=val_dataloader,
-    )
-
-    trainer.test(dataloaders=test_dataloader, ckpt_path='best')
-
-    model_save_path = f"{wandb.run.dir}/tft_model.pth"
-    torch.save(tft_model.state_dict(), model_save_path)
-    wandb.save(model_save_path)
-
-    best_model_path = trainer.checkpoint_callback.best_model_path
-    best_tft = TemporalFusionTransformer.load_from_checkpoint(best_model_path)
-    val_prediction_results = best_tft.predict(val_dataloader, mode="raw", return_x=True)
-    plot_evaluations(best_tft, val_prediction_results, val_dataloader, 'val')
-    test_prediction_results = best_tft.predict(test_dataloader, mode="raw", return_index=True, return_x=True)
-    plot_evaluations(best_tft, test_prediction_results, test_dataloader, 'test')
+    # trainer.fit(
+    #     tft_model,
+    #     train_dataloaders=train_dataloader,
+    #     val_dataloaders=val_dataloader,
+    # )
+    #
+    # trainer.test(dataloaders=test_dataloader, ckpt_path='best')
+    #
+    # model_save_path = f"{wandb.run.dir}/tft_model.pth"
+    # torch.save(tft_model.state_dict(), model_save_path)
+    # wandb.save(model_save_path)
+    #
+    # best_model_path = trainer.checkpoint_callback.best_model_path
+    # best_tft = TemporalFusionTransformer.load_from_checkpoint(best_model_path)
+    # val_prediction_results = best_tft.predict(val_dataloader, mode="raw", return_x=True)
+    # plot_evaluations(best_tft, val_prediction_results, val_dataloader, 'val')
+    # test_prediction_results = best_tft.predict(test_dataloader, mode="raw", return_index=True, return_x=True)
+    # plot_evaluations(best_tft, test_prediction_results, test_dataloader, 'test')
 
     run.finish()
