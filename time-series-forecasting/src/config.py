@@ -13,7 +13,7 @@ def get_general_config():
 def get_tft_config():
     general_config = get_general_config()
     tft_specific_config = {
-        # "gradient_clip_val": 0.08,
+        "gradient_clip_val": 0.5,
         "time_idx": "time_idx",
         "target": "moer",
         "group_ids": ["country"],
@@ -32,13 +32,13 @@ def get_tft_config():
         "allow_missing_timesteps": True,
         "batch_size": 32,
         "num_workers": 2,
-        "max_epochs": 5,
+        "max_epochs": 8,
         "accelerator:": "auto",
         "enable_model_summary": True,
         "learning_rate": 0.01,
         "hidden_size": 32,
         "attention_head_size": 3,
-        "dropout": 0.4,
+        "dropout": 0.2,
         "hidden_continuous_size": 8,
         "log_interval": 10,
         "reduce_on_plateau_patience": 3,
