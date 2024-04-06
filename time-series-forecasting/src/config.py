@@ -26,7 +26,7 @@ def get_tft_config():
         ],
         "time_varying_known_reals": ["time_idx", "ghi", "temperature", "wind_speed", "precipitation"],
         "time_varying_unknown_reals": ["moer"],
-        "lags": {'moer': [168]},
+        "lags": {'moer': [720]},
         "add_relative_time_idx": True,
         "add_target_scales": True,
         "add_encoder_length": True,
