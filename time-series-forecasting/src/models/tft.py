@@ -41,14 +41,15 @@ def convert_categoricals(weather_time_moer_data):
     weather_time_moer_data['hour_of_day'] = weather_time_moer_data['hour_of_day'].astype(str).astype("category")
     weather_time_moer_data['day_of_week'] = weather_time_moer_data['day_of_week'].astype(str).astype("category")
     weather_time_moer_data['day_of_year'] = weather_time_moer_data['day_of_year'].astype(str).astype("category")
-    weather_time_moer_data['is_holiday_or_weekend'] = weather_time_moer_data['is_holiday_or_weekend'].astype(str).astype("category")
+    weather_time_moer_data['is_holiday_or_weekend'] = weather_time_moer_data['is_holiday_or_weekend'].astype(
+        str).astype("category")
     return weather_time_moer_data
 
 
 def create_cut_data(weather_time_moer_data, cut_length):
     data = weather_time_moer_data.copy()
     cutoffs = {}
-    for country in ['DE', 'NO']:
+    for country in tft_config.get('countries'):
         country_data = data[data['country'] == country]
         max_time_idx = country_data["time_idx"].max()
         cutoffs[country] = max_time_idx - cut_length
@@ -56,7 +57,7 @@ def create_cut_data(weather_time_moer_data, cut_length):
     cut_data = pd.DataFrame()
     for country, cutoff in cutoffs.items():
         country_train_data = data[(data['country'] == country) &
-                                        (data['time_idx'] <= cutoff)]
+                                  (data['time_idx'] <= cutoff)]
         cut_data = pd.concat([cut_data, country_train_data])
     return cut_data
 
@@ -64,7 +65,7 @@ def create_cut_data(weather_time_moer_data, cut_length):
 def create_last_data_segment(weather_time_moer_data, cut_length):
     data = weather_time_moer_data.copy()
     last_data_segments = pd.DataFrame()
-    for country in ['DE', 'NO']:
+    for country in tft_config.get('countries'):
         country_data = data[data['country'] == country]
         country_data_sorted = country_data.sort_values(by="time_idx")
         last_segment = country_data_sorted.tail(cut_length)
@@ -133,7 +134,7 @@ def create_tft_model(training_dataset):
         attention_head_size=tft_config.get('attention_head_size'),
         dropout=tft_config.get('dropout'),
         hidden_continuous_size=tft_config.get('hidden_continuous_size'),
-        loss=QuantileLoss(),
+        loss=QuantileLoss([0.25, 0.5]),
         reduce_on_plateau_patience=tft_config.get('reduce_on_plateau_patience'),  # reduce learning automatically
     )
     model_save_path = Path(wandb.run.dir) / "tft_model.pth"
@@ -153,7 +154,7 @@ def create_tft_checkpoints():
 
 
 def create_tft_trainer():
-    wandb_logger = WandbLogger(name="tsf_moer_tft", project="tsf_moer_tft")
+    wandb_logger = WandbLogger(name="moer_tft", project="moer_tft")
     early_stop_callback = EarlyStopping(monitor="val_loss", min_delta=1e-4, patience=10, verbose=False, mode="min")
     trainer = pl.Trainer(
         accelerator="auto",
@@ -188,9 +189,11 @@ def tune_hyperparameters(train_dataloader, val_dataloader):
         train_dataloader,
         val_dataloader,
         model_path=f"{wandb.run.dir}/optuna_test",
+        max_epochs=8,
         n_trials=20,
         hidden_size_range=(8, 128),
         dropout_range=(0.1, 0.4),
+        use_learning_rate_finder=False
     )
 
     hyperparameter_study_save_path = f"{wandb.run.dir}/hyperparameter_study.pkl"
@@ -199,10 +202,11 @@ def tune_hyperparameters(train_dataloader, val_dataloader):
 
 
 def plot_evaluations(best_tft, prediction_results, dataloader, kind):
-    # mse_loss = torch.nn.functional.mse_loss
-    total_mse = 0
+    mse_loss_function = torch.nn.MSELoss(reduction='mean')
+    all_predictions = []
+    all_actuals = []
 
-    for idx in range(2):
+    for idx in range(1):
         fig, ax = plt.subplots(figsize=(23, 5))
         best_tft.plot_prediction(prediction_results.x,
                                  prediction_results.output,
@@ -219,7 +223,9 @@ def plot_evaluations(best_tft, prediction_results, dataloader, kind):
             # actuals vs. predictions by variables
             predictions = best_tft.predict(dataloader, return_x=True)
             predictions_vs_actuals = best_tft.calculate_prediction_actual_by_variable(predictions.x, predictions.output)
-            features = list(set(predictions_vs_actuals['support'].keys()) - {f"moer_lagged_by_{tft_config.get('lags')['moer'][0]}"})
+            features = list(set(predictions_vs_actuals['support'].keys()) - {
+                f"moer_lagged_by_{tft_config.get('lags')['moer'][0]}"} - {
+                                f"moer_lagged_by_{tft_config.get('lags')['moer'][1]}"})
             for feature in features:
                 best_tft.plot_prediction_actual_by_variable(predictions_vs_actuals, name=feature)
                 act_vs_predict_file_path = f"{wandb.run.dir}/{feature}_act_vs_predict.png"
@@ -233,13 +239,26 @@ def plot_evaluations(best_tft, prediction_results, dataloader, kind):
             plt.savefig(interpretation_file_path)
             wandb.log({f"interpretation": wandb.Image(interpretation_file_path)})
 
-    avg_mse = total_mse / len(dataloader.dataset)
-    print(f"Average MSE for {kind}: {avg_mse}")
-    wandb.log({f"{kind}_mse": avg_mse})
+    with torch.no_grad():
+        for batch in dataloader:
+            x, y = batch
+            decoder_target = y[0]  # Assuming y is a tuple where the first entry is the target
+            batch_predictions = best_tft(x)  # Changed variable name to batch_predictions to avoid confusion
+            all_predictions.append(batch_predictions)
+            all_actuals.append(decoder_target)
+
+    all_predictions = torch.cat([p['prediction'] for p in all_predictions], dim=0)
+    all_actuals = torch.cat(all_actuals, dim=0)
+    print(all_predictions, all_actuals)
+    total_mse = mse_loss_function(all_predictions, all_actuals).item()
+    print(f"Average MSE on {kind} Data: {total_mse}")
+    wandb.log({f"{kind}_MSE": total_mse})
 
 
 def train_tft(weather_time_moer_data):
-    run = wandb.init(project="tsf_moer_tft", config=dict(tft_config))
+    run = wandb.init(project="moer_tft", config=dict(tft_config))
+
+    weather_time_moer_data = weather_time_moer_data[weather_time_moer_data['country'].isin(tft_config.get('countries'))]
 
     weather_time_moer_data = add_time_idx(weather_time_moer_data)
     weather_time_moer_data = normalize_features(weather_time_moer_data)
@@ -272,25 +291,25 @@ def train_tft(weather_time_moer_data):
     tft_model = create_tft_model(training_dataset)
 
     # find_optimal_learning_rate(trainer, tft_model, train_dataloader, val_dataloader)
-    tune_hyperparameters(train_dataloader, val_dataloader)
+    # tune_hyperparameters(train_dataloader, val_dataloader)
 
-    # trainer.fit(
-    #     tft_model,
-    #     train_dataloaders=train_dataloader,
-    #     val_dataloaders=val_dataloader,
-    # )
-    #
-    # trainer.test(dataloaders=test_dataloader, ckpt_path='best')
-    #
-    # model_save_path = f"{wandb.run.dir}/tft_model.pth"
-    # torch.save(tft_model.state_dict(), model_save_path)
-    # wandb.save(model_save_path)
-    #
-    # best_model_path = trainer.checkpoint_callback.best_model_path
-    # best_tft = TemporalFusionTransformer.load_from_checkpoint(best_model_path)
-    # val_prediction_results = best_tft.predict(val_dataloader, mode="raw", return_x=True)
-    # plot_evaluations(best_tft, val_prediction_results, val_dataloader, 'val')
-    # test_prediction_results = best_tft.predict(test_dataloader, mode="raw", return_index=True, return_x=True)
-    # plot_evaluations(best_tft, test_prediction_results, test_dataloader, 'test')
+    trainer.fit(
+        tft_model,
+        train_dataloaders=train_dataloader,
+        val_dataloaders=val_dataloader,
+    )
+
+    trainer.test(dataloaders=test_dataloader, ckpt_path='best')
+
+    model_save_path = f"{wandb.run.dir}/tft_model.pth"
+    torch.save(tft_model.state_dict(), model_save_path)
+    wandb.save(model_save_path)
+
+    best_model_path = trainer.checkpoint_callback.best_model_path
+    best_tft = TemporalFusionTransformer.load_from_checkpoint(best_model_path)
+    test_prediction_results = best_tft.predict(test_dataloader, mode="raw", return_index=True, return_x=True)
+    plot_evaluations(best_tft, test_prediction_results, test_dataloader, 'test')
+    val_prediction_results = best_tft.predict(val_dataloader, mode="raw", return_x=True)
+    plot_evaluations(best_tft, val_prediction_results, val_dataloader, 'val')
 
     run.finish()
