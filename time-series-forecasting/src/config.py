@@ -33,7 +33,7 @@ def get_tft_config():
         "allow_missing_timesteps": True,
         "batch_size": 32,
         "num_workers": 2,
-        "max_epochs": 5,
+        "max_epochs": 20,
         "accelerator:": "auto",
         "enable_model_summary": True,
         "learning_rate": 0.01,

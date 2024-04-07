@@ -135,6 +135,7 @@ def create_tft_model(training_dataset):
         dropout=tft_config.get('dropout'),
         hidden_continuous_size=tft_config.get('hidden_continuous_size'),
         loss=QuantileLoss(),
+        log_interval=tft_config.get('log_interval'),
         reduce_on_plateau_patience=tft_config.get('reduce_on_plateau_patience'),  # reduce learning automatically
     )
     model_save_path = Path(wandb.run.dir) / "tft_model.pth"
@@ -206,7 +207,7 @@ def plot_evaluations(best_tft, prediction_results, dataloader, kind):
     all_predictions = []
     all_actuals = []
 
-    for idx in range(1):
+    for idx in range(2):
         fig, ax = plt.subplots(figsize=(23, 5))
         best_tft.plot_prediction(prediction_results.x,
                                  prediction_results.output,
@@ -239,18 +240,26 @@ def plot_evaluations(best_tft, prediction_results, dataloader, kind):
             plt.savefig(interpretation_file_path)
             wandb.log({f"interpretation": wandb.Image(interpretation_file_path)})
 
+    best_tft.eval()
+
     with torch.no_grad():
         for batch in dataloader:
             x, y = batch
-            decoder_target = y[0]  # Assuming y is a tuple where the first entry is the target
-            batch_predictions = best_tft(x)  # Changed variable name to batch_predictions to avoid confusion
+            decoder_target = y[0]
+            batch_predictions = best_tft(x)['prediction']
             all_predictions.append(batch_predictions)
             all_actuals.append(decoder_target)
 
-    all_predictions = torch.cat([p['prediction'] for p in all_predictions], dim=0)
+    all_predictions = torch.cat(all_predictions, dim=0)
     all_actuals = torch.cat(all_actuals, dim=0)
-    print(all_predictions, all_actuals)
-    total_mse = mse_loss_function(all_predictions, all_actuals).item()
+
+    # Select the median prediction from the quantiles
+    median_index = 3
+    all_predictions_median = all_predictions[:, :, median_index]
+    all_predictions_median = all_predictions_median.to(all_actuals.device).float()
+    all_actuals = all_actuals.float()
+
+    total_mse = mse_loss_function(all_predictions_median, all_actuals).item()
     print(f"Average MSE on {kind} Data: {total_mse}")
     wandb.log({f"{kind}_MSE": total_mse})
 
@@ -307,9 +316,9 @@ def train_tft(weather_time_moer_data):
 
     best_model_path = trainer.checkpoint_callback.best_model_path
     best_tft = TemporalFusionTransformer.load_from_checkpoint(best_model_path)
-    test_prediction_results = best_tft.predict(test_dataloader, mode="raw", return_index=True, return_x=True)
-    plot_evaluations(best_tft, test_prediction_results, test_dataloader, 'test')
     val_prediction_results = best_tft.predict(val_dataloader, mode="raw", return_x=True)
     plot_evaluations(best_tft, val_prediction_results, val_dataloader, 'val')
+    test_prediction_results = best_tft.predict(test_dataloader, mode="raw", return_index=True, return_x=True)
+    plot_evaluations(best_tft, test_prediction_results, test_dataloader, 'test')
 
     run.finish()
