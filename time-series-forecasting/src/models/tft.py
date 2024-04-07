@@ -134,7 +134,7 @@ def create_tft_model(training_dataset):
         attention_head_size=tft_config.get('attention_head_size'),
         dropout=tft_config.get('dropout'),
         hidden_continuous_size=tft_config.get('hidden_continuous_size'),
-        loss=QuantileLoss([0.25, 0.5]),
+        loss=QuantileLoss(),
         reduce_on_plateau_patience=tft_config.get('reduce_on_plateau_patience'),  # reduce learning automatically
     )
     model_save_path = Path(wandb.run.dir) / "tft_model.pth"
