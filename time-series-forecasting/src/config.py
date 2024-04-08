@@ -7,6 +7,7 @@ def get_general_config():
         "data_path": os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), 'data/'),
         "output_path": os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), 'out/'),
         "preprocessed_data_file_name": "weather_time_moer_2021_2024_DE_NO.csv",
+        "preprocessed_filtered_data_file_name": "weather_time_moer_filtered_2021_2024_DE_NO.csv",
     }
 
 

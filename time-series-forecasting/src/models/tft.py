@@ -213,9 +213,10 @@ def plot_evaluations(best_tft, prediction_results, dataloader, kind):
                                  idx=idx,
                                  add_loss_to_title=True,
                                  ax=ax)
-        val_plot_file_path = f"{wandb.run.dir}/plot_{kind}_group_{idx}.png"
+        country = tft_config.get('countries')[idx]
+        val_plot_file_path = f"{wandb.run.dir}/plot_{kind}_{country}.png"
         plt.savefig(val_plot_file_path)
-        wandb.log({f"plot_{kind}_group_{idx}": wandb.Image(val_plot_file_path)})
+        wandb.log({f"plot_{kind}_{country}": wandb.Image(val_plot_file_path)})
         plt.show()
         plt.close()
 
