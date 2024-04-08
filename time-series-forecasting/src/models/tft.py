@@ -297,7 +297,7 @@ def train_tft(weather_time_moer_data):
     trainer = create_tft_trainer()
     tft_model = create_tft_model(training_dataset)
 
-    find_optimal_learning_rate(trainer, tft_model, train_dataloader, val_dataloader)
+    # find_optimal_learning_rate(trainer, tft_model, train_dataloader, val_dataloader)
     tune_hyperparameters(train_dataloader, val_dataloader)
 
     # trainer.fit(
