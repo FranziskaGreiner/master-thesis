@@ -131,8 +131,8 @@ def create_tft_test_dataset(validation_dataset, test_data):
     return test_dataset
 
 
-def create_baseline_model(val_dataloader):
-    baseline_predictions = Baseline().predict(val_dataloader, return_y=True)
+def create_baseline_model(test_dataloader):
+    baseline_predictions = Baseline().predict(test_dataloader, return_y=True)
     mae_value = MAE()(baseline_predictions.output, baseline_predictions.y)
     print(f"Baseline MAE: {mae_value.item()}")
 
@@ -319,7 +319,7 @@ def train_tft(weather_time_moer_data):
                                                  num_workers=tft_config.get('num_workers'),
                                                  persistent_workers=True)
 
-    create_baseline_model(val_dataloader)
+    create_baseline_model(test_dataloader)
     trainer = create_tft_trainer()
     tft_model = create_tft_model(training_dataset)
 
