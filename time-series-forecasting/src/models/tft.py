@@ -293,6 +293,7 @@ def train_tft(weather_time_moer_data):
     weather_time_moer_data = weather_time_moer_data[weather_time_moer_data['country'].isin(tft_config.get('countries'))]
 
     weather_time_moer_data = add_time_idx(weather_time_moer_data)
+    weather_time_moer_data = transform_features(weather_time_moer_data)
     weather_time_moer_data = normalize_features(weather_time_moer_data)
     weather_time_moer_data = convert_categoricals(weather_time_moer_data)
 
