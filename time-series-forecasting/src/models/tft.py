@@ -52,6 +52,7 @@ def normalize_features(weather_time_moer_data):
 
 
 def convert_categoricals(weather_time_moer_data):
+    weather_time_moer_data['country'] = weather_time_moer_data['country'].astype(str).astype("category")
     weather_time_moer_data['is_holiday_or_weekend'] = weather_time_moer_data['is_holiday_or_weekend'].astype(
         str).astype("category")
     return weather_time_moer_data
@@ -147,6 +148,7 @@ def create_tft_model(training_dataset):
         hidden_continuous_size=tft_config.get('hidden_continuous_size'),
         loss=QuantileLoss(),
         reduce_on_plateau_patience=tft_config.get('reduce_on_plateau_patience'),  # reduce learning automatically
+        optimizer='adam'
     )
     model_save_path = Path(wandb.run.dir) / "tft_model.pth"
     torch.save(tft_model.state_dict(), model_save_path)
@@ -217,7 +219,7 @@ def plot_evaluations(best_tft, prediction_results, dataloader, kind):
     all_predictions = []
     all_actuals = []
 
-    for idx in range(1):
+    for idx in range(2):
         fig, ax = plt.subplots(figsize=(23, 5))
         best_tft.plot_prediction(prediction_results.x,
                                  prediction_results.output,
@@ -344,5 +346,7 @@ def train_tft(weather_time_moer_data):
     plot_evaluations(best_tft, val_prediction_results, val_dataloader, 'val')
     test_prediction_results = best_tft.predict(test_dataloader, mode="raw", return_index=True, return_x=True)
     plot_evaluations(best_tft, test_prediction_results, test_dataloader, 'test')
+    test_quantile_predictions = best_tft.predict(test_dataloader, mode="quantiles")
+    print(test_quantile_predictions.output)
 
     run.finish()
