@@ -140,7 +140,7 @@ def train_sarimax(weather_time_moer_data):
     for country in ['DE', 'NO']:
         sarimax_country_config = sarimax_config.get(country.lower())
         country_data = weather_time_moer_data.loc[weather_time_moer_data['country'] == country]
-        country_data_complete = weather_time_moer_data.interpolate(method='linear', limit_direction='both')
+        country_data_complete = country_data.interpolate(method='linear', limit_direction='both')
         train_data, validation_data, exog_train, exog_validation = create_sarimax_datasets(country_data_complete)
         # create_auto_arima(train_data, exog_train)
         sarimax_model = create_sarimax_model(train_data, exog_train, sarimax_country_config)
