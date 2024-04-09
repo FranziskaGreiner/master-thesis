@@ -116,7 +116,6 @@ def create_tft_validation_dataset(training_dataset, validation_data):
     validation_dataset = TimeSeriesDataSet.from_dataset(
         training_dataset,
         validation_data,
-        predict=True,  # predict the decoder length on the last entries in the time index
         stop_randomization=True,
     )
     return validation_dataset
@@ -148,7 +147,6 @@ def create_tft_model(training_dataset):
         hidden_continuous_size=tft_config.get('hidden_continuous_size'),
         loss=QuantileLoss(),
         reduce_on_plateau_patience=tft_config.get('reduce_on_plateau_patience'),  # reduce learning automatically
-        optimizer='adam'
     )
     model_save_path = Path(wandb.run.dir) / "tft_model.pth"
     torch.save(tft_model.state_dict(), model_save_path)
@@ -313,7 +311,7 @@ def train_tft(weather_time_moer_data):
                                                       num_workers=tft_config.get('num_workers'),
                                                       persistent_workers=True)
     val_dataloader = validation_dataset.to_dataloader(train=False,
-                                                      batch_size=tft_config.get('batch_size') * 10,
+                                                      batch_size=tft_config.get('batch_size'),
                                                       num_workers=tft_config.get('num_workers'),
                                                       persistent_workers=True)
     test_dataloader = test_dataset.to_dataloader(train=False,
