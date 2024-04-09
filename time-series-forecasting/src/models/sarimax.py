@@ -4,11 +4,21 @@ import wandb
 import joblib
 import matplotlib.pyplot as plt
 import pmdarima as pm
+from sklearn.preprocessing import StandardScaler
 from statsmodels.tsa.statespace.sarimax import SARIMAX
 from src.config import get_sarimax_config
 from sklearn.metrics import mean_squared_error, mean_absolute_error
 
 sarimax_config = get_sarimax_config()
+
+
+def normalize_features(weather_time_moer_data):
+    scaler = StandardScaler()
+    features_to_normalize = ['temperature', 'ghi', 'wind_speed', 'precipitation']
+    scaler.fit(weather_time_moer_data[features_to_normalize])
+    weather_time_moer_data.loc[:, features_to_normalize] = scaler.transform(
+        weather_time_moer_data[features_to_normalize])
+    return weather_time_moer_data
 
 
 def create_sarimax_datasets(weather_time_moer_data):
@@ -125,11 +135,13 @@ def log_diagnostics(results, country):
 
 def train_sarimax(weather_time_moer_data):
     run = wandb.init(project="tsf_moer_sarimax", config=sarimax_config)
+    weather_time_moer_data = normalize_features(weather_time_moer_data)
 
     for country in ['DE', 'NO']:
         sarimax_country_config = sarimax_config.get(country.lower())
         country_data = weather_time_moer_data.loc[weather_time_moer_data['country'] == country]
-        train_data, validation_data, exog_train, exog_validation = create_sarimax_datasets(country_data)
+        country_data_complete = weather_time_moer_data.interpolate(method='linear', limit_direction='both')
+        train_data, validation_data, exog_train, exog_validation = create_sarimax_datasets(country_data_complete)
         # create_auto_arima(train_data, exog_train)
         sarimax_model = create_sarimax_model(train_data, exog_train, sarimax_country_config)
         results = sarimax_model.fit(disp=False)
