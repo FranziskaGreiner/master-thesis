@@ -18,7 +18,7 @@ def get_tft_config():
         "time_idx": "time_idx",
         "target": "moer",
         "group_ids": ["country"],
-        "countries": ['DE', 'NO'],
+        "countries": ['DE'],
         "max_encoder_length": 168,  # 1 week
         "max_prediction_length": 168,  # 1 week
         "static_categoricals": ["country"],
