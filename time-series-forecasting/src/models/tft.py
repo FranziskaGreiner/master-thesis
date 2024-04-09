@@ -4,6 +4,7 @@ import lightning.pytorch as pl
 import wandb
 import joblib
 import matplotlib.pyplot as plt
+import numpy as np
 from sklearn.preprocessing import StandardScaler
 from pathlib import Path
 from lightning.pytorch.callbacks import ModelCheckpoint, EarlyStopping
@@ -24,6 +25,20 @@ def add_time_idx(weather_time_moer_data):
     return weather_time_moer_data
 
 
+def transform_features(weather_time_moer_data):
+    weather_time_moer_data['season_sin'] = np.sin(2 * np.pi * weather_time_moer_data['season'] / 4)
+    weather_time_moer_data['season_cos'] = np.cos(2 * np.pi * weather_time_moer_data['season'] / 4)
+    weather_time_moer_data['hour_of_day_sin'] = np.sin(2 * np.pi * weather_time_moer_data['hour_of_day'] / 24)
+    weather_time_moer_data['hour_of_day_cos'] = np.cos(2 * np.pi * weather_time_moer_data['hour_of_day'] / 24)
+    weather_time_moer_data['day_of_week_sin'] = np.sin(2 * np.pi * weather_time_moer_data['day_of_week'] / 7)
+    weather_time_moer_data['day_of_week_cos'] = np.cos(2 * np.pi * weather_time_moer_data['day_of_week'] / 7)
+    weather_time_moer_data['day_of_year_sin'] = np.sin(2 * np.pi * weather_time_moer_data['day_of_year'] / 365)
+    weather_time_moer_data['day_of_year_cos'] = np.cos(2 * np.pi * weather_time_moer_data['day_of_year'] / 365)
+    cols_to_drop = ['season', 'hour_of_day', 'day_of_week', 'day_of_year']
+    weather_time_moer_data = weather_time_moer_data.drop(cols_to_drop, axis=1)
+    return weather_time_moer_data
+
+
 def normalize_features(weather_time_moer_data):
     scaler = StandardScaler()
     features_to_normalize = ['temperature', 'ghi', 'wind_speed', 'precipitation']
@@ -37,10 +52,6 @@ def normalize_features(weather_time_moer_data):
 
 
 def convert_categoricals(weather_time_moer_data):
-    weather_time_moer_data['season'] = weather_time_moer_data['season'].astype(str).astype("category")
-    weather_time_moer_data['hour_of_day'] = weather_time_moer_data['hour_of_day'].astype(str).astype("category")
-    weather_time_moer_data['day_of_week'] = weather_time_moer_data['day_of_week'].astype(str).astype("category")
-    weather_time_moer_data['day_of_year'] = weather_time_moer_data['day_of_year'].astype(str).astype("category")
     weather_time_moer_data['is_holiday_or_weekend'] = weather_time_moer_data['is_holiday_or_weekend'].astype(
         str).astype("category")
     return weather_time_moer_data

@@ -7,7 +7,7 @@ import pmdarima as pm
 from sklearn.preprocessing import StandardScaler
 from statsmodels.tsa.statespace.sarimax import SARIMAX
 from src.config import get_sarimax_config
-from sklearn.metrics import mean_squared_error, mean_absolute_error
+from sklearn.metrics import mean_squared_error, mean_absolute_error, mean_absolute_percentage_error
 
 sarimax_config = get_sarimax_config()
 
@@ -71,18 +71,18 @@ def calculate_and_plot_metrics(results, train_data, validation_data, exog_valida
                                                  exog=exog_validation, dynamic=False).predicted_mean
         # overall metrics
         val_mse = mean_squared_error(validation_data['moer'], val_predictions)
-        val_rmse = np.sqrt(val_mse)
         val_mae = mean_absolute_error(validation_data['moer'], val_predictions)
+        val_mape = mean_absolute_percentage_error(validation_data['moer'], val_predictions)
         wandb.log({f"{country}_validation_MSE": val_mse,
-                   f"{country}_validation_RMSE": val_rmse,
-                   f"{country}_validation_MAE": val_mae})
+                   f"{country}_validation_MAE": val_mae,
+                   f"{country}_validation_MAPE": val_mape})
 
         # weekly metrics
         # weekly_metrics = calculate_weekly_metrics(validation_data['moer'], val_predictions)
         # for week, metrics in weekly_metrics.items():
         #     wandb.log({f"{country}_{week}_validation_MSE": metrics['MSE'],
-        #                f"{country}_{week}_validation_RMSE": metrics['RMSE'],
-        #                f"{country}_{week}_validation_MAE": metrics['MAE']})
+        #                f"{country}_{week}_validation_MAE": metrics['MAE'],
+        #                f"{country}_{week}_validation_MAPE": metrics['MAPE']})
 
         plt.figure(figsize=(10, 5))
         plt.plot(validation_data.index, validation_data['moer'], label='Actual')
@@ -112,13 +112,13 @@ def calculate_weekly_metrics(actual, predicted):
 
             if len(actual_values) == len(predicted_values):
                 weekly_mse = mean_squared_error(actual_values, predicted_values)
-                weekly_rmse = np.sqrt(weekly_mse)
                 weekly_mae = mean_absolute_error(actual_values, predicted_values)
+                weekly_mape = mean_absolute_percentage_error(actual_values, predicted_values)
 
                 weekly_metrics[period] = {
                     'MSE': weekly_mse,
-                    'RMSE': weekly_rmse,
-                    'MAE': weekly_mae
+                    'MAE': weekly_mae,
+                    'MAPE': weekly_mape
                 }
         else:
             print(f"No predictions available for {period}")
