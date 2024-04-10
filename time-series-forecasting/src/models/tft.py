@@ -172,6 +172,7 @@ def create_tft_trainer():
         enable_model_summary=True,
         max_epochs=tft_config.get('max_epochs'),
         gradient_clip_val=tft_config.get('gradient_clip_val'),
+        limit_train_batches=tft_config.get('limit_train_batches'),
         logger=wandb_logger,
         callbacks=[create_tft_checkpoints(), early_stop_callback]
     )
@@ -311,7 +312,7 @@ def train_tft(weather_time_moer_data):
                                                       num_workers=tft_config.get('num_workers'),
                                                       persistent_workers=True)
     val_dataloader = validation_dataset.to_dataloader(train=False,
-                                                      batch_size=tft_config.get('batch_size' * 10),
+                                                      batch_size=tft_config.get('batch_size') * 10,
                                                       num_workers=tft_config.get('num_workers'),
                                                       persistent_workers=True)
     test_dataloader = test_dataset.to_dataloader(train=False,
