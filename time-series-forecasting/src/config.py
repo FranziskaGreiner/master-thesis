@@ -55,11 +55,11 @@ def get_sarimax_config():
         "start_date": pd.to_datetime('2023-09-01 00:00'),
         "training_cutoff_date": pd.to_datetime('2024-02-22 23:00'),
         "de": {
-            "p": 2, "d": 0, "q": 0,
+            "p": 3, "d": 0, "q": 1,
             "P": 1, "D": 0, "Q": 0, "s": 24,
         },
         "no": {
-            "p": 2, "d": 0, "q": 1,
+            "p": 2, "d": 0, "q": 2,
             "P": 2, "D": 0, "Q": 0, "s": 24,
         },
         "auto_arima": {
