@@ -172,7 +172,6 @@ def create_tft_trainer():
         enable_model_summary=True,
         max_epochs=tft_config.get('max_epochs'),
         gradient_clip_val=tft_config.get('gradient_clip_val'),
-        limit_train_batches=tft_config.get('limit_train_batches'),
         logger=wandb_logger,
         callbacks=[create_tft_checkpoints(), early_stop_callback]
     )
