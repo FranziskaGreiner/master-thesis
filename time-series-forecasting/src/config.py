@@ -35,7 +35,7 @@ def get_tft_config():
         "batch_size": 64,
         "limit_train_batches": 10,
         "num_workers": 2,
-        "max_epochs": 20,
+        "max_epochs": 50,
         "accelerator:": "auto",
         "enable_model_summary": True,
         "learning_rate": 0.01,
