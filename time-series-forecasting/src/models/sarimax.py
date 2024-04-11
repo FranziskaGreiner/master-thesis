@@ -52,8 +52,8 @@ def create_sarimax_datasets(country_data_complete):
     validation_data = country_data_complete[country_data_complete.index > sarimax_config.get('training_cutoff_date')]
 
     exog_variables = [
-        'temperature', 'ghi', 'wind_speed', 'precipitation', 'hour_of_day_sin', 'hour_of_day_cos', 'day_of_week_sin',
-        'day_of_week_cos', 'day_of_year_sin', 'day_of_year_cos', 'is_holiday_or_weekend', 'season_sin', 'season_cos'
+        'temperature', 'ghi', 'wind_speed', 'precipitation', 'hour_of_day', 'day_of_week', 'day_of_year',
+        'is_holiday_or_weekend', 'season'
     ]
     exog_train = train_data[exog_variables] if not train_data.empty else None
     exog_validation = validation_data[exog_variables] if not validation_data.empty else None
