@@ -52,8 +52,8 @@ def get_tft_config():
 def get_sarimax_config():
     general_config = get_general_config()
     sarimax_config = {
-        "start_date": pd.to_datetime('2023-09-01 00:00'),
-        "training_cutoff_date": pd.to_datetime('2024-02-22 23:00'),
+        "start_date": pd.to_datetime('2023-02-01 00:00'),
+        "training_cutoff_date": pd.to_datetime('2024-01-31 23:00'),
         "de": {
             "p": 2, "d": 0, "q": 0,
             "P": 1, "D": 0, "Q": 1, "s": 24,
