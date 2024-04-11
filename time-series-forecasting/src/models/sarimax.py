@@ -154,7 +154,7 @@ def log_diagnostics(results, country):
 
 def train_sarimax(weather_time_moer_data):
     run = wandb.init(project="tsf_moer_sarimax", config=sarimax_config)
-    weather_time_moer_data = transform_features(weather_time_moer_data)
+    # weather_time_moer_data = transform_features(weather_time_moer_data)
     weather_time_moer_data = normalize_features(weather_time_moer_data)
 
     for country in ['DE', 'NO']:
