@@ -157,7 +157,7 @@ def train_sarimax(weather_time_moer_data):
     # weather_time_moer_data = transform_features(weather_time_moer_data)
     weather_time_moer_data = normalize_features(weather_time_moer_data)
 
-    for country in ['NO']:
+    for country in ['DE', 'NO']:
         sarimax_country_config = sarimax_config.get(country.lower())
         country_data = weather_time_moer_data.loc[weather_time_moer_data['country'] == country]
         country_data_complete = interpolate_data(country_data, country)

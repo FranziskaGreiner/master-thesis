@@ -341,8 +341,8 @@ def train_tft(weather_time_moer_data):
 
     best_model_path = trainer.checkpoint_callback.best_model_path
     best_tft = TemporalFusionTransformer.load_from_checkpoint(best_model_path)
-    val_prediction_results = best_tft.predict(val_dataloader, mode="raw", return_x=True)
-    plot_evaluations(best_tft, val_prediction_results, val_dataloader, 'val')
+    # val_prediction_results = best_tft.predict(val_dataloader, mode="raw", return_x=True)
+    # plot_evaluations(best_tft, val_prediction_results, val_dataloader, 'val')
     test_prediction_results = best_tft.predict(test_dataloader, mode="raw", return_index=True, return_x=True)
     plot_evaluations(best_tft, test_prediction_results, test_dataloader, 'test')
     test_quantile_predictions = best_tft.predict(test_dataloader, mode="quantiles")
