@@ -33,9 +33,9 @@ def get_tft_config():
         "add_encoder_length": True,
         "allow_missing_timesteps": True,
         "batch_size": 32,
-        "limit_train_batches": 10,
+        "limit_train_batches": 30,
         "num_workers": 2,
-        "max_epochs": 50,
+        "max_epochs": 20,
         "accelerator:": "auto",
         "enable_model_summary": True,
         "learning_rate": 0.01,
@@ -56,12 +56,20 @@ def get_sarimax_config():
         "training_cutoff_date": pd.to_datetime('2024-01-31 23:00'),
         "de": {
             "p": 2, "d": 0, "q": 0,
-            "P": 1, "D": 0, "Q": 1, "s": 24,
+            "P": 2, "D": 1, "Q": 0, "s": 24,
         },
         "no": {
-            "p": 2, "d": 0, "q": 1,
-            "P": 2, "D": 0, "Q": 0, "s": 24,
+            "p": 0, "d": 0, "q": 2,
+            "P": 0, "D": 1, "Q": 1, "s": 24,
         },
+        # "de": {
+        #     "p": 5, "d": 0, "q": 0,
+        #     "P": 2, "D": 1, "Q": 0, "s": 24,
+        # },
+        # "no": {
+        #     "p": 1, "d": 0, "q": 1,
+        #     "P": 2, "D": 1, "Q": 0, "s": 24,
+        # },
         "auto_arima": {
             "start_p": 0, "start_q": 0, "max_p": 5, "max_q": 5, "m": 24, "d": 0,
             "seasonal": True, "trace": True, "suppress_warnings": True, "stepwise": True,

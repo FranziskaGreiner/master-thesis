@@ -95,11 +95,11 @@ def calculate_metrics(validation_data, val_predictions, country):
                    f"{country}_validation_MAPE": val_mape})
 
         # weekly metrics
-        # weekly_metrics = calculate_weekly_metrics(validation_data['moer'], val_predictions)
-        # for week, metrics in weekly_metrics.items():
-        #     wandb.log({f"{country}_{week}_validation_MSE": metrics['MSE'],
-        #                f"{country}_{week}_validation_MAE": metrics['MAE'],
-        #                f"{country}_{week}_validation_MAPE": metrics['MAPE']})
+        weekly_metrics = calculate_weekly_metrics(validation_data['moer'], val_predictions)
+        for week, metrics in weekly_metrics.items():
+            wandb.log({f"{country}_{week}_validation_MSE": metrics['MSE'],
+                       f"{country}_{week}_validation_MAE": metrics['MAE'],
+                       f"{country}_{week}_validation_MAPE": metrics['MAPE']})
 
 
 def calculate_weekly_metrics(actual, predicted):
@@ -157,27 +157,27 @@ def train_sarimax(weather_time_moer_data):
     # weather_time_moer_data = transform_features(weather_time_moer_data)
     weather_time_moer_data = normalize_features(weather_time_moer_data)
 
-    for country in ['DE', 'NO']:
+    for country in ['NO']:
         sarimax_country_config = sarimax_config.get(country.lower())
         country_data = weather_time_moer_data.loc[weather_time_moer_data['country'] == country]
         country_data_complete = interpolate_data(country_data, country)
         train_data, validation_data, exog_train, exog_validation = create_sarimax_datasets(country_data_complete)
-        create_auto_arima(train_data, exog_train)
-        # sarimax_model = create_sarimax_model(train_data, exog_train, sarimax_country_config)
-        # results = sarimax_model.fit(disp=False)
-        #
-        # print(results.summary())
-        # val_predictions = results.get_prediction(start=len(train_data),
-        #                                          end=len(train_data) + len(validation_data) - 1,
-        #                                          exog=exog_validation, dynamic=False).predicted_mean
-        # calculate_metrics(validation_data, val_predictions, country)
-        # plot_evaluation(validation_data, val_predictions, country)
-        # log_diagnostics(results, country)
-        #
-        # model_file_path = f"{wandb.run.dir}/sarimax_model_{country}.joblib"
-        # joblib.dump(results, model_file_path)
-        # artifact = wandb.Artifact(f'sarimax_model_{country}', type='model')
-        # artifact.add_file(model_file_path)
-        # run.log_artifact(artifact)
+        # create_auto_arima(train_data, exog_train)
+        sarimax_model = create_sarimax_model(train_data, exog_train, sarimax_country_config)
+        results = sarimax_model.fit(disp=False)
+
+        print(results.summary())
+        val_predictions = results.get_prediction(start=len(train_data),
+                                                 end=len(train_data) + len(validation_data) - 1,
+                                                 exog=exog_validation, dynamic=False).predicted_mean
+        calculate_metrics(validation_data, val_predictions, country)
+        plot_evaluation(validation_data, val_predictions, country)
+        log_diagnostics(results, country)
+
+        model_file_path = f"{wandb.run.dir}/sarimax_model_{country}.joblib"
+        joblib.dump(results, model_file_path)
+        artifact = wandb.Artifact(f'sarimax_model_{country}', type='model')
+        artifact.add_file(model_file_path)
+        run.log_artifact(artifact)
 
     run.finish()

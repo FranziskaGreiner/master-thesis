@@ -232,24 +232,23 @@ def plot_evaluations(best_tft, prediction_results, dataloader, kind):
         plt.show()
         plt.close()
 
-        if kind == 'val':
-            # actuals vs. predictions by variables
-            predictions = best_tft.predict(dataloader, return_x=True)
-            predictions_vs_actuals = best_tft.calculate_prediction_actual_by_variable(predictions.x, predictions.output)
-            features = list(
-                set(predictions_vs_actuals['support'].keys()) - {f"moer_lagged_by_{tft_config.get('lags')['moer'][0]}"})
-            for feature in features:
-                best_tft.plot_prediction_actual_by_variable(predictions_vs_actuals, name=feature)
-                act_vs_predict_file_path = f"{wandb.run.dir}/{feature}_act_vs_predict.png"
-                plt.savefig(act_vs_predict_file_path)
-                wandb.log({f"act_vs_predict": wandb.Image(act_vs_predict_file_path)})
+        # actuals vs. predictions by variables
+        predictions = best_tft.predict(dataloader, return_x=True)
+        predictions_vs_actuals = best_tft.calculate_prediction_actual_by_variable(predictions.x, predictions.output)
+        features = list(
+            set(predictions_vs_actuals['support'].keys()) - {f"moer_lagged_by_{tft_config.get('lags')['moer'][0]}"})
+        for feature in features:
+            best_tft.plot_prediction_actual_by_variable(predictions_vs_actuals, name=feature)
+            act_vs_predict_file_path = f"{wandb.run.dir}/{feature}_act_vs_predict.png"
+            plt.savefig(act_vs_predict_file_path)
+            wandb.log({f"act_vs_predict": wandb.Image(act_vs_predict_file_path)})
 
-            # variable importance
-            interpretation = best_tft.interpret_output(prediction_results.output, reduction="sum")
-            best_tft.plot_interpretation(interpretation)
-            interpretation_file_path = f"{wandb.run.dir}/interpretation.png"
-            plt.savefig(interpretation_file_path)
-            wandb.log({f"interpretation": wandb.Image(interpretation_file_path)})
+        # variable importance
+        interpretation = best_tft.interpret_output(prediction_results.output, reduction="sum")
+        best_tft.plot_interpretation(interpretation)
+        interpretation_file_path = f"{wandb.run.dir}/interpretation.png"
+        plt.savefig(interpretation_file_path)
+        wandb.log({f"interpretation": wandb.Image(interpretation_file_path)})
 
     best_tft.eval()
 
