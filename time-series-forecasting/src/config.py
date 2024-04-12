@@ -32,7 +32,7 @@ def get_tft_config():
         "add_target_scales": True,
         "add_encoder_length": True,
         "allow_missing_timesteps": True,
-        "batch_size": 64,
+        "batch_size": 32,
         "limit_train_batches": 10,
         "num_workers": 2,
         "max_epochs": 50,
