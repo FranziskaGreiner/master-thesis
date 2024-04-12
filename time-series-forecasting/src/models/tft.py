@@ -46,8 +46,8 @@ def normalize_features(weather_time_moer_data):
     weather_time_moer_data.loc[:, features_to_normalize] = scaler.transform(
         weather_time_moer_data[features_to_normalize])
 
-    # scaler_save_path = f"{wandb.run.dir}/feature_scaler.joblib"
-    # joblib.dump(scaler, scaler_save_path)
+    scaler_save_path = f"{wandb.run.dir}/feature_scaler.joblib"
+    joblib.dump(scaler, scaler_save_path)
     return weather_time_moer_data
 
 
@@ -106,9 +106,9 @@ def create_tft_training_dataset(train_data):
         add_encoder_length=tft_config.get("add_encoder_length"),
         allow_missing_timesteps=tft_config.get("allow_missing_timesteps")
     )
-    # training_dataset_params = training_dataset.get_parameters()
-    # training_params_save_path = f"{wandb.run.dir}/training_dataset_params.pth"
-    # torch.save(training_dataset_params, training_params_save_path)
+    training_dataset_params = training_dataset.get_parameters()
+    training_params_save_path = f"{wandb.run.dir}/training_dataset_params.pth"
+    torch.save(training_dataset_params, training_params_save_path)
     return training_dataset
 
 
@@ -148,8 +148,8 @@ def create_tft_model(training_dataset):
         loss=QuantileLoss(),
         reduce_on_plateau_patience=tft_config.get('reduce_on_plateau_patience'),  # reduce learning automatically
     )
-    # model_save_path = Path(wandb.run.dir) / "tft_model.pth"
-    # torch.save(tft_model.state_dict(), model_save_path)
+    model_save_path = Path(wandb.run.dir) / "tft_model.pth"
+    torch.save(tft_model.state_dict(), model_save_path)
     return tft_model
 
 
@@ -200,7 +200,7 @@ def tune_hyperparameters(train_dataloader, val_dataloader):
     study = optimize_hyperparameters(
         train_dataloader,
         val_dataloader,
-        model_path="optuna_test",
+        model_path=f"{wandb.run.dir}/optuna_test",
         max_epochs=20,
         n_trials=25,
         hidden_size_range=(8, 128),
@@ -208,8 +208,8 @@ def tune_hyperparameters(train_dataloader, val_dataloader):
         use_learning_rate_finder=False
     )
 
-    # hyperparameter_study_save_path = f"{wandb.run.dir}/hyperparameter_study.pkl"
-    # joblib.dump(study, hyperparameter_study_save_path)
+    hyperparameter_study_save_path = f"{wandb.run.dir}/hyperparameter_study.pkl"
+    joblib.dump(study, hyperparameter_study_save_path)
     print(study.best_trial.params)
 
 
@@ -290,7 +290,7 @@ def plot_evaluations(best_tft, prediction_results, dataloader, kind):
 
 
 def train_tft(weather_time_moer_data):
-    # run = wandb.init(project="moer_tft", config=dict(tft_config))
+    run = wandb.init(project="moer_tft", config=dict(tft_config))
 
     weather_time_moer_data = weather_time_moer_data[weather_time_moer_data['country'].isin(tft_config.get('countries'))]
 
@@ -316,43 +316,43 @@ def train_tft(weather_time_moer_data):
                                                       batch_size=tft_config.get('batch_size') * 10,
                                                       num_workers=tft_config.get('num_workers'),
                                                       persistent_workers=True)
-    # test_dataloader = test_dataset.to_dataloader(train=False,
-    #                                              batch_size=tft_config.get('batch_size') * 10,
-    #                                              num_workers=tft_config.get('num_workers'),
-    #                                              persistent_workers=True)
+    test_dataloader = test_dataset.to_dataloader(train=False,
+                                                 batch_size=tft_config.get('batch_size') * 10,
+                                                 num_workers=tft_config.get('num_workers'),
+                                                 persistent_workers=True)
 
-    # create_baseline_model(test_dataloader)
-    # trainer = create_tft_trainer()
-    # tft_model = create_tft_model(training_dataset)
+    create_baseline_model(test_dataloader)
+    trainer = create_tft_trainer()
+    tft_model = create_tft_model(training_dataset)
 
     # find_optimal_learning_rate(trainer, tft_model, train_dataloader, val_dataloader)
-    tune_hyperparameters(train_dataloader, val_dataloader)
+    # tune_hyperparameters(train_dataloader, val_dataloader)
 
-    # trainer.fit(
-    #     tft_model,
-    #     train_dataloaders=train_dataloader,
-    #     val_dataloaders=val_dataloader,
-    # )
-    #
-    # trainer.test(dataloaders=test_dataloader, ckpt_path='best')
-    #
-    # model_save_path = f"{wandb.run.dir}/tft_model.pth"
-    # torch.save(tft_model.state_dict(), model_save_path)
-    # wandb.save(model_save_path)
-    #
-    # best_model_path = trainer.checkpoint_callback.best_model_path
-    # best_tft = TemporalFusionTransformer.load_from_checkpoint(best_model_path)
-    # # val_prediction_results = best_tft.predict(val_dataloader, mode="raw", return_x=True)
-    # # plot_evaluations(best_tft, val_prediction_results, val_dataloader, 'val')
-    # test_prediction_results = best_tft.predict(test_dataloader, mode="raw", return_index=True, return_x=True)
-    # plot_evaluations(best_tft, test_prediction_results, test_dataloader, 'test')
-    # test_quantile_predictions = best_tft.predict(test_dataloader, mode="quantiles")
-    # print(test_quantile_predictions)
-    # # quantile_predictions = test_quantile_predictions["prediction"]
-    # # quantiles = [0.02, 0.1, 0.25, 0.5, 0.75, 0.9, 0.98]
-    # # quarter_predictions = quantile_predictions[:, :, quantiles.index(0.25)]
-    # # for i, q in enumerate(quantiles):
-    # #     q_predictions = quantile_predictions[:, :, i]
-    # #     print(f"Quantile {q}: {q_predictions}")
+    trainer.fit(
+        tft_model,
+        train_dataloaders=train_dataloader,
+        val_dataloaders=val_dataloader,
+    )
 
-    # run.finish()
+    trainer.test(dataloaders=test_dataloader, ckpt_path='best')
+
+    model_save_path = f"{wandb.run.dir}/tft_model.pth"
+    torch.save(tft_model.state_dict(), model_save_path)
+    wandb.save(model_save_path)
+
+    best_model_path = trainer.checkpoint_callback.best_model_path
+    best_tft = TemporalFusionTransformer.load_from_checkpoint(best_model_path)
+    val_prediction_results = best_tft.predict(val_dataloader, mode="raw", return_x=True)
+    plot_evaluations(best_tft, val_prediction_results, val_dataloader, 'val')
+    test_prediction_results = best_tft.predict(test_dataloader, mode="raw", return_index=True, return_x=True)
+    plot_evaluations(best_tft, test_prediction_results, test_dataloader, 'test')
+    test_quantile_predictions = best_tft.predict(test_dataloader, mode="quantiles")
+    print(test_quantile_predictions)
+    # quantile_predictions = test_quantile_predictions["prediction"]
+    # quantiles = [0.02, 0.1, 0.25, 0.5, 0.75, 0.9, 0.98]
+    # quarter_predictions = quantile_predictions[:, :, quantiles.index(0.25)]
+    # for i, q in enumerate(quantiles):
+    #     q_predictions = quantile_predictions[:, :, i]
+    #     print(f"Quantile {q}: {q_predictions}")
+
+    run.finish()
