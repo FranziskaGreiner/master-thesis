@@ -1,7 +1,31 @@
-\begin{tabularx}{\textwidth}{|X|X|X|X|}
+\begin{tabular}{
+    l
+    S[table-format=6.2]
+    S[table-format=3.2]
+    S[table-format=3.2]
+    S[table-format=6.2]
+    S[table-format=3.2]
+    S[table-format=3.2]
+}
+    \toprule
+    {Modell} & \multicolumn{3}{c}{168} & \multicolumn{3}{c}{720} \\
+    \cmidrule(lr){2-4} \cmidrule(lr){5-7}
+    & {MSE} & {MAE} & {MAPE} & {MSE} & {MAE} & {MAPE} \\
+    \midrule
+    I. Ungefilterte Daten \\ \hline
+    Baseline &  & 34,88 &  &  &  &  \\
+    SARIMAX DE & 5477,67 & 34,98 &  & 3707,84 & 35,71 &  \\
+    SARIMAX NO & 1489,62 & 32,49 &  & 3766,06 & 43,21 &  \\
+    TFT &  & 23,89 & 0,07 &  & 35,01 & 0,09 \\
+    TFT DE &  &  &  &  &  &  \\
+    TFT NO &  &  &  &  &  &  \\
     \hline
-    Modell & MSE & MAE & MAPE \\ \hline \hline
-    SARIMAX DE & 5477,67 & 34,98 & \\ \hline
-    SARIMAX NO & 1489,62 & 32,49 & \\ \hline
-    TFT & & 15,56 & 0,05 \\ \hline
-\end{tabularx}
+    II. Bereinigte Daten \\ \hline
+    Baseline &  & 19,16 &  &  &  &  \\
+    SARIMAX DE & 1232.88 & 27,94 & 0,04 & 155,83 & 7,15 & 0,0094 \\ % 168: curious-mountain-103, %720: sunny-firefly-109
+    SARIMAX NO &  &  &  &  &  &  \\
+    TFT &  &  &  &  &  &  \\
+    TFT DE &  &  &  &  &  &  \\
+    TFT NO &  &  &  &  &  &  \\
+    \bottomrule
+\end{tabular}
