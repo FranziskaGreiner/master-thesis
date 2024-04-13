@@ -19,15 +19,15 @@ def get_tft_config():
         "target": "moer",
         "group_ids": ["country"],
         "countries": ['DE', 'NO'],
-        "max_encoder_length": 168,  # 1 week
-        "max_prediction_length": 168,  # 1 week
+        "max_encoder_length": 720,  # 1 week
+        "max_prediction_length": 720,  # 1 week
         "static_categoricals": ["country"],
         "time_varying_known_categoricals": ["is_holiday_or_weekend"],
         "time_varying_known_reals": ["time_idx", "ghi", "temperature", "wind_speed", "precipitation",
                                      "season_sin", "season_cos", "day_of_week_sin", "day_of_week_cos",
                                      "day_of_year_sin", "day_of_year_cos", "hour_of_day_sin", "hour_of_day_cos"],
         "time_varying_unknown_reals": ["moer"],
-        "lags": {'moer': [168]},
+        "lags": {'moer': [720]},
         "add_relative_time_idx": True,
         "add_target_scales": True,
         "add_encoder_length": True,
