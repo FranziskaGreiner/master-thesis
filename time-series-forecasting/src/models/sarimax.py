@@ -176,8 +176,8 @@ def train_sarimax(weather_time_moer_data):
 
         model_file_path = f"{wandb.run.dir}/sarimax_model_{country}.joblib"
         joblib.dump(results, model_file_path)
-        artifact = wandb.Artifact(f'sarimax_model_{country}', type='model')
-        artifact.add_file(model_file_path)
-        run.log_artifact(artifact)
+        # artifact = wandb.Artifact(f'sarimax_model_{country}', type='model')
+        # artifact.add_file(model_file_path)
+        # run.log_artifact(artifact)
 
     run.finish()
