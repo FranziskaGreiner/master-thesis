@@ -267,25 +267,25 @@ def plot_evaluations(best_tft, prediction_results, dataloader, kind):
     median_index = 3
     all_predictions_median = all_predictions[:, :, median_index]
     all_predictions_median = all_predictions_median.to(all_actuals.device).float()
-    # # Select the 0,25 quantile prediction, quantiles are [0.02, 0.1, 0.25, 0.5, 0.75, 0.9, 0.98]
-    # quantile_index = 2
-    # all_predictions_quantile = all_predictions[:, :, quantile_index]
-    # all_predictions_quantile = all_predictions_quantile.to(all_actuals.device).float()
-    # all_actuals = all_actuals.float()
+    # Select the 0,25 quantile prediction, quantiles are [0.02, 0.1, 0.25, 0.5, 0.75, 0.9, 0.98]
+    quantile_index = 2
+    all_predictions_quantile = all_predictions[:, :, quantile_index]
+    all_predictions_quantile = all_predictions_quantile.to(all_actuals.device).float()
+    all_actuals = all_actuals.float()
 
     total_mse = mse_loss_function(all_predictions_median, all_actuals).item()
     print(f"Average MSE on {kind} Data: {total_mse}")
     wandb.log({f"{kind}_MSE": total_mse})
 
-    # quantile_loss = torch.where(
-    #     all_actuals > all_predictions_quantile,
-    #     0.25 * (all_actuals - all_predictions_quantile),  # quantile * (y - y_hat) for underestimations
-    #     0.75 * (all_predictions_quantile - all_actuals)   # (1-quantile) * (y_hat - y) for overestimations
-    # ).mean()
-    #
-    # total_quantile_loss = quantile_loss.item()
-    # print(f"Average 0,25 Quantile Loss on {kind} Data: {total_quantile_loss}")
-    # wandb.log({f"{kind}_0,25_Quantile_Loss": total_quantile_loss})
+    quantile_loss = torch.where(
+        all_actuals > all_predictions_quantile,
+        0.25 * (all_actuals - all_predictions_quantile),  # quantile * (y - y_hat) for underestimations
+        0.75 * (all_predictions_quantile - all_actuals)   # (1-quantile) * (y_hat - y) for overestimations
+    ).mean()
+
+    total_quantile_loss = quantile_loss.item()
+    print(f"Average 0,25 Quantile Loss on {kind} Data: {total_quantile_loss}")
+    wandb.log({f"{kind}_0,25_Quantile_Loss": total_quantile_loss})
 
 
 def train_tft(weather_time_moer_data):
@@ -345,10 +345,6 @@ def train_tft(weather_time_moer_data):
     # plot_evaluations(best_tft, val_prediction_results, val_dataloader, 'val')
     test_prediction_results = best_tft.predict(test_dataloader, mode="raw", return_index=True, return_x=True)
     plot_evaluations(best_tft, test_prediction_results, test_dataloader, 'test')
-    test_quantile_predictions = best_tft.predict(test_dataloader, mode="quantiles")
-    quantiles = [0.02, 0.1, 0.25, 0.5, 0.75, 0.9, 0.98]
-    for i, q in enumerate(quantiles):
-        q_predictions = test_quantile_predictions[:, :, i]
-        print(f"Quantile {q}: {q_predictions}")
+    # test_quantile_predictions = best_tft.predict(test_dataloader, mode="quantiles")
 
     run.finish()
