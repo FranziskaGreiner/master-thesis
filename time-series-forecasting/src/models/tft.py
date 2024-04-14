@@ -236,7 +236,9 @@ def plot_evaluations(best_tft, prediction_results, dataloader, kind):
         predictions = best_tft.predict(dataloader, return_x=True)
         predictions_vs_actuals = best_tft.calculate_prediction_actual_by_variable(predictions.x, predictions.output)
         features = list(
-            set(predictions_vs_actuals['support'].keys()) - {f"moer_lagged_by_{tft_config.get('lags')['moer'][0]}"})
+            set(predictions_vs_actuals['support'].keys())
+            - {f"moer_lagged_by_{tft_config.get('lags')['moer'][0]}"}
+            - {f"moer_lagged_by_{tft_config.get('lags')['moer'][1]}"})
         for feature in features:
             best_tft.plot_prediction_actual_by_variable(predictions_vs_actuals, name=feature)
             act_vs_predict_file_path = f"{wandb.run.dir}/{feature}_act_vs_predict.png"

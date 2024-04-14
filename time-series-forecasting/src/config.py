@@ -27,7 +27,7 @@ def get_tft_config():
                                      "season_sin", "season_cos", "day_of_week_sin", "day_of_week_cos",
                                      "day_of_year_sin", "day_of_year_cos", "hour_of_day_sin", "hour_of_day_cos"],
         "time_varying_unknown_reals": ["moer"],
-        "lags": {'moer': [24]},
+        "lags": {'moer': [24, 168]},
         "add_relative_time_idx": True,
         "add_target_scales": True,
         "add_encoder_length": True,
