@@ -42,7 +42,7 @@ def interpolate_data(country_data, country):
 
     # Set country bc strings cannot be interpolated
     country_data['country'] = country
-    country_data_complete = country_data.interpolate(method='linear', limit_direction='both')
+    country_data_complete = country_data.interpolate(method='time', limit_direction='both')
     return country_data_complete
 
 
