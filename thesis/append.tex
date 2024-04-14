@@ -1,6 +1,6 @@
 \chapter{Abbildungen}\label{CAP:append-figures}
 \begin{figure}
-    \caption{Die Dokomposition der MOER-Werte von Norwegen (eigene Darstellung)}
+    \caption[Dekomposition der MOER Norwegens]{Die Dokomposition der MOER-Werte von Norwegen (eigene Darstellung)}
     {\includegraphics[width=0.9\textwidth]{\figdir/moer_decomposition_NO}}
     \label{FIG:moer_decomposition_NO}
 \end{figure}
@@ -10,19 +10,24 @@
     \subfloat[\centering ACF]{{\includegraphics[width=.4\textwidth]{\figdir/acf_moer_no} }}%
     \qquad
     \subfloat[\centering PACF]{{\includegraphics[width=.4\textwidth]{\figdir/pacf_moer_no} }}%
-    \caption{Die ACF und PACF der MOER-Zeitreihe für Norwegen (eigene Darstellung)}%
+    \caption[ACF und PACF der MOER von Norwegen]{Die ACF und PACF der MOER-Zeitreihe für Norwegen (eigene Darstellung)}%
     \label{FIG:acf_pacf_moer_no}%
 \end{figure}
 
 \begin{figure}
-    \caption{SARIMAX Vorhersage für 168 Stunden auf gefilterten Daten der deutschen MOER (eigene Darstellung)}
+    \caption[SARIMAX 168h Vorhersage MOER Deutschland gefiltert]{SARIMAX Vorhersage für 168 Stunden auf der gefilterten MOER des deutschen Stromnetzes (eigene Darstellung)}
     {\includegraphics[width=0.8\textwidth]{\figdir/sarimax_de_168_filtered}}
     \label{FIG:sarimax_de_168_filtered}
 \end{figure}
 \begin{figure}
-    \caption{SARIMAX Vorhersage für 720 Stunden auf gefilterten Daten der deutschen MOER (eigene Darstellung)}
+    \caption[SARIMAX 72h Vorhersage MOER Deutschland gefiltert]{SARIMAX Vorhersage für 720 Stunden auf der gefilterten MOER des deutschen Stromnetzes (eigene Darstellung)}
     {\includegraphics[width=0.8\textwidth]{\figdir/sarimax_de_720_filtered}}
     \label{FIG:sarimax_de_720_filtered}
+\end{figure}
+\begin{figure}
+    \caption[TFT 168h Vorhersage MOER Deutschland gefiltert]{TFT Vorhersage für 168 Stunden auf der ungefilterten MOER des deutschen Stromnetzes (eigene Darstellung)}
+    {\includegraphics[width=0.99\textwidth]{\figdir/tft_de-no_168_de_not-filtered}}
+    \label{FIG:TFT-168-de-plot}
 \end{figure}
 
 \begin{figure}
@@ -32,7 +37,7 @@
     \subfloat[\centering Negative Einsparungen durch Verschiebungen von Deutschland nach Norwegen]{{\includegraphics[width=.99\textwidth]{\figdir/location-shifting-potential-de_neg} }}%
     \qquad
     \subfloat[\centering Einsparungen durch Verschiebungen von Norwegen nach Deutschland]{{\includegraphics[width=.99\textwidth]{\figdir/location-shifting-potential-no} }}%
-    \caption{Das Potenzial örtlicher Verschiebungen für Deutschland und Norwegen anhand der MOER (eigene Darstellungen)}%
+    \caption[Potenzial örtlicher Verschiebungen zwischen Deutschland und Norwegen]{Das Potenzial örtlicher Verschiebungen für Deutschland und Norwegen anhand der MOER (eigene Darstellungen)}%
     \label{FIG:location-shifting-potential}%
 \end{figure}
 
@@ -40,3 +45,17 @@
 
 \chapter{Code-Ausschnitte}
 \lstinputlisting[language=Python, caption=Python-Code zur Abfrage der MOER-Werte, label=CODE:watttime_get_moer]{\codedir/wattime_get_moer.m}
+
+
+
+\chapter{Informelles Interview}
+Ein informelles Interview wurde im Unternehmen Randstad Digital Germany AG durchgeführt, um in Erfahrung zu bringen, inwiefern Nachhaltige Software im Unternehmen thematisiert wird, welche Relevanz das Thema hat und ob der Nachhaltigkeitsaspekt bei Anfragen von Kunden eine Rolle spielt.
+Befragt wurden zwei Mitarbeiter des Unternehmens:
+\begin{itemize}
+    \item Thomas Frers,
+    \item Manuel Fabritius
+\end{itemize}
+Dabei wurden folgende Fragen gestellt:
+\begin{enumerate}
+    \item
+\end{enumerate}

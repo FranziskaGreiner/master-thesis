@@ -90,24 +90,25 @@ Gegliedert ist die Arbeit in sieben Hauptkapitel, was zu einer klaren Strukturie
 
 Dieses erste Kapitel erklärt die Motivation, die Ziele, die Abgrenzung und die Einordnung im Hinblick auf vorhandene Forschungen
 
-Nach der Einleitung werden in Kapitel 2 die theoretischen Grundlagen nachhaltiger Softwarearchitektur und die Relevanz der Kohlenstoffintensität als Maßstab für Nachhaltigkeit dargelegt.
+Nach der Einleitung werden in Kapitel~\ref{CAP:sustainable-software-basics} die theoretischen Grundlagen nachhaltiger Softwarearchitektur und die Relevanz der Kohlenstoffintensität als Maßstab für Nachhaltigkeit dargelegt.
 
-Kapitel 3 widmet sich verschiedenen Strategien zur Optimierung der Nachhaltigkeit von Softwaresystemen.
+Kapitel~\ref{CAP:strategies} widmet sich verschiedenen Strategien zur Optimierung der Nachhaltigkeit von Softwaresystemen.
 Hier werden mögliche Ansätze wie Scheduling, Scaling, Demand Shifting und Demand Shaping erörtert, sowie die Voraussetzungen, die für die Anwendung dieser Strategien erforderlich sind.
 
-Kapitel 4 bietet eine Einführung in die Grundlagen der Zeitreihenprognose, gefolgt von detaillierten Beschreibungen des SARIMAX-Modells sowie des Temporal Fusion Transformers als fortschrittliches KI-basiertes Modell.
+Kapitel~\ref{CAP:tsf_basics} bietet eine Einführung in die Grundlagen der Zeitreihenprognose, gefolgt von detaillierten Beschreibungen des SARIMAX-Modells sowie des Temporal Fusion Transformers als fortschrittliches KI-basiertes Modell.
 Es dient als Grundstein für das darauffolgende Kapitel.
 
-Kapitel 5 fokussiert sich auf die Prognose der Kohlenstoffintensität.
+Kapitel~\ref{CAP:prediction} fokussiert sich auf die Prognose der Kohlenstoffintensität.
 Hierbei wird zunächst auf die Auswahl und Vorverarbeitung der Daten eingegangen, gefolgt von einer tiefgreifenden Analyse der Daten.
 Die zuvor theoretisch erklärten Verfahren zur Zeitreihenprognose finden nun ihre praktische Anwendung.
 Abgeschlossen wird das Kapitel durch eine umfangreiche Evaluierung der Prognose und einem Vergleich zwischen den beiden Ansätzen.
 
-Anwendungsmöglichkeiten der in Kapitel 5 entwickelten Prognosemodelle werden in Kapitel 6 aufgezeigt.
+Anwendungsmöglichkeiten der in Kapitel~\ref{CAP:prediction} entwickelten Prognosemodelle werden in Kapitel~\ref{CAP:prediction-application} aufgezeigt.
 Es werden konkrete Anwendungsszenarien, verfügbare Tools, eine API zur Abfrage der Prognose sowie die damit verbundenen Herausforderungen und Grenzen behandelt.
-Die Ergebnisse der Anwendung der Modelle sowie eine umfassende Diskussion werden ebenfalls in diesem Kapitel präsentiert.
 
-Das abschließende Kapitel 7 bietet ein Resümee der gesamten Arbeit und einen Ausblick auf zukünftige Forschungsmöglichkeiten in diesem Bereich.
+Die Ergebnisse der gesamten Arbeit sowie eine umfassende Diskussion werden in Kapitel~\ref{CAP:results} präsentiert.
+
+Das abschließende Kapitel~\ref{CAP:resumee} bietet ein Resümee der gesamten Arbeit und einen Ausblick auf zukünftige Forschungsmöglichkeiten in diesem Bereich.
 Es fasst die wichtigsten Erkenntnisse zusammen und beschreibt potenzielle Entwicklungen der Untersuchungen.
 
 \section{Themenabgrenzung}
@@ -197,14 +198,14 @@ Die größte Wirkung liegt dabei in einfachen Scheduling-Strategien.
 Wenig überraschend ist die Erkenntnis, dass ein Wandel der Energieversorgung hin zu \glqq grüneren\grqq{} Stromquellen den Nutzen der kohlenstoffbewussten Planung senken~\cite{Sukprasert.2023}.
 %!
 %!
-\chapter{Grundlagen nachhaltiger Software}
+\chapter{Grundlagen nachhaltiger Software}\label{CAP:sustainable-software-basics}
 Das folgende Kapitel erklärt die Grundlagen nachhaltiger Software und beschreibt, wie die Nachhaltigkeit gemessen werden kann.
 Es bildet den Grundstein für die im nachfolgenden Kapitel behandelten Strategien und für das Verständnis, welchen Einfluss die Kohlenstoffintensität hat.
 \section{Definition Nachhaltigkeit}
 Das Ziel der vorliegenden Arbeit besteht darin, eine Möglichkeit zu finden, die Nachhaltigkeit von Software zu optimieren.
 An dieser Stelle wird deshalb als Grundlage der Begriff der Nachhaltigkeit definiert und erklärt, welche Rolle Nachhaltigkeit in der Softwareentwicklung spielt.
 
-Vom Bundesministerium für wirtschaftliche Zusammenarbeit und Entwicklung~\cite{BundesministeriumWirtschaftlicheZusammenarbeitundEntwicklung} wird Nachhaltigkeit wie folgt definiert:
+Vom Bundesministerium für wirtschaftliche Zusammenarbeit und Entwicklung \cite{BundesministeriumWirtschaftlicheZusammenarbeitundEntwicklung} wird Nachhaltigkeit wie folgt definiert:
 \glqq Nachhaltigkeit oder nachhaltige Entwicklung bedeutet, die Bedürfnisse der Gegenwart so zu befriedigen, dass die Möglichkeiten zukünftiger Generationen nicht eingeschränkt werden.\grqq{}
 Dabei erstrecke sich Nachhaltigkeit gleichermaßen auf drei verschiedene Dimensionen, nämlich wirtschaftlich effizient, sozial gerecht und ökologisch tragfähig.
 Laut Duden ist Nachhaltigkeit in Bezug auf Ökologie das \glqq Prinzip, nach dem nicht mehr verbraucht werden darf, als jeweils nachwachsen, sich regenerieren, künftig wieder bereitgestellt werden kann\grqq{}~\cite{Dudenredaktion.27.04.2018}.
@@ -222,7 +223,7 @@ Es umfasst mehrere Standards, die Unternehmen und Organisationen eine Bilanz der
 Dabei werden die Emissionen in drei verschiedene Bereiche unterteilt, siehe Tabelle~\ref{tab:GhgScopes}, die zusammen ein Gesamtbild der verursachten Emissionen ergeben.
 \begin{table}[t]
  \centering\small
- \caption{Die drei verschiedenen Dimensionen von Emissionen laut dem GHG Protokoll~\cite{WorldBusinessCouncilforSustainableDevelopment.2004}}
+ \caption[GHG Protokoll Scopes]{Die drei verschiedenen Dimensionen von Emissionen laut dem GHG Protokoll~\cite{WorldBusinessCouncilforSustainableDevelopment.2004}}
  \label{tab:GhgScopes}
  \input{\tabledir/GhgScopes.tex}
 \end{table}
@@ -412,16 +413,53 @@ Die entsprechende Formel ist Formel~\ref{eq:sci}.
 \end{equation}
 In die Berechnung fließen folgende Werte ein~\cite{Buchanan.2023}~\cite{GreenSoftwareFoundation.2022}:
 \begin{itemize}
- \item die von der Software benötigte Energie E (Strom für virtuelle Maschine, Kühlung, etc.)
+ \item die von der Software benötigte Energie E (Strom für \ac{VM}, Kühlung, etc.)
  \item die standortbezogene marginale Kohlenstoffemissionen I (emittierter Kohlenstoff pro \ac{kWh})
  \item der verkörperte Kohlenstoff M der zugrunde liegenden Hardware (emittierter Kohlenstoff während der Herstellung und der Entsorgung der Hardware)
  \item die Skaliereinheit R, die für die zu messende Software relevant ist (z.B. pro zusätzlichem Benutzer, Gerät, ~\ac{API}-Aufruf, etc.)
 \end{itemize}
 Anhand dieser Formel ergeben sich die Optimierungspunkte des \ac{CO2}-Fußabdrucks eines Workloads, nämlich Energie, Kohlenstoffintensität, verkörperter Kohlenstoff und Skaliereinheit.
+Die Green Software Foundation empfiehlt demnach auch, die marginale Kohlenstoffintensität als Messwert für die Emissionen des Stromnetzes zu verwenden~\cite{GreenSoftwareFoundation.2022b}.
 
 Für die Berechnung der Summe an Kohlenstoffemissionen einer Software werden demnach detaillierte Daten zu den einzelnen Faktoren der Formel benötigt.
 Wichtig ist dabei, die Berechnung stets pro einer Einheit R zu machen, da nur dann aussagekräftige Werte erzielt werden können.
 Würden stattdessen absolute Werte verwendet werden, könnte ein Anstieg der Nutzer zum Beispiel fälschlicherweise dazu führen, dass höhere Emissionswerte als schlechte Nachhaltigkeitsentwicklung interpretiert werden~\cite{GreenSoftwareFoundation.2022}.
+
+Bergman stellt im Microsoft-Blog einen Ansatz vor, um die Energie E in kWh zu berechnen, die eine bestimmte \ac{VM} verbraucht (vgl. Formel~\ref{eq:e})~\cite{Bergman.15.2.2021}.
+\begin{equation}
+ \label{eq:e}
+ E = \frac{c \times E_c + E_r + g \times E_g}{1000}
+\end{equation}
+Diese ergibt sich aus der Anzahl der \acp{CPU} und der \acp{GPU} multipliziert mit dem jeweiligen Energieverbrauch zuzüglich der Energie für den Speicher.
+Um das Ergebnis in Kilowattstunden zu erhalten, wird der Wert durch 1000 geteilt.
+Im Beispiel von Microsoft wird die Thermal Design Power der Hardware-Komponenten als Schätzung für den Stromverbrauch hergenommen.
+Die \ac{TDP}, auch Prozessor-Basisleistung genannt, gibt den Stromverbrauch unter maximaler theoretischer Last an.
+Bei Lasten geringer der maximalen Last ist der Stromverbrauch geringer als die \ac{TDP}~\cite{Intel.20240317}.
+Es wird allerdings darauf hingewiesen, dass die Verwendung des tatsächlichen Energieverbrauchs zu einem genaueren Ergebnis führen würde.
+Diesen zu messen ist jedoch nicht immer möglich.
+Bei einer Azure D2sv3, einer Standard-\ac{VM} geeignet zum Beispiel für kleine bis mittlere Business-Anwendungen, ergibt sich bei 80\% \ac{CPU}-Auslastung über eine Stunde nach Formel~\ref{eq:e-example} ein Energieverbrauch von 0,264kWh~\cite{Bergman.15.2.2021}.
+\begin{equation}
+ \label{eq:e-example}
+ E = \frac{2 \times 0,8 \times 165W}{1000}
+\end{equation}
+$E_c$ wird hier durch die Auslastung multipliziert mit der \ac{TDP} berechnet.
+Die Berechnungsfaktoren für \acp{GPU} fallen in diesem Beispiel weg, weil ausschließlich \acp{CPU} verwendet werden.
+
+Bislang wurde ein wesentlicher Aspekt noch nicht berücksichtigt:
+Von der gesamten Energie, die aufgebracht werden muss, kann nicht 100\% tatsächlich von Servern verwendet werden.
+Die \ac{PUE} ist ein Maß für die Energieeffizienz von Rechenzentren und wird wie in Formel~\ref{eq:pue} beschrieben berechnet~\cite{Walsh.22.4.2022}.
+\begin{equation}
+ \label{eq:pue}
+ PUE = \frac{\text{Gesamtstromverbrauch des Rechenzentrums}}{\text{Stromverbrauch der IT-Komponenten}}
+\end{equation}
+Sie gibt das Verhältnis zwischen der Energie an, die in einem Rechenzentrum verwendet werden kann, verglichen mit der insgesamt aufgewendeten Energie.
+Verbraucht wird die Differenz unter anderem für Kühlung und Stromverteilung.
+Ein optimaler \ac{PUE}-Wert würde bei 1 liegen, was bedeuten würde, dass die gesamte zugeführte Energie effektiv für den Betrieb der Hardware genutzt wird~\cite{GreenSoftwareFoundation.2022}.
+Die durchschnittliche \ac{PUE} der Rechenzentren liegt für Azure bei 1,235 und für \ac{GCP} bei 1,10~\cite{Walsh.22.4.2022}\cite{Google.20240312}.
+Amazon veröffentlicht für \ac{AWS} keine Informationen über die \ac{PUE}~\cite{Cockcroft.18.7.2023}.
+
+Berechnet man den Energieverbrauch wie in Formel~\ref{eq:e}, muss dieser schlussendlich noch mit der \ac{PUE} verrechnet werden.
+Insgesamt ergibt sich dadurch ein Energieverbrauch von $0,264kWh \times 1,235 = 0,32604kWh$.
 %!
 %!
 \chapter{Strategien zur Nachhaltigkeitsoptimierung}\label{CAP:strategies}
@@ -522,10 +560,10 @@ Bei der vertikalen Skalierung wird die Rechenleistung erhöht (oder auch verring
 % \caption{Skalierung \cite{Slingerland.2023}}%
 % \label{FIG:scaling}%
 %\end{figure}
-Durch vertikale Skalierung wird zum Beispiel die Anzahl der virtuellen Maschinen in einem Cluster erhöht oder verringert, um das System auf eine steigende oder sinkende Nachfrage anzupassen.
+Durch vertikale Skalierung wird zum Beispiel die Anzahl der \acp{VM} in einem Cluster erhöht oder verringert, um das System auf eine steigende oder sinkende Nachfrage anzupassen.
 Durch Load Balancing wird die Rechenlast auf die verschiedenen Maschinen verteilt.
 Ein Vorteil dieser Maßnahme ist unter anderem die höhere Ausfallsicherheit durch Verteilung auf mehrere Einheiten.
-Bei der horizontalen Skalierung wird beispielsweise bei einer vorhandenen virtuellen Maschine die CPU oder die Speicherkapazität erhöht oder verringert.
+Bei der horizontalen Skalierung wird beispielsweise bei einer vorhandenen \ac{VM} die \ac{CPU} oder die Speicherkapazität erhöht oder verringert.
 Der Workload wird also nach wie vor von einer Infrastruktur-Einheit bewerkstelligt, diese kann aber mehr Last verarbeiten.
 Das hat den Vorteil, dass nicht zwischen unterschiedlichen Komponenten kommuniziert und synchronisiert werden muss und die zusätzlich anfallenden Kosten meist geringer sind als bei der horizontalen Skalierung~\cite{Slingerland.2023}.
 Cloud-Anbieter verfügen meist über automatische Skalierungsmöglichkeiten, sodass eine Anpassung der Ressourcen nicht manuell stattfinden muss.
@@ -648,7 +686,7 @@ Für diesen Anwendungsfall ist vor allem die Dauer und die zusätzlich benötigt
 Einer ausführlichen Studie zur räumlichen Verlagerung von Workloads zur Folge~\cite{Sukprasert.2023} bringt diese Strategie, selbst unter Vernachlässigung des zusätzlichen Aufwands durch die Mehrzahl der Verschiebungen, keine besseren Einsparungen als die einmalige Verlagerung in ein grüneres Rechenzentrum.
 %!
 %!
-\chapter{Grundlagen zur Zeitreihenprognose}
+\chapter{Grundlagen zur Zeitreihenprognose}\label{CAP:tsf_basics}
 In diesem Kapitel sollen die Grundlagen für die Zeitreihenprognose definiert werden.
 Zuerst geht es darum, festzulegen, was Zeitreihen sind, gefolgt von der Beschreibung zweier ausgewählter Methoden zur Vorhersage von Zeitreihen.
 Diese Grundlagen dienen als Basis für das darauffolgende Kapitel, in dem die beiden Methoden Anwendung finden.
@@ -830,7 +868,7 @@ Bei WattTime passt sich das Binning-basierte Modell an ein lineares Modell zwisc
 % Gegenüber reinen Differenzierungsmodellen bietet es den Vorteil, dass kleine Laständerungen nicht zu starken Verzerrungen führen.
 Das Datenmodell basiert auf historischen Zeitreihendaten der in Tabelle~\ref{TAB:moer-sources} aufgelisteten Quellen~\cite{WattTime.20231121T18:47:09+00:00}.
 \begin{table}[t]
- \caption{Die Datenquellen, die WattTime für die Modellierung der MOER verwendet (\cite{WattTime.20231121T18:47:09+00:00})}
+ \caption[Datenquellen MOER Modellierung]{Die Datenquellen, die WattTime für die Modellierung der MOER verwendet (\cite{WattTime.20231121T18:47:09+00:00})}
  \label{TAB:moer-sources}
  \input{\tabledir/MoerSources.tex}
 \end{table}
@@ -933,7 +971,7 @@ Auf diese Weise werden für den gefilterten Datensatz 2630 der norwegischen und 
 Der Mittelwert verschiebt sich dadurch für Norwegen von 246 auf 237 und für Deutschland von 747 auf 766.
 
 \section{Analyse der Kohlenstoffintensität des deutschen und norwegischen Stromnetzes}\label{CAP:ci-analysis}
-tbd: Analyse des Potenzials zeitlicher Verschiebungen, Analyse des Potenzials örtlicher Verschiebungen
+%tbd: Analyse des Potenzials zeitlicher Verschiebungen, Analyse des Potenzials örtlicher Verschiebungen
 
 Die Daten zur \ac{MOER} sollen zunächst für die beiden Länder analysiert werden, um ein Bild über deren Beschaffenheit zu erhalten.
 Zwischen den beiden Ländern ist ein deutlicher Unterschied für die MOER-Werte zu erkennen.
@@ -996,8 +1034,8 @@ Regionen mit einem hohen Anteil dieser beiden Energiequellen zeigen tendenziell 
 
 Interessant ist unter anderem der monatliche Verlauf der \ac{MOER}, zu sehen in Abbildung~\ref{FIG:moer_trend_month}.
 \begin{figure}
- \caption[Monatlicher Verlauf der MOER von Deutschland und Norwegen]{Die Höhe der MOER des deutschen und norwegischen Stromnetzes pro Monat (eigene Darstellung)}
- {\includegraphics[width=0.99\textwidth]{\figdir/moer_trend_month}}
+ \caption[Monatlicher Verlauf der MOER von Deutschland und Norwegen]{Der monatliche Verlauf der MOER des deutschen und norwegischen Stromnetzes (eigene Darstellung)}
+ {\includegraphics[width=0.9\textwidth]{\figdir/moer_trend_month}}
  \label{FIG:moer_trend_month}
 \end{figure}
 Erneut ist das unterschiedliche Niveau beider Länder zu beachten.
@@ -1130,7 +1168,7 @@ Durch lineare Interpolation werden die fehlenden Werte im gefilterten Datensatz 
 \textit{statsmodels} bietet eine einfache Möglichkeit, die Diagnostik für die Residuen, also die Differenzen zwischen beobachteten und vom Modell vorhergesagten Werten, einzusehen.
 Abbildung~\ref{FIG:sarimax_diagnostics_de} zeigt die Ergebnisse für das Modell der \ac{MOER}-Vorhersage des deutschen Stromnetzes.
 \begin{figure}
- \caption{Diagnostik des SARIMAX-Modells zur Prognose der MOER des deutschen Stromnetzes (eigene Darstellung)}
+ \caption[SARIMAX Diagnostik MOER Deutschland]{Diagnostik des SARIMAX-Modells zur Prognose der MOER des deutschen Stromnetzes (eigene Darstellung)}
  {\includegraphics[width=0.8\textwidth]{\figdir/sarimax_diagnostics_de}}
  \label{FIG:sarimax_diagnostics_de}
 \end{figure}
@@ -1231,7 +1269,7 @@ Dieser ist gut für Zeitreihenvorhersagen geeignet, weil er einen Vergleich vers
 Grafische Darstellungen der Vorhersagen der verschiedenen Modelle können im Anhang der Arbeit (\ref{CAP:append-figures}) eingesehen werden.
 
 Die Vorhersageleistung der Modelle ist in Tabelle~\ref{TAB:forecasting-performance} zusammengefasst.
-Die Werte sind auf zwei Nachkommastellen gerundet angegeben.
+Die Werte sind auf zwei bzw. vier Nachkommastellen gerundet angegeben.
 \begin{table}[htbp]
  \centering
  \caption{Vorhersageleistung der Modelle}
@@ -1252,12 +1290,7 @@ Um auszuschließen, dass die mangelhaften Ergebnisse nicht durch eine unzureiche
 \end{itemize}
 
 Der \ac{TFT} weist allgemein bessere Prognoseergebnisse auf, jedoch zeigt sich auch hier, dass die Vorhersage der deutschen Werte besser funktioniert als die der norwegischen.
-Vergleicht man die Vorhersage auf dem Testdatensatz mit den tatsächlichen Werten, fällt für Deutschland vor allem der extrem niedrige Wert zu Beginn des Zeitraums und das darauf folgende periodische Muster in den Daten auf, was beides vom \ac{TFT} sehr gut erfasst wird (siehe Abbildung~\ref{FIG:TFT-168-de-plot}).
-\begin{figure}
- \caption{TFT Vorhersage der deutschen Werte für eine Woche (eigene Darstellung)}
- {\includegraphics[width=0.99\textwidth]{\figdir/tft_de-no_168_de-plot}}
- \label{FIG:TFT-168-de-plot}
-\end{figure}
+% Vergleicht man die Vorhersage auf dem Testdatensatz mit den tatsächlichen Werten, fällt für Deutschland vor allem der extrem niedrige Wert zu Beginn des Zeitraums und das darauf folgende periodische Muster in den Daten auf, was beides vom \ac{TFT} sehr gut erfasst wird (siehe Abbildung~\ref{FIG:TFT-168-de-plot}).
 Lediglich kleinere Schwankungen werden in der Vorhersage nicht erkannt.
 Die Minima und Maxima im täglichen Verlauf werden durch die Vorhersage sehr gut getroffen, was wichtig für die spätere Anwendung der Vorhersagen ist.
 
@@ -1267,7 +1300,7 @@ Durch die Self-Attention-Heads können zudem Aussagen über die Gewichtung einze
 
 Betrachtet man die Wichtigkeit der einzelnen Variablen für den Encoder und den Decoder (siehe Abbildung~\ref{FIG:decoder-interpretation}), so wird ersichtlich, dass für das Erfassen der Werte (Encoder) vor allem der relative Zeitindex wichtig ist.
 \begin{figure}
- \caption{TFT Wichtigkeit der einzelnen Variablen für den Dencoder (eigene Darstellung)}
+ \caption[TFT Vorhersage Einluss einzelner Variablen]{TFT Wichtigkeit der einzelnen Variablen für den Dencoder (eigene Darstellung)}
  {\includegraphics[width=0.6\textwidth]{\figdir/tft_de-no_168_decoder-interpretation}}
  \label{FIG:decoder-interpretation}
 \end{figure}
@@ -1281,7 +1314,7 @@ Für die norwegischen Werte zeigt dies einen Grund für die Qualität der Vorher
 Die letzten 25 Werte sind nicht aussagekräftig genug, um anhand dieser die nächste Woche vorherzusagen.
 %!
 %!
-\chapter{Anwendungsmöglichkeiten der Strategien auf Basis der Prognose}
+\chapter{Anwendungsmöglichkeiten der Strategien auf Basis der Prognose}\label{CAP:prediction-application}
 \section{Anwendungsszenarien}\label{CAP:scenarios}
 % even a static selection of where to host your workload can make a big difference~\cite{Norlander}
 Die Analyse der \ac{MOER} hat eine deutliche tägliche Saisonalität aufgezeigt (siehe Kapitel~\ref{CAP:data-preparation-analysis}).
@@ -1371,7 +1404,7 @@ Kubernetes findet in diesem Zusammenhang wegen seiner hohen Individualisierbarke
 %\end{table}
 
 Diese vier Anbieter verfügen über umfassende Tools für das zeitliche Planen von Workloads basierend auf bestimmten Kriterien.
-\textit{\ac{AWS} Lambda Scheduled Events} ermöglichen die automatische Ausführung von Funktionen zu gewünschten Zeitpunkten und in regelmäßigen Abständen.
+Die Cloud-Tools in der Kategorie \glqq Serverless\grqq{}, wie \textit{\ac{AWS} Lambda Scheduled Events} bieten aufgrund ihres Design die optimalen Voraussetzungen und ermöglichen die automatische Ausführung von Funktionen zu gewünschten Zeitpunkten und in regelmäßigen Abständen.
 %Für wiederkehrende Aufgaben, wie Datenbackups oder das Erstellen von Berichten ist dieses Feature besonders nützlich.
 Bei Microsoft bietet \textit{Azure Automation} eine ähnliche Funktionalität.
 Workloads können zu einem vordefinierten Zeitpunkt ausgeführt und über verschiedene Azure-Dienste hinweg verwaltet werden.
@@ -1401,12 +1434,12 @@ Zudem können zum Beispiel bei der Auto-Scaling Funktion von Amazon EC2-Instanze
 %Es gilt also, teils Kompromisse bei der Nachfrage zu machen, um eine Skalierung entlang der Kohlenstoffintensität zu ermöglichen.
 
 Die Kohlenstoffintensität könnte als benutzerdefinierte Metrik für das Auto-Scaling eingeführt werden.
-Amazon setzt dafür standardmäßig \textit{Amazon CloudWatch} ein, ein Tool zur Beobachtung bestimmter Metriken einer Instanz, mit Metriken wie z.B. der CPU-Auslastung zur Überwachung der Last und entsprechender Ressourcenanpassung verwendet.
+Amazon setzt dafür standardmäßig \textit{Amazon CloudWatch} ein, ein Tool zur Beobachtung bestimmter Metriken einer Instanz, mit Metriken wie z.B. der \ac{CPU}-Auslastung zur Überwachung der Last und entsprechender Ressourcenanpassung verwendet.
 Für CloudWatch können aber auch eigene Metriken konfiguriert werden.
 Auf diese Weise könnten für die prognostizierte Kohlenstoffintensität bestimmte Schwellwerte festgelegt werden, anhand dieser der Auto-Scaler die Anzahl der Instanzen erhöht oder verringert.
 Die Funktionsweise von CloudWatch, inklusive Bestandteile und dem Ablauf, ist in Abbildung~\ref{FIG:aws-cloudwatch} dargestellt.
 \begin{figure}
- \caption{Die Funktionsweise von AWS Cloudwatch zur automatischen Skalierung von Cloud-Instanzen anhand spezifischer Metriken~\cite{AmazonWebServices.20240320T16:42:17.000Z}}
+ \caption[Funktionsweise AWS Cloudwatch]{Die Funktionsweise von AWS Cloudwatch zur automatischen Skalierung von Cloud-Instanzen anhand spezifischer Metriken~\cite{AmazonWebServices.20240320T16:42:17.000Z}}
  {\includegraphics[width=0.8\textwidth]{\figdir/aws-cloudwatch}}
  \label{FIG:aws-cloudwatch}
 \end{figure}
@@ -1420,7 +1453,7 @@ Außerdem können die von CloudWatch generierten Statistiken weiter verarbeitet 
 
 Das Hinzufügen einer eigenen Metrik zu CloudWatch erfolgt durch die Angabe verschiedener Parameter.
 Code-Ausschnitt~\ref{CODE:aws-cloudwatch} zeigt, wie ein Befehl in der Kommandozeile von AWS zur Definition eines vorhergesagten \ac{MOER}-Werts aussehen könnte.
-\lstinputlisting[language=sh, caption=Kommandozeilenbefehl zur Definition eines prognostizierten \ac{MOER}-Werts für CloudWatch, label=CODE:aws-cloudwatch]{\codedir/aws-cloudwatch_put-custom-metric.m}
+\lstinputlisting[language=sh, caption=Kommandozeilenbefehl zur Definition eines prognostizierten MOER-Werts für CloudWatch, label=CODE:aws-cloudwatch]{\codedir/aws-cloudwatch_put-custom-metric.m}
 Angegeben wird der Name der benutzerdefinierten Metrik, gefolgt vom Name der Metrik-Sammlung.
 \lstinline[columns=fixed]{--value} ist der prognostizierte Wert, der für einen bestimmten Zeitpunkt und eine bestimmte Region angegeben wird~\cite{AmazonWebServices.20240320T16:42:17.000Z}.
 
@@ -1429,11 +1462,11 @@ Das Prinzip ist dabei immer dasselbe:
 Wenn bestimmte Bedingungen erfüllt sind, werden eine oder mehrere Autoskalierungsaktionen ausgelöst, sodass zusätzliche Ressourceninstanzen hinzugefügt oder entfernt werden.
 \textit{Azure AutoScale} ist ein Teil des \textit{Azure Monitor}, der die Skalierung von Azure-Diensten erleichtert.
 Die automatische Anpassung ist jedoch meist nur in Form von horizontaler Skalierung möglich, für vertikales Skalieren sind oft manuelle Eingriffe notwendig.
-Neben bestimmten vordefinierten Metriken, wie zum Beispiel CPU-Auslastung oder Anzahl der Threads können auch benutzerdefinierten Metriken, die direkt von der jeweiligen Anwendung generiert werden, verwendet werden.
+Neben bestimmten vordefinierten Metriken, wie zum Beispiel ac{CPU}-Auslastung oder Anzahl der Threads können auch benutzerdefinierten Metriken, die direkt von der jeweiligen Anwendung generiert werden, verwendet werden.
 Darüber hinaus können auch Zeitpläne zur Auslösung der Skalierung dienen.
 Auf diese Weise können Scheduling und Scaling zu einem geplanten Skalieren kombiniert werden.
 Die verwendete Bedingung für die Skalierung kann also entweder Metrik- oder Zeit-basiert sein ~\cite{Microsoft.2023}.
-Die Implementierung von Google, der \textit{Google Cloud Autoscaler}, bietet ähnliche Funktionalitäten und passt die Anzahl der Instanzen Virtueller Maschinen automatisch an die Anforderungen der Workloads an, um die Leistung zu optimieren und die Kosten zu minimieren.
+Die Implementierung von Google, der \textit{Google Cloud Autoscaler}, bietet ähnliche Funktionalitäten und passt die Anzahl der \ac{VM}-Instanzen automatisch an die Anforderungen der Workloads an, um die Leistung zu optimieren und die Kosten zu minimieren.
 Kubernetes verfügt über den \textit{Horizontal Pod Autoscaler}, der die Anzahl der Pod-Replikaten basierend auf einer ausgewählten Metrik skaliert.
 
 Bei Kubernetes besteht zudem die Möglichkeit zur automatischen Skalierung anhand bestimmter Events.
@@ -1446,7 +1479,7 @@ Es ermöglicht eine einfache Integration in ein Kubernetes-Cluster und bietet ve
 Die Idee hinter dem Carbon Aware \ac{KEDA} Operator ist, die standardmäßig verfügbaren Ereignis-Metriken um die Kohlenstoffintensität zu erweitern.
 Die Funktionsweise des Tools wird in Abbildung~\ref{FIG:carbon-aware-keda-operator} veranschaulicht.
 \begin{figure}
- \caption{Die Funktionsweise des Carbon Aware KEDA Operators zur Skalierung von Containern in Kubernetes anhand der Kohlenstoffintensität~\cite{Azure.20240321T11:03:47.000Z}}
+ \caption[Funktionsweise Carbon Aware KEDA Operator]{Die Funktionsweise des Carbon Aware KEDA Operators zur Skalierung von Containern in Kubernetes anhand der Kohlenstoffintensität~\cite{Azure.20240321T11:03:47.000Z}}
  {\includegraphics[width=0.8\textwidth]{\figdir/CarbonAwareKedaOperator}}
  \label{FIG:carbon-aware-keda-operator}
 \end{figure}
@@ -1577,7 +1610,7 @@ Insbesondere zu Zeiten mit einer hohen Last kombiniert mit der Anforderung von m
 Eine Möglichkeit, dem Abhilfe zu schaffen, ist die Prognosen zur Kohlenstoffintensität mit Erwartungen der Last auf das System zu kombinieren.
 Die Integration der erwarteten Systemlast und der Schwankungen der Kohlenstoffintensität zu integrieren, könnte eine Lösung sein, um beiden Anforderungen gerecht zu werden.
 
-tbd: Weitere Herausforderungen und Grenzen
+%tbd: Weitere Herausforderungen und Grenzen
 
 %Es gilt zu beachten, dass die analysierten Optimierungen ihre Grenzen haben.
 %Es handelt sich nicht um allgemein gültige, immer anwendbare Lösungen, sondern vielmehr um Vorschläge oder Richtlinien, die unter bestimmten Umständen durchaus positive Auswirkungen haben können.
@@ -1589,18 +1622,17 @@ tbd: Weitere Herausforderungen und Grenzen
 %Die örtliche Verlagerung ist nicht immer sinnvoll.
 %
 
-\chapter{Ergebnisse und Diskussion}
+\chapter{Ergebnisse und Diskussion}\label{CAP:results}
 Für eine Auswertung der Ergebnisse, sollen die Forschungsziele aus Kapitel~\ref{CAP:goals} aufgegriffen werden.
 Die Ergebnisse können folgendermaßen zusammengefasst werden:
 \begin{itemize}
  \item \textbf{Entwicklung eines Vorhersagemodells} \\
  Für die Prognose der \ac{MOER} des deutschen und norwegischen Stromnetzes wurden verschiedene Modelle entwickelt.
  Diese unterscheiden sich in der grundsätzlichen Art der Vorhersage, in der möglichen Vorhersagelänge und im verwendeten Land.
- Es hat sich gezeigt, dass sich \ac{SARIMAX}-Modelle nicht für den betrachteten Anwendungsfall eignen.
- Sie können die Schwankungen der Werte nicht genau genug abbilden.
+ Es hat sich gezeigt, dass sich \ac{SARIMAX}-Modelle zwar für den betrachteten Anwendungsfall eignen, sie aber die Schwankungen der Werte nicht genau abbilden können.
  Der \ac{TFT} als \ac{KI}-basiertes Modell eignet sich besser und erzielt - zumindest für Deutschland - zufriedenstellende Ergebnisse.
- Als wichte Eingabedaten haben sich ... herausgestellt.
- ... waren unwichtig für die Vorhersage.
+ Als wichte Eingabedaten haben sich vor allem die Stunde, der Zeitindex, der Wind und die zeitverzögerte \ac{MOER} herausgestellt.
+ Der Niederschlag und ob ein Feiertag oder Wochenendtag vorliegt waren unwichtig für die Vorhersage.
  \item \textbf{Nachhaltigkeitsoptimierung von Softwareanwendungen} \\
  Für die Verbesserung der Nachhaltigkeit von Software wurden verschiedene Strategien untersucht.
  Dabei hat sich herausgestellt, dass die Effektivität der Strategien stark von der Beschaffenheit der Daten abhängt.
@@ -1667,7 +1699,11 @@ Beginnend bei der Architektur, über Programmiersprachen und Code-Prinzipien, bi
 Eine wichtige Rolle spielt dabei auch die regelmäßige Messung und Überprüfung, um eine Einordnung zu ermöglichen.
 %!
 %!
-\chapter{Fazit und Ausblick}
+\chapter{Diskussion}
+\section{Daten}
+%!
+%!
+\chapter{Fazit und Ausblick}\label{CAP:resumee}
 Angesichts des rasanten Anstiegs der Rechenleistung, bedingt unter anderem durch Anwendungen in den Bereichen \ac{KI}, Bitcoin oder allgemeine Computernutzung, wird sich der Energiebedarf von Rechenzentren in den nächsten zwei Jahren voraussichtlich verdoppeln.
 % Voraussichtlich wird sich der Energieverbrauch von Rechenzentren durch den starken Anstieg der Rechenleistung in den nächsten zwei Jahren verdoppeln.
 Vor diesem Hintergrund haben sich die Lastanpassung und -verschiebung als vielversprechende Methoden herausgestellt~\cite{WattTime.12.3.2024}.
@@ -1683,7 +1719,7 @@ Cloud- und Service-Anbieter sollten Nutzer ermutigen, ihre Workloads möglichst 
 Spot-Instanzen sind bereits bei vielen Anbietern verfügbar, sodass die Cloud besser ausgelastet und zugleich niedrige Kosten angeboten werden können.
 Nicht zuletzt zwingt die Bepreisung von Kohlendioxid, die laut World Bank 2023 ein Rekordhoch erreicht hat~\cite{WorldBank.2023}, Anbieter und Nutzer dazu, sich mit diesem Thema zu beschäftigen.
 Neben finanziellen Anreizen, sollten Anbieter vermehrt Wissen über Kohlenstoffintensität und die adäquate Gestaltung von Workloads zur Verfügung stellen.
-Eine einfache Änderung wäre die Angabe von Zeitfenstern (z.B. nachts) anstelle konkreter Zeitpunkte (z.B. um 1 Uhr) für Workloads, sodass das Potenzial für Kohlenstoffeinsparungen genutzt werden kann~\cite{Wiesner.2021}.
+Eine einfache Änderung wäre die Angabe von Zeitfenstern für Scheduling-Startzeitpunkte (z.B. nachts) anstelle konkreter Zeitpunkte (z.B. um 1 Uhr) für Workloads, sodass das Potenzial für Kohlenstoffeinsparungen genutzt werden kann~\cite{Wiesner.2021}.
 
 Qualitativ hochwertige Prognosen sowohl der Kohlenstoffintensität als auch von Workloads stehen im Mittelpunkt erfolgreicher kohlenstoffbewusster Verlagerungen.
 Wichtig sind dabei vor allem auch Informationen über die Workloads, wie zeitliche Beschränkungen, erwartete Dauer und, ob eine Unterbrechung möglich ist.
