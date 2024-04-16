@@ -2,30 +2,38 @@
     l
     l
     l
-    l
-    l
-    l
-    l
 }
     \toprule
-    {Modell} & \multicolumn{2}{c}{TFT} & \multicolumn{2}{c}{TFT DE} & \multicolumn{2}{c}{TFT NO} \\
-    \cmidrule(lr){2-3} \cmidrule(lr){4-5} \cmidrule(lr){6-7}
-    Vorhersagelänge & {168} & {720} & {168} & {720} & {168} & {720} \\
+    {Modell} & \multicolumn{2}{c}{TFT} \\
+    \cmidrule(lr){2-3}
+    Vorhersagelänge & {168} & {720} \\
     \midrule
-    attention heads & 1 & & & & &\\
-    hidden size & 32 & & & & & \\
-    hidden continous size & 8 & & & & & \\
-    dropout & 0.4 & & & & & \\
-    max epochs & 10 & & & & & \\
-    learning rate & 0.02 & & & & & \\
+    attention heads & 1 & 3 \\
+    hidden size & 32 & 64 \\
+    hidden continous size & 8 & 32 \\
+    dropout & 0.4 & 0.4 \\
+    max epochs & 20 & 20 \\
+    learning rate & 0.02 & 0.01 \\
 \end{tabular}
 
-%\begin{tabular}{|p{4cm}|p{1cm}|}
-%    \hline
-%    attention heads & 1 \\ \hline
-%    hidden size & 32 \\ \hline
-%    hidden continous size & 8 \\ \hline
-%    dropout & 0.4 \\ \hline
-%    max epochs & 10 \\ \hline
-%    learning rate & 0.02 \\ \hline
+%\begin{tabular}{
+%    l
+%    l
+%    l
+%    l
+%    l
+%    l
+%    l
+%}
+%    \toprule
+%    {Modell} & \multicolumn{2}{c}{TFT} & \multicolumn{2}{c}{TFT DE} & \multicolumn{2}{c}{TFT NO} \\
+%    \cmidrule(lr){2-3} \cmidrule(lr){4-5} \cmidrule(lr){6-7}
+%    Vorhersagelänge & {168} & {720} & {168} & {720} & {168} & {720} \\
+%    \midrule
+%    attention heads & 1 & 3 & & & &\\
+%    hidden size & 32 & 64 & & & & \\
+%    hidden continous size & 8 & 32 & & & & \\
+%    dropout & 0.4 & 0.4 & & & & \\
+%    max epochs & 20 & 20 & & & & \\
+%    learning rate & 0.02 & 0.01 & & & & \\
 %\end{tabular}
