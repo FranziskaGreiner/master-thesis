@@ -2,8 +2,6 @@ import argparse
 import wandb
 
 from src.util import get_preprocessed_data
-from src.data_preprocessing import preprocess_data
-from src.feature_engineering import add_features
 from src.models.sarimax import train_sarimax
 from src.models.tft import train_tft
 
@@ -15,20 +13,13 @@ def main(model_type, use_filtered_data):
 
     if preprocessed_data is None:
         print('preprocessing data')
-        # 1. data preprocessing
-        preprocessed_data = preprocess_data()
-        # 2. feature engineering
-        preprocessed_data = add_features(preprocessed_data)
     else:
         print('using existing data file')
 
-    # 3. training and 4. evaluation
     if model_type == 'sarimax':
-        sarimax_model = train_sarimax(preprocessed_data)
-        # evaluate_sarimax(sarimax_model, preprocessed_data)
+        train_sarimax(preprocessed_data)
     elif model_type == 'tft':
-        tft_model = train_tft(preprocessed_data)
-        # evaluate_tft(tft_model, preprocessed_data)
+        train_tft(preprocessed_data)
     else:
         raise ValueError("Unsupported model type specified.")
 

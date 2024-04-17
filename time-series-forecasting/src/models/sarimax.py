@@ -12,20 +12,6 @@ from sklearn.metrics import mean_squared_error, mean_absolute_error, mean_absolu
 sarimax_config = get_sarimax_config()
 
 
-def transform_features(weather_time_moer_data):
-    weather_time_moer_data['season_sin'] = np.sin(2 * np.pi * weather_time_moer_data['season'] / 4)
-    weather_time_moer_data['season_cos'] = np.cos(2 * np.pi * weather_time_moer_data['season'] / 4)
-    weather_time_moer_data['hour_of_day_sin'] = np.sin(2 * np.pi * weather_time_moer_data['hour_of_day'] / 24)
-    weather_time_moer_data['hour_of_day_cos'] = np.cos(2 * np.pi * weather_time_moer_data['hour_of_day'] / 24)
-    weather_time_moer_data['day_of_week_sin'] = np.sin(2 * np.pi * weather_time_moer_data['day_of_week'] / 7)
-    weather_time_moer_data['day_of_week_cos'] = np.cos(2 * np.pi * weather_time_moer_data['day_of_week'] / 7)
-    weather_time_moer_data['day_of_year_sin'] = np.sin(2 * np.pi * weather_time_moer_data['day_of_year'] / 365)
-    weather_time_moer_data['day_of_year_cos'] = np.cos(2 * np.pi * weather_time_moer_data['day_of_year'] / 365)
-    cols_to_drop = ['season', 'hour_of_day', 'day_of_week', 'day_of_year']
-    weather_time_moer_data = weather_time_moer_data.drop(cols_to_drop, axis=1)
-    return weather_time_moer_data
-
-
 def normalize_features(weather_time_moer_data):
     scaler = StandardScaler()
     features_to_normalize = ['temperature', 'ghi', 'wind_speed', 'precipitation']
@@ -130,10 +116,13 @@ def calculate_weekly_metrics(actual, predicted):
     return weekly_metrics
 
 
-def plot_evaluation(validation_data, val_predictions, country):
+def plot_evaluation(train_data, validation_data, val_predictions, country):
     plt.figure(figsize=(10, 5))
-    plt.plot(validation_data.index, validation_data['moer'], label='Actual')
-    plt.plot(validation_data.index, val_predictions, label='Prediction', linestyle='--')
+    last_train_points = train_data.iloc[-168:]
+    extended_validation_data = pd.concat([last_train_points, validation_data])
+    plt.plot(extended_validation_data.index, extended_validation_data['moer'], label='observed')
+    plt.plot(validation_data.index, val_predictions, label='predicted')
+
     plt.xticks(rotation=45)
     plt.title(f'validation prediction vs. actual ({country})')
     plt.legend()
@@ -154,7 +143,6 @@ def log_diagnostics(results, country):
 
 def train_sarimax(weather_time_moer_data):
     run = wandb.init(project="tsf_moer_sarimax", config=sarimax_config)
-    # weather_time_moer_data = transform_features(weather_time_moer_data)
     weather_time_moer_data = normalize_features(weather_time_moer_data)
 
     for country in ['DE', 'NO']:
@@ -171,7 +159,7 @@ def train_sarimax(weather_time_moer_data):
                                                  end=len(train_data) + len(validation_data) - 1,
                                                  exog=exog_validation, dynamic=False).predicted_mean
         calculate_metrics(validation_data, val_predictions, country)
-        plot_evaluation(validation_data, val_predictions, country)
+        plot_evaluation(train_data, validation_data, val_predictions, country)
         log_diagnostics(results, country)
 
         model_file_path = f"{wandb.run.dir}/sarimax_model_{country}.joblib"
