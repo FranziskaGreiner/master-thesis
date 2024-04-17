@@ -106,10 +106,9 @@ Abgeschlossen wird das Kapitel durch eine umfangreiche Evaluierung der Prognose 
 Anwendungsmöglichkeiten der in Kapitel~\ref{CAP:prediction} entwickelten Prognosemodelle werden in Kapitel~\ref{CAP:prediction-application} aufgezeigt.
 Es werden konkrete Anwendungsszenarien, verfügbare Tools, eine API zur Abfrage der Prognose sowie die damit verbundenen Herausforderungen und Grenzen behandelt.
 
-Die Ergebnisse der gesamten Arbeit sowie eine umfassende Diskussion werden in Kapitel~\ref{CAP:results} präsentiert.
+Eine umfassende Diskussion, sowie potenzielle Entwicklungen der Untersuchungen und zukünftige Forschungsmöglichkeiten werden in Kapitel~\ref{CAP:discussion} präsentiert.
 
-Das abschließende Kapitel~\ref{CAP:resumee} bietet ein Resümee der gesamten Arbeit und einen Ausblick auf zukünftige Forschungsmöglichkeiten in diesem Bereich.
-Es fasst die wichtigsten Erkenntnisse zusammen und beschreibt potenzielle Entwicklungen der Untersuchungen.
+Das abschließende Kapitel~\ref{CAP:resumee} bietet ein Resümee der gesamten Arbeit, es fasst die wichtigsten Erkenntnisse zusammen.
 
 \section{Themenabgrenzung}
 Im Folgenden werden gezielte Abgrenzungen vorgenommen, um den Umfang und Fokus der Arbeit zu definieren und gleichzeitig relevante, jedoch nicht zentrale Themen auszugrenzen.
@@ -205,7 +204,7 @@ Es bildet den Grundstein für die im nachfolgenden Kapitel behandelten Strategie
 Das Ziel der vorliegenden Arbeit besteht darin, eine Möglichkeit zu finden, die Nachhaltigkeit von Software zu optimieren.
 An dieser Stelle wird deshalb als Grundlage der Begriff der Nachhaltigkeit definiert und erklärt, welche Rolle Nachhaltigkeit in der Softwareentwicklung spielt.
 
-Vom Bundesministerium für wirtschaftliche Zusammenarbeit und Entwicklung \cite{BundesministeriumWirtschaftlicheZusammenarbeitundEntwicklung} wird Nachhaltigkeit wie folgt definiert:
+Vom Bundesministerium für wirtschaftliche Zusammenarbeit und Entwicklung~\cite{BundesministeriumWirtschaftlicheZusammenarbeitundEntwicklung} wird Nachhaltigkeit wie folgt definiert:
 \glqq Nachhaltigkeit oder nachhaltige Entwicklung bedeutet, die Bedürfnisse der Gegenwart so zu befriedigen, dass die Möglichkeiten zukünftiger Generationen nicht eingeschränkt werden.\grqq{}
 Dabei erstrecke sich Nachhaltigkeit gleichermaßen auf drei verschiedene Dimensionen, nämlich wirtschaftlich effizient, sozial gerecht und ökologisch tragfähig.
 Laut Duden ist Nachhaltigkeit in Bezug auf Ökologie das \glqq Prinzip, nach dem nicht mehr verbraucht werden darf, als jeweils nachwachsen, sich regenerieren, künftig wieder bereitgestellt werden kann\grqq{}~\cite{Dudenredaktion.27.04.2018}.
@@ -390,7 +389,7 @@ Zu ermitteln, wann und wo diese Anlagen ihre Produktion drosseln müssen und wie
 Der Zusammenhang zwischen Stromerzeugung, Stromnachfrage und marginalen Emissionen ist in Abbildung~\ref{FIG:grid-moer} beispielhaft dargestellt.
 \begin{figure}
  \caption[Nachfrage, Erzeugung und Emissionen eines Stromnetzes]{Nachfrage, Erzeugung und Emissionen eines Stromnetzes~\cite{DiStefano.2019}}
- {\includegraphics[width=0.8\textwidth]{\figdir/grid-moer}}
+ {\includegraphics[width=0.9\textwidth]{\figdir/grid-moer}}
  \label{FIG:grid-moer}
 \end{figure}
 Entsteht an einem bestimmten Ort und zu einer bestimmten Zeit eine zusätzliche Stromnachfrage, ändert sich die Belastung der Kraftwerke, die zu diesem Zeitpunkt Strom produzieren.
@@ -398,7 +397,7 @@ Diese Grenzkraftwerke unterscheiden sich in Wirkungsgrad und Brennstoff stark un
 Übersteigt die Erzeugung aus erneuerbaren Energien die Gesamtlast des Netzes, wird diese in das Netz eingespeist und zusätzlich anfallende Last würde zu diesem Zeitpunkt nur wenig oder gar keine Emissionen verursachen.
 Im Zeitraum bei dem erneuerbare Energie nur in einem geringen Maß verfügbar sind, ist die fossile Erzeugung hoch, um die Nachfrage zu decken.
 Es werden entweder zusätzliche Kraftwerke eingeschaltet oder Strom aus benachbarten Netzen importiert.
-In dieser Abbildung wird sichtbar, dass die höchste \ac{MOER} nicht unbedingt zum gleichen Zeitpunkt wie ein Nachfragehoch auftritt~\cite{DiStefano}.
+In dieser Abbildung wird sichtbar, dass die höchste \ac{MOER} nicht unbedingt zum gleichen Zeitpunkt wie ein Nachfragehoch auftritt~\cite{DiStefano.2019}.
 
 Die \ac{MOER} eignet sich für den vorliegenden Anwendungsfall demnach besser, als die durchschnittliche Kohlenstoffintensität, da sie die Emissionen pro Lastverschiebung angibt und somit die Beziehung zwischen Ursache und Wirkung der Lastverschiebung erfasst\cite{Wiesner.2021}.
 
@@ -411,7 +410,7 @@ Die entsprechende Formel ist Formel~\ref{eq:sci}.
  \label{eq:sci}
  SCI = ((E \times I) + M) pro R
 \end{equation}
-In die Berechnung fließen folgende Werte ein~\cite{Buchanan.2023}~\cite{GreenSoftwareFoundation.2022}:
+In die Berechnung fließen laut Green Software Foundation folgende Werte ein~\cite{GreenSoftwareFoundation.2022}:
 \begin{itemize}
  \item die von der Software benötigte Energie E (Strom für \ac{VM}, Kühlung, etc.)
  \item die standortbezogene marginale Kohlenstoffemissionen I (emittierter Kohlenstoff pro \ac{kWh})
@@ -425,7 +424,7 @@ Für die Berechnung der Summe an Kohlenstoffemissionen einer Software werden dem
 Wichtig ist dabei, die Berechnung stets pro einer Einheit R zu machen, da nur dann aussagekräftige Werte erzielt werden können.
 Würden stattdessen absolute Werte verwendet werden, könnte ein Anstieg der Nutzer zum Beispiel fälschlicherweise dazu führen, dass höhere Emissionswerte als schlechte Nachhaltigkeitsentwicklung interpretiert werden~\cite{GreenSoftwareFoundation.2022}.
 
-Bergman stellt im Microsoft-Blog einen Ansatz vor, um die Energie E in kWh zu berechnen, die eine bestimmte \ac{VM} verbraucht (vgl. Formel~\ref{eq:e})~\cite{Bergman.15.2.2021}.
+Bergman stellt im Microsoft-Blog einen Ansatz vor, um die Energie E in kWh zu berechnen, die eine bestimmte \ac{VM} verbraucht (vgl. Formel~\ref{eq:e}, leicht abgewandelt)~\cite{Bergman.15.2.2021}.
 \begin{equation}
  \label{eq:e}
  E = \frac{c \times E_c + E_r + g \times E_g}{1000}
@@ -467,7 +466,10 @@ Für viele Unternehmen bietet die Verlagerung in die Cloud einen Ansatz der Verb
 Durch zunehmendes Migrieren in die Cloud wird es umso wichtiger, dass die entsprechenden Betreiber sich um den ökologischen Fußabdruck ihres Services kümmern~\cite{Buchanan.2023}.
 Verwaltete Cloud-Dienste bieten aufgrund ihrer hohen Rechendichte und ihrer enormen Hardware- und Energienutzung ein großes Potenzial zur Effizienzverbesserung~\cite{Currie.2024}.
 Die drei großen Cloud-Anbieter \ac{AWS}, Azure und \ac{GCP} haben sich zur Kohlenstoffneutralität verpflichtet.
-Dies bedeutet jedoch nicht, dass es allein ausreichend ist, eine Anwendung auf einer dieser Plattformen bereitzustellen und sich nicht weiter mit dem Thema Nachhaltigkeit auseinander setzten zu müssen.
+Diese Verpflichtungen klingen jedoch vielversprechender als sie sind.
+Bei Google bedeutet das zum Beispiel, dass bis 2030 50\% der Emissionen eingespart werden sollen und durchgängig kohlenstofffreie Energie genutzt werden soll~\cite{Google.2023}.
+
+Dieses Ziel der Cloud-Anbieter bedeutet deshalb nicht, dass es allein ausreichend ist, eine Anwendung auf einer dieser Plattformen bereitzustellen und sich nicht weiter mit dem Thema Nachhaltigkeit auseinander setzten zu müssen.
 Auch die Anwendung selbst muss für Nachhaltigkeit optimiert sein und die vorhanden Möglichkeiten müssen genutzt werden~\cite{Newman.2023}.
 Der deutsche Bitkom hat in einer Metastudie auf Grundlage von mehreren Studien aus den Jahren 2012 bis 2019 zwei Hauptkategorien für Energieensparungen definiert: Anwendungen und Infrastruktur.
 In Abbildung~\ref{FIG:sustainability-infrastructure} werden die Facetten der Nachhaltigkeit auf Anwendungs- und Infrastrukturebene dargestellt.
@@ -866,9 +868,9 @@ Der eigentliche Datenwert wird dann durch den Bereich, in den er fällt, ersetzt
 Auf diese Weise kann das \glqq Binning\grqq{} dem linearen Modell helfen, nichtlineare Beziehungen in den Daten besser abzubilden~\cite{Muller.2017}.
 Bei WattTime passt sich das Binning-basierte Modell an ein lineares Modell zwischen Emissionen und Last an und ergibt so die marginale Emissionsbeziehung~\cite{WattTime.2022}.
 % Gegenüber reinen Differenzierungsmodellen bietet es den Vorteil, dass kleine Laständerungen nicht zu starken Verzerrungen führen.
-Das Datenmodell basiert auf historischen Zeitreihendaten der in Tabelle~\ref{TAB:moer-sources} aufgelisteten Quellen~\cite{WattTime.20231121T18:47:09+00:00}.
+Das Datenmodell basiert auf historischen Zeitreihendaten der in Tabelle~\ref{TAB:moer-sources} aufgelisteten Quellen~\cite{WattTime.11.2023}.
 \begin{table}[t]
- \caption[Datenquellen MOER Modellierung]{Die Datenquellen, die WattTime für die Modellierung der MOER verwendet (\cite{WattTime.20231121T18:47:09+00:00})}
+ \caption[Datenquellen MOER Modellierung]{Die Datenquellen, die WattTime für die Modellierung der MOER verwendet (\cite{WattTime.2023})}
  \label{TAB:moer-sources}
  \input{\tabledir/MoerSources.tex}
 \end{table}
@@ -1220,9 +1222,6 @@ Das wird sichergestellt, indem während des Trainings ausschließlich der Datens
 Sind die verwendeten Lags länger, als die Vorhersagelänge, so muss diese Länge dem Trainingsdatensatz vorenthalten werden, sodass durch die zeitlichen Verschiebungen der Lags keine Einsicht in die Zukunft bietet.
 Die entsprechenden Cut-Off-Zeitpunkte werden die beiden Länder separat anhand des maximalen Zeitindex definiert.
 
-Zur Einordnung der Vorhersageleistung der Modelle soll der \ac{MAE} eines äußerst simplen Basismodells, dem Baseline-Modell von \textit{pytorch forecasting} errechnet werden, um eine Ausgangslage zu haben~\cite{PytorchForecastingDocumentation.20230410T20:05:46.000Zb}.
-Dieses verwendet den letzten bekannten Wert der Zielvariable, um eine Vorhersage für den nächsten Zeitschritt zu machen.
-
 Die wichtigsten Parameter der \lstinline[columns=fixed]{TemporalFusionTransformer}-Klasse in \textit{pytorch forecasting} werden im Folgenden erklärt~\cite{Joseph.2022}:
 \begin{itemize}
   \item \lstinline[columns=fixed]{attention_head_size}: Legt die Anzahl der Attention-Heads fest, die das Modell  nutzen kann, um aus den Daten zu lernen.
@@ -1267,7 +1266,6 @@ Um zudem eine prozentuale Fehlermetrik zur besseren Einschätzung der Verhältni
 Dieser ist gut für Zeitreihenvorhersagen geeignet, weil er einen Vergleich verschiedenster Zeitreihen und Skalen ermöglicht~\cite{Lazzeri.2021}.
 
 Grafische Darstellungen der Vorhersagen der verschiedenen Modelle können im Anhang der Arbeit (\ref{CAP:append-figures}) eingesehen werden.
-
 Die Vorhersageleistung der Modelle ist in Tabelle~\ref{TAB:forecasting-performance} zusammengefasst.
 Die Werte sind auf zwei bzw. vier Nachkommastellen gerundet angegeben.
 \begin{table}[htbp]
@@ -1276,10 +1274,29 @@ Die Werte sind auf zwei bzw. vier Nachkommastellen gerundet angegeben.
  \label{TAB:forecasting-performance}
  \input{\tabledir/ForecastingPerformance.tex}
 \end{table}
-Mit Blick auf die Werte von \ac{SARIMAX} wird ersichtlich, dass die Prognose für das deutsche Stromnetz weitaus besser funktioniert, als für das norwegische.
+Die Modelle sind aufgeteilt in diejenigen für den ungefilterten Datensatz und diejenigen für den Datensatz, bei dem die Ausreißer, wie in Abschnitt~\ref{CAP:data-preparation-analysis} beschrieben, entfernt wurden.
+Zur Einordnung der Vorhersageleistung der Modelle wird der \ac{MAE} eines simplen Basismodells, dem Baseline-Modell von \textit{pytorch forecasting} hergenommen~\cite{PytorchForecastingDocumentation.20230410T20:05:46.000Zb}.
+Dieses verwendet den letzten bekannten Wert der Zielvariable, um eine Vorhersage für den nächsten Zeitschritt zu machen und dient als Referenzwert.
+
+Beim ungefilterten Datensatz ist der Baseline-\ac{MAE} sowohl für die 168-Stunden-, als auch für die 720-Stunden-Vorhersage relativ hoch.
+Bedenkt man, dass der Mittelwert dieses Datensatzes für Deutschland bei 746,79g/kWh und für Norwegen bei 245,76g/kWh liegt, ist die Abweichung sehr groß.
+Mit Blick auf die Werte der \ac{SARIMAX}-Modelle wird ersichtlich, dass die Vorhersage vor allem für 168 Stunden nicht gut funktioniert.
+Die Ergebnisse sind sogar schlechter, als die des Basismodells.
+Anhand des \ac{MAPE} fällt außerdem auf, dass die \ac{SARIMAX}-Modelle für eine 720-Stunden-Vorhersage bessere Ergebnisse erzielen, als für die kürzere Vorhersagelänge.
+Zudem sind die Prognose-Leistungen der Modelle für das deutsche Stromnetz besser, als für das norwegische.
 Grund dafür könnte die sehr geringe oder fehlende Abhängigkeit zu den Eingabevariablen sein.
 Wie in der Korrelationsmatrix (Abbildung~\ref{FIG:correlation_matrix}) sichtbar wurde, ist die \ac{MOER} Norwegens nur kaum linear von den Zeit- und Wetterdaten abhängig, was eine Vorhersage enorm erschwert.
 Für Deutschland werden bessere Vorhersagewerte erzielt, was zum einen an der Abhängigkeit von der Sonneneinstrahlung und der Windstärke und zum anderen dass das periodisch abfolgende Muster sich größtenteils gleich verhält.
+Der \ac{TFT} performt vor allem bei der kurzen Vorhersagelänge gut, sodass der \ac{MAE} mit 20,38 deutlich unter dem des Basismodells liegt.
+Bei der einmonatigen Vorhersage erzielt er gemessen am \ac{MAPE} zwar ein besseres Ergebnis als das \ac{SARIMAX}-Modell für Norwegen, jedoch ist dieses nicht zufriedenstellend.
+
+Der bereinigte Datensatz führt allgemein zu geringeren Abweichungen bei der Vorhersage.
+Alle Modelle liegen mit ihren Vorhersagen unter den \ac{MAE}-Werten des Basismodells.
+Für einen direkten Vergleich zwischen der Vorhersageleistung auf dem ungefilterten und auf dem gefilterten Datensatz eignet sich insbesondere der \ac{MAPE}, weil durch die Angabe von Prozentwerten die unterschiedliche Werteverteilung zwischen den beiden Datensätzen keine Rolle spielt.
+Die \ac{MAPE}-Werte liegen für alle drei Modelle sowohl für die einwöchige als auch für die einmonatige Vorhersage unter denen des ungefilterten Datensatzes.
+Dies bekräftigt die Vermutung, dass die Modelle starke Ausreißer in den Daten schlecht abbilden können.
+Auch für diesen Datensatz zeigt sich, dass die Vorhersage der \ac{MOER} des norwegischen Stromnetzes wesentlich schlechter funktioniert, als die des deutschen.
+
 Um auszuschließen, dass die mangelhaften Ergebnisse nicht durch eine unzureichende Datenvorbereitung oder eine unpassende Modellauswahl zu begründen sind, wurden folgende Untersuchungen unternommen:
 \begin{itemize}
  \item \textbf{Filtern der Daten}: Zusätzlich zum vollständigen Datensatz wurde ein gefilterter Datensatz erstellt, aus dem Werte unterhalb des ersten und überhalb des dritten Quantils entfernt wurden.
@@ -1289,14 +1306,37 @@ Um auszuschließen, dass die mangelhaften Ergebnisse nicht durch eine unzureiche
  \item \textbf{Validierungsdatensatz}: Der Validierungsdatensatz wurde variiert, um auszuschließen, dass die mangelhaften Ergebnisse an untypischen Validierungsdaten liegen.
 \end{itemize}
 
-Der \ac{TFT} weist allgemein bessere Prognoseergebnisse auf, jedoch zeigt sich auch hier, dass die Vorhersage der deutschen Werte besser funktioniert als die der norwegischen.
-% Vergleicht man die Vorhersage auf dem Testdatensatz mit den tatsächlichen Werten, fällt für Deutschland vor allem der extrem niedrige Wert zu Beginn des Zeitraums und das darauf folgende periodische Muster in den Daten auf, was beides vom \ac{TFT} sehr gut erfasst wird (siehe Abbildung~\ref{FIG:TFT-168-de-plot}).
-Lediglich kleinere Schwankungen werden in der Vorhersage nicht erkannt.
-Die Minima und Maxima im täglichen Verlauf werden durch die Vorhersage sehr gut getroffen, was wichtig für die spätere Anwendung der Vorhersagen ist.
+Die Abbildung~\ref{FIG:tft-plot} zeigt die 168-Stunden-Vorhersage des \ac{TFT}-Modells auf dem ungefilterten Datensatz.
+\begin{figure}
+ \caption[TFT 168-Stunden-Vorhersage auf ungefiltertem Datensatz]{168-Stunden-Vorhersage des \ac{TFT}-Modells auf dem ungefilterten Datensatz (eigene Darstellung)}
+ {\includegraphics[width=0.99\textwidth]{\figdir/tft_de-no_168_notFiltered_de-plot}}
+ \label{FIG:tft-plot}
+\end{figure}
+Das Diagramm visualisiert sowohl die tatsächlichen als auch die vom \ac{TFT}-Modell vorhergesagten \ac{MOER}-Werte im Zeitverlauf.
+Auf der linken y-Achse werden die \ac{MOER}-Werte in g\ac{CO2}/kWh abgetragen.
+Die rechte y-Achse hingegen zeigt die Aufmerksamkeitsgewichtung des Modells.
+Die x-Achse stellt die Zeitpunkte dar, mit dem Zeitindex 0 als Beginn der Vorhersageperiode.
+Dabei umfasst der Bereich links von Index 0 die letzten 168 Stunden vor der Vorhersage und der Bereich rechts die nachfolgenden 168 Stunden.
+
+Ein markanter Ausreißer ist zu Beginn der Vorhersage zu verzeichnen, wo sich der \ac{MOER}-Wert signifikant verringert.
+Das Modell schafft es, diesen extremen Wertwechsel abzubilden.
+Die Vorhersagen der verschiedenen Quantile, angezeigt durch die Schattierungen der orangefarbenen Linie, sind nur minimal voneinander abweichend, was eine hohe Sicherheit des Modells in der Prognose suggeriert.
+
+Der Verlustwert (Loss) von 11,25 verdeutlicht die mittlere Differenz zwischen den vorhergesagten und tatsächlichen Werten über alle Quantile hinweg.
+Die gleichmäßig niedrigen Aufmerksamkeitsgewichte bis auf zwei signifikante Anstiege - einer zu Beginn und einer am Ende des betrachteten 168-Stunden-Zeitraums - deuten darauf hin, dass das Modell den anfänglichen Zustand sowie die jüngsten Beobachtungen als besonders relevant für die Vorhersage erachtet.
+Insgesamt spiegelt die Grafik wider, dass das Modell die allgemeinen Trends und saisonalen Muster gut erfassen kann, allerdings Schwierigkeiten bei der Identifizierung kleinerer Unregelmäßigkeiten in den Daten aufweist.
+
+Im Vergleich dazu ist in Abbildung~\ref{FIG:tft-plot-2} die Vorhersage auf dem gefilterten Datensatz zu sehen.
+\begin{figure}
+ \caption[TFT 168-Stunden-Vorhersage auf gefiltertem Datensatz]{168-Stunden-Vorhersage des \ac{TFT}-Modells auf dem gefilterten Datensatz (eigene Darstellung)}
+ {\includegraphics[width=0.99\textwidth]{\figdir/tft_de-no_168_filtered_de-plot}}
+ \label{FIG:tft-plot-2}
+\end{figure}
 
 Ein \ac{TFT} gibt Aufschluss darüber, wie die einzelnen von ihm verwendeten Variablen interpretiert wurden.
 Aufgrund der \acp{VSN} besteht die Möglichkeit, direkt auf die Gewichtung von Features zugreifen zu können.
 Durch die Self-Attention-Heads können zudem Aussagen über die Gewichtung einzelner Zeitschritte im Aufmerksamkeitsmechanismus~\cite{Joseph.2022}.
+
 
 Betrachtet man die Wichtigkeit der einzelnen Variablen für den Encoder und den Decoder (siehe Abbildung~\ref{FIG:decoder-interpretation}), so wird ersichtlich, dass für das Erfassen der Werte (Encoder) vor allem der relative Zeitindex wichtig ist.
 \begin{figure}
@@ -1376,6 +1416,40 @@ Die Integration und Bereitstellung von Software über CI/CD-Pipelines kann, sola
 Weitere Aufgaben, die oft zufällig ohne festes Muster ausgeführt werden, können sich ebenso für zeitliche Verschiebungen eignen.
 Dazu gehören Datenbank-Indexierungen, die essentiell für die Performance-Optimierung von Datenbanksystemen sind oder Replikationsaufgaben, die im Hintergrund die Synchronisation von Daten zwischen verschiedenen Systemen garantieren.
 Solche Workloads, die asynchron laufen, keine Abhängigkeiten oder Verzögerungen nach sich ziehen und deren Fälligkeitsdatum es erlaubt, sind demnach in einem realen Umfeld keine Ausnahme (Informationen aus Befragung, sieht~\ref{CAP:interview}).
+
+Als Beispiel für ein Anwendungsszenario soll die Entwicklung der \ac{TFT}-Modelle für die vorliegende Arbeit betrachtet werden.
+Durch die Berechnung der betriebsbedingten Emissionen anhand des Energieverbrauchs und der \ac{MOER} soll berechnet werden, wie viel \ac{CO2} während des gesamten Trainingsprozesses eingespart werden könnte.
+Diese betriebsbedingten Emissionen sind Teil der Berechnung des \ac{SCI}-Index, welcher zusätzlich noch die verkörperten Emissionen berücksichtigt, die jedoch in diesem Beispiel konstant sind und deshalb vernachlässigt werden.
+Gemäß Formel~\ref{eq:e} fließen die Energien benötigt für \ac{CPU}, \ac{GPU} und Speicher in die Berechnung des insgesamt verbrauchten Stroms ein.
+Das Training der Modelle erfolgte hauptsächlich in Google Colab Pro aufgrund der einfachen Integration von Jupyter Notebooks.
+Hierbei wurde eine Laufzeitumgebung mit einer Intel Xeon \ac{CPU} und einer Tesla T4 \ac{GPU} verwendet.
+
+Zur Überwachung und Analyse der Trainingsläufe kam das Tool Weights and Biases zum Einsatz, das nicht nur grafische Übersichten, sondern auch detaillierte Statistiken für Machine-Learning-Prozesse liefert.
+Diese Dokumentation ermöglichte es, die Systemauslastung während der Trainingsläufe genau zu verfolgen.
+Es wurde festgestellt, dass die durchschnittliche Leistung der \ac{GPU} bei 56,23 Watt lag.
+Der Energieverbrauch der \ac{CPU} wurde anhand einer durchschnittlichen Auslastung von 47\% und einer angenommenen \ac{TDP} von 85 Watt berechnet.
+Wie im Berechnungsbeispiel in Abschnitt~\ref{CAP:ci} beschrieben, soll zudem die \ac{PUE} berücksichtigt werden.
+Für \ac{GCP} liegt diese wie zuvor beschrieben bei 1,10.
+Außerdem wird wie im Beispiel der Energieverbrauch des Speichers vernachlässigt, weil dieser verhältnismäßig gering ist.
+
+Um den Einfluss der marginalen Kohlenstoffintensität zu beurteilen, wurden die \ac{MOER}-Werte variiert, während alle anderen Faktoren der Formel konstant blieben.
+Es wurden zwei Szenarien entwickelt: ein Worst-Case-Szenario, das die 72 Stunden mit den höchsten \ac{MOER}-Werten verwendet, und ein Best-Case-Szenario mit den niedrigsten Werten.
+Diese Methode ermöglicht eine Abschätzung, wie viel \ac{CO2} während des Trainings eingespart werden könnte, wenn optimale Betriebszeiten gewählt werden.
+Die Trainings fanden hauptsächlich im Januar 2024 statt, weshalb die Untersuchung auf diesen Zeitraum begrenzt wurde.
+Die Berechnung der Emissionen pro Stunde zeigen Formeln~\ref{eq:e-tft} und ~\ref{eq:e-tft-2}, wobei $OE$ für \glqq operational emissions \grqq{} steht.
+\begin{equation}
+ \label{eq:e-tft}
+ OE[h] = \frac{E_c + E_g}{1000} \times PUE \times MOER[h]
+\end{equation}
+\begin{equation}
+ \label{eq:e-tft-2}
+ OE[h] = \frac{0.47 \times 85W + 56.23W}{1000} \times 1.10 \times MOER[h]
+\end{equation}
+
+Für die Kohlenstoffintensität ergaben sich folgende Werte:
+Im Worst-Case-Szenario wurden 421,4 kg \ac{CO2}eq und im Best-Case-Szenario 366,77 kg \ac{CO2}eq emittiert.
+Das bedeutet, das für den betrachteten Anwendungsfall ungefähr 13\% der Emissionen eingespart werden können, wenn das Training zu den Zeiten mit der geringsten \ac{MOER} ausgeführt wird.
+Umgesetzt werden könnte das mithilfe von Checkpoints, die nach jeder Trainingsepoche gespeichert werden und somit eine spätere Fortführung des Trainings ermöglichen.
 
 % Zum Beispiel enthalten die Softwarelösungen oft Batch-Jobs, die regelmäßig ausgeführt werden müssen.
 
@@ -1570,46 +1644,8 @@ Auf diese Weise könnte der Zugang zu \ac{MOER}-Vorhersagen automatisiert werden
 Zudem könnten bestimmte Schwellenwerte definiert werden, anhand derer entschieden wird, ob ein Workload ausgeführt wird oder nicht.
 Darüber hinaus könnte die \ac{API} in Kombination mit dem Carbon Aware \ac{SDK} verwendet werden, sodass Systeme sowohl die aktuelle, als auch die vorhergesagte Kohlenstoffintensität des Stromnetzes abfragen und nutzen können.
 
-\section{Herausforderungen und Grenzen}
 %Für welche Architektur geeignet
 %Echtzeit
-In diesem Abschnitt sollen die Herausforderungen und Grenzen, die sich bei der parktischen Anwendung von kohlenstoffbewussten Strategien ergeben, beleuchtet werden.
-Es handelt sich nicht um allgemein gültige, immer anwendbare Lösungen, sondern vielmehr um Vorschläge oder Richtlinien, um positive Effekte erzielen zu können.
-
-Die Herausforderungen und Grenzen beim Anwenden der Prognosen für Software haben zwei Quellen.
-Zum einen ergeben sie sich aus der Prognose und zum anderen aus den Strategien zur Optimierung der Software.
-
-Bezüglich der Prognosen, stellen vor allem Vorhersagen weit in die Zukunft Schwierigkeiten dar.
-Mit größerer Vorhersagelänge steigen auch die Fehleranfälligkeit der Vorhersagen.
-Diese beginnen beim Wetter, dessen Vorhersagegenauigkeit nach sieben Tagen stark abnimmt~\cite{Lam.2022}.
-Sowohl eine unzureichende Vorhersage des Wetters, als auch Fehler der Zeitreihenvorhersage selbst sind mögliche Fehlerquellen~\cite{Wiesner.2021}.
-Die Vorhersage der \ac{MOER} des norwegischen Stromnetzes hat sich zudem als schwierig herausgestellt.
-Die unzureichende Genauigkeit stellt eine hohe Fehlerquelle dar, weil vorhergesagte Minimalwerte der \ac{MOER} in Wirklichkeit Höchstwerte sein könnten.
-Nicht zuletzt diese Gefahr, sondern auch das allgemein niedrige Niveau der Kohlenstoffintensität rechtfertigen den Aufwand für eine emissionsgesteuerte Ausrichtung von Workloads anhand Vorhersagen für das norwegische Stromnetz nicht.
-Für solche Stromnetze, deren Vorhersage aufgrund ihrer Beschaffenheit nur schwer möglich ist, die aber allgemein niedrige Werte verzeichnen, bietet sich eine örtliche Verlagerung von ortsunabhängigen Aufgaben in dieses Stromnetz an.
-
-Die Qualität der Vorhersagen ist stets von der Datenqualität- und verfügbarkeit abhängig.
-WattTime erfasst seine Daten zur \ac{MOER} nach aktuellem Wissensstand und überprüft die Qualität regelmäßig.
-Es handelt sich aber dennoch um modellierte Werte, deren Qualität nicht direkt durch Vergleichsberechnungen gemessen werden kann~\cite{WattTime.2022}.
-Außerdem ist das Anwendungsgebiet ein hochaktueller Forschungsbereich, der stets neue Erkenntnisse hervorbringt, aber dadurch besteht auch die Möglichkeit, dass der aktuelle Kenntnisstand oder die Art der Datenerfassung und -erstellung korrigiert werden wird.
-
-Darüber hinaus schränkt die Beschaffenheit der \ac{MOER}-Werte des deutschen und norwegischen Stromnetzes die Anwendbarkeit ein.
-Entgegen anderer Ergebnisse~(\cite{Wiesner.2021}), die einen großen Unterschied zwischen unter der Woche und am Wochenende gemessenen Werten verzeichneten, weisen sie keine großen Unterschiede zwischen diesen Zeiträumen auf.
-Die \ac{MOER} des deutschen Stromnetzes ist durchschnittlich über den betrachteten Zeitraum am Wochenende um 0,53\% geringer als unter der Woche und die des norwegischen Stromnetzes ist am Wochenende sogar um 0,74\% höher.
-Beides sind zu vernachlässigende Unterschiede, die das pauschale Verschieben von Workloads auf das Wochenende nicht rechtfertigen würden.
-Bei~\cite{Wiesner.2021} wurde gemessen, dass die Kohlenstoffintensität Deutschlands am Wochenende ungefähr 25\% geringer ist, was eine Verlagerung hin zum Wochenende durchaus sinnvoll macht.
-Die verschiedenen Messungen kommen höchstwahrscheinlich daher, dass bei~\cite{Wiesner.2021} die durchschnittliche Kohlenstoffintensität des Stromnetzes verwendet wurde, die sich nach aktuellem Wissensstand wie bereits beschrieben nur schlecht für die Analyse von Laständerungen eignet.
-
-Die Integration der Tools zur Nachhaltigkeitsoptimierung von Softwaresystemen ist stets mit Herausforderungen und Aufwand verbunden.
-Dieser Aufwand wird von Unternehmen nur eingegangen, wenn ein ausreichend hohes Potenzial und ein Nutzen besteht.
-Der Aufwand kann doch eine einfache Verfügbarkeit und Zugänglichkeit der Technologien und Lösungen minimiert werden.
-Sind die Tools leicht integrierbar in Entwicklung und Betrieb bestehender Softwaresysteme, so ist die Hürde zur Anwendung gering.
-
-Die Skalierungsstrategien von Softwaresystemen sind eng an die jeweilige Systemlast und die spezifischen Anforderungen gekoppelt.
-Insbesondere zu Zeiten mit einer hohen Last kombiniert mit der Anforderung von minimalen Ausfallquoten kann der Wunsch nach Nachhaltigkeit in direktem Konflikt mit der Notwendigkeit stehen, Lastspitzen bewältigen zu können.
-Eine Möglichkeit, dem Abhilfe zu schaffen, ist die Prognosen zur Kohlenstoffintensität mit Erwartungen der Last auf das System zu kombinieren.
-Die Integration der erwarteten Systemlast und der Schwankungen der Kohlenstoffintensität zu integrieren, könnte eine Lösung sein, um beiden Anforderungen gerecht zu werden.
-Eine weitere mögliche Lösung ist, den Preis als Signalgeber zu verwenden.
 %tbd: Weitere Herausforderungen und Grenzen
 
 %Es gilt zu beachten, dass die analysierten Optimierungen ihre Grenzen haben.
@@ -1622,31 +1658,6 @@ Eine weitere mögliche Lösung ist, den Preis als Signalgeber zu verwenden.
 %Die örtliche Verlagerung ist nicht immer sinnvoll.
 %
 
-\chapter{Zusammenfassung der Ergebnisse}\label{CAP:results}
-Für eine Auswertung der Ergebnisse, sollen die Forschungsziele aus Kapitel~\ref{CAP:goals} aufgegriffen werden.
-Die Ergebnisse können folgendermaßen zusammengefasst werden:
-\begin{itemize}
- \item \textbf{Entwicklung eines Vorhersagemodells} \\
- Für die Prognose der \ac{MOER} des deutschen und norwegischen Stromnetzes wurden verschiedene Modelle entwickelt.
- Diese unterscheiden sich in der grundsätzlichen Art der Vorhersage, in der möglichen Vorhersagelänge und im verwendeten Land.
- Es hat sich gezeigt, dass sich \ac{SARIMAX}-Modelle zwar für den betrachteten Anwendungsfall eignen, sie aber die Schwankungen der Werte nicht genau abbilden können.
- Der \ac{TFT} als \ac{KI}-basiertes Modell eignet sich besser und erzielt - zumindest für Deutschland - zufriedenstellende Ergebnisse.
- Als wichte Eingabedaten haben sich vor allem die Stunde, der Zeitindex, der Wind und die zeitverzögerte \ac{MOER} herausgestellt.
- Der Niederschlag und ob ein Feiertag oder Wochenendtag vorliegt waren unwichtig für die Vorhersage.
- \item \textbf{Nachhaltigkeitsoptimierung von Softwareanwendungen} \\
- Für die Verbesserung der Nachhaltigkeit von Software wurden verschiedene Strategien untersucht.
- Dabei hat sich herausgestellt, dass die Effektivität der Strategien stark von der Beschaffenheit der Daten abhängt.
- Wohingegen die \ac{MOER}-Werte des norwegischen Stromnetzes schwer vorhersagbar sind, haben diese allgemein ein niedriges Niveau.
- Ein Workload-Scheduling anhand der Prognosen für diese Werte ist deshalb nur bedingt sinnvoll.
- Vielversprechender ist die örtliche Verschiebung von ortsunabhängigen Rechenlasten in das norwegische Stromnetz.
- Die deutschen Werte sind im Durchschnitt fast dreimal so hoch, sie bieten jedoch den Vorteil, dass sie unter anderem aufgrund der Zusammensetzung des Stromnetzes besser vorhersagbar sind.
- Außerdem sind immer wieder starke Minimalausschläge in den Daten zu verzeichnen, die sich nach Vorhersage gut für eine zeitliche Verschiebung von Rechenlasten eignen.
- \ac{AWS}, Azure, \ac{GCP} und Kubernetes bieten umfangreiche Möglichkeiten, die zur Emissionsreduzierung von Software beitragen können und in die Vorhersagen der Kohlenstoffintensität integriert werden können.
- \item \textbf{Beitrag zu nachhaltigen Softwaresystemen} \\
- Die Arbeit hat gezeigt, dass komplexe Zusammenhänge die Kohlenstoffintensität des Stroms für zusätzliche Lastanforderungen bestimmen.
- Die Verwendung der \ac{MOER} als Maß für die Kohlenstoffintensität hat außerdem einen Einfluss auf die Ergebnisse im Vergleich zur Verwendung der durchschnittlichen Kohlenstoffintensität, die bei vorherigen Forschungsarbeiten meist verwendet wurde.
- Es empfiehlt sich, den gesamten Lebenszyklus einer Software für Nachhaltigkeitsoptimierungen zu betrachten.
-\end{itemize}
 %Eine große Herausforderung besteht darin, das Thema Nachhaltigkeit in der \ac{IT} anzubringen.
 %Lange wurde diesem keine Aufmerksamkeit geschenkt und Optimierungen fanden hauptsächlich für anfallende Kosten statt.
 %Wenn der Umweltaspekt nicht Motivation genug ist, können noch zwei weitere Aspekte hilfreich sein.
@@ -1658,7 +1669,65 @@ Die Ergebnisse können folgendermaßen zusammengefasst werden:
 %
 %Inwiefern ist die Vorhersage für Länder sinnvoll auf die Regionen der Datencenter übertragbar?
 
-Varianz der Stromnetze: Durch die Energiewende werden sich die Stromnetze verändern - sei es kurzfristig durch betriebliche Änderungen oder langfristig durch strukturelle Änderungen.
+
+
+%!
+%!
+\chapter{Diskussion}\label{CAP:discussion}
+In diesem Kapitel sollen Herausforderungen und Grenzen diskutiert werden und mögliche Erweiterungen und Anknüpfungen zur vorliegednen Arbeit identifiziert werden.
+
+Die Herausforderungen und Grenzen beim Anwenden der Prognosen für Software haben zwei Quellen.
+Zum einen ergeben sie sich aus der Prognose und zum anderen aus den Strategien zur Optimierung der Software.
+
+\section{Datenmodell und Prognose}
+Die Qualität der Vorhersagen ist stets von der Datenqualität- und verfügbarkeit abhängig.
+WattTime erfasst seine Daten zur \ac{MOER} nach aktuellem Wissensstand und überprüft die Qualität regelmäßig.
+Es handelt sich aber dennoch um modellierte Werte, deren Qualität nicht direkt durch Vergleichsberechnungen gemessen werden kann~\cite{WattTime.2022}.
+Außerdem ist das Anwendungsgebiet ein hochaktueller Forschungsbereich, der stets neue Erkenntnisse hervorbringt, aber dadurch besteht auch die Möglichkeit, dass der aktuelle Kenntnisstand oder die Art der Datenerfassung und -erstellung korrigiert werden wird.
+Die Methoden zur Modellierung und Überprüfung der \ac{MOER}-Daten befinden sich momentan noch in einem kontinuierlichen Entwicklungs- und Verbesserungsprozess.
+Aktuell ist WattTime der einzige Anbieter dieser spezifischen Daten zur marginalen Emissionsrate, was zu einer monopolistischen Situation führt.
+Es ist daher anzunehmen, dass die Qualität der Daten zukünftig weiter steigen wird und womöglich weitere Anbieter für \ac{MOER}-Daten aufkommen werden.
+Zukünftige Forschungsarbeiten könnten demnach von einer verbesserten und realitätsnäheren Modellierung der \ac{MOER}-Daten profitieren
+Außerdem wird mit fortschreitender Zeit eine größere Datenmenge zur Verfügung stehen, weil der Beginn der Datenmodellierung dann schon weiter zurückliegen wird.
+
+Die Entstehung und der Zusammenhang der \ac{MOER}-Werte, sowie verschiedene Einflussfaktoren auf diese, bilden ein komplexes Konstrukt.
+Die einzelnen Zusammenhänge und Abhängigkeiten noch genauer interpretieren zu können, erfordert eine umfassendere Analyse der Stromnetz- und Strommarktdaten.
+Hierzu zählt die Analyse der Zusammensetzung der Energiequellen, der Abhängigkeit von Wetterbedingungen, der Präzision von Wettervorhersagen sowie der Entwicklung von Strompreisen und deren Auswirkungen auf die Kohlenstoffintensität.
+Erkenntnisse aus einer solchen Analyse könnten zu verbesserten Vorverarbeitungsschritten der Daten und präziseren Prognosen führen.
+Prognosemodelle mit weiteren, die \ac{MOER} beeinflussenden Eingabevariablen könnten in Zukunft erstellt und trainiert werden.
+Auf diese Weise könnte ein Vergleich von Modellgenauigkeit und Trainingsaufwand je verwendeter Variablen aufgestellt werden, um herauszufinden, welche Kombination dieser Eingabevariablen die besten Ergebnisse unter akzeptablem Trainingsaufwand erreichen.
+Zudem spielen externe Einflüsse eine wesentliche Rolle in der Dynamik des Srommarkts.
+Politische Entscheidungen, gesetzliche Regelungen und unvorhersehbare Ereignisse können erhebliche Auswirkungen haben.
+Im betrachteten Zeitraum (2021-2024) waren das unter anderem die COVID-19-Pandemie, geopolitische Konflikte wie der Russland-Krieg und infrastrukturelle Angriffe wie ein Anschlag auf die Nordstream Gas-Pipelines~\cite{Baumgartner.30.09.2022}.
+Eine Möglichkeit für den Umgang mit solchen meist nicht vorhersagbaren Einflüssen, ist die Erkennung dieser im Energiemarkt und damit verbunden eine automatische Aktualisierung der Prognosemodelle.
+
+Darüber hinaus wurde der geographische Rahmen des Datenmodells und der Prognose eingegrenzt.
+Weitere Länder mit aufzunehmen kann einen umfangreicheren Vergleich verschiedener Stromnetze und \ac{MOER}-Werte ermöglichen, was zu allgemeingültigeren Ergebnissen führen kann.
+Verwendet die vorliegende Arbeit Daten auf nationaler Ebene, so wäre außerdem ein sinnvoller nächster Schritt, dies noch weiter in verschiedene Zonen einzuteilen.
+Limitierender Faktor ist dabei momentan die Verfügbarkeit von Daten zur marginalen Kohlenstoffintensität, die gegenwärtig nur Länder-spezifisch zur Verfügung stehen.
+Eine detaillierte regionale Aufschlüsselung könnte nicht nur die Präzision der Daten erhöhen, sondern auch die Relevanz der Daten für den Einsatz in Rechenzentren wesentlich verbessern.
+Interessant wäre zum Beispiel auch den Einfluss der geographischen Lage zu betrachten.
+Dabei können am Äquator gelegene Länder möglicherweise von der starken Sonneneinstrahlung profitieren.
+Für eine entsprechende Analyse sind jedoch sowohl bei WattTime, als auch bei Electricity Maps noch nicht ausreichend Daten verfügbar~\cite{WattTime.20230823}\cite{ElectricityMaps.20240305T20:54:29.000Z}.
+
+Bezüglich der Prognosen, stellen vor allem Vorhersagen weit in die Zukunft Schwierigkeiten dar.
+Mit größerer Vorhersagelänge steigen auch die Fehleranfälligkeit der Vorhersagen.
+Diese beginnen beim Wetter, dessen Vorhersagegenauigkeit nach sieben Tagen stark abnimmt~\cite{Lam.2022}.
+Sowohl eine unzureichende Vorhersage des Wetters, als auch Fehler der Zeitreihenvorhersage selbst sind mögliche Fehlerquellen~\cite{Wiesner.2021}.
+Aufgrund hoher Anteile von regelbaren Erzeugern im norwegischen Stromnetz, ist eine wetterabhängige Vorhersage wenig sinnvoll.
+Nicht zuletzt diese Gefahr, sondern auch das allgemein niedrige Niveau der Kohlenstoffintensität rechtfertigen den Aufwand für eine emissionsgesteuerte Ausrichtung von Workloads anhand Vorhersagen für das norwegische Stromnetz nicht.
+Für solche Stromnetze, deren Vorhersage aufgrund ihrer Beschaffenheit nur schwer möglich ist, die aber allgemein niedrige Werte verzeichnen, bietet sich eine örtliche Verlagerung von ortsunabhängigen Aufgaben in dieses Stromnetz an.
+Das stellt einen Gegensatz zum deutschen Stromnetz dar, welches immer höhere Anteile von wetterabhängigen Energiequellen beinhaltet.
+Hier bietet das Vorhersagemodell einen Mehrwert.
+
+Darüber hinaus schränkt die Beschaffenheit der \ac{MOER}-Werte des deutschen und norwegischen Stromnetzes die Anwendbarkeit ein.
+Entgegen anderer Ergebnisse~(\cite{Wiesner.2021}), die einen großen Unterschied zwischen unter der Woche und am Wochenende gemessenen Werten verzeichneten, weisen sie keine großen Unterschiede zwischen diesen Zeiträumen auf.
+Die \ac{MOER} des deutschen Stromnetzes ist durchschnittlich über den betrachteten Zeitraum am Wochenende um 0,53\% geringer als unter der Woche und die des norwegischen Stromnetzes ist am Wochenende sogar um 0,74\% höher.
+Beides sind zu vernachlässigende Unterschiede, die das pauschale Verschieben von Workloads auf das Wochenende nicht rechtfertigen würden.
+Bei~\cite{Wiesner.2021} wurde gemessen, dass die Kohlenstoffintensität Deutschlands am Wochenende ungefähr 25\% geringer ist, was eine Verlagerung hin zum Wochenende durchaus sinnvoll macht.
+Die verschiedenen Messungen kommen höchstwahrscheinlich daher, dass bei~\cite{Wiesner.2021} die durchschnittliche Kohlenstoffintensität des Stromnetzes verwendet wurde, die sich nach aktuellem Wissensstand wie bereits beschrieben nur schlecht für die Analyse von Laständerungen eignet.
+
+Durch die Energiewende werden sich die Stromnetze verändern - sei es kurzfristig durch betriebliche Änderungen oder langfristig durch strukturelle Änderungen.
 Diese Einflüsse machen die Emissionen schwer vorhersagbar.
 Die Eröffnung eines neuen Rechenzentrums könnte zum Beispiel dazu führen, dass die Grenzstromnetze hochgefahren werden müssen, um die zusätzliche Last zu decken.
 Solche zusätzlichen neuen Nachfragen könnten Netzbetreiber aber auch zum Ausbau der Erzeugungskapazitäten führen.
@@ -1685,40 +1754,7 @@ Bestimmte Ereignisse, seien sie politischer, ökonomischer oder ökologischer Na
 Solche Ereignisse sind kaum oder meistens gar nicht vorhersagbar.
 Beispiele aus der Gegenwart und nahen Vergangenheit sind der Russlandkrieg und die Corona-Pandemie oder auch kleinere Ereignisse wie die Abschaltung von Anlagen.
 
-Die Arbeit hat nur einen kleinen Bereich der Nachhaltigkeit von Software beleuchtet.
-Neben dem bewussten Verbrauch von Kohlenstoff, gibt es eine Reihe weiterer Prinzipien, wie in Kapitel\ref{CAP:sustainable-software} beschrieben.
-Eine im  Bezug auf Nachhaltigkeit optimale Software würde alle diese Prinzipien beachten.
-Außerdem sollte Nachhaltigkeit auf alle Ebenen der Software angewandt werden.
-Beginnend bei der Architektur, über Programmiersprachen und Code-Prinzipien, bis hin zu Bereitstellung und Betrieb sollte die Software vollumfänglich für Nachhaltigkeit optimiert werden.
-Eine wichtige Rolle spielt dabei auch die regelmäßige Messung und Überprüfung, um eine Einordnung zu ermöglichen.
-%!
-%!
-\chapter{Diskussion}
-\section{Datenmodell und Prognose}
-Die Methoden zur Modellierung und Überprüfung der \ac{MOER}-Daten befinden sich momentan noch in einem kontinuierlichen Entwicklungs- und Verbesserungsprozess.
-Aktuell ist WattTime der einzige Anbieter dieser spezifischen Daten zur marginalen Emissionsrate, was zu einer monopolistischen Situation führt.
-Es ist daher anzunehmen, dass die Qualität der Daten zukünftig weiter steigen wird und womöglich weitere Anbieter für \ac{MOER}-Daten aufkommen werden.
-Außerdem wird mit fortschreitender Zeit eine größere Datenmenge zur Verfügung stehen, weil der Beginn der Datenmodellierung dann schon weiter zurückliegen wird.
-
-Die Entstehung und der Zusammenhang der \ac{MOER}-Werte, sowie verschiedene Einflussfaktoren auf diese, bilden ein komplexes Konstrukt.
-Die einzelnen Zusammenhänge und Abhängigkeiten noch genauer interpretieren zu können, erfordert eine umfassendere Analyse der Stromnetz- und Strommarktdaten.
-Hierzu zählt die Analyse der Zusammensetzung der Energiequellen, der Abhängigkeit von Wetterbedingungen, der Präzision von Wettervorhersagen sowie der Entwicklung von Strompreisen und deren Auswirkungen auf die Kohlenstoffintensität.
-Erkenntnisse aus einer solchen Analyse könnten zu verbesserten Vorverarbeitungsschritten der Daten und präziseren Prognosen führen.
-Zudem spielen externe Einflüsse eine wesentliche Rolle in der Dynamik des Srommarkts.
-Politische Entscheidungen, gesetzliche Regelungen und unvorhersehbare Ereignisse können erhebliche Auswirkungen haben.
-Im betrachteten Zeitraum (2021-2024) waren das unter anderem die COVID-19-Pandemie, geopolitische Konflikte wie der Russland-Krieg und infrastrukturelle Angriffe wie ein Anschlag auf die Nordstream Gas-Pipelines~\cite{Baumgartner.30.09.2022}.
-Eine Möglichkeit für den Umgang mit solchen meist nicht vorhersagbaren Einflüssen, ist die Erkennung dieser im Energiemarkt und damit verbunden eine automatische Aktualisierung der Prognosemodelle.
-
-Darüber hinaus wurde der geographische Rahmen des Datenmodells und der Prognose eingegrenzt.
-Weitere Länder mit aufzunehmen kann einen umfangreicheren Vergleich verschiedener Stromnetze und \ac{MOER}-Werte ermöglichen, was zu allgemeingültigeren Ergebnissen führen kann.
-Verwendet die vorliegende Arbeit Daten auf nationaler Ebene, so wäre außerdem ein sinnvoller nächster Schritt, dies noch weiter in verschiedene Zonen einzuteilen.
-Limitierender Faktor ist dabei momentan die Verfügbarkeit von Daten zur marginalen Kohlenstoffintensität, die gegenwärtig nur Länder-spezifisch zur Verfügung stehen.
-Eine detaillierte regionale Aufschlüsselung könnte nicht nur die Präzision der Daten erhöhen, sondern auch die Relevanz der Daten für den Einsatz in Rechenzentren wesentlich verbessern.
-Interessant wäre zum Beispiel auch den Einfluss der geographischen Lage zu betrachten.
-Dabei können am Äquator gelegene Länder möglicherweise von der starken Sonneneinstrahlung profitieren.
-Für eine entsprechende Analyse sind jedoch sowohl bei WattTime, als auch bei Electricity Maps noch nicht ausreichend Daten verfügbar~\cite{WattTime.20230823}\cite{ElectricityMaps.20240305T20:54:29.000Z}.
-
-\section{API}
+\section{Anwendung der Vorhersagen}
 Es besteht eine Vielzahl an Möglichkeiten zur Erweiterung der \ac{API}.
 Eine mögliche Erweiterung wäre die Bereitstellung einer detaillierteren Rückgabe, die eine Liste mit verschiedenen Vorhersageergebnissen umfasst.
 Dies würde es Endnutzern ermöglichen, einen umfassenderen Überblick über die prognostizierten \ac{MOER}-Werte zu verschiedenen Zeiten zu erhalten.
@@ -1729,6 +1765,35 @@ Eine Umsetzung der Prognose für zusätzliche könnte für die \ac{API} einen Me
 Für einen Zeitpunkt in der Zukunft könnte eine Liste von Regionen mit den entsprechenden \ac{MOER}-Werten sortiert nach der Höhe der \ac{MOER} ausgegeben werden.
 Dies könnte nicht nur für einen bestimmten Zeitpunkts, sondern auch insgesamt für die Dauer eines Workloads umgesetzt werden.
 Darüber hinaus könnte man noch genauer auf die Umgebung eingehen, in der der Workload ausgeführt wird.
+
+Es bestehen Herausforderungen und Grenzen, die sich bei der parktischen Anwendung von kohlenstoffbewussten Strategien ergeben
+Die Integration der Tools zur Nachhaltigkeitsoptimierung von Softwaresystemen ist stets mit Herausforderungen und Aufwand verbunden.
+Dieser Aufwand wird von Unternehmen nur eingegangen, wenn ein ausreichend hohes Potenzial und ein Nutzen besteht.
+Der Aufwand kann doch eine einfache Verfügbarkeit und Zugänglichkeit der Technologien und Lösungen minimiert werden.
+Sind die Tools leicht integrierbar in Entwicklung und Betrieb bestehender Softwaresysteme, so ist die Hürde zur Anwendung gering.
+
+Die Skalierungsstrategien von Softwaresystemen sind eng an die jeweilige Systemlast und die spezifischen Anforderungen gekoppelt.
+Insbesondere zu Zeiten mit einer hohen Last kombiniert mit der Anforderung von minimalen Ausfallquoten kann der Wunsch nach Nachhaltigkeit in direktem Konflikt mit der Notwendigkeit stehen, Lastspitzen bewältigen zu können.
+Eine Möglichkeit, dem Abhilfe zu schaffen, ist die Prognosen zur Kohlenstoffintensität mit Erwartungen der Last auf das System zu kombinieren.
+Die Integration der erwarteten Systemlast und der Schwankungen der Kohlenstoffintensität zu integrieren, könnte eine Lösung sein, um beiden Anforderungen gerecht zu werden.
+Eine weitere mögliche Lösung ist, den Preis als Signalgeber zu verwenden.
+In Stromnetzen wie in Deutschland sollten die schwankenden erneuerbaren Energien automatisch mit der \ac{MOER} korrelieren und diese wiederum aufgrund ihrer geringen Kosten mit dem Preis.
+Eine erste Analyse hat zwischen der \ac{MOER} des deutschen Stromnetzes und dem Strom-Großhandelspreis eine Korrelation von ungefähr 20\% ergeben.
+Anders herum führt beispielsweise eine Reduzierung der Cloud-Kosten meist dadurch zu geringeren Emissionen, als dass es darauf abzielt, weniger Ressourcen zu nutzen oder die verwendeten Ressourcen besser auszunutzen~\ref{Toughtworks.2020}.
+
+Qualitativ hochwertige Prognosen sowohl der Kohlenstoffintensität als auch von Workloads stehen im Mittelpunkt erfolgreicher kohlenstoffbewusster Verlagerungen.
+Wichtig sind dabei vor allem auch Informationen über die Workloads, wie zeitliche Beschränkungen, erwartete Dauer und, ob eine Unterbrechung möglich ist.
+Zur Unterstützung könnten Tools zur Bereitstellung dieser Informationen eingesetzt werden.
+So könnten Schnittstellen bereitgestellt werden, um zeitliche Beschränkungen und andere Eigenschaften programmatisch zu deklarieren oder diese automatisch zu erkennen.
+Die benötigte Zeit für das Anhalten und Wiederaufnehmen eines Workloads könnte erfasst und dieser anhand dessen automatisch als unterbrechbar oder nicht unterbrechbar gekennzeichnet werden
+Zeitliche Beschränkungen könnten zum Beispiel vom Abhängigkeitsgraphen eines Workloads abgeleitet werden~\cite{Wiesner.2021}.
+
+Cloud- und Service-Anbieter sollten Nutzer ermutigen, ihre Workloads möglichst zeitlich flexibel und unterbrechbar zu gestalten und sie dementsprechend zu deklarieren.
+Spot-Instanzen sind bereits bei vielen Anbietern verfügbar, sodass die Cloud besser ausgelastet und zugleich niedrige Kosten angeboten werden können.
+Nicht zuletzt zwingt die Bepreisung von Kohlendioxid, die laut World Bank 2023 ein Rekordhoch erreicht hat~\cite{WorldBank.2023}, Anbieter und Nutzer dazu, sich mit diesem Thema zu beschäftigen.
+Neben finanziellen Anreizen, sollten Anbieter vermehrt Wissen über Kohlenstoffintensität und die adäquate Gestaltung von Workloads zur Verfügung stellen.
+Eine einfache Änderung wäre die Angabe von Zeitfenstern für Scheduling-Startzeitpunkte (z.B. nachts) anstelle konkreter Zeitpunkte (z.B. um 1 Uhr) für Workloads, sodass das Potenzial für Kohlenstoffeinsparungen genutzt werden kann~\cite{Wiesner.2021}.
+
 \section{Nachhaltige Softwareanwendungen}
 Der Beitrag zur Nachhaltigkeit von Softwareanwendungen muss im Gesamtkontext gesehen werden.
 An dieser Stelle soll die Berechnung der Emissionen einer Software durch den \ac{SCI}-Index (Formel~\ref{eq:sci}) erneut aufgegriffen werden.
@@ -1738,62 +1803,49 @@ Die Gesamtemissionen von Softwareanwendungen umfassen weitere relevante Faktoren
 Die benötigte Energie zu reduzieren oder die verwendete Hardware effizienter zu nutzen kann die Kohlenstoffintensität der Software ebenfalls verringern.
 Nachhaltige Software sollte also bestenfalls für alle diese Einflussfaktoren optimiert sein.
 
-Als Beispiel soll die Entwicklung der \ac{TFT}-Modelle für die vorliegende Arbeit betrachtet werden.
-Anhand des \ac{SCI}-Index soll berechnet werden, wie viel \ac{CO2} während des gesamten Trainingsprozesses eingespart werden könnte.
-Gemäß Formel~\ref{eq:sci} fließen der verbrauchte Strom, die marginale Kohlenstoffintensität und die verkörperten Emissionen in die Berechnung ein.
-Das Training der Modelle erfolgte hauptsächlich in Google Colab Pro aufgrund der einfachen Integration von Jupyter Notebooks.
-Hierbei wurde eine Laufzeitumgebung mit einer Tesla T4 \ac{GPU} verwendet.
-
-Zur Überwachung und Analyse der Trainingsläufe kam das Tool Weights and Biases zum Einsatz, das nicht nur grafische Übersichten, sondern auch detaillierte Statistiken für Machine-Learning-Prozesse liefert.
-Diese Dokumentation ermöglichte es, die Systemauslastung während der Trainingsläufe genau zu verfolgen.
-Es wurde festgestellt, dass die durchschnittliche Leistung der \ac{GPU} bei 56,23 Watt lag.
-Der Energieverbrauch der \ac{CPU} wurde anhand einer durchschnittlichen Auslastung von 47\% und einer angenommenen \ac{TDP} von 85 Watt berechnet.
-
-Um den Einfluss der marginalen Kohlenstoffintensität zu beurteilen, wurden die \ac{MOER}-Werte variiert, während alle anderen Faktoren der Formel konstant blieben.
-Es wurden zwei Szenarien entwickelt: ein Worst-Case-Szenario, das die 72 Stunden mit den höchsten \ac{MOER}-Werten verwendet, und ein Best-Case-Szenario mit den niedrigsten Werten.
-Diese Methode ermöglicht eine Abschätzung, wie viel \ac{CO2} während des Trainings eingespart werden könnte, wenn optimale Betriebszeiten gewählt werden.
-Die Trainings fanden hauptsächlich im Januar 2024 statt, weshalb die Untersuchung auf diesen Zeitraum begrenzt wurde.
-
-Für die Kohlenstoffintensität ergaben sich folgende Werte:
-Im Worst-Case-Szenario wurden 421,4 kg \ac{CO2}eq und im Best-Case-Szenario 366,77 kg \ac{CO2}eq emittiert.
-Das bedeutet, das für den betrachteten Anwendungsfall ungefähr 13\% der Emissionen eingespart werden können, wenn das Training zu den Zeiten mit der geringsten \ac{MOER} ausgeführt wird.
-Umgesetzt werden könnte das mithilfe von Checkpoints, die nach jeder Trainingsepoche gespeichert werden und somit eine spätere Fortführung des Trainings ermöglichen.
-
-Im Grundlagenteil der Arbeit in Abschnitt~\ref{CAP:sustainable-software} wurden die unterschiedlichen Aspekte nachhaltiger Software thematisiert.
-Neben dem bewussten und verantwortungsvollen Umgang mit Kohlenstoff gehören demnach auch eine effiziente Nutzung von Energie und Hardware dazu.
-Im Rahmen dieser Arbeit wurde demnach nur ein Teilaspekt nachhaltiger Software behandelt.
+Die Arbeit hat nur einen kleinen Bereich der Nachhaltigkeit von Software beleuchtet.
+Neben dem bewussten Verbrauch von Kohlenstoff, gibt es eine Reihe weiterer Prinzipien, wie in Kapitel\ref{CAP:sustainable-software} beschrieben.
+Eine im  Bezug auf Nachhaltigkeit optimale Software würde alle diese Prinzipien beachten.
+Außerdem sollte Nachhaltigkeit auf alle Ebenen der Software angewandt werden.
+Beginnend bei der Architektur, über Programmiersprachen und Code-Prinzipien, bis hin zu Bereitstellung und Betrieb sollte die Software vollumfänglich für Nachhaltigkeit optimiert werden.
+Eine wichtige Rolle spielt dabei auch die regelmäßige Messung und Überprüfung, um eine Einordnung zu ermöglichen.
 %!
 %!
 \chapter{Fazit}\label{CAP:resumee}
-Angesichts des rasanten Anstiegs der Rechenleistung, bedingt unter anderem durch Anwendungen in den Bereichen \ac{KI}, Bitcoin oder allgemeine Computernutzung, wird sich der Energiebedarf von Rechenzentren in den nächsten zwei Jahren voraussichtlich verdoppeln.
+Angesichts des rasanten Anstiegs der Rechenleistung, bedingt unter anderem durch Anwendungen in den Bereichen \ac{KI}, Bitcoin oder allgemeine Computernutzung, wird sich der Energiebedarf von Rechenzentren in den nächsten zwei Jahren voraussichtlich verdoppeln~\cite{WattTime.12.3.2024}.
+Moore's Gesetz zur Evolution von Rechenleistung zu Folge sogar noch stärker~\cite{intel}.
 % Voraussichtlich wird sich der Energieverbrauch von Rechenzentren durch den starken Anstieg der Rechenleistung in den nächsten zwei Jahren verdoppeln.
 Vor diesem Hintergrund haben sich die Lastanpassung und -verschiebung als vielversprechende Methoden herausgestellt~\cite{WattTime.12.3.2024}.
 Diese Arbeit untersuchte das Potenzial der Nachhaltigkeitsoptimierung von Software anhand der Zeitreihenvorhersage der marginalen Kohlenstoffintensität zwei spezifischer Stromnetze.
 Neben der Vorhersage durch ein statistisches Modell wurde mit dem \ac{TFT} auch ein Neuronales Netz trainiert und die Ergebnisse der beiden Modelle verglichen.
 Für die Optimierungsmöglichkeiten wurden unterschiedliche Strategien untersucht und die Anwendbarkeit der zeitlichen und örtlichen Verschiebung für verschiedene Workloads bewertet.
 
-Die Ergebnisse zeigen sowohl für Deutschland, als auch für Norwegen, ein sich täglich wiederholendes Muster im Verlauf der marginalen Kohlenstoffintensität, wobei sich die Muster je Land geringfügig unterscheiden.
-Die Minimalwerte zur Mittagszeit können für eine generelle Verschiebung in diese Zeiten genutzt werden.
-Darüber hinaus kann die Vorhersage der Intensität eine Woche oder einen Monat im Voraus jederzeit unter Angabe von Dauer und Fälligkeitsdatum des betrachteten Workloads abgerufen werden.
-
-Cloud- und Service-Anbieter sollten Nutzer ermutigen, ihre Workloads möglichst zeitlich flexibel und unterbrechbar zu gestalten und sie dementsprechend zu deklarieren.
-Spot-Instanzen sind bereits bei vielen Anbietern verfügbar, sodass die Cloud besser ausgelastet und zugleich niedrige Kosten angeboten werden können.
-Nicht zuletzt zwingt die Bepreisung von Kohlendioxid, die laut World Bank 2023 ein Rekordhoch erreicht hat~\cite{WorldBank.2023}, Anbieter und Nutzer dazu, sich mit diesem Thema zu beschäftigen.
-Neben finanziellen Anreizen, sollten Anbieter vermehrt Wissen über Kohlenstoffintensität und die adäquate Gestaltung von Workloads zur Verfügung stellen.
-Eine einfache Änderung wäre die Angabe von Zeitfenstern für Scheduling-Startzeitpunkte (z.B. nachts) anstelle konkreter Zeitpunkte (z.B. um 1 Uhr) für Workloads, sodass das Potenzial für Kohlenstoffeinsparungen genutzt werden kann~\cite{Wiesner.2021}.
-
-Qualitativ hochwertige Prognosen sowohl der Kohlenstoffintensität als auch von Workloads stehen im Mittelpunkt erfolgreicher kohlenstoffbewusster Verlagerungen.
-Wichtig sind dabei vor allem auch Informationen über die Workloads, wie zeitliche Beschränkungen, erwartete Dauer und, ob eine Unterbrechung möglich ist.
-Zur Unterstützung könnten Tools zur Bereitstellung dieser Informationen eingesetzt werden.
-So könnten Schnittstellen bereitgestellt werden, um zeitliche Beschränkungen und andere Eigenschaften programmatisch zu deklarieren oder diese automatisch zu erkennen.
-Die benötigte Zeit für das Anhalten und Wiederaufnehmen eines Workloads könnte erfasst und dieser anhand dessen automatisch als unterbrechbar oder nicht unterbrechbar gekennzeichnet werden
-Zeitliche Beschränkungen könnten zum Beispiel vom Abhängigkeitsgraphen eines Workloads abgeleitet werden~\cite{Wiesner.2021}.
-
-Anschließende Forschungsarbeiten könnten die regionale Auflösung der Prognosedaten erhöhen.
-
-Darüber hinaus könnten zukünftige Untersuchungen von einer Verbesserung und realitätsnäheren Modellierung der \ac{MOER}-Daten profitieren.
-
-Darüber hinaus könnten die Prognosemodelle mit weiteren, die \ac{MOER} beeinflussenden Eingabevariablen erstellt und trainiert werden.
-Auf diese Weise könnte ein Vergleich von Modellgenauigkeit und Trainingsaufwand je verwendeter Variablen aufgestellt werden, um herauszufinden, welche Kombination dieser Eingabevariablen die besten Ergebnisse unter akzeptablem Trainingsaufwand erreichen.
+%Die Ergebnisse zeigen sowohl für Deutschland, als auch für Norwegen, ein sich täglich wiederholendes Muster im Verlauf der marginalen Kohlenstoffintensität, wobei sich die Muster je Land geringfügig unterscheiden.
+%Die Minimalwerte zur Mittagszeit können für eine generelle Verschiebung in diese Zeiten genutzt werden.
+%Darüber hinaus kann die Vorhersage der Intensität eine Woche oder einen Monat im Voraus jederzeit unter Angabe von Dauer und Fälligkeitsdatum des betrachteten Workloads abgerufen werden.
 
 
+Als Fazit sollen die Forschungsziele aus Kapitel~\ref{CAP:goals} aufgegriffen werden.
+Die Ergebnisse können folgendermaßen zusammengefasst werden:
+\begin{itemize}
+ \item \textbf{Entwicklung eines Vorhersagemodells} \\
+ Für die Prognose der \ac{MOER} des deutschen und norwegischen Stromnetzes wurden verschiedene Modelle entwickelt.
+ Diese unterscheiden sich in der grundsätzlichen Art der Vorhersage, in der möglichen Vorhersagelänge und im verwendeten Land.
+ Es hat sich gezeigt, dass sich \ac{SARIMAX}-Modelle zwar für den betrachteten Anwendungsfall eignen, sie aber die Schwankungen der Werte nicht genau abbilden können.
+ Der \ac{TFT} als \ac{KI}-basiertes Modell eignet sich besser und erzielt - zumindest für Deutschland - zufriedenstellende Ergebnisse.
+ Als wichte Eingabedaten haben sich vor allem die Stunde, der Zeitindex, der Wind und die zeitverzögerte \ac{MOER} herausgestellt.
+ Der Niederschlag und ob ein Feiertag oder Wochenendtag vorliegt waren unwichtig für die Vorhersage.
+ \item \textbf{Nachhaltigkeitsoptimierung von Softwareanwendungen} \\
+ Für die Verbesserung der Nachhaltigkeit von Software wurden verschiedene Strategien untersucht.
+ Dabei hat sich herausgestellt, dass die Effektivität der Strategien stark von der Beschaffenheit der Daten abhängt.
+ Wohingegen die \ac{MOER}-Werte des norwegischen Stromnetzes schwer vorhersagbar sind, haben diese allgemein ein niedriges Niveau.
+ Ein Workload-Scheduling anhand der Prognosen für diese Werte ist deshalb nur bedingt sinnvoll.
+ Vielversprechender ist die örtliche Verschiebung von ortsunabhängigen Rechenlasten in das norwegische Stromnetz.
+ Die deutschen Werte sind im Durchschnitt fast dreimal so hoch, sie bieten jedoch den Vorteil, dass sie unter anderem aufgrund der Zusammensetzung des Stromnetzes besser vorhersagbar sind.
+ Außerdem sind immer wieder starke Minimalausschläge in den Daten zu verzeichnen, die sich nach Vorhersage gut für eine zeitliche Verschiebung von Rechenlasten eignen.
+ \ac{AWS}, Azure, \ac{GCP} und Kubernetes bieten umfangreiche Möglichkeiten, die zur Emissionsreduzierung von Software beitragen können und in die Vorhersagen der Kohlenstoffintensität integriert werden können.
+ \item \textbf{Beitrag zu nachhaltigen Softwaresystemen} \\
+ Die Arbeit hat gezeigt, dass komplexe Zusammenhänge die Kohlenstoffintensität des Stroms für zusätzliche Lastanforderungen bestimmen.
+ Die Verwendung der \ac{MOER} als Maß für die Kohlenstoffintensität hat außerdem einen Einfluss auf die Ergebnisse im Vergleich zur Verwendung der durchschnittlichen Kohlenstoffintensität, die bei vorherigen Forschungsarbeiten meist verwendet wurde.
+ Es empfiehlt sich, den gesamten Lebenszyklus einer Software für Nachhaltigkeitsoptimierungen zu betrachten.
+\end{itemize}
