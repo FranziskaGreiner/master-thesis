@@ -218,7 +218,7 @@ def plot_evaluations(best_tft, prediction_results, dataloader, kind):
     all_predictions = []
     all_actuals = []
 
-    for idx in range(2):
+    for idx in range(1):
         fig, ax = plt.subplots(figsize=(23, 5))
         best_tft.plot_prediction(prediction_results.x,
                                  prediction_results.output,
