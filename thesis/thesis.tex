@@ -5,14 +5,15 @@
     headinclude=true,
     footinclude=false,
     pagesize,%         write pagesize to DVI or PDF
-    fontsize=12pt,%             use this font size
+    fontsize=13pt,%             use this font size
     paper=a4,%          use ISO A4
     bibliography=totoc,%         write bibliography-chapter to table of contents
     index=totoc,%         write index-chapter to table of contents
     cleardoublepage=plain,% \cleardoublepage generates pages with pagestyle empty
      headings=big,%       A4/B5
     listof=flat,%        improved list of tables
-    numbers=noenddot
+    numbers=noenddot,
+  url=true
   ]{scrbook}
 
 \usepackage[utf8]{inputenc}
@@ -64,7 +65,9 @@
 \usepackage{tabularx}
 \usepackage{threeparttable}
 \usepackage{enumitem}
-\setlist[itemize]{noitemsep, topsep=2pt}
+\usepackage{booktabs}
+\usepackage{url}
+\def\UrlBreaks{\do\/\do-}
 
 \lstdefinestyle{mystyle}{
   backgroundcolor=\color{backcolour},
@@ -97,6 +100,8 @@
 \renewfloatcommand{fcapside}{figure}[\capbeside][\FBwidth]
 \newfloatcommand{tcapside}{table}[\capbeside][\FBwidth]
 
+\renewcommand{\lstlistingname}{Code-Ausschnitt}
+\renewcommand{\lstlistlistingname}{\lstlistingname e}
 
 \selectlanguage{ngerman}
 
@@ -107,6 +112,20 @@
 \makeindex
 
 \newcommand{\real}{\mathord{\mathrm{I\!R}}}
+
+% Custom chapter style
+\usepackage{lmodern}
+\definecolor{chaptercolor}{RGB}{55, 65, 105}
+\addtokomafont{disposition}{\color{chaptercolor}}
+\addtokomafont{chapter}{\huge}
+\RedeclareSectionCommand[
+  beforeskip=0pt, % Space before the chapter title
+  afterskip=15pt, % Space after the chapter title
+  innerskip=0pt, % Space between chapter prefix and title
+]{chapter}
+\renewcommand*{\chapterformat}{% Redefine the chapter number format
+  \fontsize{50}{60}\selectfont\thechapter\autodot\enskip
+}
 
 \begin{document}
 \selectlanguage{ngerman}
@@ -144,6 +163,7 @@
 
 
 \appendix
+\addtokomafont{chapter}{\normalcolor}
 \include{append}
 
 \cleardoublepage

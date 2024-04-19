@@ -9,6 +9,7 @@ Masterarbeit Franziska Greiner
   - notebooks: Jupyter Notebooks
   - reports: Weights & Biases Reports
   - src: Modelle und Konfiguration
+  - main.py: Lokales Training der Modelle (Angabe von --model_type und --use_filtered_data)
   - app.py: API zum lokalen Abrufen der Modellvorhersagen
 
 *Wegen Lizenzvereinbarung mit WattTime können die MOER-Daten nicht zur Verfügung gestellt werden*
