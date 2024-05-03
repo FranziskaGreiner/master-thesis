@@ -120,7 +120,7 @@ Soziale und ökonomische Nachhaltigkeitsaspekte werden nur am Rande behandelt.
 Neben den Einflüssen der Software auf die Umwelt ist die Hardware ein wichtiger Faktor.
 Bei ihrer Herstellung und Entsorgung freigesetzte, sogenannte verkörperte Emissionen können einen großen Anteil ausmachen.
 %!Kommentar Thomas: Software hat auch Einfluss auf verkörperte Emissionen, weil effizienter die Software ist und je weniger Hardware sie benötigt, desto weniger verkörptere Emissionen, weil Hardware wird besser genutzt.
-Dieser Aspekt und daraus resultierenden Maßnahmen sind zwar signifikant, werden jedoch in dieser Arbeit nicht direkt behandelt, sondern bieten einen Ansatzpunkt für weiterführende Forschung.
+Dieser Aspekt und daraus resultierende Maßnahmen sind zwar signifikant, werden jedoch in dieser Arbeit nicht direkt behandelt, sondern bieten einen Ansatzpunkt für weiterführende Forschung.
 Indirekt werden jedoch auch die verkörperten Emissionen thematisiert, denn Maßnahmen wie der effiziente Betrieb von Software gehen beispielsweise oft mit einer Reduzierung der verkörperten Emissionen einher.
 % Indirekt sind die jedoch auch die verkörperten Emissionen betroffen, denn je effizienter die Software gestaltet ist, desto weniger Hardware benötigt sie zur Ausführung und desto weniger verkörperte Emissionen sind damit verbunden.
 
@@ -164,11 +164,11 @@ Darüber hinaus existieren auch Arbeiten zur Anwendung der Vorhersagen.
 Ein Projekt, dass sich konkret mit der Anwendung der Vorhersagen zur Kohlenstoffintensität befasst, wurde von der Green Software Foundation ins Leben gerufen.
 Es bietet eine erleichterte Integration von Vorhersagen in bestehende Anwendungen.
 Dafür wurde ein \ac{SDK} entwickelt, mit Hilfe dessen herausgefunden werden kann, wann und wo ein Workload mit der geringsten Menge an Kohlenstoff ausgeführt werden kann.
-Carbon Aware \ac{SDK} kann als Web\ac{API} und als \ac{CLI}verwendet werden und steht als Open-Source-Projekt zur Verfügung.
+Carbon Aware \ac{SDK} kann als Web\ac{API} und als \ac{CLI} verwendet werden und steht als Open-Source-Projekt zur Verfügung.
 Es kann dabei helfen, die Ausführung nicht zeitkritischer Workloads auf Zeiten mit geringeren Emissionen zu verschieben und in andere Rechenzentren zu verlagern~\cite{GreenSoftwareFoundation.20231212T09:58:27.000Z}.
 Angeboten werden unterschiedliche Abfragen, zum Beispiel die Ausgabe der besten Startzeit und des besten Ortes unter Angabe eines Zeitintervalls und der Workload-Dauer oder die Ausgabe der aktuellsten Vorhersagedaten inklusive Berechnung des Zeitfensters mit der geringsten \ac{MOER}~\cite{GreenSoftwareFoundation.20240316T16:54:58.000Z}.
-Carbon Aware \ac{SDK} dient also dazu, Daten zur Kohlenstoffintensität für Software anwendbar zu machen.
-Die vorliegende Arbeit grenzt sich dadurch ab, dass sie die Kohlenstoffintensität weiter in die Zukunft vorherzusagen, diese Vorhersagen verfügbar zu machen und deren Anwendungsmöglichkeiten aufzuzeigen.
+Carbon Aware \ac{SDK} dient demnach dazu, Daten zur Kohlenstoffintensität für Software anwendbar zu machen.
+Die vorliegende Arbeit grenzt sich dadurch ab, dass sie versucht, die Kohlenstoffintensität weiter in die Zukunft vorherzusagen, diese Vorhersagen verfügbar zu machen und deren Anwendungsmöglichkeiten aufzuzeigen.
 
 Ein weiteres relevantes Projekt ist der Carbon Aware Scheduler~\cite{Siemers.20240319T14:09:25.000Z}.
 Es handelt sich dabei um ein \ac{CLI}-Tool für das Scheduling von Unix Jobs.
@@ -180,15 +180,15 @@ Darin beschreiben sie, wie Kohlenstoffintensität gemessen und Software nach die
 Sie verwenden das Carbon Aware \ac{SDK}, um einen Prototypen zur zeitlichen Verschiebung von Workloads zu entwerfen.
 Das Projekt zeigt, wie das Tool im laufenden Betrieb eingesetzt werden kann.
 
-Die örtliche Verlagerung von Workloads kann mit einem Kostenmehraufwand verbunden sein, der nicht nur die Verlagerung an sich sondern möglicherweise auch den höheren Preis der ausgewählten Region umfasst.
+Die örtliche Verlagerung von Workloads kann mit einem Kostenmehraufwand verbunden sein, der nicht nur die Verlagerung an sich, sondern möglicherweise auch den höheren Preis der ausgewählten Region umfasst.
 Diese zusätzlichen Kosten können von der Umsetzung der Verlagerung abhalten, weshalb Microsoft für Azure ein Werkzeug zusätzlich zur Carbon Aware \ac{SDK} entwickelt hat, das auf dieser aufbaut.
 Die Carbon Economy \ac{SDK} errechnet für die vom Carbon Aware \ac{SDK} ausgegebene optimale Zeit und Region die Kosten, um einen Workload in diese andere Region zu verlagern.
 Unter Verwendung einer normalisierten Gewichtung werden geringere Kohlenstoffemissionen gegenüber zusätzlichen Kosten priorisiert.
 Anhand diesem Gewicht kann entschieden werden, wie viel einem die geringeren Emissionen Wert sind~\cite{Norlander.2023}.
 
-Als bedeutend wurde vor allem das Paper von Wiesner et al. \cite{Wiesner.2021} identifiziert, welches das Potenzial zeitlicher Verlagerung von Workloads in Rechenzentren, um emissionsarme Energie zu verwenden, untersucht.
-Die Autoren konzentrierten sich dabei insbesondere darauf, über welche Eigenschaften Workloads verfügen müssen, sodass sie gut für die Verschiebung geeignet sind und auf die Kohlenstoffintensität vom Stromnetz vier verschiedener Länder.
-Sie kamen zu dem Ergebnis, dass das Verlagerungspotenzial in Ländern mit einem hohen Anteil von Solarenergie vor Sonnenaufgang und abends hoch ist und dass eine Verlagerung auf die Wochenenden zu Einsparungen von mehr als 20\% führen können.
+Als bedeutend wurde vor allem das Paper von Wiesner et al. \cite{Wiesner.2021} identifiziert, welches das Potenzial zeitlicher Verlagerung von Workloads in Rechenzentren zur Verwendung emissionsarmer Energie untersucht.
+Die Autoren konzentrierten sich dabei insbesondere auf die notwendigen Eigenschaften von Workloads, sodass sie gut für die Verschiebung geeignet sind und auf die Kohlenstoffintensität des Stromnetzes vier verschiedener Länder.
+Sie kamen zu dem Ergebnis, dass das Verlagerungspotenzial in Ländern mit einem hohen Anteil von Solarenergie vor Sonnenaufgang und abends hoch ist und dass eine Verlagerung auf die Wochenenden zu Einsparungen von mehr als 20\% führen kann.
 Außerdem stellte es sich als besonders hilfreich heraus, wenn für Workloads die zeitlichen Beschränkungen gelockert und die Möglichkeit für Unterbrechungen genutzt werden~\cite{Wiesner.2021}.
 
 Eine jüngst veröffentlichte Forschungsarbeit beschäftigt sich mit den Einschränkungen zeitlicher und örtlicher Verlagerungen von Workloads in der Cloud anhand der Kohlenstoffintensität~\cite{Sukprasert.2023}.
@@ -206,7 +206,7 @@ An dieser Stelle wird deshalb als Grundlage der Begriff der Nachhaltigkeit defin
 
 Vom Bundesministerium für wirtschaftliche Zusammenarbeit und Entwicklung~\cite{BundesministeriumWirtschaftlicheZusammenarbeitundEntwicklung} wird Nachhaltigkeit wie folgt definiert:
 \glqq Nachhaltigkeit oder nachhaltige Entwicklung bedeutet, die Bedürfnisse der Gegenwart so zu befriedigen, dass die Möglichkeiten zukünftiger Generationen nicht eingeschränkt werden.\grqq{}
-Dabei erstrecke sich Nachhaltigkeit gleichermaßen auf drei verschiedene Dimensionen, nämlich wirtschaftlich effizient, sozial gerecht und ökologisch tragfähig.
+Dabei erstrecke sich Nachhaltigkeit gleichermaßen auf drei verschiedene Dimensionen: wirtschaftlich effizient, sozial gerecht und ökologisch tragfähig.
 Laut Duden ist Nachhaltigkeit in Bezug auf Ökologie das \glqq Prinzip, nach dem nicht mehr verbraucht werden darf, als jeweils nachwachsen, sich regenerieren, künftig wieder bereitgestellt werden kann\grqq{}~\cite{Dudenredaktion.27.04.2018}.
 
 Die im Jahr 1992 auf der Konferenz für Umwelt und Entwicklung der Vereinten Nationen verabschiedeten Agenda 21 legte Nachhaltigkeit als übergreifendes Ziel der Politik fest.
@@ -289,16 +289,17 @@ Für ein hybrides Szenario aus privaten und öffentlichen Cloud-Anwendungen fäl
 Entwickelt ein Unternehmen kundenorientierte Front-End-Anwendungen, so sind diese in Scope 3 des Unternehmens einzuordnen, da der Kunde selbst die Energie für das verwendete Gerät kauft~\cite{GreenSoftwareFoundation.2022}.
 
 Die wachsende Notwendigkeit für Unternehmen, ihre Nachhaltigkeitsbemühungen zu intensivieren, wird zunehmend durch regulatorische Vorgaben getrieben.
-Insbesondere verlangt die EU-Gesetzgebung von Großunternehmen sowie börsennotierten Gesellschaften, umfassend über soziale und ökologische Risiken, Chancen sowie die Auswirkungen ihrer Geschäftstätigkeiten auf Umwelt und Gesellschaft Rechenschaft abzulegen.
+Insbesondere verlangt die EU-Gesetzgebung von Großunternehmen, sowie börsennotierten Gesellschaften, umfassend über soziale und ökologische Risiken, Chancen und die Auswirkungen ihrer Geschäftstätigkeiten auf Umwelt und Gesellschaft Rechenschaft abzulegen.
 Ziel dieser Richtlinien ist es, eine konsistente und vergleichbare Nachhaltigkeitsbewertung von Unternehmen innerhalb der EU zu gewährleisten.
-Mit der Verschärfung dieser Richtlinien im Jahr 2023, die ab 2025 Wirkung zeigen wird, verstärkt sich der Anreiz für Unternehmen, ihre Umweltauswirkungen offenzulegen und Maßnahmen zu deren Verbesserung einzuleiten~\cite{DirectorateGeneralforFinancialStability.20240411T13:37:55.000Z}.
+Mit der Verschärfung dieser Richtlinien im Jahr 2023, die ab 2025 gültig wird, verstärkt sich der Anreiz für Unternehmen, ihre Umweltauswirkungen offenzulegen und Maßnahmen zu deren Verbesserung einzuleiten~\cite{DirectorateGeneralforFinancialStability.20240411T13:37:55.000Z}.
 Das Gesetz zur Steigerung der Energieeffizienz in Deutschland sieht zudem zum Beispiel bis 2030 eine Verringerung des Energieverbrauchs um 26,5\% im Vergleich zu 2008 vor~\cite{BundesministeriumderJustiz.20240418} vor.
 
 Transparenz in der Nachhaltigkeitskommunikation bietet Unternehmen darüber hinaus eine Chance, ihr Image zu verbessern und sich auf dem Markt als Vorreiter in Sachen Umweltbewusstsein zu positionieren.
 In diesem Kontext spielt die zuvor beschriebene Dokumentation anhand der GHG-Protokoll-Scopes eine wesentliche Rolle.
 Angesichts dieser Entwicklungen hat die Randstad Digital Germany AG als Unternehmen für individuelle Softwaresysteme und kundenspezifische Beratung ihr Angebot im Bereich der nachhaltigen Softwarelösungen ausgebaut.
 Angeregt durch die strengeren EU-Richtlinien und das steigende Bewusstsein für Klimaschutz, sieht die Randstad Digital Germany AG eine zunehmende Nachfrage nach ökologisch nachhaltiger Entwicklung und Beratung.
-Kunden unterschiedlichster Branchen suchen gezielt nach Unterstützung, um ihre Anwendungen und Prozesse klimafreundlicher zu gestalten und somit ihren Beitrag zur Verringerung der ökologischen Fußabdrücke zu leisten (Informationen aus Befragung, siehe~\ref{CAP:interview}).
+Kunden unterschiedlichster Branchen suchen gezielt nach Unterstützung, um ihre Anwendungen und Prozesse klimafreundlicher zu gestalten und somit ihren Beitrag zur Verringerung der ökologischen Fußabdrücke zu leisten.
+Die entsprechenden Informationen stammen aus den Befragungen beschrieben in Abschnitt ~\ref{CAP:interview}.
 
 %Die Motivation für Unternehmen, ihre Nachhaltigkeit zu dokumentieren und zu verbessern ist hauptsächlich durch Regulatorien getrieben.
 %Das EU-Recht verpflichtet zum Beispiel alle Großunternehmen und alle börsennotierten Unternehmen, soziale und ökologische Risiken und Chancen, sowie Informationen der Auswirkungen ihrer Tätigkeiten auf Mensch und Natur offenzulegen.
@@ -316,11 +317,11 @@ Im Folgenden gilt es, Kohlenstoffintensität zu definieren und die Frage zu klä
 Der Begriff Kohlenstoff wird häufig als Synonym für alle Treibhausgase und als Oberbegriff für die Auswirkungen aller Arten von Emissionen und Aktivitäten auf die globale Erwärmung verwendet~\cite{GreenSoftwareFoundation.2022}.
 Die Kohlenstoffintensität wird in Gramm \ac{CO2} pro bestimmter Einheit gemessen und gibt an, wie viel Kohlendioxid für diese Einheit emittiert wird~\cite{LyndonRuff.20220420T15:34:17.000Z}.
 
-Das Konzept der Kohlenstoffintensität kann auf verschiedenste Bereich angewand werden, um die Auswirkungen auf die Umwelt zu messen.
+Das Konzept der Kohlenstoffintensität kann auf verschiedenste Bereich angewandt werden, um die Auswirkungen auf die Umwelt zu messen.
 Die vorliegende Arbeit beschäftigt sich damit, wann Strom verbraucht werden soll, sodass möglichst wenig Emissionen damit verbunden sind.
 Sie betrachtet also die Kohlenstoffintensität von Stromnetzen, die in diesem Fall die Kohlenstoffintensität in Gramm \ac{CO2} pro \ac{kWh} angibt und aussagt, wie viel Kohlendioxid pro verbrauchter \ac{kWh} Strom emittiert wird.
 
-Kohlenstoffintensität ist hier also ein Maß der Nachhaltigkeit des erzeugten oder verbrauchten Stroms.
+Kohlenstoffintensität ist hier daher ein Maß der Nachhaltigkeit des erzeugten oder verbrauchten Stroms.
 Je geringer der Wert ist, desto nachhaltiger ist der Strom.
 Genauer betrachtet führt ein verringerter Anteil von Energiequellen mit hoher \ac{CO2}-Emission (z.B.\ Braun- oder Steinkohle) am erzeugten Strom zu einem geringeren Emissionsfaktor des Stromnetzes.
 Eine weitere Größe, die den Emissionsfaktor beeinflusst, ist der Wirkungsgrad des Energieträgers.
@@ -367,8 +368,8 @@ Für eine Berechnungsweise (Formel~\ref{eq:ci}), die Forscher aus Großbritannie
  \label{eq:ci}
  C_t = \frac{\sum_{g=1}^{G} P_{g,t} \times c_g}{D_t}
 \end{equation}
-Die Kohlenstoffintensität Ct zur Zeit t ist das Produkt aus Energiequelle und Intensitätsfaktor summiert für alle verwendeten Energiequellen und anschließender Teilung durch die Nachfrage~\cite{LyndonRuff.20220420T15:34:17.000Z}.
-Für \ac{CO2}-Emissionen durch erneuerbare Energien sowie durch Kernkraft wird der Intensitätsfaktor mit 0 berechnet, sodass für diese Energiequellen das Gesamtergebnis der Kohlenstoffintensität gleich 0 ist.
+Die Kohlenstoffintensität $C_t$ zur Zeit $t$ ist das Produkt aus Energiequelle $P_{g,t}$ und Intensitätsfaktor $c_g$, summiert für alle verwendeten Energiequellen und anschließender Teilung durch die Nachfrage $D_t$~\cite{LyndonRuff.20220420T15:34:17.000Z}.
+Für \ac{CO2}-Emissionen durch erneuerbare Energien und durch Kernkraft wird der Intensitätsfaktor mit 0 berechnet, sodass für diese Energiequellen das Gesamtergebnis der Kohlenstoffintensität gleich 0 ist.
 
 Für den vorliegenden Anwendungsfall ist die marginale Kohlenstoffintensität, auch als \ac{MOER} bezeichnet, das geeignete Maß.
 Diese gibt die Emissionsintensität der Grenzkraftwerke an, die auf die veränderte Stromnachfrage reagieren~\cite{Buchanan.2023}.
@@ -381,7 +382,7 @@ Doch auch diese Annahme wurde von Studien widerlegt.
 Im Kontext der Lastverschiebung haben über eineinhalb Jahrzehnte hinweg peer-reviewte Studien deutlich gemacht, dass die entscheidenden Faktoren die Emissionen und der Überschuss an erneuerbaren Energien sind, abhängig davon, welche Energieerzeuger als Grenzanbieter fungieren.
 Es geht darum, zu identifizieren, welche Energieerzeuger als Reaktion auf die durch Lastverschiebung verursachten Nachfrageänderungen ihre Produktion erhöhen oder reduzieren.
 Dies ermöglicht eine präzise Bewertung der realen Auswirkungen auf das Energienetz und dessen Emissionen.
-Die Idee, Lastverschiebung in Datenzentren zur Minimierung von Emissionen einzusetzen, indem man sich auf Zeiten oder Orte konzentriert, wo reichlich Sonnenlicht für die Solarenergieerzeugung vorhanden ist, mag zunächst sinnvoll erscheinen.
+Die Idee, Lastverschiebung in Datenzentren zur Minimierung von Emissionen einzusetzen, indem man sich auf Zeiten oder Orte konzentriert, die reichlich Sonnenlicht für die Solarenergieerzeugung bieten, mag zunächst sinnvoll erscheinen.
 Wenn jedoch die gesamte von Solaranlagen erzeugte Energie bereits durch die Netzlast aufgebraucht wird, könnte jede zusätzliche Nachfrage durch die Lastverschiebung das Hochfahren eines umweltschädlichen, fossil betriebenen Spitzenlastkraftwerks erforderlich machen.
 Um überschüssige erneuerbare Energien effektiv zu nutzen, die ansonsten reduziert würden, ist es entscheidend, die Grenzemissionsraten und die Grenzerzeugungsquellen zu analysieren.
 Es stellt sich die Frage, zu welchen Zeiten und an welchen Orten Anlagen erneuerbarer Energiequellen am Rande der Kapazitätsbeschränkungen operieren.
@@ -394,13 +395,13 @@ Der Zusammenhang zwischen Stromerzeugung, Stromnachfrage und marginalen Emission
  \label{FIG:grid-moer}
 \end{figure}
 Entsteht an einem bestimmten Ort und zu einer bestimmten Zeit eine zusätzliche Stromnachfrage, ändert sich die Belastung der Kraftwerke, die zu diesem Zeitpunkt Strom produzieren.
-Diese Grenzkraftwerke unterscheiden sich in Wirkungsgrad und Brennstoff stark und bestimmten die Emissionen der zusätzlichen Last auf das Stromnetz.
+Diese Grenzkraftwerke unterscheiden sich in Wirkungsgrad und Brennstoff stark und bestimmen die Emissionen der zusätzlichen Last auf das Stromnetz.
 Übersteigt die Erzeugung aus erneuerbaren Energien die Gesamtlast des Netzes, wird diese in das Netz eingespeist und zusätzlich anfallende Last würde zu diesem Zeitpunkt nur wenig oder gar keine Emissionen verursachen.
-Im Zeitraum bei dem erneuerbare Energie nur in einem geringen Maß verfügbar sind, ist die fossile Erzeugung hoch, um die Nachfrage zu decken.
+Im Zeitraum, in dem erneuerbare Energie nur in einem geringen Maß verfügbar sind, ist die fossile Erzeugung hoch, um die Nachfrage zu decken.
 Es werden entweder zusätzliche Kraftwerke eingeschaltet oder Strom aus benachbarten Netzen importiert.
-In dieser Abbildung wird sichtbar, dass die höchste \ac{MOER} nicht unbedingt zum gleichen Zeitpunkt wie ein Nachfragehoch auftritt~\cite{DiStefano.2019}.
+In Abbildung~\ref{FIG:grid-moer} wird sichtbar, dass die höchste \ac{MOER} nicht unbedingt zum gleichen Zeitpunkt wie ein Nachfragehoch auftritt~\cite{DiStefano.2019}.
 
-Die \ac{MOER} eignet sich für den vorliegenden Anwendungsfall demnach besser, als die durchschnittliche Kohlenstoffintensität, da sie die Emissionen pro Lastverschiebung angibt und somit die Beziehung zwischen Ursache und Wirkung der Lastverschiebung erfasst\cite{Wiesner.2021}.
+Die \ac{MOER} eignet sich für den vorliegenden Anwendungsfall demnach besser als die durchschnittliche Kohlenstoffintensität, da sie die Emissionen pro Lastverschiebung angibt und somit die Beziehung zwischen Ursache und Wirkung der Lastverschiebung erfasst\cite{Wiesner.2021}.
 
 
 Kohlenstoffintensität kann auch verwendet werden, um die Nachhaltigkeit von Software zu berechnen, nicht nur für die Nachhaltigkeit der von der Software verwendeten Energie.
@@ -418,7 +419,7 @@ In die Berechnung fließen laut Green Software Foundation folgende Werte ein~\ci
  \item der verkörperte Kohlenstoff M der zugrunde liegenden Hardware (emittierter Kohlenstoff während der Herstellung und der Entsorgung der Hardware)
  \item die Skaliereinheit R, die für die zu messende Software relevant ist (z.B. pro zusätzlichem Benutzer, Gerät, ~\ac{API}-Aufruf, etc.)
 \end{itemize}
-Anhand dieser Formel ergeben sich die Optimierungspunkte des \ac{CO2}-Fußabdrucks eines Workloads, nämlich Energie, Kohlenstoffintensität, verkörperter Kohlenstoff und Skaliereinheit.
+Anhand dieser Formel ergeben sich die Optimierungspunkte des \ac{CO2}-Fußabdrucks eines Workloads: Energie, Kohlenstoffintensität, verkörperter Kohlenstoff und Skaliereinheit.
 Die Green Software Foundation empfiehlt demnach auch, die marginale Kohlenstoffintensität als Messwert für die Emissionen des Stromnetzes zu verwenden~\cite{GreenSoftwareFoundation.2022b}.
 
 Für die Berechnung der Summe an Kohlenstoffemissionen einer Software werden demnach detaillierte Daten zu den einzelnen Faktoren der Formel benötigt.
@@ -472,11 +473,11 @@ Bei Google bedeutet das zum Beispiel, dass bis 2030 50\% der Emissionen eingespa
 
 Dieses Ziel der Cloud-Anbieter bedeutet deshalb nicht, dass es allein ausreichend ist, eine Anwendung auf einer dieser Plattformen bereitzustellen und sich nicht weiter mit dem Thema Nachhaltigkeit auseinander setzten zu müssen.
 Auch die Anwendung selbst muss für Nachhaltigkeit optimiert sein und die vorhanden Möglichkeiten müssen genutzt werden~\cite{Newman.2023}.
-Der deutsche Bitkom hat in einer Metastudie auf Grundlage von mehreren Studien aus den Jahren 2012 bis 2019 zwei Hauptkategorien für Energieensparungen definiert: Anwendungen und Infrastruktur.
+Der deutsche Bitkom hat in einer Metastudie auf Grundlage von mehreren Studien aus den Jahren 2012 bis 2019 zwei Hauptkategorien für Energieensparungen definiert: Anwendungen und Infrastruktur~\cite{Bieser.2020}.
 In Abbildung~\ref{FIG:sustainability-infrastructure} werden die Facetten der Nachhaltigkeit auf Anwendungs- und Infrastrukturebene dargestellt.
 Von Amazon~\cite{Mokhtari.2023} wird dieses Modell als Modell der geteilten Verantwortungen vorgestellt.
 Der Cloud-Anbieter ist für die Nachhaltigkeit der Cloud verantwortlich, dies beinhaltet unter anderem die Bereitstellung einer effizienten, gemeinsam genutzten Infrastruktur, die nachhaltige Wassernutzung und die Beschaffung erneuerbarer Energien.
-Der Cloud-Nutzer ist für die Nachhaltigkeit in der Cloud verantwortlich, also zum Beispiel das Optimieren von Workloads und Ressourcennutzung und das Minimieren der Gesamtressourcen, die für die Workloads bereitgestellt werden müssen~\cite{Mokhtari.2023}.
+Der Cloud-Nutzer ist für die Nachhaltigkeit in der Cloud verantwortlich, zum Beispiel das Optimieren von Workloads und Ressourcennutzung und das Minimieren der Gesamtressourcen, die für die Workloads bereitgestellt werden müssen~\cite{Mokhtari.2023}.
 \begin{figure}
  \caption[Nachhaltigkeit auf Anwendungs- und Infrastrukturebene]{Nachhaltigkeit auf Anwendungs- und Infrastrukturebene, eigene Darstellung nach ~\cite{Mokhtari.2023}}
  {\includegraphics[width=0.99\textwidth]{\figdir/SustainabilityOfAndOnInfrastructure}}
@@ -551,7 +552,7 @@ In vielen Regionen sind Emissionsreduzierungen um mehr als 10\% und in der Regio
 
 \section{Scaling}
 Skalierung bedeutet im Kontext des Softwarebetriebs eine Erhöhung oder Verringerung der Rechen-, Speicher- oder Netzwerkressourcen, die für einen bestimmten Workload genutzt werden.
-Wohingegen man in herkömmlichen, dedizierten Hosting-Umgebungen durch die verfügbaren Hardwareressourcen begrenzt ist, bietet eine Cloud-basierte Anwendung diese Möglichkeit.
+Während man in herkömmlichen, dedizierten Hosting-Umgebungen durch die verfügbaren Hardwareressourcen begrenzt ist, bietet eine Cloud-basierte Anwendung diese Möglichkeit.
 Es kann zudem zwischen vertikaler Skalierung (Scaling Up) und horizontaler Skalierung (Scaling Out) unterschieden werden.
 Bei der vertikalen Skalierung wird die Rechenleistung erhöht (oder auch verringert) und die Infrastruktur beibehalten, die horizontale Skalierung vergrößert oder verkleinert die Ressourcen bei gleichbleibender Rechenleistung~\cite{AlibabaCloudCommunity.20240118T09:19:15.000Z}.
 %Ein Vergleich dieser beiden Methoden ist in Abbildung~\ref{FIG:scaling} dargestellt.
@@ -567,18 +568,19 @@ Durch vertikale Skalierung wird zum Beispiel die Anzahl der \acp{VM} in einem Cl
 Durch Load Balancing wird die Rechenlast auf die verschiedenen Maschinen verteilt.
 Ein Vorteil dieser Maßnahme ist unter anderem die höhere Ausfallsicherheit durch Verteilung auf mehrere Einheiten.
 Bei der horizontalen Skalierung wird beispielsweise bei einer vorhandenen \ac{VM} die \ac{CPU} oder die Speicherkapazität erhöht oder verringert.
-Der Workload wird also nach wie vor von einer Infrastruktur-Einheit bewerkstelligt, diese kann aber mehr Last verarbeiten.
+Der Workload wird daher nach wie vor von einer Infrastruktur-Einheit bewerkstelligt, diese kann aber mehr Last verarbeiten.
 Das hat den Vorteil, dass nicht zwischen unterschiedlichen Komponenten kommuniziert und synchronisiert werden muss und die zusätzlich anfallenden Kosten meist geringer sind als bei der horizontalen Skalierung~\cite{Slingerland.2023}.
 Cloud-Anbieter verfügen meist über automatische Skalierungsmöglichkeiten, sodass eine Anpassung der Ressourcen nicht manuell stattfinden muss.
-Dadurch ist ein effizienteres und Kosten-effektiveres Skalieren möglich.
-Auto-Scaling wird detaillierter in Kapitel~\ref{CAP:scenarios} behandelt, wenn es um die Anwendung der hier vorgestellten Strategien geht.
+Dadurch ist ein effizienteres und kosteneffektiveres Skalieren möglich.
+Auto-Scaling wird detaillierter in Kapitel~\ref{CAP:scenarios} behandelt, dort wird die Anwendung der hier vorgestellten Strategien beschrieben.
 % Load shifting
 \section{Demand Shifting}
 Eine Software-Anwendung kann nachhaltiger betrieben werden, indem der Strombedarf auf die Kohlenstoffintensität ausgerichtet wird.
 Als Lösung sollen Software-Workloads, die viel Rechenleistung benötigen, auf Zeiten und Orte verlagert werden, bei denen der Strommix zu den geringst möglichen Kohlenstoffemissionen führt.
-Durch sogenanntes Demand-Shifting, also der Verschiebung der Nachfrage je nach Kohlenstoffintensität, kann Studien zufolge zwischen 45\% und 99\% Kohlenstoff eingespart werden.
+Durch Demand-Shifting, der Verschiebung der Nachfrage basierend auf der Kohlenstoffintensität, kann Studien zufolge zwischen 45\% und 99\% Kohlenstoff eingespart werden.
 Bei der örtlichen Verlagerung wird ein Ort, bei dem der Strom im Moment \glqq kohlenstoffärmer\grqq{} ist, gewählt.
-Für die örtliche Verlagerung kann man sich die unterschiedlichen Wetterverhältnisse weltweit zu nutzen machen, denn wenn es z.B. in Deutschland im Moment wolkig und windstill ist, können an einem anderen Ort bei wolkenfreiem Himmel und Sonnenschein die perfekten Verhältnisse für die Solarstrom-Erzeugung herrschen.
+Für die örtliche Verlagerung kann man sich die unterschiedlichen Wetterverhältnisse weltweit zu nutzen machen.
+Während es z.B. in Deutschland im Moment wolkig und windstill ist, können an einem anderen Ort bei wolkenfreiem Himmel und Sonnenschein die perfekten Verhältnisse für die Solarstrom-Erzeugung herrschen.
 Für die zeitliche Verlagerung ist ein umfangreiches Wissen über die Kohlenstoffintensität bzw. die Wetterverhältnisse im Verlauf der Zeit nötig.
 Auf Grundlage dessen können Workloads in Zeiten mit geringer Kohlenstoffintensität verlagert werden~\cite{GreenSoftwareFoundation.2022}.
 Eine beispielhafte Darstellung der zeitlichen Verlagerung ist in Abbildung~\ref{FIG:time-shifting} dargestellt.
@@ -589,7 +591,7 @@ Eine beispielhafte Darstellung der zeitlichen Verlagerung ist in Abbildung~\ref{
 \end{figure}
 Die Kohlenstoffintensität (blaue Linie) schwankt im Laufe der Zeit stark.
 Der Beispiel-Workload dauert eine Stunde lang und wird lediglich um eine Stunde verschoben, verbraucht aber dadurch deutlich weniger Kohlenstoff.
-Ein Szenario, das von der zeitlichen Verschiebung profitieren kann ist zum Beispiel das Batch Processing.
+Ein Szenario, das von der zeitlichen Verschiebung profitieren kann, ist zum Beispiel das Batch Processing.
 Ein Batch-Job eignet sich besonders gut dafür, da mehrere Aufgaben gruppiert und nacheinander ohne Benutzereingabe ausgeführt werden.
 Außerdem sind sie oft zu einer beliebigen Zeit innerhalb eines bestimmten Zeitraums ausführbar.
 Dazu zählen unter anderem Software-Updates und System-Backups.
@@ -602,18 +604,19 @@ Die Kohlenstoffintensität kann dadurch um bis zu 75\% reduziert werden~\cite{Do
 Eine ähnliche Methode, die ebenfalls das Ziel verfolgt, die Kohlenstoffemissionen zu senken, ist das Demand-Shaping.
 Dabei wird bei geringer Kohlenstoffintensität die volle Funktionalität geboten und bei hoher Kohlenstoffintensität Einschränkungen getroffen oder die Funktionalität reduziert~\cite{Currie.2024}.
 
-Man kann Demand Shifting und Demand Shaping also voneinander abgrenzen, indem man beim Demand Shifting einen bestimmten Workload betrachtet und die Verhältnisse dafür entweder auf örtlicher oder auf zeitlicher Ebene anpasst.
+Man kann Demand Shifting und Demand Shaping also voneinander abgrenzen, dass man beim Demand Shifting einen bestimmten Workload betrachtet und die Verhältnisse dafür entweder auf örtlicher oder auf zeitlicher Ebene anpasst.
 Beim Demand Shaping werden die aktuellen Verhältnisse betrachtet (Ort und Zeit sind unveränderlich) und der Workload, genauer gesagt die Höhe der Stromnachfrage, wird an diese angepasst.
 
 Das Demand Shaping kann als eine Form des Scalings betrachtet werden, weil beide Prinzipien die Betriebsgröße bzw. Kapazität unter bestimmten Voraussetzungen anpassen.
 
 Ein Beispiel für die Anwendung von Demand Shaping zeigt Google mit der optimierten Lastverteilung seiner Datencenter.
-Täglich vergleicht Google die Vorhersage der erwarteten durchschnittlichen Kohlenstoffintensität im Verlauf des nächsten Tages (verwendet wird die Vorhersage von Electricity Maps) mit der Vorhersage der auf dem System zu erwartenden Last und passt diese beiden Größen aufeinander an.
+Täglich vergleicht Google die Vorhersage der erwarteten durchschnittlichen Kohlenstoffintensität im Verlauf des nächsten Tages mit der Vorhersage der auf dem System zu erwartenden Last und passt diese beiden Größen aufeinander an.
+Verwendet wird dafür die Vorhersage von Electricity Maps.
 Die Compute Tasks werden Stunde für Stunde an die Kohlenstoffwerte angepasst, um möglichst viel Last auf Zeiten mit geringen Emissionen zu verschieben.
 Rundum verfügbare Services, wie die Google-Suche oder der Kartendienst Google-Maps sollen davon nicht beeinträchtigt werden, doch für nicht zeitkritische Updates, wie das Hinzufügen neuer Wörter zum Google-Übersetzer ist die Verschiebung geeignet.
 Laut Google zeigt die Lastverteilung Erfolge und die Verwendung kohlenstoffarmer Energiequellen kann durch diesen Ansatz erfolgreich erhöht werden~\cite{Radovanovic.22.4.2020}.
 
-Ein allgegenwärtiges Beispiel für Demand Shaping ist der bei Geräten wie Autos, Waschmaschinen oder Spülmaschinen verfügbare Eco-Modus.
+Ein allgegenwärtiges Beispiel für Demand Shaping ist der bei Autos, Waschmaschinen oder Spülmaschinen verfügbare Eco-Modus.
 Das Prinzip dahinter ist, dass Leistung verzögert wird für weniger Ressourcenverbrauch.
 Wichtig ist dabei, dass der Eco-Modus lediglich eine Option ist, aber der Leistungsverzicht nicht dauerhaft oder verpflichtend ist~\cite{GreenSoftwareFoundation.2022}.
 Das Konzept eines Eco-Modus könnte auch für Software-Anwendungen basierend auf der Kohlenstoffintensität angewandt werden.
@@ -634,16 +637,16 @@ Dabei hat sich gezeigt, dass bei Google die meisten Workloads nur wenige Minuten
 Wichtig für die Verschiebung sind vor allem zeitliche Beschränkungen.
 Haben die Workloads eine baldige Frist, wie zum Beispiel CI-/CD-Läufe, so eignen sie sich nicht zur späteren Ausführung.
 Jedoch können einige Batch-Jobs, darunter zum Beispiel nächtliche Backups, an bestimmte Vereinbarungen gekoppelt sein und deshalb eine höhere Flexibilität hinsichtlich des Ausführungszeitpunkts bieten.
-Für länger laufende Workloads wie zum Beispiel das Trainieren von Machine-Learning-Modellen besteht das Problem, dass sie oft mehr Ressourcen anfragen, als eigentlich nötig.
-Wegen ihrer oft Energie-intensiven Arbeit und der Tatsache, dass auf ihre Fertigstellung oft ein menschlicher Eingriff folgt, sind sie gut für die zeitliche Verschiebung geeignet.
-Ist es dafür beispielsweise nicht entscheidend, ob der Workload direkt gestartet wird und dann nachts fertig ist, oder später gestartet wird und bis zum nächsten Morgen vollendet ist, ist das die perfekte Vorassetzung für eine mögliche spätere Ausführung.
+Für länger laufende Workloads, wie zum Beispiel das Trainieren von Machine-Learning-Modellen, besteht das Problem, dass sie oft mehr Ressourcen anfragen, als eigentlich nötig.
+Wegen ihrer oft energieintensiven Arbeit und der Tatsache, dass auf ihre Fertigstellung oft ein menschlicher Eingriff folgt, sind sie gut für die zeitliche Verschiebung geeignet.
+Ist es dafür beispielsweise nicht entscheidend, ob der Workload direkt gestartet wird und dann nachts fertig ist, oder später gestartet wird und bis zum nächsten Morgen vollendet ist, ist das die perfekte Voraussetzung für eine mögliche spätere Ausführung.
 Kontinuierliche Workloads umfassen zum Beispiel Blockchain-Mining, langandauernde wissenschaftliche Simulationen oder durchgehend verfügbare Benutzerschnittstellen.
 Sie bieten zwar den Vorteil, dass in ihnen möglicherweise ein großes Einsparungspotenzial steckt, jedoch macht die lange oder unendliche Laufzeit eine zeitliche Verschiebung nur schwer oder gar nicht möglich~\cite{Wiesner.2021}.
 
 Betrachtet man den Zeitpunkt der Ausführung, können im wesentlichen zwei Unterscheidungen getroffen werden:
 Ad-hoc-, also sofort auszuführende, und geplante Workloads.
 Abbildung~\ref{FIG:workloads-execution-time-interruptibility}a zeigt beispielhaft den Unterschied zwischen beiden Arten und deren Möglichkeit zur zeitlichen Verschiebung.
-Der Ausführungszeitpunkt und wie wichtig dessen Einhaltung ist, hat eine große Auswirkung auf die Eignung für zeitliche Verschiebung.
+Der Ausführungszeitpunkt und die Wichtigkeit seiner Einhaltung hat eine große Auswirkung auf die Eignung für zeitliche Verschiebung.
 Ein Großteil der kurzen und langen Workloads sind Ad-hoc-Workloads.
 Die Schwierigkeit besteht darin, die Ausstellung eines solchen Workloads im Voraus zu wissen.
 Erst wenn der Workload erstellt wurde, kann anhand seiner zeitlichen Beschränkungen die Ausführung geplant werden.
@@ -652,7 +655,7 @@ Geplante Workloads sind solche, deren Ausführung für einen Zeitpunkt in der Zu
 Typisch dafür sind periodisch auftretende Workloads, wie beispielsweise nachts ausgeführte Integrationstests und Builds oder regelmäßige Backups, Aktualisierung von Suchindizes in Datenbanken und automatisch erstellte Berichte.
 Der große Vorteil ist, dass sie oft zeitlich sowohl nach hinten, als auch nach vorne verschoben werden können, abhängig vom Fälligkeitsdatum.
 Bei einem regelmäßig in der Nacht ausgeführten Integrationstests mag es zum Beispiel egal sein, ob er statt um 1 Uhr schon um 23 Uhr oder erst um 3 Uhr ausgeführt wird.
-Diese Art von Workload eignet sich also meist hervorragend für eine zeitliche Verschiebung und kommt darüber hinaus auch oft vor.
+Diese Art von Workload eignet sich daher meist hervorragend für eine zeitliche Verschiebung und kommt darüber hinaus auch oft vor.
 Bei Microsoft sind bis zu 60\% der auf großen Klustern laufenden Workloads wiederkehrende Batch-Jobs, wovon mehr als 40\% täglich ausgeführt werden.
 Andere gängige Ausführungsperioden sind 15 Minuten, eine Stunde und zwölf Stunden.
 Bei Google zeigte sich zwischen 2011 und 2019 eine Veränderung hin zu mehr geplanten Workloads und einer deutlichen Erhöhung der Ausführungsrate~\cite{Wiesner.2021}.
@@ -742,15 +745,15 @@ Ergänzt wurde die Formel durch die Saisonalität in Form einer zusätzlichen AR
 
 Wie Daten zur Verwendung des Modells vorbereitet werden müssen und wie die beschriebenen Parameter konfiguriert werden, wird im Abschnitt~\ref{CAP:SARIMAX-training} thematisiert.
 
-Wohingegen \ac{SARIMAX} auf einer vordefinierten Struktur basiert, ist das folgende Modell weitaus flexibler und nutzt maschinelles Lernen, um komplexe Muster und Beziehungen in den Daten zu erfassen~\cite{Lim.19.12.2019}.
+Während \ac{SARIMAX} auf einer vordefinierten Struktur basiert, ist das folgende Modell weitaus flexibler und nutzt maschinelles Lernen, um komplexe Muster und Beziehungen in den Daten zu erfassen~\cite{Lim.19.12.2019}.
 
 \section{Temporal Fusion Transformer als KI-basiertes Modell}
 Neben dem Einsatz von SARIMAX als Basismodell, soll ein sogenannter Temporal Fusion Transformer angewandt werden.
 
 Machine-Learning- und Deep-Learning-Ansätze haben in den vergangenen Jahren aufgrund ihrer breiten Einsatzmöglichkeit bei realen Herausforderungen und ihrer Fähigkeit, praktikable Lösungen zu generieren, signifikant an Bedeutung gewonnen.
-Für Zeitreihenvorhersagen sind überwiegend Deep-Learning-Verfahren für die Vorhersage in Szenarien bestehend aus einer Sequenz von einzelnen Datenpunkten konzipiert worden.
-Dadurch, dass die Zeitreihen nur aus einem Attribut bestanden, tendierten einfachere und traditionellere Methoden, wie \ac{ARIMA}, in einigen Fällen besser abzuschneiden.
-Die damit verbundene Fehlannahme, dass Deep-Learning-Modelle bei der Vorhersage von Zeitreihen nicht effektiv seien, rechtfertigte ihren Mehraufwand gegenüber einfacheren ansätzen nicht.
+Für Zeitreihenvorhersagen sind überwiegend Deep-Learning-Verfahren für die Vorhersage in Szenarien, bestehend aus einer Sequenz von einzelnen Datenpunkten, konzipiert worden.
+Dadurch, dass die Zeitreihen nur aus einem Attribut bestanden, tendierten einfachere und traditionellere Methoden, wie \ac{ARIMA} dazu, in einigen Fällen besser abzuschneiden.
+Die damit verbundene Fehlannahme, dass Deep-Learning-Modelle bei der Vorhersage von Zeitreihen nicht effektiv seien, rechtfertigte ihren Mehraufwand gegenüber einfacheren Ansätzen nicht.
 Mittlerweile hat sich jedoch gezeigt, dass \acp{RNN} in vielen Anwendungen mit Zeitreihen oder sequenziellen Daten, einschließlich Übersetzung und Spracherkennung die besten Ergebnisse erzielen~\cite{Lazzeri.2021}.
 
 Wissenschaftlern von Google gelang 2017 eine Forschungsarbeit~\cite{Vaswani.2017}, die die Forschung zur künstlichen Intelligenz vor allem im Bereich der natürlichen Sprachverarbeitung maßgeblich beeinflusste.
@@ -759,7 +762,7 @@ Anstelle von Feedback-Schleifen durch \acp{RNN}, die üblicherweise in Encoder-D
 Es stellte sich heraus, dass sich dieser neue Architekturansatz für verschiedenste Zwecke eignet und große Vorteile bietet, wie zum Beispiel die Parallelisierbarkeit, die Vielseitigkeit und nicht zuletzt die hohe Qualität der erzielten Ergebnisse~\cite{Vaswani.2017}.
 Heute basieren bedeutende Modelle wie ChatGPT unter anderem auf Transformern.
 
-Ein \ac{TFT} ist ein \ac{DNN} mit besonderer Architektur für das Multi-Horizon Forecasting, also die Vorhersage für mehrere zukünftige Zeitschritte.
+Ein \ac{TFT} ist ein \ac{DNN} mit besonderer Architektur für das Multi-Horizon Forecasting, das heißt die Vorhersage für mehrere zukünftige Zeitschritte.
 Zunehmend wurden für diesen Anwendungsfall \acp{DNN} eingesetzt, da sie die Leistung herkömmlicher Modelle übertreffen~\cite{Lim.19.12.2019}.
 Die Idee des Attention-Mechanismus, der den Kern der Transformer-Architektur bildet, wurde für \ac{TFT} übernommen.
 Um die Architektur auf die Varietät der Eingabedaten und deren zeitliche Beziehungen auszurichten, werden Codierer für die statischen Kovariaten, also Variablen zusätzlich zur Zielvariable, die Informationen über diese enthalten, eingesetzt, Gating-Mechanismen und stichprobenabhängige Variablenauswahl zur Minimierung irrelevanter Eingaben, eine Sequence-to-Sequence-Schicht zur Verarbeitung der Known und Observed Inputs und ein Self-Attention Decodierer zur Analyse der Eingabedaten auf langfristige Abhängigkeiten.
@@ -773,7 +776,7 @@ Er verwendet als Input verschiedenste Daten, wie in Abbildung~\ref{FIG:tft-forec
 \begin{itemize}
  \item Werte der Zielvariablen aus der Vergangenheit (Past Targets)
  \item Zeitlich abhängige bekannte Informationen sowohl für die Vergangenheit, als auch für die Zukunft (Known Inputs)
- \item Zeitlich abhängige jedoch nur in der Vergangenheit bekannte Eingabewerte (Observed Inputs)
+ \item Zeitlich abhängige, jedoch nur in der Vergangenheit bekannte Eingabewerte (Observed Inputs)
  \item Feststehende, zeitunabhängige Daten, die einen kontextuellen Zusammenhang bieten (statische Kovariaten)
 \end{itemize}
 \begin{figure}
@@ -789,7 +792,7 @@ Wie in vorheriger Auflistung deutlich wurde, können die zeitabhängigen Variabl
 Wichtig sind außerdem sogenannte Quantile, denn sie ermöglichen die Vorhersage von Ergebnisintervallen, anstatt nur einzelner Werte und bieten auf diese Weise die Aussage über Best- und Worst-Case Werte (z.B. Ausgabe des 10., 50. und 90. Perzentil jedes Zeitschrittes)~\cite{Lim.19.12.2019}.
 
 Formel~\ref{eq:tft} beschreibt die Prognose des $q$-ten Quantils des $\tau$-ten Vorhersageschrittes zum Zeitpunkt $t$.
-Dabei werden alle Informationen innerhalb des endlichen Look-Back-Windows $k$ mit einbezogen, inklusive der Zielvariablen $y$ bis einschließlich des Startpunkts der Vorhersage $t$ ($y_{i,t-k:t} = \{y_{j,t-k}, \ldots, y_{j,t}\}$) und bekannter Variablen $x$ für den gesamten Zeitraum ($x_{i,t-k:t+\tau} = \{x_{i,t-k}, \ldots, x_{i,t}, \ldots, x_{i,t+\tau}\}$)~\cite{Lim.19.12.2019}.
+Dabei werden alle Informationen innerhalb des endlichen Look-Back-Windows $k$ mit einbezogen, inklusive der Zielvariablen $y$ bis einschließlich des Startpunkts der Vorhersage $t$ ($y_{i,t-k:t} = \{y_{j,t-k}, \ldots, y_{j,t}\}$) und bekannter Variablen $x$ für den gesamten Zeitraum \newline ($x_{i,t-k:t+\tau} = \{x_{i,t-k}, \ldots, x_{i,t}, \ldots, x_{i,t+\tau}\}$)~\cite{Lim.19.12.2019}.
 \begin{equation}
  \label{eq:tft}
  \hat{y}_i(q, \tau, T) = f_q(\tau, y_{j,t-k:t}, z_{i,t-k:t}, x_{j,t-k:t+T}, s_i)
@@ -812,7 +815,7 @@ Sie hilft, die auffälligsten Merkmale herauszufinden und diejenigen, die sich n
 Dadurch kann sie die Leistung des Modells erheblich verbessern~\cite{Lim.19.12.2019}.
 
 Ein wichtiger Bestandteil sind außerdem die statischen Kovariaten-Kodierer (Static Covariate Encoders), die in Abbildung~\ref{FIG:tft-architecture} links zu finden sind.
-Mit Hilfe von diesen werden verschiedene Kontextvektoren erstellt, nämlich für die Auswahl zeitlicher Variablen, die lokale Verarbeitung zeitlicher Variablen und das Anreichern von zeitlichen Merkmale mit statischen Variablen.
+Mit Hilfe von diesen werden verschiedene Kontextvektoren erstellt, für die Auswahl zeitlicher Variablen, die lokale Verarbeitung zeitlicher Variablen und das Anreichern von zeitlichen Merkmale mit statischen Variablen.
 Diese werden an den verschiedenen Stellen im Decoder verknüpft, um statische Merkmale in das Netzwerk zu integrieren.
 Das unterscheidet das \ac{TFT}-Netzwerk von anderen Architekturen für die Zeitreihenprognose, die für statische Metadaten keine separaten Kodierer verwenden~\cite{Lim.19.12.2019, Labiadh.2023}.
 
@@ -833,8 +836,8 @@ Die verwendete spezielle Quantile Loss-Funktion, auch Pinball-Verlust genannt, w
  \label{eq:tft-quantile-loss}
  QL(y, \hat{y}, q) = q \max(0, y - \hat{y}) + (1 - q) \max(0, \hat{y} - y)
 \end{equation}
-Diese Funktion gewichtet Unterschätzungen, also wenn die Prognose $\hat{y}$ kleiner als der tatsächliche Wert $y$ ist, proportional zum Quantil $q$.
-Dies bedeutet, dass für Quantile unterhalb des Medians (also $q < 0,5$) Unterschätzungen stärker bestraft werden.
+Diese Funktion gewichtet Unterschätzungen, wenn die Prognose $\hat{y}$ kleiner als der tatsächliche Wert $y$ ist, proportional zum Quantil $q$.
+Dies bedeutet, dass für Quantile unterhalb des Medians ($q < 0,5$) Unterschätzungen stärker bestraft werden.
 Umgekehrt werden Überschätzungen, wenn $\hat{y}$ größer als $y$ ist, mit $1 - q$ gewichtet, wodurch für Quantile oberhalb des Medians Überschätzungen stärker ins Gewicht fallen~\cite{Efimov.29.10.2023}.
 
 Die neue Form der Interpretierbarkeit eines \ac{TFT} ermöglicht ein einfaches Zurückverfolgen der relevantesten Zeitschritte für jede Prognose, was traditionelle Saisonalitäts- und Autokorrelationsanalysen ersetzen kann.
@@ -844,15 +847,14 @@ Die Vorteile der Architektur eines \ac{TFT} sind unter anderem die Möglichkeit 
 Weitere Vorteile sind, dass mehrere Ziele gleichzeitig und sogar heterogene Ziele mit kontinuierlichen und kategorischen Variablen, also Regression und Klassifikation zur selben Zeit, unterstützt werden.
 Die Anwendung von sowohl Regression als auch Klassifikation unterscheidet ihn zum Beispiel von DeepAR, einem Modell zur Zeitreihenprognose von Amazon, welches ausschließlich die Regression anwendet.
 Der \ac{TFT} berücksichtigt zudem die Unsicherheit in Form von Quantilen, was ihn von \acp{RNN} mit einfacher \ac{LSTM}- oder \ac{GRU}-Schicht und Ausgabeschicht oder von NBeats und NHiTS unterscheidet.
-Durch die Nutzung statischer Kovariaten kann der \ac{TFT} auch mit sogenannten \glqq Cold-Start-Problemen \grqq{}, also Prognosen ohne oder mit nur sehr wenigen historischen Daten, umgehen.
-Die komplexe Architektur kann mit Blick auf Anforderungen an die Rechenleistung zum Nachteil werden.
-Im Vergleich zu anderen Aufgaben zum Beispiel im Bereich Computer Vision oder Sprachverarbeitung sind Zeitreihendaten meist kleiner, wodurch eine höhere Komplexität des verwendeten Modells den positiven Effekt haben kann, dass die verwendete Hardware ausgereizt wird~\cite{PytorchForecastingDocumentation.20230410T20:05:43.000Z}.
-Dies ist auch im Hinblick auf Nachhaltigkeit ein guter Ansatz, weil die Hardware effizient genutzt wird.
+Durch die Nutzung statischer Kovariaten kann der \ac{TFT} auch mit sogenannten \glqq Cold-Start-Problemen \grqq{}, das heißt Prognosen ohne oder mit nur sehr wenigen historischen Daten, umgehen.
+
 %!
 %!
 \chapter{Prognose der Kohlenstoffintensität}\label{CAP:prediction}
 \section{Auswahl und Vorverarbeitung der Daten}\label{CAP:data-preparation-analysis}
-Allgemein hängt die Kohlenstoffintensität von Strom stark von der Verfügbarkeit erneuerbarer Energien ab und diese, vor allem Wind- und Solarenergie sind wiederum auf bestimmte Wetterverhältnisse angewiesen.
+Die Kohlenstoffintensität von Strom wird maßgeblich durch die Verfügbarkeit erneuerbarer Energien bestimmt.
+Insbesondere Wind- und Solarenergie sind dabei stark von spezifischen Wetterbedingungen abhängig.
 Um präzise Vorhersagen zu treffen, ist es daher wichtig, sowohl historische Kohlenstoffintensitätswerte zu analysieren, als auch den Einfluss des Wetters zu berücksichtigen.
 Auf dieser Grundlage kann dann eine möglichst genaue Prognose für zukünftige Zeitpunkte erstellt werden.
 
@@ -861,12 +863,12 @@ Die \ac{MOER} wird für einen bestimmten Zeitpunkt und Ort angegeben und kann da
 Wie in Kapitel~\ref{CAP:ci} beschrieben, ist für den vorliegenden Anwendungsfall die durchschnittliche Kohlenstoffintensität des Stromnetzes, die sich schlichtweg aus Anteil der Energiequellen multipliziert mit dem Intensitätsfaktor der jeweiligen Energiequelle errechnen lässt, das falsche Maß.
 Realistische Werte für die marginale Kohlenstoffintensität zu errechnen, ist jedoch weitaus anspruchsvoller~\cite{WattTime.11212023}.
 Die Schwierigkeit bei der Datenerfassung zur \ac{MOER} besteht darin, dass zwei Fälle miteinander verglichen werden müssen.
-Zum Einen, dass eine Lastverschiebung stattfindet und zum Anderen dass sie nicht stattfindet, von denen nicht beide gleichzeitig umgesetzt werden können.
+Zum Einen, dass eine Lastverschiebung stattfindet und zum Anderen, dass sie nicht stattfindet, von denen nicht beide gleichzeitig umgesetzt werden können.
 Durch schwankende Bedingungen im Stromnetz ändert sich die \ac{MOER} ständig, weshalb man den Fall der Lastverschiebung und den Fall, in dem keine Last verschoben wird, nicht einfach hintereinander ausprobieren kann.
 Eine Lösung dieses Problems ist, auch die Netzbedingungen zu betrachten und davon auszugehen, dass bei gleichen Bedingungen auch die \ac{MOER} gleich ist.
 Diesen Ansatz nutzt WattTime und überprüft dessen Genauigkeit durch verschiedenste Experimente~\cite{WattTime.2022}.
 Die Daten werden durch eine sogenannte Binned Regression modelliert.
-Diese unterscheidet sich von einer Linearen Regression darin, dass die Daten in Bereiche unterteilt werden, um \glqq Bins\grqq{}, also wörtlich Behälter zu erstellen.
+Diese unterscheidet sich von einer Linearen Regression darin, dass die Daten in Bereiche unterteilt werden, um \glqq Bins\grqq{}, wörtlich Behälter zu erstellen.
 Der eigentliche Datenwert wird dann durch den Bereich, in den er fällt, ersetzt.
 Auf diese Weise kann das \glqq Binning\grqq{} dem linearen Modell helfen, nichtlineare Beziehungen in den Daten besser abzubilden~\cite{Muller.2017}.
 Bei WattTime passt sich das Binning-basierte Modell an ein lineares Modell zwischen Emissionen und Last an und ergibt so die marginale Emissionsbeziehung~\cite{WattTime.2022}.
@@ -896,7 +898,7 @@ Die \ac{MOER}-Werte werden über die \ac{API} von WattTime pro Monat für die L�
 Um auf die Daten zugreifen zu können, registrieren sich berechtigte Nutzer mit ihrer E-Mail-Adresse über einen Registrierungsendpunkt und loggen sich anschließend über einen Login-Endpunkt ein, um einen Token zu erhalten.
 Dieser Token ist eine halbe Stunde lang gültig und ermöglicht durch Setzen im Header die Abfrage der Daten über die \ac{API}~\cite{.20240220T17:59:19.000Z}.
 Der Vorgang der Datenabfrage und Speicherung ist in Code-Ausschnitt~\ref{CODE:watttime_get_moer} zu sehen.
-Die Daten werden ab dem frühst möglichen Zeitpunkt, also dem Zeitpunkt ab dem WattTime mit der Datenerfassung begonnen hat, abgefragt.
+Die Daten werden ab dem frühst möglichen Zeitpunkt, dem Zeitpunkt ab dem WattTime mit der Datenerfassung begonnen hat, abgefragt.
 Für Deutschland ist das ab Oktober 2022 und für Norwegen ab Januar 2021.
 Sie konnten nur monatsweise abgefragt werden, weil die Abfrage sonst zu lange dauern würde und der Token während der Abfrage ungültig wird.
 
@@ -912,13 +914,13 @@ Als beeinflussende Variablen werden Wetterdaten zum Datensatz hinzugefügt.
 Dafür wird auf den Copernicus Climate Change Service~\cite{Copernicus.20231212T14:09:40.000Z} zurückgegriffen, der umfangreiche Datensätze rund um das weltweite Klima und den Klimawandel zur Verfügung stellt.
 Konkret wurden vier mögliche Einflussfaktoren für die Kohlenstoffintensität auf Basis der Energiequellen-Zusammensetzung, die in Kapitel~\ref{CAP:ci-analysis} näher betrachtet wird, als wichtig identifiziert und ausgewählt:
 die Lufttemperatur in 2m Höhe, die Windgeschwindigkeit in 100m Höhe, der Niederschlag und die globale horizontale Bestrahlungsstärke (im Englischen als \ac{GHI} bezeichnet).
-Letztere wird durch die atmosphärische Zusammensetzung mit Aerosolen, Wasserdampf und Ozon, hauptsächliche jedoch von Wolken beeinflusst~\cite{KallioMyers.2020}.
+Letztere wird durch die atmosphärische Zusammensetzung mit Aerosolen, Wasserdampf und Ozon, hauptsächlich jedoch von Wolken beeinflusst~\cite{KallioMyers.2020}.
 Für die Stromerzeugung durch Photovoltaik ist in erster Linie die Sonneneinstrahlung, die auf das Solarmodul einfällt, entscheidend~\cite{James.}.
 Die Erzeugung durch Windkraft hängt hauptsächlich von der Windgeschwindigkeit ab.
 Für die Wasserkraft ist unter anderem der Niederschlag ausschlaggebend~\cite{Copernicus.20231212T14:09:40.000Z}.
 Bei den Werten handelt es sich um Daten des ERA5 Reanalysis Datensatzes.
 Dies sind von verschiedenen Quellen, wie Satelliten oder Wetterstationen, gemessene Daten, bei denen fehlende Werte mit durch physikalische Gesetze oder historische Verlaufsmuster generierten Daten ergänzt wurden.
-Grundsätzlich sind die Daten also echt gemessene Daten, die zur Vollständigkeit mit generierten Daten ergänzt wurden~\cite{CopernicusClimateChangeService.2020}\cite{CopernicusKnowledgeBase.20231009}.
+Grundsätzlich sind die Daten demnach echt gemessene Daten, die zur Vollständigkeit mit generierten Daten ergänzt wurden~\cite{CopernicusClimateChangeService.2020}\cite{CopernicusKnowledgeBase.20231009}.
 Die durchschnittlichen Werte über den Datenzeitraum (Oktober 2022 bzw. Januar 2021 bis Februar 2024) pro Monat sind in Abbildung~\ref{FIG:weather-data-by-month} zusammengefasst.
 \begin{figure}[ht]
  \centering
@@ -932,7 +934,7 @@ Die durchschnittlichen Werte über den Datenzeitraum (Oktober 2022 bzw. Januar 2
 \end{figure}
 Die \ac{GHI}, zu sehen in Abbildung~\ref{FIG:weather-data-by-month}a, steigt in beiden Ländern ab Januar bis zum Höhepunkt im Sommer und fällt dann wieder gegen Ende des Jahres ab.
 In Deutschland ist die Sonneneinstrahlung im Sommer stärker als in Norwegen.
-Die Abbildung~\ref{FIG:weather-data-by-month}b des durchschnittlichen Niederschlags pro Monat zeigt, dass sich das der Verlauf und die Höhe der Werte pro Land unterscheiden.
+Die Abbildung~\ref{FIG:weather-data-by-month}b des durchschnittlichen Niederschlags pro Monat zeigt, dass sich der Verlauf und die Höhe der Werte pro Land unterscheiden.
 In Deutschland ist ein ausgeprägter Ausschlag im Juni und ein weiterer im Oktober zu erkennen.
 In Norwegen hingegen ist der Niederschlag gleichmäßig über das Jahr verteilt, mit Spitzen im Juli und September.
 In Abbildung~\ref{FIG:weather-data-by-month}c ist die durchschnittliche Temperatur der beiden Länder abgebildet.
@@ -963,17 +965,17 @@ Für den betrachteten Anwendungsfall kann eine gegenseitige Beeinflussung für d
 Die verschiedenen Wetterdaten sind nicht von der \ac{MOER} abhängig und die Zeit ist sowieso feststehend.
 Bei der Stromnachfrage, den Preisen und den Drosselungsmengen ist die Beurteilung weniger trivial.
 Aus diesem Grund wurde für die vorliegende Arbeit entschieden, ausschließlich die Wetter- und Zeitvariablen heranzuziehen.
-Wohingegen das Wetter einen direkten Einfluss auf die Energieerzeugung vor allem durch Solaranlagen und Windparks hat, ist der Zusammenhang mit Nachfrage, Preis und Drosselung nicht eindeutig.
+Während das Wetter einen direkten Einfluss auf die Energieerzeugung vor allem durch Solaranlagen und Windparks hat, ist der Zusammenhang mit Nachfrage, Preis und Drosselung nicht eindeutig.
 Die Reduzierung der Eingabevariablen auf Wetter- und Zeitdaten dient außerdem der Komplexitätsreduktion des Modells und soll sicherstellen, dass sich das Modell auf diese fokussieren kann.
 Zusätzliche zu trainierende Parameter führen vor allem beim \ac{TFT} zu einer erhöhten Größe und Trainingsdauer des Modells, sodass ein Gleichgewicht zwischen Modellgenauigkeit und Trainingsaufwand gefunden werden muss.
 
 Aufgrund der teilweise sehr starken Ausreißer der \ac{MOER} vor allem in Deutschland, was im folgenden Abschnitt noch detaillierter thematisiert wird, soll ein zusätzlicher Datensatz erstellt werden, bei dem die Extremen entfernt werden.
 Laut WattTime sind diese Ausreißer höchstwahrscheinlich durch Drosselungen verursacht~\cite{WattTime.2022}.
-Da diese Phenomene in den Daten möglicherweise eine Schwierigkeit bei der Vorhersage sein können, ist es interessant, einen Vergleich zwischen den gefilterten und den ungefilterten Daten anzustellen.
-Dafür wird das 25. und das 75. Perzentil der \ac{MOER}-Werte berechnet, also die Werte, unter denen 25\% bzw. 75\% der Datenpunkte liegen.
+Da diese Phänomene in den Daten möglicherweise eine Schwierigkeit bei der Vorhersage sein können, ist es interessant, einen Vergleich zwischen den gefilterten und den ungefilterten Daten anzustellen.
+Dafür wird das 25. und das 75. Perzentil der \ac{MOER}-Werte berechnet, das heißt die Werte, unter denen 25\% bzw. 75\% der Datenpunkte liegen.
 Als Ausreißer werden diejenigen Werte betrachtet, die nicht den mittleren 50\% entsprechen.
 Auf diese Weise werden für den gefilterten Datensatz 2630 der norwegischen und 882 der deutschen Datenpunkte entfernt.
-Der Mittelwert verschiebt sich dadurch für Norwegen von 246 auf 237 und für Deutschland von 747 auf 766.
+Der Mittelwert verschiebt sich dadurch für Norwegen von 246 g/\ac{kWh} auf 237 g/\ac{kWh} und für Deutschland von 747 g/\ac{kWh} auf 766 g/\ac{kWh}.
 
 \section{Analyse der Kohlenstoffintensität des deutschen und norwegischen Stromnetzes}\label{CAP:ci-analysis}
 %tbd: Analyse des Potenzials zeitlicher Verschiebungen, Analyse des Potenzials örtlicher Verschiebungen
@@ -1054,7 +1056,7 @@ Das deutsche Stromnetz besteht zu einem großen Anteil aus Wind- und Sonnenenerg
 Die Sonneneinstrahlung in Deutschland erreichte ihre Höchstwerte in den Monaten Mai bis Juli und die Windgeschwindigkeit in den Monaten November bis März.
 Das könnten Gründe dafür sein, wieso im Januar und im Juli die \ac{MOER} ihre Tiefstwerte erreicht.
 Die hohen Werte im April, Mai und September könnten unter anderem auf die geringe Windstärke in diesen Monaten zurückzuführen sein.
-Das norwegische Stromnetz wird von Windkraft dominiert und erhält knapp 10\% seines Stroms aus Windkraftanlagen.
+Das norwegische Stromnetz wird von Wasserkraft dominiert und erhält knapp 10\% seines Stroms aus Windkraftanlagen.
 Der Niederschlag war im betrachteten Zeitraum in den Monaten Juli bis Oktober und Januar am stärksten und der Wind in den Monaten Oktober bis März.
 Kombiniert könnten diese Faktoren die niedrige \ac{MOER} von August bis Dezember erklären.
 
@@ -1067,7 +1069,7 @@ Für Deutschland und Norwegen wird je eine dieser Matrizen erstellt, zu sehen in
 \end{figure}
 Die Beziehungen der Werte werden durch Koeffizienten repräsentiert, die von -1 bis +1 reichen können.
 Ein Wert nahe +1 bedeutet eine starke positive Korrelation, ein Wert nahe -1 eine starke negative Korrelation und ein Wert nahe 0 bedeutet einen nur sehr schwachen oder keinen Zusammenhang.
-Insgesamt geht hervor, dass der lineare Zusammenhang zwischen den \ac{MOER}-Werten, also der Zielvariable, und den anderen Variablen eher gering ist.
+Insgesamt geht hervor, dass der lineare Zusammenhang zwischen den \ac{MOER}-Werten als Zielvariable und den anderen Variablen eher gering ist.
 Der größte Zusammenhang besteht mit der Windgeschwindigkeit (-0,20) und der Sonneneinstrahlung (-0,24) in Deutschland.
 Das bedeutet, dass sich bei höheren Werten für diese beiden Variablen, niedrigere Werte für die \ac{MOER} verzeichnen lassen.
 Vor dem Hintergrund der Energiequellen des deutschen Stromnetzes scheint die Interpretation sinnvoll, dass bei steigender Windstärke und Sonneneinstrahlung mehr Strom durch Solarstrom und Strom aus Windkraftwerken gewonnen werden kann und somit die Emissionsgröße sinkt.
@@ -1075,7 +1077,7 @@ Eine schwache Abhängigkeit besteht auch zum Wochentag und zur Variable, die aus
 Für Norwegen zeigt der Tag des Jahres und die Windgeschwindigkeit die höchsten Abhängigkeiten aller analysierten Werte, die mit Werten von -0,12 und -0,10 jedoch trotzdem nicht hoch sind.
 
 \section{Modellentwicklung und Training mit SARIMAX}\label{CAP:SARIMAX-training}
-Für die Verwendung von auf \ac{ARIMA} basierenden Modellen ist es zu aller Erst nötig, die Daten auf Stationarität zu untersuchen, weil diese eine Voraussetzung für die Modelle ist.
+Für die Verwendung von auf \ac{ARIMA} basierenden Modellen ist es zuallererst nötig, die Daten auf Stationarität zu untersuchen, weil diese eine Voraussetzung für die Modelle ist.
 Stationär ist eine Zeitreihe dann, wenn ihr Mittelwert, ihre Varianz und ihre Autokorrelation konstant und zeitunabhängig sind~\cite{Peixeiro.2022}.
 Die vorherige Dekomposition der Daten (Abbildung~\ref{FIG:moer_decomposition_DE}) weist darauf hin, dass sie stationär sind, jedoch soll diese Vermutung nochmals bestätigt werden.
 Mit Hilfe eines \ac{ADF} Tests werden die Daten auf eine Einheitswurzel getestet, das entspricht der Nullhypothese.
@@ -1089,7 +1091,7 @@ Die \ac{MOER}-Werte für Norwegen sind ebenfalls stationär, jedoch ist die Able
 Wären die Daten nicht stationär, müssten sie solange differenziert werden, bis sie Stationarität aufweisen~\cite{Peixeiro.2022}~\cite{Rahmadhan.8.5.2023}.
 
 Zur Anwendung des SARIMAX-Modells wird die Implementierung von \textit{statsmodels} verwendet.
-Ein SARIMAX-Modell muss, anders als beim \ac{TFT} mit der Möglichkeit separater Gruppen-IDs, für jedes der beiden Länder separat erstellt werden
+Ein SARIMAX-Modell muss, anders als beim \ac{TFT} mit der Möglichkeit separater Gruppen-IDs, für jedes der beiden Länder separat erstellt werden.
 Definiert wird das Modell durch Angabe der Zielvariable, der exogenen Variablen, der Parameter für den nicht-saisonalen Teil des Modells (\lstinline[columns=fixed]{p,d,q}) und derjenigen für den saisonalen Teil des Modells (\lstinline[columns=fixed]{P,D,Q,s}).
 
 Die Festlegung der Parameter für \ac{SARIMAX} kann unter anderem durch Analyse der \ac{ACF} und der \ac{PACF} erfolgen.
@@ -1133,7 +1135,7 @@ Die Parameter für das SARIMAX-Modell können anhand der beiden Funktionen nicht
 Für \lstinline[columns=fixed]{p} sollte laut Analyse der \ac{PACF} wie erwähnt der Wert 1 verwendet werden.
 Nachdem der \ac{ADF}-Test bestätigt hat, dass die Daten stationär sind, wird \lstinline[columns=fixed]{d} auf 0 gesetzt.
 Aufgrund der täglichen Saisonalität der Daten wird \lstinline[columns=fixed]{s} gleich 24 gesetzt.
-Bei den restlichen Parameter ist eine eindeutige Entscheidung nicht gegeben, sodass die optimalen Werte zum Beispiel durch Ausprobieren ausfindig gemacht werden können.
+Bei den restlichen Parametern ist eine eindeutige Entscheidung nicht gegeben, sodass die optimalen Werte zum Beispiel durch Ausprobieren ausfindig gemacht werden können.
 Die Variable \lstinline[columns=fixed]{q} wäre durch einen starken Abfall der Korrelation im \ac{ACF}-Diagramm definiert, welcher im gezeigten Diagramm aber nicht ausfindig gemacht werden kann.
 
 Eine Alternativmethode ist, verschiedene Werte für die Parameter automatisch überprüfen zu lassen.
@@ -1170,7 +1172,7 @@ Die Parameter der Modelle für den gefilterten Datensatz entsprechen dabei denen
 Zur Anwendung von \ac{SARIMAX} dürfen keine Datenpunkte fehlen, was nur für die ungefilterte Version der Daten gegeben ist.
 Durch lineare Interpolation werden die fehlenden Werte im gefilterten Datensatz ergänzt.
 
-Das Package \textit{statsmodels} bietet eine einfache Möglichkeit, die Diagnostik für die Residuen, also die Differenzen zwischen beobachteten und vom Modell vorhergesagten Werten, einzusehen.
+Das Package \textit{statsmodels} bietet eine einfache Möglichkeit, die Diagnostik für die Residuen, das heißt die Differenzen zwischen beobachteten und vom Modell vorhergesagten Werten, einzusehen.
 Abbildung~\ref{FIG:sarimax_diagnostics_de} zeigt die Ergebnisse für das Modell der \ac{MOER}-Vorhersage des deutschen Stromnetzes.
 \begin{figure}
  \caption[SARIMAX Diagnostik MOER Deutschland]{Diagnostik des SARIMAX-Modells zur Prognose der MOER des deutschen Stromnetzes (eigene Darstellung)}
@@ -1207,7 +1209,7 @@ Bei Zeitreihenprognosen mit mehreren Zeitreihen, die einen unterschiedlichen Dat
 Wichtig ist darüber hinaus eine korrekte Zuordnung der Variablen zu den verschiedenen Variablenarten~\cite{GitHub.20240307T20:56:16.000Z}.
 Im betrachteten Anwendungsfall der Vorhersage von \ac{MOER}-Werten, werden diese als Zielvariable festgelegt.
 Das Land wird als Gruppen-Id gesetzt, um zu definieren, dass ausgehend vom Land zwei verschiedene Zeitreihen existieren.
-Zwei für die Vorhersage wichtige Angaben sind die \lstinline[columns=fixed]{max_encoder_length}, also die Anzahl der zu verwendenden Vergangenheitswerte, und die \lstinline[columns=fixed]{max_predicition_length}, die definiert wie weit in die Zukunft vorhergesagt wird.
+Zwei für die Vorhersage wichtige Angaben sind die \lstinline[columns=fixed]{max_encoder_length}, also die Anzahl der zu verwendenden Vergangenheitswerte, und die \lstinline[columns=fixed]{max_predicition_length}, die definiert, wie weit in die Zukunft vorhergesagt wird.
 Das Land wird außerdem auch als statische, kategorische Variable \lstinline[columns=fixed]{static_categoricals} angegeben, da sich die Werte im Lauf der Zeit nicht verändern.
 Kategorische Werte, die sich über die Zeit ändern, aber im Voraus bekannt sind wie im vorliegenden Beispiel der Wochentag und, ob es sich um einen Feiertag handelt, werden als \lstinline[columns=fixed]{time_varying_known_categoricals} gesetzt.
 Sich über die Zeit ändernde, im Voraus bekannte, aber kontinuierliche Werte, sind die Wetterdaten (Temperatur, Windgeschwindigkeit, \ac{GHI} und Niederschlag).
@@ -1222,7 +1224,7 @@ Außerdem wird festgelegt, dass fehlende Zeitschritte geduldet werden, was voral
 Die Datensätze zur Validierung und zum Testen werden dann ausgehend vom Trainingsdatensatz erstellt, wobei für den Testdatensatz durch Setzen von \lstinline[columns=fixed]{predict=True} angegeben wird, dass eine Vorhersage ausgeführt werden soll~\cite{Labiadh.2023}~\cite{GitHub.20240307T20:56:16.000Z}.
 Wichtig zu beachten ist, dass beim Training in keiner Weise Daten der Zukunft eingesehen werden können.
 Das wird sichergestellt, indem während des Trainings ausschließlich der Datensatz abzüglich der Werte der maximalen Vorhersagelänge zur Verfügung gestellt werden.
-Sind die verwendeten Lags länger, als die Vorhersagelänge, so muss diese Länge dem Trainingsdatensatz vorenthalten werden, sodass durch die zeitlichen Verschiebungen der Lags keine Einsicht in die Zukunft bietet.
+Sind die verwendeten Lags länger als die Vorhersagelänge, so muss diese Länge dem Trainingsdatensatz vorenthalten werden, sodass durch die zeitlichen Verschiebungen der Lags keine Einsicht in die Zukunft bietet.
 Die entsprechenden Cut-Off-Zeitpunkte werden die beiden Länder separat anhand des maximalen Zeitindex definiert.
 
 Die wichtigsten Parameter der \lstinline[columns=fixed]{TemporalFusionTransformer}-Klasse in \textit{pytorch forecasting} werden im Folgenden erklärt~\cite{Joseph.2022}:
@@ -1230,7 +1232,7 @@ Die wichtigsten Parameter der \lstinline[columns=fixed]{TemporalFusionTransforme
   \item \lstinline[columns=fixed]{attention_head_size}: Legt die Anzahl der Attention-Heads fest, die das Modell  nutzen kann, um aus den Daten zu lernen.
  Mehrere Attention-Heads können dem Modell helfen, eine vielfältigere Reihe von Zusammenhängen in den Daten zu erkennen.
   \item \lstinline[columns=fixed]{dopout}: Ein Wert zwischen 0 und 1, der die Dropout-Rate innerhalb angibt.
-  Dropout ist eine Regularisierungstechnik, die dazu dient das Modell robuster zu machen, indem zufällig ausgewählte Neuronen während des Trainings ignoriert werden.
+  Dropout ist eine Regularisierungstechnik, die dazu dient, das Modell robuster zu machen, indem zufällig ausgewählte Neuronen während des Trainings ignoriert werden.
   \item \lstinline[columns=fixed]{hidden_size}: Wahrscheinlich der wichtigste Hyperparameter im Modell, der die versteckte Dimension im gesamten Modell definiert.
  Diese Dimension wird für alle \acp{GRN}, \ac{LSTM}-Einheiten und Selbst-Attention verwendet.
  Dieser Hyperparameter ist zentral für die Architektur des Modells, da er die Kapazität zum Verarbeiten und Speichern von Informationen bestimmt.
@@ -1259,7 +1261,7 @@ Die schlussendlich verwendeten Parameter für jedes der Modelle sind in Tabelle~
 \end{table}
 Die Kombination dieser Hyperparameter für die \ac{TFT}-Modelle spiegelt einen umfangreichen Abstimmungsprozess während des Trainings wieder, um eine optimale Leistung zu erzielen.
 Für das Tuning kamen sowohl die automatische Hyperparametersuche als auch gezielte Experimente zum Einsatz, ergänzt durch eigene Einschätzungen.
-Die Entscheidung, drei Attention Heads zu nutzen stellt einen Kompromiss aus umfangreicher Datenrepräsentation und Komplexität bzw. Rechenzeit dar.
+Die Entscheidung, drei Attention Heads zu nutzen, stellt einen Kompromiss aus umfangreicher Datenrepräsentation und Komplexität bzw. Rechenzeit dar.
 Die \lstinline[columns=fixed]{hidden_size} beeinflusst die Kapazität des Modells, komplexe Muster zu erfassen, sodass es durch den größeren Wert für die längere Vorhersage in der Lage ist, längerfristige Abhängigkeiten abzubilden.
 Der größere Wert für die Einbettung kontinuierlicher Variablen bei der 720-Stunden-Prognose reflektiert die Notwendigkeit, längerfristige zeitliche Beziehungen abzubilden.
 Die höhere Dropout-Rate deutet darauf hin, dass beim 720-Stunden-Modell womöglich in Anbetracht der vergrößerten \lstinline[columns=fixed]{hidden_size} stärker regularisiert werden muss, sodass das Modell nach wie vor ausreichend generalisieren kann~\cite{Joseph.2022}.
@@ -1284,10 +1286,10 @@ Die Werte sind auf zwei bzw. vier Nachkommastellen gerundet angegeben.
  \input{\tabledir/ForecastingPerformance.tex}
 \end{table}
 Die Modelle sind aufgeteilt in diejenigen für den ungefilterten Datensatz und diejenigen für den Datensatz, bei dem die Ausreißer, wie in Abschnitt~\ref{CAP:data-preparation-analysis} beschrieben, entfernt wurden.
-Zur Einordnung der Vorhersageleistung der Modelle wird der \ac{MAE} eines simplen Basismodells, dem Baseline-Modell von \textit{pytorch forecasting} hergenommen~\cite{PytorchForecastingDocumentation.20230410T20:05:46.000Zb}.
+Zur Einordnung der Vorhersageleistung der Modelle wird der \ac{MAE} eines simplen Basismodells, dem Baseline-Modell von \textit{pytorch forecasting}, hergenommen~\cite{PytorchForecastingDocumentation.20230410T20:05:46.000Zb}.
 Dieses verwendet den letzten bekannten Wert der Zielvariable, um eine Vorhersage für den nächsten Zeitschritt zu machen und dient als Referenzwert.
 
-Beim ungefilterten Datensatz ist der Baseline-\ac{MAE} sowohl für die 168-Stunden-, als auch für die 720-Stunden-Vorhersage relativ hoch.
+Beim ungefilterten Datensatz ist der Baseline-\ac{MAE} sowohl für die 168-Stunden-Vorhersage, als auch für die 720-Stunden-Vorhersage relativ hoch.
 Bedenkt man, dass der Mittelwert dieses Datensatzes für Deutschland bei 746,79 g/\ac{kWh} und für Norwegen bei 245,76 g/\ac{kWh} liegt, ist die Abweichung sehr groß.
 Mit Blick auf die Werte der \ac{SARIMAX}-Modelle wird ersichtlich, dass die Vorhersage vor allem für 168 Stunden nicht gut funktioniert.
 Die Ergebnisse sind sogar schlechter, als die des Basismodells.
@@ -1295,7 +1297,7 @@ Anhand des \ac{MAPE} fällt außerdem auf, dass die \ac{SARIMAX}-Modelle für ei
 Zudem sind die Prognose-Leistungen der Modelle für das deutsche Stromnetz besser, als für das norwegische.
 Grund dafür könnte die sehr geringe oder fehlende Abhängigkeit zu den Eingabevariablen sein.
 Wie in der Korrelationsmatrix (Abbildung~\ref{FIG:correlation_matrix}) sichtbar wurde, ist die \ac{MOER} Norwegens nur kaum linear von den Zeit- und Wetterdaten abhängig, was eine Vorhersage enorm erschwert.
-Für Deutschland werden bessere Vorhersagewerte erzielt, was zum einen an der Abhängigkeit von der Sonneneinstrahlung und der Windstärke und zum anderen dass das periodisch abfolgende Muster sich größtenteils gleich verhält.
+Für Deutschland werden bessere Vorhersagewerte erzielt, was zum einen an der Abhängigkeit von der Sonneneinstrahlung und der Windstärke liegt und zum anderen daran, dass das periodisch abfolgende Muster sich größtenteils gleich verhält.
 Der \ac{TFT} performt vor allem bei der kurzen Vorhersagelänge gut, sodass der \ac{MAE} mit 20,38 deutlich unter dem des Basismodells liegt.
 Bei der einmonatigen Vorhersage erzielt er gemessen am \ac{MAPE} zwar ein besseres Ergebnis als das \ac{SARIMAX}-Modell für Norwegen, jedoch ist dieses nicht zufriedenstellend.
 
@@ -1308,7 +1310,7 @@ Auch für diesen Datensatz zeigt sich, dass die Vorhersage der \ac{MOER} des nor
 
 Um auszuschließen, dass die mangelhaften Ergebnisse nicht durch eine unzureichende Datenvorbereitung oder eine unpassende Modellauswahl zu begründen sind, wurden folgende Untersuchungen unternommen:
 \begin{itemize}
- \item \textbf{Filtern der Daten}: Zusätzlich zum vollständigen Datensatz wurde ein gefilterter Datensatz erstellt, aus dem Werte unterhalb des ersten und überhalb des dritten Quantils entfernt wurden.
+ \item \textbf{Filtern der Daten}: Zusätzlich zum vollständigen Datensatz wurde ein gefilterter Datensatz erstellt, aus dem Werte unterhalb des ersten und oberhalb des dritten Quantils entfernt wurden.
  \item \textbf{Stationarität der Daten}: Schlechte Ergebnisse können durch eine fehlende Stationarirät der Daten entstehen~\cite{Artley.26.4.2022}. Um das zu verhindern, wurde die $auto_arima$-Funktion zusätzlich mit einer Differenzierung der Werte ($d > 0$ oder $D > 0$) ausgeführt, was jedoch höhere \ac{AIC}-Werte zur Folge hatte.
  \item \textbf{Parameterprobe}: Die Parameter von \ac{SARIMAX} wurden mit unterschiedlichsten Werten erprobt.
  \item \textbf{Trainingsdatensatz}: Die Länge des Trainingsdatensatzes wurde variiert, um Overfitting und Underfitting zu verhindern.
@@ -1333,7 +1335,7 @@ Die Vorhersagen der verschiedenen Quantile, angezeigt durch die Schattierungen d
 
 Der Verlustwert (Loss) von 11,25 verdeutlicht die mittlere Differenz zwischen den vorhergesagten und tatsächlichen Werten über alle Quantile hinweg.
 Der anfangs relativ gleichmäßig verlaufende Graph der Aufmerksamkeitsgewichtung bildet die täglichen Werteschwankungen ab und zeigt, dass das Modell die täglichen Hochpunkte sowie die jüngsten Beobachtungen als besonders relevant für die Vorhersage erachtet.
-Die Wichtigkeit der letzen Rund 25 Zeitschritte scheint mit Blick auf den Verlauf der \ac{MOER} in Deutschland um den Vorhersagezeitpunkt logisch, denn zu diesem Zeitpunkts ist ein starker Abfall der Werte zu verzeichnen.
+Die Wichtigkeit der letzen Rund 25 Zeitschritte scheint mit Blick auf den Verlauf der \ac{MOER} in Deutschland um den Vorhersagezeitpunkt logisch, denn zu diesem Zeitpunkt ist ein starker Abfall der Werte zu verzeichnen.
 Gleichzeitig begründet die tägliche Saisonalität die Wichtigkeit der letzten 24 Stunden.
 Insgesamt spiegelt die Grafik wider, dass das Modell die allgemeinen Trends und saisonalen Muster gut erfassen kann, allerdings Schwierigkeiten bei der Identifizierung kleinerer Unregelmäßigkeiten in den Daten aufweist.
 
@@ -1346,7 +1348,7 @@ Im Vergleich dazu ist in Abbildung~\ref{FIG:tft-plot-2} die Vorhersage auf dem g
 
 Ein \ac{TFT} gibt Aufschluss darüber, wie die einzelnen von ihm verwendeten Variablen interpretiert wurden.
 Aufgrund der \acp{VSN} besteht die Möglichkeit, direkt auf die Gewichtung von Features zugreifen zu können.
-Durch die Self-Attention-Heads können zudem Aussagen über die Gewichtung einzelner Zeitschritte im Aufmerksamkeitsmechanismus~\cite{Joseph.2022}.
+Durch die Self-Attention-Heads können zudem Aussagen über die Gewichtung einzelner Zeitschritte im Aufmerksamkeitsmechanismus getroffen werden~\cite{Joseph.2022}.
 
 Es hat sich gezeigt, dass die Prognose der \ac{MOER}-Werte für das norwegische Stromnetz mit den initialen \ac{TFT}-Modellen, die auf einer Gruppierung der Länderdaten basierten, nicht den gewünschten Erfolg erbrachte.
 Vor diesem Hintergrund wurden neben den gemischten \ac{TFT}-Modellen auch spezifische Modelle für die einzelnen Länder entwickelt.
@@ -1367,7 +1369,7 @@ Dieser erreicht eine Wichtigkeit von 25\%.
 Weitere wichtige Variablen sind zum Beispiel die Temperatur, der Wochentag, der Niederschlag und der vorherige \ac{MOER}-Wert.
 Unbedeutend ist vor allem die \ac{GHI}.
 Für die Vorhersage (Decoder) stützt sich das Modell vor allem auf die Stunde des Tages, die ein Viertel der Variablen-Gewichtung ausmacht, was durch das tägliche Muster der Daten bedingt sein könnte.
-Den nächst großen Einfluss haben die binäre Variable zur Feiertags-/Wochenendinformation, der \ac{MOER}-Wert vor 168 Stunden und die Windgeschwindigkeit.
+Den nächst größeren Einfluss haben die binäre Variable zur Feiertags-/Wochenendinformation, der \ac{MOER}-Wert vor 168 Stunden und die Windgeschwindigkeit.
 
 %Für die norwegischen Werte zeigt dies einen Grund für die Qualität der Vorhersage.
 %Die letzten 25 Werte sind nicht aussagekräftig genug, um anhand dieser die nächste Woche vorherzusagen.
@@ -1379,11 +1381,11 @@ Den nächst großen Einfluss haben die binäre Variable zur Feiertags-/Wochenend
 Die Analyse der \ac{MOER} hat eine deutliche tägliche Saisonalität aufgezeigt (siehe Kapitel~\ref{CAP:data-preparation-analysis}).
 Für Deutschland zeigen die Daten für gewöhnlich folgendes Muster:
 Zu Beginn des Tages ist die \ac{MOER} relativ hoch, bevor sie zuerst langsam, dann schneller absinkt.
-Kurz vor dem Mittag erreicht sie ihren Tiefstwert und steigt danach erneut stark an bis zum Höchstwert kurz vor Mitternacht.
+Kurz vor dem Mittag erreicht sie ihren Tiefstwert und steigt danach erneut stark an, bis zum Höchstwert kurz vor Mitternacht.
 Diese täglichen Schwankungen der \ac{MOER} bieten wertvolle Ansatzpunkte für Lastmanagementstrategien.
 Wenn ausführliche oder langfristige Prognosen nicht verfügbar sind, können diese regelmäßigen Muster als vereinfachte Grundlage genutzt werden, um den Energieverbrauch zeitlich so zu steuern, dass die Kohlenstoffintensität minimiert wird.
 So könnte etwa eine Lastverlagerung in die Mittagszeit, wenn die \ac{MOER} am niedrigsten ist, eine effektive Methode sein, um die Umweltbelastung zu reduzieren.
-Allerdings zeigen die Daten jedoch auch immer wieder starke Einbrüche.
+Allerdings zeigen die Daten auch immer wieder starke Einbrüche.
 Die in Kapitel~\ref{CAP:prediction} entwickelten Prognosemodelle bieten eine Vorhersage der \ac{MOER} für eine Woche bzw. einen Monat.
 Diese können für die in Kapitel~\ref{CAP:strategies} beschriebenen Strategien angewandt werden.
 
@@ -1392,7 +1394,7 @@ In Abbildung~\ref{FIG:location-shifting-potential} ist das Potenzial für die St
 Aufgrund der stark abweichenden Werte wurde die Analyse für Verschiebungen von Deutschland nach Norwegen in zwei separate Diagramme für positive und negative Einsparungen unterteilt.
 In den Abbildungen~\ref{FIG:location-shifting-potential}a und~\ref{FIG:location-shifting-potential}b wird ersichtlich, dass eine Verlagerung von Lasten von Deutschland nach Norwegen in der Mehrzahl der Fälle zu erheblichen Einsparungen von CO2-Emissionen führt, wobei oftmals eine Reduktion zwischen 60\% und 70\% zu verzeichnen ist.
 Nur in einer geringen Anzahl von Zeitpunkten zeigt sich ein gegenteiliges Bild:
-Hier übersteigt die \ac{MOER} Deutschlands diejenige Norwegens, was zu negativen Einsparungen, das heißt zu einer Erhöhung der CO2-Emissionen, führen würde.
+Hier übersteigt die \ac{MOER} Deutschlands diejenige Norwegens, was zu negativen Einsparungen und daher zu einer Erhöhung der CO2-Emissionen führen würde.
 Diese Zeitpunkte, die eine drastische Zunahme der Emissionen zwischen 200\% und 1000\% verursachen würden, sind jedoch als Ausnahmen zu betrachten.
 In diesen seltenen Fällen ist die \ac{MOER} in Deutschland erheblich niedriger als in Norwegen.
 Abbildung~\ref{FIG:location-shifting-potential}c stellt das umgekehrte Szenario dar und zeigt, dass Verschiebungen von Norwegen nach Deutschland selten sinnvoll sind, aufgrund der konstant niedrigen \ac{MOER} in Norwegen.
@@ -1434,7 +1436,8 @@ Cron Jobs, die periodische Aufgaben wie Datenbank-Backups oder Berichtsgenerieru
 Die Integration und Bereitstellung von Software über CI/CD-Pipelines kann, solange die Abläufe nicht kritisch sind, ebenso zeitlich verlagert werden.
 Weitere Aufgaben, die oft zufällig ohne festes Muster ausgeführt werden, können sich ebenso für zeitliche Verschiebungen eignen.
 Dazu gehören Datenbank-Indexierungen, die essentiell für die Performance-Optimierung von Datenbanksystemen sind oder Replikationsaufgaben, die im Hintergrund die Synchronisation von Daten zwischen verschiedenen Systemen garantieren.
-Solche Workloads, die asynchron laufen, keine Abhängigkeiten oder Verzögerungen nach sich ziehen und deren Fälligkeitsdatum es erlaubt, sind demnach in einem realen Umfeld keine Ausnahme (Informationen aus Befragung, sieht~\ref{CAP:interview}).
+Solche Workloads, die asynchron laufen, keine Abhängigkeiten oder Verzögerungen nach sich ziehen und deren Fälligkeitsdatum es erlaubt, sind demnach in einem realen Umfeld keine Ausnahme.
+Die entsprechenden Informationen stammen aus den Befragungen beschrieben in Abschnitt~\ref{CAP:interview}.
 
 Als Beispiel für ein Anwendungsszenario soll die Entwicklung der \ac{TFT}-Modelle für die vorliegende Arbeit betrachtet werden.
 Durch die Berechnung der betriebsbedingten Emissionen anhand des Energieverbrauchs und der \ac{MOER} soll berechnet werden, wie viel \ac{CO2} während des gesamten Trainingsprozesses eingespart werden könnte.
@@ -1693,9 +1696,9 @@ Darüber hinaus könnte die \ac{API} in Kombination mit dem Carbon Aware \ac{SDK
 %!
 %!
 \chapter{Diskussion}\label{CAP:discussion}
-\noindent In diesem Kapitel sollen Herausforderungen und Grenzen diskutiert werden und mögliche Erweiterungen und Anknüpfungen zur vorliegednen Arbeit identifiziert werden.
+\noindent In diesem Kapitel sollen Herausforderungen und Grenzen diskutiert werden und mögliche Erweiterungen und Anknüpfungen zur vorliegenden Arbeit identifiziert werden.
 
-Die Herausforderungen und Grenzen beim Anwenden der Prognosen für Software haben zwei Quellen.
+Die Einschränkungen beim Anwenden der Prognosen für Software haben zwei Quellen.
 Zum einen ergeben sie sich aus der Prognose und zum anderen aus den Strategien zur Optimierung der Software.
 
 \section{Datenmodell und Prognose}
@@ -1706,7 +1709,7 @@ Außerdem ist das Anwendungsgebiet ein hochaktueller Forschungsbereich, der stet
 Die Methoden zur Modellierung und Überprüfung der \ac{MOER}-Daten befinden sich momentan noch in einem kontinuierlichen Entwicklungs- und Verbesserungsprozess.
 Aktuell ist WattTime der einzige Anbieter dieser spezifischen Daten zur marginalen Emissionsrate, was zu einer monopolistischen Situation führt.
 Es ist daher anzunehmen, dass die Qualität der Daten zukünftig weiter steigen wird und womöglich weitere Anbieter für \ac{MOER}-Daten aufkommen werden.
-Zukünftige Forschungsarbeiten könnten demnach von einer verbesserten und realitätsnäheren Modellierung der \ac{MOER}-Daten profitieren
+Zukünftige Forschungsarbeiten könnten demnach von einer verbesserten und realitätsnäheren Modellierung der \ac{MOER}-Daten profitieren.
 Außerdem wird mit fortschreitender Zeit eine größere Datenmenge zur Verfügung stehen, weil der Beginn der Datenmodellierung dann schon weiter zurückliegen wird.
 
 Die Entstehung und der Zusammenhang der \ac{MOER}-Werte, sowie verschiedene Einflussfaktoren auf diese, bilden ein komplexes Konstrukt.
@@ -1717,12 +1720,12 @@ Prognosemodelle mit weiteren, die \ac{MOER} beeinflussenden Eingabevariablen kö
 Auf diese Weise könnte ein Vergleich von Modellgenauigkeit und Trainingsaufwand je verwendeter Variablen aufgestellt werden, um herauszufinden, welche Kombination dieser Eingabevariablen die besten Ergebnisse unter akzeptablem Trainingsaufwand erreichen.
 Zudem spielen externe Einflüsse eine wesentliche Rolle in der Dynamik des Strommarkts.
 Politische Entscheidungen, gesetzliche Regelungen und unvorhersehbare Ereignisse können erhebliche Auswirkungen haben.
-Im betrachteten Zeitraum (2021-2024) waren das unter anderem die COVID-19-Pandemie, geopolitische Konflikte wie der Russland-Krieg und infrastrukturelle Angriffe wie ein Anschlag auf die Nordstream Gas-Pipelines~\cite{Baumgartner.30.9.2022}.
+Im betrachteten Zeitraum (2021-2024) waren das unter anderem die COVID-19-Pandemie, geopolitische Konflikte wie der Ukraine-Krieg und infrastrukturelle Angriffe wie ein Anschlag auf die Nordstream Gas-Pipelines~\cite{Baumgartner.30.9.2022}.
 Eine Möglichkeit für den Umgang mit solchen meist nicht vorhersagbaren Einflüssen, ist die Erkennung dieser im Energiemarkt und damit verbunden eine automatische Aktualisierung der Prognosemodelle.
 
 Darüber hinaus wurde der geographische Rahmen des Datenmodells und der Prognose eingegrenzt.
 Weitere Länder mit aufzunehmen kann einen umfangreicheren Vergleich verschiedener Stromnetze und \ac{MOER}-Werte ermöglichen, was zu allgemeingültigeren Ergebnissen führen kann.
-Verwendet die vorliegende Arbeit Daten auf nationaler Ebene, so wäre außerdem ein sinnvoller nächster Schritt, dies noch weiter in verschiedene Zonen einzuteilen.
+Die vorliegende Arbeit verwendet Daten auf nationaler Ebene, sodass ein möglicher nächster Schritt wäre, dies noch weiter in verschiedene nationale Zonen einzuteilen, um präzisere Daten zu erhalten.
 Limitierender Faktor ist dabei momentan die Verfügbarkeit von Daten zur marginalen Kohlenstoffintensität, die gegenwärtig nur Länder-spezifisch zur Verfügung stehen.
 Eine detaillierte regionale Aufschlüsselung könnte nicht nur die Präzision der Daten erhöhen, sondern auch die Relevanz der Daten für den Einsatz in Rechenzentren wesentlich verbessern.
 Interessant wäre zum Beispiel auch den Einfluss der geographischen Lage zu betrachten.
@@ -1731,9 +1734,9 @@ Für eine entsprechende Analyse sind jedoch sowohl bei WattTime, als auch bei El
 
 Bezüglich der Prognosen, stellen vor allem Vorhersagen weit in die Zukunft Schwierigkeiten dar.
 Mit größerer Vorhersagelänge steigen auch die Fehleranfälligkeit der Vorhersagen.
-Diese beginnen beim Wetter, dessen Vorhersagegenauigkeit nach sieben Tagen stark abnimmt~\cite{Lam.2022}.
+Diese zeigt sich zunächst bei der Vorhersagegenauigkeit des Wetters, welche nach sieben Tagen stark abnimmt~\cite{Lam.2022}.
 Sowohl eine unzureichende Vorhersage des Wetters, als auch Fehler der Zeitreihenvorhersage selbst sind mögliche Fehlerquellen~\cite{Wiesner.2021}.
-Aufgrund hoher Anteile von regelbaren Erzeugern im norwegischen Stromnetz, ist eine wetterabhängige Vorhersage wenig sinnvoll.
+Aufgrund hoher Anteile regelbarer Erzeuger im norwegischen Stromnetz, ist eine wetterabhängige Vorhersage wenig sinnvoll.
 Nicht zuletzt diese Gefahr, sondern auch das allgemein niedrige Niveau der Kohlenstoffintensität rechtfertigen den Aufwand für eine emissionsgesteuerte Ausrichtung von Workloads anhand Vorhersagen für das norwegische Stromnetz nicht.
 Für solche Stromnetze, deren Vorhersage aufgrund ihrer Beschaffenheit nur schwer möglich ist, die aber allgemein niedrige Werte verzeichnen, bietet sich eine örtliche Verlagerung von ortsunabhängigen Aufgaben in dieses Stromnetz an.
 Das stellt einen Gegensatz zum deutschen Stromnetz dar, welches immer höhere Anteile von wetterabhängigen Energiequellen beinhaltet.
@@ -1741,18 +1744,18 @@ Hier bietet das Vorhersagemodell einen Mehrwert.
 
 Darüber hinaus schränkt die Beschaffenheit der \ac{MOER}-Werte des deutschen und norwegischen Stromnetzes die Anwendbarkeit ein.
 Entgegen anderer Ergebnisse, wie beispielsweise bei Wiesner et al.~\cite{Wiesner.2021}, die einen großen Unterschied zwischen unter der Woche und am Wochenende gemessenen Werten verzeichneten, weisen sie keine großen Unterschiede zwischen diesen Zeiträumen auf.
-Die \ac{MOER} des deutschen Stromnetzes ist durchschnittlich über den betrachteten Zeitraum am Wochenende um 0,53\% geringer als unter der Woche und die des norwegischen Stromnetzes ist am Wochenende sogar um 0,74\% höher.
+Die \ac{MOER} des deutschen Stromnetzes ist durchschnittlich über den betrachteten Zeitraum am Wochenende um 0,53\% geringer als unter der Woche und die des norwegischen Stromnetzes ist am Wochenende um 0,74\% höher.
 Beides sind zu vernachlässigende Unterschiede, die das pauschale Verschieben von Workloads auf das Wochenende nicht rechtfertigen würden.
 Wiesner et al.~\cite{Wiesner.2021} haben gemessen, dass die Kohlenstoffintensität Deutschlands am Wochenende ungefähr 25\% geringer ist, was eine Verlagerung hin zum Wochenende durchaus sinnvoll macht.
-Die verschiedenen Messungen kommen höchstwahrscheinlich daher, dass bei Wiesner et al.~\cite{Wiesner.2021} die durchschnittliche Kohlenstoffintensität des Stromnetzes verwendet wurde, die sich nach aktuellem Wissensstand wie bereits beschrieben nur schlecht für die Analyse von Laständerungen eignet.
+Die verschiedenen Messungen kommen höchstwahrscheinlich daher, dass bei Wiesner et al.~\cite{Wiesner.2021} die durchschnittliche Kohlenstoffintensität des Stromnetzes verwendet wurde, die sich nach aktuellem Wissensstand wie bereits beschrieben nur bedingt für die Analyse von Laständerungen eignet.
 
 Durch die Energiewende werden sich die Stromnetze verändern - sei es kurzfristig durch betriebliche Änderungen oder langfristig durch strukturelle Änderungen.
 Diese Einflüsse machen die Emissionen schwer vorhersagbar.
-Die Eröffnung eines neuen Rechenzentrums könnte zum Beispiel dazu führen, dass die Grenzstromnetze hochgefahren werden müssen, um die zusätzliche Last zu decken.
-Solche zusätzlichen neuen Nachfragen könnten Netzbetreiber aber auch zum Ausbau der Erzeugungskapazitäten führen.
+Die Eröffnung eines neuen Rechenzentrums könnte zum Beispiel veranlassen, dass die Grenzstromnetze hochgefahren werden müssen, um die zusätzliche Last zu decken.
+Solche zusätzlichen neuen Nachfragen könnten Netzbetreiber aber auch zum Ausbau der Erzeugungskapazitäten bringen.
 Abhängig von den dafür verwendeten Energiequellen könnten diese neuen Kapazitäten „grüner“ oder auch „brauner“ sein~\cite{WattTime.2022}.
 Insgesamt ist bei den globalen Stromnetzen ein Wachstum sauberer Energietechnologien zu verzeichnen.
-Dieses ist nötig für das Ziel, bis 2050 weltweit Netto-Null-Emissionen zu erreichen.
+Dieses ist nötig, um das Ziel zu erreichen, bis 2050 weltweit Netto-Null-Emissionen zu verzeichnen.
 Um dieses Ziel zu erfüllen, sieht die Net Zero Roadmap der IEA vor, dass sich die weltweite Kapazität zur Stromerzeugung aus erneuerbaren Energien von 2022 bis 2030 verdreifachen soll.
 Nicht zuletzt deshalb werden sich die Stromnetze in den nächsten Jahren ändern.
 In Deutschland gibt die Energiewende vor, dass bis 2030 80\% der gesamten Stromversorgung aus erneuerbaren Energiequellen stammen.
@@ -1762,7 +1765,7 @@ Außerdem soll im Rahmen des Energieeffizienzgesetzes der Energieverbrauch bis 2
 Die Umsetzung der Strategien zur Optimierung der Nachhaltigkeit von Software ist laut WattTime deshalb möglicherweise als Übergangslösung zu betrachten, um die Zeit hin zu kohlenstoffärmeren Stromnetzen zu überbrücken~\cite{WattTime.12.3.2024}.
 Andererseits kann argumentiert werden, dass Energie immer ein limitierender Faktor bleiben wird und die Herausforderung besteht, erneuerbare Energien trotz ihrer schwankenden Verfügbarkeit optimal zu nutzen.
 
-Gleichzeitig hat die U.S. Energy Information Administration in ihrem Bericht \textit{International Energy Outlook 2023}~\cite{U.S.EnergyInformationAdministration.2023} zur Untersuchung der weltweiten Energietrends bis zum Jahr 2050 herausgefunden, dass die wachsende Bevölkerung die Auswirkungen der sinkenden Energie- und Kohlenstoffintensität auf Emissionen ausgleichen.
+Gleichzeitig hat die U.S. Energy Information Administration in ihrem Bericht \textit{International Energy Outlook 2023}~\cite{U.S.EnergyInformationAdministration.2023} zur Untersuchung der weltweiten Energietrends bis zum Jahr 2050 dargelegt, dass die wachsende Bevölkerung die Auswirkungen der sinkenden Energie- und Kohlenstoffintensität auf Emissionen ausgleicht.
 Außerdem wird darin beschrieben, dass die Bedenken bezüglich der Energiesicherheit die Abkehr von fossilen Brennstoffen zwar beschleunigen, in anderen Ländern jedoch zu einem höheren Verbrauch dieser Energiequellen führen.
 Diese zwei Erkenntnisse bilden einen Gegensatz gegenüber dem erwarteten Trend zum Sinken der Kohlenstoffintensität der Stromnetze weltweit.
 
@@ -1771,7 +1774,7 @@ WattTime stellt klar, dass langfristige Vorhersagen der marginalen Emissionen zw
 Grund dafür ist unter anderem die hohe zu erwartende Varianz der Stromnetze~\cite{WattTime.2022}.
 Bestimmte Ereignisse, seien sie politischer, ökonomischer oder ökologischer Natur, werden immer einen starken Einfluss auf das Stromnetz und dessen vielschichtige Zusammensetzung und Abhängigkeiten haben.
 Solche Ereignisse sind kaum oder meistens gar nicht vorhersagbar.
-Beispiele aus der Gegenwart und nahen Vergangenheit sind der Russlandkrieg und die Corona-Pandemie oder auch kleinere Ereignisse wie die Abschaltung von Anlagen.
+Beispiele aus der Gegenwart und nahen Vergangenheit sind der Ukraine-Krieg und die Corona-Pandemie oder auch kleinere Ereignisse wie die Abschaltung von Anlagen.
 
 \section{Anwendung der Vorhersagen}
 Es besteht eine Vielzahl an Möglichkeiten zur Erweiterung der \ac{API}.
@@ -1780,31 +1783,30 @@ Dies würde es Endnutzern ermöglichen, einen umfassenderen Überblick über die
 
 Außerdem könnte die \ac{API} so erweitert werden, dass sie für einen spezifischen Zeitpunkt in der Zukunft die zu erwartende \ac{MOER} ausgibt.
 
-Eine Umsetzung der Prognose für zusätzliche könnte für die \ac{API} einen Mehrwert bieten.
+Eine Umsetzung der Prognose für zusätzliche Regionen könnte für die \ac{API} einen Mehrwert bieten.
 Für einen Zeitpunkt in der Zukunft könnte eine Liste von Regionen mit den entsprechenden \ac{MOER}-Werten sortiert nach der Höhe der \ac{MOER} ausgegeben werden.
-Dies könnte nicht nur für einen bestimmten Zeitpunkts, sondern auch insgesamt für die Dauer eines Workloads umgesetzt werden.
-Darüber hinaus könnte man noch genauer auf die Umgebung eingehen, in der der Workload ausgeführt wird.
+Dies könnte nicht nur für einen bestimmten Zeitpunkt, sondern auch insgesamt für die Dauer eines Workloads umgesetzt werden.
+Darüber hinaus könnte noch genauer auf die Umgebung eingegangen werden, in der der Workload ausgeführt wird.
 
-Es bestehen Herausforderungen und Grenzen, die sich bei der parktischen Anwendung von kohlenstoffbewussten Strategien ergeben
 Die Integration der Tools zur Nachhaltigkeitsoptimierung von Softwaresystemen ist stets mit Herausforderungen und Aufwand verbunden.
 Dieser Aufwand wird von Unternehmen nur eingegangen, wenn ein ausreichend hohes Potenzial und ein Nutzen besteht.
-Der Aufwand kann doch eine einfache Verfügbarkeit und Zugänglichkeit der Technologien und Lösungen minimiert werden.
+Der Aufwand kann durch eine einfache Verfügbarkeit und Zugänglichkeit der Technologien und Lösungen minimiert werden.
 Sind die Tools leicht integrierbar in Entwicklung und Betrieb bestehender Softwaresysteme, so ist die Hürde zur Anwendung gering.
 
 Die Skalierungsstrategien von Softwaresystemen sind eng an die jeweilige Systemlast und die spezifischen Anforderungen gekoppelt.
-Insbesondere zu Zeiten mit einer hohen Last kombiniert mit der Anforderung von minimalen Ausfallquoten kann der Wunsch nach Nachhaltigkeit in direktem Konflikt mit der Notwendigkeit stehen, Lastspitzen bewältigen zu können.
+Insbesondere zu Zeiten mit einer hohen Last, kombiniert mit der Anforderung minimaler Ausfallquoten, kann der Wunsch nach Nachhaltigkeit in direktem Konflikt mit der Notwendigkeit stehen, Lastspitzen bewältigen zu können.
 Eine Möglichkeit, dem Abhilfe zu schaffen, ist die Prognosen zur Kohlenstoffintensität mit Erwartungen der Last auf das System zu kombinieren.
-Die Integration der erwarteten Systemlast und der Schwankungen der Kohlenstoffintensität zu integrieren, könnte eine Lösung sein, um beiden Anforderungen gerecht zu werden.
+Die Integration der erwarteten Systemlast und der Schwankungen der Kohlenstoffintensität, könnte eine Lösung sein, um beiden Anforderungen gerecht zu werden.
 Eine weitere mögliche Lösung ist, den Preis als Signalgeber zu verwenden.
 In Stromnetzen wie in Deutschland sollten die schwankenden erneuerbaren Energien automatisch mit der \ac{MOER} korrelieren und diese wiederum aufgrund ihrer geringen Kosten mit dem Preis.
-Eine erste Analyse hat zwischen der \ac{MOER} des deutschen Stromnetzes und dem Strom-Großhandelspreis eine Korrelation von ungefähr 20\% ergeben.
-Anders herum führt beispielsweise eine Reduzierung der Cloud-Kosten meist dadurch zu geringeren Emissionen, als dass es darauf abzielt, weniger Ressourcen zu nutzen oder die verwendeten Ressourcen besser auszunutzen~\cite{Thoughtworks.2020}.
+Eine erste Analyse zwischen der \ac{MOER} des deutschen Stromnetzes und dem Strom-Großhandelspreis hat eine Korrelation von ungefähr 20\% ergeben.
+Umgekehrt führt beispielsweise eine Reduzierung der Cloud-Kosten meist dadurch zu geringeren Emissionen, als dass es darauf abzielt, weniger Ressourcen zu nutzen oder die verwendeten Ressourcen besser auszuschöpfen~\cite{Thoughtworks.2020}.
 
-Qualitativ hochwertige Prognosen sowohl der Kohlenstoffintensität als auch von Workloads stehen im Mittelpunkt erfolgreicher kohlenstoffbewusster Verlagerungen.
+Qualitativ hochwertige Prognosen sowohl der Kohlenstoffintensität als auch der Workloads stehen im Mittelpunkt erfolgreicher kohlenstoffbewusster Verlagerungen.
 Wichtig sind dabei vor allem auch Informationen über die Workloads, wie zeitliche Beschränkungen, erwartete Dauer und, ob eine Unterbrechung möglich ist.
 Zur Unterstützung könnten Tools zur Bereitstellung dieser Informationen eingesetzt werden.
-So könnten Schnittstellen bereitgestellt werden, um zeitliche Beschränkungen und andere Eigenschaften programmatisch zu deklarieren oder diese automatisch zu erkennen.
-Die benötigte Zeit für das Anhalten und Wiederaufnehmen eines Workloads könnte erfasst und dieser anhand dessen automatisch als unterbrechbar oder nicht unterbrechbar gekennzeichnet werden
+So könnten Schnittstellen zur Verfügung gestellt werden, um zeitliche Beschränkungen und andere Eigenschaften programmatisch zu deklarieren oder diese automatisch zu erkennen.
+Die benötigte Zeit für das Anhalten und Wiederaufnehmen eines Workloads könnte erfasst und dieser anhand dessen automatisch als unterbrechbar oder nicht unterbrechbar gekennzeichnet werden.
 Zeitliche Beschränkungen könnten zum Beispiel vom Abhängigkeitsgraphen eines Workloads abgeleitet werden~\cite{Wiesner.2021}.
 
 Cloud- und Service-Anbieter sollten Nutzer ermutigen, ihre Workloads möglichst zeitlich flexibel und unterbrechbar zu gestalten und sie dementsprechend zu deklarieren.
@@ -1823,7 +1825,7 @@ Die benötigte Energie zu reduzieren oder die verwendete Hardware effizienter zu
 Nachhaltige Software sollte demzufolge bestenfalls für alle diese Einflussfaktoren optimiert sein.
 
 Die Arbeit hat nur einen kleinen Bereich der Nachhaltigkeit von Software beleuchtet.
-Neben dem bewussten Verbrauch von Kohlenstoff, gibt es eine Reihe weiterer Prinzipien, wie in Kapitel\ref{CAP:sustainable-software} beschrieben.
+Neben dem bewussten Verbrauch von Kohlenstoff, gibt es eine Reihe weiterer Prinzipien, wie in Kapitel~\ref{CAP:sustainable-software} beschrieben.
 Eine im  Bezug auf Nachhaltigkeit optimale Software würde alle diese Prinzipien beachten.
 Außerdem sollte Nachhaltigkeit auf alle Ebenen der Software angewandt werden.
 Beginnend bei der Architektur, über Programmiersprachen und Code-Prinzipien, bis hin zu Bereitstellung und Betrieb sollte die Software vollumfänglich für Nachhaltigkeit optimiert werden.
@@ -1848,14 +1850,14 @@ Als Fazit sollen die Forschungsziele aus Kapitel~\ref{CAP:goals} aufgegriffen we
 Die Ergebnisse können folgendermaßen zusammengefasst werden:
 \begin{enumerate}
  \item \textbf{Entwicklung eines Vorhersagemodells} \\
- Zur Prognose der \ac{MOER} der Stromnetze in Deutschland und Norwegen wurden verschiedene Vorhersageodelle entwickelt.
+ Zur Prognose der \ac{MOER} der Stromnetze in Deutschland und Norwegen wurden verschiedene Vorhersagemodelle entwickelt.
  Diese variieren hinsichtlich der Vorhersagetechnik, der Vorhersagelänge und der Behandlung von Ausreißern in den Daten.
  Für das norwegische Stromnetz waren die Prognosen herausfordernd, was vermutlich an der geringen Abhängigkeit vom Wetter und dem hohen Anteil regelbarer Energiequellen liegt.
  Es zeigte sich, dass \ac{SARIMAX}-Modelle die Fluktuationen in den Daten nur unzureichend abbilden konnten.
  Die \ac{TFT}-Modelle als \ac{KI}-basierte Modelle eignen sich besser und erzielen für Deutschland überzeugende Ergebnisse.
  Obwohl es unter Verwendung des \ac{TFT} möglich ist, ein gemeinsames Modell für mehrere Länder zu trainieren, hat sich die Entwicklung separater Modelle als vorteilhaft herausgestellt, was die Bedeutung individuell angepasster Modelle unterstreicht.
- Die Prognoseergebnisse auf gefilterten Daten waren besser, allerdings zum Nachteil des Verlusts von wichtigen Ausreißern, die für Lastverschiebung genutzt werden könnten.
- Als relevante Eingabedaten haben sich vor allem die Stunde, der Zeitindex, der Wind und die zeitverzögerte \ac{MOER} erwiesen, während der Niederschlag und ob ein Feiertag oder Wochenendtag vorliegt von geringer Bedeutung für die Vorhersage waren.
+ Die Prognoseergebnisse auf den gefilterten Daten waren besser, allerdings zum Nachteil des Verlusts von wichtigen Ausreißern, die für Lastverschiebung genutzt werden könnten.
+ Als relevante Eingabedaten haben sich vor allem die Tageszeit-Stunde, der Zeitindex, der Wind und die zeitverzögerte \ac{MOER} erwiesen, während der Niederschlag und, ob ein Feiertag oder Wochenendtag vorliegt von geringer Bedeutung für die Vorhersage waren.
  \item \textbf{Nachhaltigkeitsoptimierung von Softwareanwendungen} \\
  Im Rahmen der Nachhaltigkeitsoptimierung wurden Strategien zur Verlagerung von Rechenlasten, sowie die Voraussetzungen für deren Umsetzung untersucht.
  Örtliche Verlagerungen scheitern oft an Regulierungen und Latenzbeschränkungen, während die Möglichkeiten zeitlicher Verlagerungen durch die Länge, die Unterbrechbarkeit und das Fälligkeitsdatum des Workloads bestimmt sind.
@@ -1863,13 +1865,13 @@ Die Ergebnisse können folgendermaßen zusammengefasst werden:
  Wohingegen die \ac{MOER}-Werte des norwegischen Stromnetzes schwer vorhersagbar sind, haben diese allgemein ein niedriges Niveau.
  Ein Workload-Scheduling anhand der Prognosen für diese Werte ist deshalb nur bedingt sinnvoll.
  Vielversprechender ist die örtliche Verschiebung von ortsunabhängigen Rechenlasten in das norwegische Stromnetz.
- Die deutschen Werte sind im Durchschnitt fast dreimal so hoch wie die norwegischen, sie bieten jedoch den Vorteil, dass sie unter anderem aufgrund der Zusammensetzung der Energiequellen besser vorhersagbar sind.
+ Die deutschen \ac{MOER}-Werte sind im Durchschnitt fast dreimal so hoch wie die norwegischen, sie bieten jedoch den Vorteil, dass sie unter anderem aufgrund der Zusammensetzung der Energiequellen besser vorhersagbar sind.
  Die signifikanten Minima in den Daten bieten Chancen für zeitliche Lastverschiebungen.
  \ac{AWS}, Azure, \ac{GCP} und Kubernetes bieten umfangreiche Möglichkeiten, die zur Emissionsreduzierung von Software beitragen können und in die Vorhersagen der Kohlenstoffintensität integriert werden können.
  \item \textbf{Beitrag zu nachhaltigen Softwaresystemen} \\
  Diese Arbeit leistet einen Beitrag zur Förderung der Nachhaltigkeit von Softwarelösungen.
- Durch die Entwicklung und den Vergleich effektiver Prognosemodelle und die Untersuchung von Lastverlagerungsstrategien werden praktische Erkenntnisse und Empfehlungen bereitgestellt, die eine nachhaltigere Softwarearchitektur und Anwendungsbetrieb ermöglichen.
+ Durch die Entwicklung und den Vergleich effektiver Prognosemodelle und die Untersuchung von Lastverlagerungsstrategien werden praktische Erkenntnisse und Empfehlungen bereitgestellt, die sowohl eine nachhaltigere Softwarearchitektur als auch einen nachhaltigeren Anwendungsbetrieb ermöglichen.
  Die Analyse zeigt, dass die Implementierung von Nachhaltigkeitsstrategien sorgfältig gegen den erforderlichen Aufwand abgewogen werden muss.
- Kalkulationsmodelle und beispielhafte Analysen veranschaulichen die Berechnung der Kohlenstoffintensität und des Einsparpotenzial.
+ Kalkulationsmodelle und beispielhafte Analysen veranschaulichen die Berechnung der Kohlenstoffintensität und des Einsparpotenzials.
  Durch ein informelles Interview im Unternehmen Randstad Digital Germany AG konnte die Relevanz des Themas bestätigt und ein praxisnaher Bezug hergestellt werden.
 \end{enumerate}
