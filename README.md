@@ -6,8 +6,8 @@ Masterarbeit Franziska Greiner
   - thesis.pdf: Finale PDF-Datei
   - thesis.bib: Literaturquellen
 - time-series-forecasting: Zeitreihenvorhersage
+  - diagrams: TFT Diagramme erstellt mit Weights and Biases
   - notebooks: Jupyter Notebooks
-  - reports: Weights & Biases Reports
   - src: Modelle und Konfiguration
   - main.py: Lokales Training der Modelle (Angabe von --model_type und --use_filtered_data)
   - app.py: API zum lokalen Abrufen der Modellvorhersagen
